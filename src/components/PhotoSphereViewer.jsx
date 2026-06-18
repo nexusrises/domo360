@@ -50,7 +50,7 @@ export default function PhotoSphereViewer({
       viewerInstance = new Viewer({
         container: viewerDiv,
         panorama: panorama,
-        loadingImg: '/favicon.svg',
+        loadingImg: `${import.meta.env.BASE_URL}logo3.2.png`,
         touchmoveTwoFingers: false,
         mousewheelCtrlKey: false,
         mousewheel: interactive,

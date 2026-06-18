@@ -146,6 +146,7 @@ const tourEditorApiPlugin = () => ({
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/',
   plugins: [react(), tourEditorApiPlugin()],
   resolve: {
     alias: {

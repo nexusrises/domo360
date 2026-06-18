@@ -110,7 +110,8 @@ export default function Footer() {
             onClick={handleLogoClick} 
             className="flex flex-row items-center gap-3 group select-none cursor-pointer w-fit"
           >
-            <img src="/logo3.2.png" alt="Nexus Rise Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110 translate-y-[-15px]" />
+            <img src={`${import.meta.env.BASE_URL}logo3.2.png`} alt="Nexus Rise Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110 translate-y-[-15px]" />
+
             {/* Puedes modificar la clase 'translate-y-[5px]' (u otros píxeles) para subir o bajar el texto respecto al logo */}
             <div className="text-4xl font-logo flex items-center transform translate-y-[1px]">
               <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105">Nexus</span>

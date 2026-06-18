@@ -19,6 +19,7 @@ import {
   Zap,
   MessageSquare
 } from 'lucide-react';
+import MemberCard from '../components/MemberCard';
 
 // Subcomponente de Conteo Animado que incrementa de 0 al valor actual al volverse visible
 function AnimatedCounter({ value, duration = 1500, suffix = "" }) {
@@ -80,166 +81,6 @@ function AnimatedCounter({ value, duration = 1500, suffix = "" }) {
   );
 }
 
-// Componente de Tarjeta de Miembro Interactiva 3D e Independiente
-function MemberCard({ name, role, education, description, status, photoUrl, className = "" }) {
-  const cardRef = useRef(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [shadowStyle, setShadowStyle] = useState({});
-  const [isTouched, setIsTouched] = useState(false);
-
-  // Efecto dinámico con Giroscopio/Acelerómetro para móviles
-  useEffect(() => {
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (!isTouchDevice) return;
-
-    const handleOrientation = (event) => {
-      // Si el usuario está tocando activamente la tarjeta, el touch-move tiene prioridad sobre el giroscopio
-      if (isTouched) return;
-
-      const { beta, gamma } = event; // beta (inclinación adelante/atrás), gamma (izquierda/derecha)
-      if (beta === null || gamma === null) return;
-
-      // Suponemos una inclinación normal de lectura del celular de 60 grados para beta
-      const targetBeta = Math.min(Math.max(beta, 30), 90); 
-      const targetGamma = Math.min(Math.max(gamma, -30), 30);
-
-      // Mapeo suave de rotación de 12 grados máx
-      const rX = -((targetBeta - 60) / 30) * 12;
-      const rY = (targetGamma / 30) * 12;
-
-      setRotateX(rX);
-      setRotateY(rY);
-      setShadowStyle({
-        boxShadow: `${-rY * 1.5}px ${rX * 1.5}px 30px rgba(59, 130, 246, 0.22)`,
-        border: '1px solid rgba(59, 130, 246, 0.4)'
-      });
-    };
-
-    window.addEventListener('deviceorientation', handleOrientation);
-    return () => window.removeEventListener('deviceorientation', handleOrientation);
-  }, [isTouched]);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    
-    // Posición del cursor relativa al centro de la tarjeta
-    const mouseX = e.clientX - rect.left - width / 2;
-    const mouseY = e.clientY - rect.top - height / 2;
-    
-    // Calcular grados de rotación (límite de 12 grados para control sutil)
-    const rX = -(mouseY / (height / 2)) * 12;
-    const rY = (mouseX / (width / 2)) * 12;
-    
-    setRotateX(rX);
-    setRotateY(rY);
-    
-    // Sombra dinámica opuesta al ratón para simular luz 3D
-    setShadowStyle({
-      boxShadow: `${-rY * 1.5}px ${rX * 1.5}px 30px rgba(59, 130, 246, 0.15)`,
-      border: '1px solid rgba(59, 130, 246, 0.35)'
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-    setShadowStyle({});
-  };
-
-  // Interactividad por arrastre táctil (Touch Events)
-  const handleTouchStart = () => {
-    setIsTouched(true);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-
-    const touch = e.touches[0];
-    const touchX = touch.clientX - rect.left - width / 2;
-    const touchY = touch.clientY - rect.top - height / 2;
-
-    // Aumentamos ligeramente la sensibilidad en touch (15 grados máx)
-    const rX = -(touchY / (height / 2)) * 15;
-    const rY = (touchX / (width / 2)) * 15;
-
-    setRotateX(rX);
-    setRotateY(rY);
-    setShadowStyle({
-      boxShadow: `${-rY * 1.8}px ${rX * 1.8}px 30px rgba(59, 130, 246, 0.25)`,
-      border: '1px solid rgba(59, 130, 246, 0.45)',
-      transform: 'scale(1.02)'
-    });
-  };
-
-  const handleTouchEnd = () => {
-    setIsTouched(false);
-    setRotateX(0);
-    setRotateY(0);
-    setShadowStyle({});
-  };
-
-  return (
-    <div 
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      style={{
-        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        transition: rotateX === 0 && rotateY === 0 ? 'all 0.5s ease' : 'none',
-        ...shadowStyle
-      }}
-      className={`w-full glass-panel border border-white/10 rounded-3xl p-6 relative flex flex-col items-center justify-between text-center select-none cursor-grab active:cursor-grabbing hover:shadow-[0_20px_40px_rgba(59,130,246,0.1)] transition-shadow duration-300 md:hover:scale-[1.02] ${className}`}
-    >
-      {/* Glow decorativo de tarjeta */}
-      <div className="absolute top-[-50px] right-[-50px] w-48 h-48 bg-nexus-accent/10 opacity-5 rounded-full blur-[40px] pointer-events-none"></div>
-
-      <div className="flex flex-col items-center w-full">
-        {/* Avatar / Foto del integrante en Rectángulo Horizontal Cristalino con efecto de agua fluyendo */}
-        <div className="w-44 h-28 rounded-2xl bg-gradient-to-r from-[#1e3a8a] via-[#00d2ff] to-[#1e3a8a] p-[1.8px] mb-4 flex items-center justify-center shadow-[0_0_20px_rgba(0,210,255,0.25)] relative overflow-hidden backdrop-blur-md border border-blue-500/20 avatar-water-border">
-          {/* COMENTARIO DE EDICIÓN: En el futuro, reemplaza "photoUrl" o el valor por defecto '/logo2.png' con la ruta de la imagen real del integrante (ej. '/img/miembros/enmanuel.png') */}
-          <img 
-            src={photoUrl || '/logo2.png'} 
-            alt={`Foto de ${name}`} 
-            className="w-full h-full rounded-2xl object-cover bg-[#070a13]"
-          />
-          {status && (
-            <div className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-nexus-dark flex items-center justify-center shadow-md" title={status}>
-              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
-            </div>
-          )}
-        </div>
-
-        <div>
-          <span className="text-[9px] text-nexus-accent font-bold uppercase tracking-widest bg-nexus-accent/10 px-2.5 py-1 rounded-full border border-nexus-accent/20 block w-max mx-auto mb-3">
-            {role}
-          </span>
-          <h3 className="text-lg md:text-xl font-bold text-white mb-1">{name}</h3>
-          <span className="text-[10px] text-nexus-purple font-semibold uppercase tracking-wider block mb-3">
-            {education}
-          </span>
-          <p className="text-gray-400 text-xs leading-relaxed">
-            {description}
-          </p>
-        </div>
-      </div>
-
-      {/* COMENTARIO DE EDICIÓN: Si necesitas agregar de nuevo los botones de redes sociales en el futuro, puedes insertar un contenedor flexible aquí con enlaces personalizados utilizando lucide-react o SVG. */}
-    </div>
-  );
-}
-
 export default function Nosotros() {
   const teamMembers = [
     {
@@ -247,7 +88,7 @@ export default function Nosotros() {
       role: "CEO & Fundador",
       education: "Director General",
       description: "Líder ejecutivo con más de 5 años de trayectoria estructurando arquitecturas de negocio digitales de alta gama y consolidando alianzas comerciales estratégicas.",
-      photoUrl: "/logo2.png", 
+      photoUrl: "/miembros/enmanuel.png", 
       status: "Director General"
     },
     {
@@ -255,7 +96,7 @@ export default function Nosotros() {
       role: "CTO & Co-Fundador",
       education: "Director de Sistemas & Devops",
       description: "Arquitecto de infraestructura y sistemas cloud de alta disponibilidad, especializado en la escalabilidad de bases de datos de alto rendimiento y optimización de latencias globales.",
-      photoUrl: "/logo2.png", 
+      photoUrl: "/miembros/miguel.png", 
       status: "Activo"
     },
     {
@@ -263,7 +104,7 @@ export default function Nosotros() {
       role: "Director Creativo & UX/UI",
       education: "Diseñador Visual Principal",
       description: "Especialista en diseño de interfaces premium centrado en la psicología de la conversión y en la creación de flujos de interacción de fricción cero.",
-      photoUrl: "/logo2.png", 
+      photoUrl: "/miembros/gabriel.png", 
       status: "Activo"
     },
     {
@@ -271,7 +112,7 @@ export default function Nosotros() {
       role: "Jefe de Desarrollo & Tecnología 360°",
       education: "Lead Web Developer & 360° Specialist",
       description: "Ingeniero experto en computación gráfica (WebGL, Three.js), experiencias web inmersivas y dirección de levantamiento multimedia tridimensional.",
-      photoUrl: "/logo2.png", 
+      photoUrl: "/miembros/angel.png", 
       status: "Activo"
     }
   ];
@@ -298,7 +139,7 @@ export default function Nosotros() {
         <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-4 mb-6 leading-tight max-w-4xl mx-auto relative z-10">
           Transformamos tu visión en <span className="text-gradient-rise">autoridad digital</span> incontestable
         </h1>
-        <p className="text-gray-300 max-w-3xl mx-auto text-base md:text-lg mb-12 leading-relaxed relative z-10">
+        <p className="text-gray-200 max-w-3xl mx-auto text-base md:text-lg mb-12 leading-relaxed relative z-10">
           No diseñamos páginas genéricas ni clonamos plantillas. Desarrollamos arquitecturas web de alta fidelidad e interacciones 3D inmersivas para marcas y negocios donde la confianza, el rigor y la precisión matemática determinan cada conversión.
         </p>
       </section>
@@ -315,10 +156,10 @@ export default function Nosotros() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
               Ingeniería frontend diseñada para capturar la atención y generar confianza
             </h2>
-            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+            <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-6">
               En <strong>Nexus Rise</strong> sabemos que en sectores de alto valor (como el inmobiliario o el de salud), una web lenta o con diseño anticuado destruye la credibilidad al instante. Por eso, no nos limitamos a lo visual.
             </p>
-            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8">
+            <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-8">
               Fusionamos computación gráfica avanzada en tiempo real (WebGL), tomas aéreas hiper-realistas y recorridos interactivos 360° con una infraestructura técnica optimizada para SEO. El resultado es una experiencia de usuario rápida, envolvente y comercialmente orientada a la conversión.
             </p>
 
@@ -366,7 +207,7 @@ export default function Nosotros() {
           <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mt-4">
             Nuestros Pilares de Confiabilidad
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed">
+          <p className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed">
             Eliminamos la incertidumbre y los vicios comunes de la industria tecnológica ofreciendo compromisos contractuales de calidad y entrega.
           </p>
         </div>
@@ -492,7 +333,7 @@ export default function Nosotros() {
           <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
             El Talento Detrás de Cada Línea de Código
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base mt-4">
+          <p className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base mt-4">
             Un equipo multidisciplinario altamente calificado que combina metodologías avanzadas de desarrollo y pasión por la excelencia visual.
           </p>
         </div>

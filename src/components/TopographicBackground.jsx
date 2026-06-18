@@ -53,6 +53,16 @@ export default function TopographicBackground() {
 
     // Ajustar resolución física para pantallas Retina/High-DPI
     const dpr = window.devicePixelRatio || 1;
+
+    // CONFIGURACIÓN DE ELEMENTOS DE DIBUJO
+    const lineSpacing = 18; // Reducido para mayor densidad de isolíneas topográficas reales
+    const segments = 65; // Mayor resolución de segmentos horizontales para curvas 3D perfectas
+
+    let centerX = width / 2;
+    let centerY = height / 1.7; // Punto de fuga y horizonte desplazado hacia la mitad inferior de la pantalla
+    let stepX = (width * 1.6) / (segments - 1);
+    let totalLines = Math.floor(height / lineSpacing) + 16;
+
     const resizeCanvas = () => {
       width = window.innerWidth;
       height = window.innerHeight;
@@ -61,13 +71,16 @@ export default function TopographicBackground() {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.scale(dpr, dpr);
+
+      // Recalcular dinámicamente según resolución
+      centerX = width / 2;
+      centerY = height / 1.7;
+      stepX = (width * 1.6) / (segments - 1);
+      totalLines = Math.floor(height / lineSpacing) + 16;
     };
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-
-    const centerX = width / 2;
-    const centerY = height / 1.7; // Punto de fuga y horizonte desplazado hacia la mitad inferior de la pantalla
 
     // MATRIZ DE PROYECCIÓN 3D A PANTALLA 2D
     const project = (x3d, y3d, z3d) => {
@@ -92,12 +105,6 @@ export default function TopographicBackground() {
 
       return { x: sx, y: sy, scale, opacity: Math.min(1.0, Math.max(0.0, scale * 1.55)) };
     };
-
-    // CONFIGURACIÓN DE ELEMENTOS DE DIBUJO
-    const lineSpacing = 18; // Reducido para mayor densidad de isolíneas topográficas reales
-    const totalLines = Math.floor(height / lineSpacing) + 16;
-    const segments = 65; // Mayor resolución de segmentos horizontales para curvas 3D perfectas
-    const stepX = (width * 1.6) / (segments - 1);
 
     // Inicializar los cometas neón (Pulses)
     const particles = [];

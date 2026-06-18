@@ -19,7 +19,7 @@ import SolucionesProfesionales from './pages/SolucionesProfesionales';
 
 function AppContent() {
   const location = useLocation();
-  const isDev = import.meta.env.DEV;
+  const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
   const hideFooter = location.pathname === '/contacto';
 
   // Configuración del IntersectionObserver para apariciones dinámicas al hacer scroll (optimizado para móviles)
@@ -88,12 +88,13 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
       <AppContent />
     </Router>
   );
 }
+
 
 export default App;
 

@@ -6,9 +6,9 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          -17.14,
-          -7.93,
-          6.6
+          -16.99,
+          -8,
+          6.89
         ],
         "destino": "02_residencial_maravillas_1585",
         "texto": "Maravillas  1",
@@ -30,8 +30,8 @@
       }
     ],
     "heading": {
-      "x": -17,
-      "y": 55
+      "x": -29,
+      "y": 5
     },
     "norteMagnetico": 145,
     "filtro": "normal",

@@ -37,7 +37,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" onClick={handleLinkClick} className="text-2xl md:text-3xl font-logo flex items-center gap-2 group select-none tracking-wide">
-          <img src="/logo3.2.png" alt="Nexus Rise Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-300 group-hover:scale-110" />
+          <img src={`${import.meta.env.BASE_URL}logo3.2.png`} alt="Nexus Rise Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-300 group-hover:scale-110" />
+
           <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105">Nexus</span>
           <span className="text-gradient-rise drop-shadow-[0_2px_8px_rgba(0,242,254,0.25)] ml-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">Rise</span>
         </Link>

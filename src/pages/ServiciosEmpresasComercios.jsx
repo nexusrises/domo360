@@ -303,7 +303,7 @@ export default function ServiciosEmpresasComercios() {
                     {/* Imagen principal con transición y efecto scroll-on-hover */}
                     <div className="w-full h-[350px] overflow-hidden relative group">
                       <img
-                        src={currentPreview.images[viewMode]}
+                        src={currentPreview.images[viewMode] ? (currentPreview.images[viewMode].startsWith('http') || currentPreview.images[viewMode].startsWith('data:') ? currentPreview.images[viewMode] : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${currentPreview.images[viewMode]}`) : ''}
                         alt={`${activeTab} ${viewMode}`}
                         className="w-full h-auto absolute top-0 left-0 transition-transform duration-[3000ms] ease-in-out group-hover:-translate-y-[calc(100%-350px)]"
                       />
@@ -395,7 +395,7 @@ export default function ServiciosEmpresasComercios() {
 
                         <div className="relative h-72 md:h-[400px] overflow-hidden">
                           <img
-                            src={sec.img}
+                            src={sec.img ? (sec.img.startsWith('http') || sec.img.startsWith('data:') ? sec.img : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sec.img}`) : ''}
                             alt={sec.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 font-sans"
                           />

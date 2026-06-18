@@ -385,7 +385,7 @@ function Hotspot({
                 className="rounded-2xl overflow-hidden border border-white/15 flex flex-col"
               >
                 {url ? (
-                  <img src={url} alt="Complemento" className="w-full h-full object-cover pointer-events-none" />
+                  <img src={url ? (url.startsWith('http') || url.startsWith('data:') ? url : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${url}`) : ''} alt="Complemento" className="w-full h-full object-cover pointer-events-none" />
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center text-[10px] text-gray-500 p-4 text-center">
                     <span>Sin imagen</span>
@@ -541,12 +541,12 @@ export default function VirtualTour({
           const cleanedSaved = localSaved.replace(/\/descargas_kuula\//g, '/tour/');
           const parsed = JSON.parse(cleanedSaved);
           const firstScene = Object.keys(parsed)[0];
-          if (firstScene) { 
+          if (firstScene) {
             if (cleanedSaved !== localSaved) {
               localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
             }
-            finishLoad(parsed, firstScene); 
-            return; 
+            finishLoad(parsed, firstScene);
+            return;
           }
         } catch (e) {
           console.error(e);
@@ -555,11 +555,14 @@ export default function VirtualTour({
 
       // 2. Archivo físico
       try {
-        const res = await fetch(`/src/data/tours/${tourId}.json`);
+        const res = await fetch(`${import.meta.env.BASE_URL.replace(/\/$/, "")}/src/data/tours/${tourId}.json`);
         if (res.ok) {
           const parsed = await res.json();
           const firstScene = Object.keys(parsed)[0];
-          if (firstScene) { finishLoad(parsed, firstScene); return; }
+          if (firstScene) {
+            finishLoad(parsed, firstScene);
+            return;
+          }
         }
       } catch (e) {
         console.warn(`No se pudo cargar el archivo físico para tourId: ${tourId}`);
@@ -573,13 +576,8 @@ export default function VirtualTour({
   }, [tourId]);
 
   // Mantener actualizado el visor con los cambios del editor local (en localStorage)
-  // NOTA: Este efecto es independiente de activeSceneKey para evitar que el cambio de escena
-  // dispare una recarga de datos que sobreponga hotspots de la escena anterior durante la transición.
   useEffect(() => {
     const handleStorageChange = (e) => {
-      // Solo reaccionar si el evento es de otra pestaña (e.key !== null) o
-      // si es un evento sintético sin clave (e === undefined), pero NUNCA llamar
-      // sincrónicamente al montar para no interferir con transiciones en curso.
       if (e && e.key !== null && e.key !== `nexus_tour_data_${tourId}`) return;
       const saved = localStorage.getItem(`nexus_tour_data_${tourId}`);
       if (saved && saved !== 'undefined') {
@@ -597,8 +595,9 @@ export default function VirtualTour({
   }, [tourId]);
 
   const activeScene = scenes[activeSceneKey] || { nombre: '', imagen: '', hotspots: [], heading: { x: 0, y: 0 }, filtro: 'normal' };
-  const displayImage = activeScene.imagen;
-  const isDev = import.meta.env.DEV;
+  const displayImage = activeScene.imagen ? (activeScene.imagen.startsWith('http') || activeScene.imagen.startsWith('data:') ? activeScene.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${activeScene.imagen}`) : '';
+
+  const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
 
   const [filtro, setFiltro] = useState(activeScene.filtro || 'normal');
 
@@ -913,8 +912,9 @@ export default function VirtualTour({
                 }`}
             >
               <div className="w-6 h-6 rounded-md overflow-hidden border border-white/10 flex-shrink-0">
-                <img src={scenes[sceneKey].imagen} alt={scenes[sceneKey].nombre} className="w-full h-full object-cover pointer-events-none" />
+                <img src={scenes[sceneKey].imagen ? (scenes[sceneKey].imagen.startsWith('http') || scenes[sceneKey].imagen.startsWith('data:') ? scenes[sceneKey].imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${scenes[sceneKey].imagen}`) : ''} alt={scenes[sceneKey].nombre} className="w-full h-full object-cover pointer-events-none" />
               </div>
+
               <span className="text-[10px] uppercase tracking-wider font-semibold">{scenes[sceneKey].nombre}</span>
             </button>
           ))}

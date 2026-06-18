@@ -266,7 +266,7 @@ export default function ServiciosSalud() {
                   {/* Screenshot / Render Content */}
                   <div className="relative h-64 md:h-[400px] overflow-hidden">
                     <img
-                      src={currentPreview.heroImg}
+                      src={currentPreview.heroImg ? (currentPreview.heroImg.startsWith('http') || currentPreview.heroImg.startsWith('data:') ? currentPreview.heroImg : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${currentPreview.heroImg}`) : ''}
                       alt="Visualización del diseño web médico"
                       className="w-full h-full object-cover"
                     />
@@ -415,7 +415,7 @@ export default function ServiciosSalud() {
                           /* Imagen convencional para los otros pasos */
                           <>
                             <img
-                              src={sec.img}
+                              src={sec.img ? (sec.img.startsWith('http') || sec.img.startsWith('data:') ? sec.img : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sec.img}`) : ''}
                               alt={sec.title}
                               className="w-full h-72 md:h-[380px] object-cover group-hover:scale-105 transition-transform duration-700"
                             />

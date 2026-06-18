@@ -18,6 +18,7 @@ import {
 import InteractiveGlobe from '../components/InteractiveGlobe';
 import AnimatedCounter from '../components/AnimatedCounter';
 import PhotoSphereViewer from '../components/PhotoSphereViewer';
+import MemberCard from '../components/MemberCard';
 
 export default function Home() {
   const [activeProject, setActiveProject] = useState(0);
@@ -147,6 +148,42 @@ export default function Home() {
       icon: Users
     }
   ];
+
+  const teamMembers = [
+    {
+      name: "J. Enmanuel",
+      role: "CEO & Fundador",
+      education: "Director General",
+      description: "Líder ejecutivo con más de 5 años de trayectoria estructurando arquitecturas de negocio digitales de alta gama y consolidando alianzas comerciales estratégicas.",
+      photoUrl: "/miembros/enmanuel.png", 
+      status: "Director General"
+    },
+    {
+      name: "Miguel Ortega",
+      role: "CTO & Co-Fundador",
+      education: "Director de Sistemas & Devops",
+      description: "Arquitecto de infraestructura y sistemas cloud de alta disponibilidad, especializado en la escalabilidad de bases de datos de alto rendimiento y optimización de latencias globales.",
+      photoUrl: "/miembros/miguel.png", 
+      status: "Activo"
+    },
+    {
+      name: "Gabriel Choque",
+      role: "Director Creativo & UX/UI",
+      education: "Diseñador Visual Principal",
+      description: "Especialista en diseño de interfaces premium centrado en la psicología de la conversión y en la creación de flujos de interacción de fricción cero.",
+      photoUrl: "/miembros/gabriel.png", 
+      status: "Activo"
+    },
+    {
+      name: "Angel Apaza",
+      role: "Jefe de Desarrollo & Tecnología 360°",
+      education: "Lead Web Developer & 360° Specialist",
+      description: "Ingeniero experto en computación gráfica (WebGL, Three.js), experiencias web inmersivas y dirección de levantamiento multimedia tridimensional.",
+      photoUrl: "/miembros/angel.png", 
+      status: "Activo"
+    }
+  ];
+
   return (
     <div className="relative">
 
@@ -174,7 +211,7 @@ export default function Home() {
             
             <p 
               style={{ textWrap: 'pretty' }} 
-              className="text-base md:text-lg text-gray-400 mb-10 max-w-2xl leading-relaxed"
+              className="text-base md:text-lg text-gray-200 mb-10 max-w-2xl leading-relaxed"
             >
               Creamos sitios web interactivos y experiencias 360° diseñadas para convertir visitas en clientes reales.
             </p>
@@ -261,8 +298,8 @@ export default function Home() {
         <div className="text-center mb-12">
           <span className="text-xs uppercase text-nexus-purple font-bold tracking-widest bg-nexus-purple/10 px-3 py-1 rounded-full border border-nexus-purple/20">Demostración de Capacidad</span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4 font-display">Ingeniería Digital en Acción: Casos de Éxito de Alto Impacto</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-            Explora las plataformas web premium y experiencias 3D que hemos creado para revolucionar la presencia digital y ventas de nuestros socios.
+          <p className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base">
+            Explora las plataformas web premium y experiencias 360° que hemos creado para revolucionar la presencia digital y ventas de nuestros socios.
           </p>
         </div>
 
@@ -333,7 +370,7 @@ export default function Home() {
               <div className="lg:col-span-6 relative flex justify-center items-center w-full">
                 {carouselProyectos[activeProject].id === 'sillar-inmobiliaria' ? (
                   <PhotoSphereViewer 
-                    panorama={carouselProyectos[activeProject].imagen} 
+                    panorama={carouselProyectos[activeProject].imagen ? (carouselProyectos[activeProject].imagen.startsWith('http') || carouselProyectos[activeProject].imagen.startsWith('data:') ? carouselProyectos[activeProject].imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${carouselProyectos[activeProject].imagen}`) : ''} 
                     autorotate={true} 
                     height="100%" 
                     showNavbar={false}
@@ -343,7 +380,7 @@ export default function Home() {
                 ) : (
                   <div className={`w-full aspect-video rounded-2xl overflow-hidden border ${carouselProyectos[activeProject].border} ${carouselProyectos[activeProject].glow} transition-all duration-500 relative group`}>
                     <img 
-                      src={carouselProyectos[activeProject].imagen} 
+                      src={carouselProyectos[activeProject].imagen ? (carouselProyectos[activeProject].imagen.startsWith('http') || carouselProyectos[activeProject].imagen.startsWith('data:') ? carouselProyectos[activeProject].imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${carouselProyectos[activeProject].imagen}`) : ''} 
                       alt={carouselProyectos[activeProject].title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       onError={(e) => {
@@ -355,6 +392,7 @@ export default function Home() {
                   </div>
                 )}
               </div>
+
             </div>
 
             {/* Controles Auxiliares e Indicadores */}
@@ -406,7 +444,7 @@ export default function Home() {
           </h2>
           <p 
             style={{ textWrap: 'pretty' }} 
-            className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base"
+            className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base"
           >
             Diseñamos arquitecturas específicas y optimizadas que resuelven los problemas reales de tu industria, maximizando la retención de usuarios y la conversión de clientes.
           </p>
@@ -468,6 +506,41 @@ export default function Home() {
               Ver Línea de Tiempo
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN DEL EQUIPO */}
+      <section className="container mx-auto px-6 pb-28 relative z-10 border-t border-white/5 pt-20 reveal-on-scroll">
+        <div className="max-w-6xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium mb-4">
+            <Briefcase className="w-3.5 h-3.5 text-nexus-accent" />
+            <span>EL EQUIPO</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight font-display">
+            El Talento Detrás de Cada Línea de Código
+          </h2>
+          <p className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base mt-4">
+            Un equipo multidisciplinario altamente calificado que combina metodologías avanzadas de desarrollo y pasión por la excelencia visual.
+          </p>
+        </div>
+
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {teamMembers.map((member, index) => (
+            <div 
+              key={index} 
+              className={`reveal-on-scroll reveal-delay-${(index + 1) * 100} w-full flex`}
+            >
+              <MemberCard 
+                name={member.name}
+                role={member.role}
+                education={member.education}
+                description={member.description}
+                photoUrl={member.photoUrl}
+                status={member.status}
+                className="h-full"
+              />
+            </div>
+          ))}
         </div>
       </section>
 

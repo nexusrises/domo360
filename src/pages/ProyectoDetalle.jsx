@@ -307,7 +307,7 @@ export default function ProyectoDetalle() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <div className="lg:col-span-8 h-[250px] md:h-[400px] rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl">
             <img 
-              src={proyecto.imagen} 
+              src={proyecto.imagen ? (proyecto.imagen.startsWith('http') || proyecto.imagen.startsWith('data:') ? proyecto.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${proyecto.imagen}`) : ''} 
               alt={proyecto.title} 
               className="w-full h-full object-cover opacity-80"
             />

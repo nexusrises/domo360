@@ -321,12 +321,13 @@ export default function ServiciosInmobiliaria() {
                       <div className="relative w-full h-full select-none bg-black">
                         {/* Interactive House Image Swapper */}
                         <img
-                          src={
-                            !topLight && !bottomLight ? '/tour/sinluz.png' :
+                          src={(() => {
+                            const imgPath = !topLight && !bottomLight ? '/tour/sinluz.png' :
                               topLight && !bottomLight ? '/tour/luzarriba.png' :
                                 !topLight && bottomLight ? '/tour/luzabajo.png' :
-                                  '/tour/conluz.jpeg'
-                          }
+                                  '/tour/conluz.jpeg';
+                            return `${import.meta.env.BASE_URL.replace(/\/$/, "")}${imgPath}`;
+                          })()}
                           alt="Casa interactiva"
                           className="w-full h-full object-cover transition-all duration-300"
                         />
@@ -356,10 +357,14 @@ export default function ServiciosInmobiliaria() {
                       </div>
                     ) : (
                       <img
-                        src={activeProject === 'residencial' ? '/tour/fotografiaaereamaravillas2.png' : currentPreview.heroImg}
+                        src={(() => {
+                          const imgPath = activeProject === 'residencial' ? '/tour/fotografiaaereamaravillas2.png' : currentPreview.heroImg;
+                          return imgPath.startsWith('http') || imgPath.startsWith('data:') ? imgPath : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${imgPath}`;
+                        })()}
                         alt="Visualización del diseño web inmobiliario"
                         className="w-full h-full object-cover"
                       />
+
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none"></div>
 
@@ -470,7 +475,7 @@ export default function ServiciosInmobiliaria() {
                       {/* Tarjeta de Imagen Principal */}
                       <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] bg-[#070a13] z-10">
                         <img 
-                          src={sec.img} 
+                          src={sec.img ? (sec.img.startsWith('http') || sec.img.startsWith('data:') ? sec.img : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sec.img}`) : ''} 
                           alt={sec.title} 
                           className="w-full h-72 md:h-[420px] object-cover group-hover:scale-105 transition-transform duration-700" 
                         />

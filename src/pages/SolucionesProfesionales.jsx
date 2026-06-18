@@ -92,7 +92,7 @@ export default function SolucionesProfesionales() {
               {/* Imagen del Profesional */}
               <div className="w-full aspect-square rounded-2xl overflow-hidden border border-white/5 relative mb-5">
                 <img 
-                  src="/tour/abogado_thumb.png" 
+                  src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/tour/abogado_thumb.png`} 
                   alt="Perfil Profesional de Autoridad" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
@@ -577,7 +577,7 @@ export default function SolucionesProfesionales() {
               {/* Contenedor de la Imagen */}
               <div className="relative aspect-video overflow-hidden border-b border-white/5">
                 <img 
-                  src="/legal_portal_preview.png" 
+                  src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/legal_portal_preview.png`} 
                   alt="Portal Valdivia & Asociados" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
@@ -616,7 +616,7 @@ export default function SolucionesProfesionales() {
               {/* Contenedor de la Imagen */}
               <div className="relative aspect-video overflow-hidden border-b border-white/5">
                 <img 
-                  src="/salud_portal_juliaca.png" 
+                  src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/salud_portal_juliaca.png`} 
                   alt="Portal Dr. Carlos Mendoza" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"

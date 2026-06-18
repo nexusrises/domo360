@@ -527,7 +527,7 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
 
                     <div className="aspect-video w-full bg-slate-900 border-b border-white/5 overflow-hidden flex items-center justify-center relative">
                       <img 
-                        src={img.url} 
+                        src={img.url ? (img.url.startsWith('http') || img.url.startsWith('data:') ? img.url : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${img.url}`) : ''} 
                         alt={img.name} 
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
@@ -781,7 +781,8 @@ export default function TourEditorPage() {
   const dragIndex = useRef(null);
 
   const activeScene = scenes[activeSceneKey] || { nombre: '', imagen: '', hotspots: [], heading: { x: 0, y: 0 }, norteMagnetico: 0, filtro: 'normal' };
-  const displayImage = activeScene.imagen;
+  const displayImage = activeScene.imagen ? (activeScene.imagen.startsWith('http') || activeScene.imagen.startsWith('data:') ? activeScene.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${activeScene.imagen}`) : '';
+
 
   // Referencia para el guardado diferido (evitar lag al arrastrar sliders)
   const saveTimeoutRef = useRef(null);
@@ -1603,7 +1604,8 @@ export default function TourEditorPage() {
                               className="rounded-2xl overflow-hidden border border-white/15 flex flex-col"
                             >
                               {hs.url ? (
-                                <img src={hs.url} alt="Vista" className="w-full h-full object-cover pointer-events-none" />
+                                <img src={hs.url ? (hs.url.startsWith('http') || hs.url.startsWith('data:') ? hs.url : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${hs.url}`) : ''} alt="Vista" className="w-full h-full object-cover pointer-events-none" />
+
                               ) : (
                                 <div className="w-full h-full flex flex-col items-center justify-center text-[10px] text-gray-500 p-4 text-center">
                                   <span>Sin imagen</span>
@@ -1791,7 +1793,8 @@ export default function TourEditorPage() {
                       isActive 
                         ? 'border-amber-400 scale-[1.02] shadow-[0_0_12px_rgba(245,158,11,0.4)]' 
                         : 'border-white/10 hover:border-white/30'
-                    }`} style={{ backgroundImage: `url(${sc.imagen})` }}>
+                    }`} style={{ backgroundImage: `url(${sc.imagen ? (sc.imagen.startsWith('http') || sc.imagen.startsWith('data:') ? sc.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sc.imagen}`) : ''})` }}>
+
                       <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
                     </div>
                     <span className={`text-[9px] font-bold truncate max-w-full text-center tracking-wide uppercase ${
@@ -2326,7 +2329,7 @@ export default function TourEditorPage() {
                                         {hs.url ? (
                                           <>
                                             <img 
-                                              src={hs.url} 
+                                              src={hs.url ? (hs.url.startsWith('http') || hs.url.startsWith('data:') ? hs.url : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${hs.url}`) : ''} 
                                               alt="Vista previa" 
                                               className="max-h-[100px] object-contain rounded-lg border border-white/10"
                                             />

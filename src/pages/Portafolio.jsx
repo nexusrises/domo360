@@ -194,7 +194,7 @@ export default function Portafolio() {
                   {/* Imagen de Portada con Gradiente Oscuro encima */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
                     <img 
-                      src={proyecto.imagen} 
+                      src={proyecto.imagen ? (proyecto.imagen.startsWith('http') || proyecto.imagen.startsWith('data:') ? proyecto.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${proyecto.imagen}`) : ''} 
                       alt={proyecto.title} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-35 group-hover:opacity-45"
                     />
