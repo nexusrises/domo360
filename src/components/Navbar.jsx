@@ -174,7 +174,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`md:hidden absolute top-20 left-0 w-full bg-[#070a13]/95 backdrop-blur-xl border-b border-white/10 shadow-[0_15px_30px_rgba(0,0,0,0.8)] p-6 flex flex-col gap-5 transition-all duration-300 origin-top z-40 ${
+      <div className={`md:hidden absolute top-full left-0 w-full bg-[#070a13]/95 backdrop-blur-xl border-b border-white/10 shadow-[0_15px_30px_rgba(0,0,0,0.8)] p-6 flex flex-col gap-5 transition-all duration-300 origin-top z-40 ${
         isOpen ? 'opacity-100 scale-y-100 visible' : 'opacity-0 scale-y-0 invisible pointer-events-none'
       }`}>
         <div className="flex flex-col gap-4 text-base font-semibold">

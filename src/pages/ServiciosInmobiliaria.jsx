@@ -431,7 +431,7 @@ export default function ServiciosInmobiliaria() {
               </p>
             </div>
 
-            <div className={`w-full h-[580px] rounded-3xl transition-all duration-300 ${isTourExpanded
+            <div className={`w-full h-[400px] md:h-[580px] rounded-3xl transition-all duration-300 ${isTourExpanded
                 ? 'z-[9999]'
                 : 'overflow-hidden glass-panel border border-white/15 shadow-2xl relative z-20'
               }`}>

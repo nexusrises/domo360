@@ -469,6 +469,14 @@ export default function VirtualTour({
   const containerRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Control interactivo táctil para evitar atascar el scroll en celulares
+  const [isInteractive, setIsInteractive] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768;
+    }
+    return true;
+  });
+
   const toggleFullscreen = async () => {
     if (!containerRef.current) return;
     try {
@@ -785,6 +793,7 @@ export default function VirtualTour({
           dampingFactor={0.08}
           autoRotate={autoRotateState}
           autoRotateSpeed={0.3}
+          enabled={isInteractive}
         />
         <FovZoomController />
         <HeadingController heading={activeScene.heading} activeSceneKey={activeSceneKey} controlsRef={orbitRef} />
@@ -812,6 +821,17 @@ export default function VirtualTour({
 
         {/* Botones de Control del Sistema */}
         <div className="flex items-center gap-2 pointer-events-auto">
+          {/* Botón para volver a bloquear interacción en móviles */}
+          {isInteractive && typeof window !== 'undefined' && window.innerWidth < 768 && (
+            <button
+              onClick={() => setIsInteractive(false)}
+              className="px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:text-white hover:bg-rose-500/20 transition-all duration-200 cursor-pointer shadow-lg text-[10px] font-bold uppercase tracking-wider font-sans"
+              title="Fijar scroll / Bloquear vista 360°"
+            >
+              Fijar Scroll
+            </button>
+          )}
+
           {/* Botón de Editor Privado (Solo desarrollo) */}
           {isDev && (
             <button
@@ -921,14 +941,18 @@ export default function VirtualTour({
         </div>
       )}
 
-      {/* Indicador Inicial de Arrastre/Drag (Fade out inmediato) */}
-      {showDragHint && (
-        <div className="absolute inset-0 bg-black/15 pointer-events-none flex flex-col items-center justify-center z-10 transition-opacity duration-500">
-          <div className="flex flex-col items-center gap-2.5 bg-slate-950/85 border border-white/10 px-6 py-4 rounded-3xl backdrop-blur-md shadow-2xl animate-pulse text-center">
-            <div className="w-9 h-9 border border-cyan-400/30 rounded-full flex items-center justify-center text-cyan-400 mb-0.5">
-              <Sparkles className="w-4.5 h-4.5 animate-spin-slow" />
+      {/* Overlay de interacción móvil para evitar atascar el scroll vertical de la página */}
+      {!isInteractive && (
+        <div 
+          onClick={() => setIsInteractive(true)}
+          className="absolute inset-0 bg-[#070a13]/40 backdrop-blur-[1.5px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#070a13]/30 z-30 pointer-events-auto"
+        >
+          <div className="bg-slate-950/90 border border-cyan-400/20 px-6 py-4 rounded-3xl shadow-2xl flex flex-col items-center gap-2.5 text-center max-w-[85%] animate-fade-in">
+            <div className="w-10 h-10 border border-cyan-400/30 rounded-full flex items-center justify-center text-cyan-400 mb-0.5 animate-pulse">
+              <Compass className="w-5 h-5 animate-spin-slow" />
             </div>
-            <span className="text-white font-bold text-[11px] uppercase tracking-wider">Arrastra para Explorar 360°</span>
+            <span className="text-white font-bold text-xs uppercase tracking-wider font-display">Toca para activar vista 360°</span>
+            <span className="text-[10px] text-gray-400 leading-relaxed max-w-[180px]">Permite girar el entorno con tu dedo sin congelar el scroll de la página</span>
           </div>
         </div>
       )}

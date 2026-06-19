@@ -173,25 +173,28 @@ export default function InteractiveGlobe() {
     }
   }, [])
 
-  // Controladores de eventos de arrastre
+  // Controladores de eventos de arrastre (desactivados en móviles para permitir scroll vertical)
   const handlePointerDown = (e) => {
-    pointerInteracting.current = e.clientX - pointerInteractionStart.current
-    pointerInteractionStart.current = e.clientX
-    canvasRef.current.style.cursor = 'grabbing'
-  }
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+    pointerInteracting.current = e.clientX - pointerInteractionStart.current;
+    pointerInteractionStart.current = e.clientX;
+    if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing';
+  };
 
   const handlePointerUp = () => {
-    pointerInteracting.current = null
-    canvasRef.current.style.cursor = 'grab'
-  }
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+    pointerInteracting.current = null;
+    if (canvasRef.current) canvasRef.current.style.cursor = 'grab';
+  };
 
   const handlePointerMove = (e) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     if (pointerInteracting.current !== null) {
-      const delta = e.clientX - pointerInteractionStart.current
-      pointerInteractionStart.current = e.clientX
-      phiRef.current += delta / 200
+      const delta = e.clientX - pointerInteractionStart.current;
+      pointerInteractionStart.current = e.clientX;
+      phiRef.current += delta / 200;
     }
-  }
+  };
 
   return (
     <div style={{ width: 'min(520px, 90vw)', aspectRatio: '1 / 1', position: 'relative' }} className="mx-auto">
@@ -400,7 +403,8 @@ export default function InteractiveGlobe() {
           contain: 'layout paint size', 
           position: 'relative', 
           zIndex: 1,
-          cursor: 'grab'
+          cursor: typeof window !== 'undefined' && window.innerWidth < 768 ? 'default' : 'grab',
+          pointerEvents: typeof window !== 'undefined' && window.innerWidth < 768 ? 'none' : 'auto'
         }}
       />
     </div>
