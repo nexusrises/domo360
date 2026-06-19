@@ -18,7 +18,8 @@ import {
   FileText,
   Activity as Stethoscope,
   Smile,
-  ShieldAlert
+  ShieldAlert,
+  ChevronRight
 } from 'lucide-react';
 
 export default function ServiciosSalud() {
@@ -151,7 +152,103 @@ export default function ServiciosSalud() {
     }
   ];
 
-  const currentPreview = previews[activeTab];
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setTimeout(() => {
+        const element = document.getElementById(`acordeon-${tabId}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+    }
+  };
+
+  const renderDetailContent = (tabKey) => {
+    const preview = previews[tabKey];
+    return (
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
+        {/* Copy / Características */}
+        <div className="lg:col-span-5 flex flex-col gap-6">
+          <div>
+            <span className="text-[10px] font-bold text-nexus-purple uppercase tracking-widest bg-nexus-purple/10 px-2.5 py-1 rounded-full border border-nexus-purple/20 w-fit block">
+              Así se Estructura tu Sitio Web
+            </span>
+            <h2 className="text-xl md:text-3.5xl font-bold text-white mt-4 leading-tight">
+              {preview.title}
+            </h2>
+            <p className="text-nexus-blue text-xs md:text-sm font-medium mt-1">
+              {preview.subtitle}
+            </p>
+          </div>
+
+          <div className="bg-white/5 border border-white/5 rounded-2xl p-5 italic text-gray-300 text-xs md:text-sm leading-relaxed relative mt-2">
+            <span className="absolute -top-3 left-4 bg-nexus-purple text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">El Deseo de tu Negocio</span>
+            {preview.deseosCliente}
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider border-b border-white/5 pb-2">Características Clave de Conversión:</h4>
+            {preview.features.map((feature, idx) => (
+              <div key={idx} className="flex items-start gap-2.5">
+                <div className="p-1 rounded-full bg-emerald-500/10 text-emerald-400 mt-0.5 border border-emerald-500/20">
+                  <CheckCircle className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-xs text-gray-300 leading-relaxed">{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mockup de Pantalla */}
+        <div className="lg:col-span-7 flex flex-col gap-4 w-full">
+          <div className="bg-[#0b0f19] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative w-full">
+
+            {/* Browser Chrome Simulation */}
+            <div className="bg-[#182035] px-4 py-2 border-b border-white/5 flex items-center gap-2">
+              <div className="flex gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
+              </div>
+              <div className="bg-white/5 rounded-lg text-[10px] text-gray-400 px-6 py-1 mx-auto w-3/4 text-center font-mono overflow-hidden whitespace-nowrap">
+                https://tu-clinica-medica.com
+              </div>
+            </div>
+
+            {/* Screenshot / Render Content */}
+            <div className="relative h-64 md:h-[400px] overflow-hidden w-full">
+              <img
+                src={preview.heroImg ? (preview.heroImg.startsWith('http') || preview.heroImg.startsWith('data:') ? preview.heroImg : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${preview.heroImg}`) : ''}
+                alt="Visualización del diseño web médico"
+                className="w-full h-full object-cover"
+              />
+              <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none"></div>
+            </div>
+
+            {/* Floating Web UI Simulation elements (Flotante en desktop, secuencial debajo de la imagen en móvil) */}
+            <div className="relative md:absolute md:bottom-6 md:left-6 md:right-6 flex flex-col md:flex-row md:items-end justify-between gap-4 p-4 md:p-0 bg-[#0b0f19] md:bg-transparent">
+              <div className="max-w-xl text-left">
+                <span className={`text-[9px] uppercase font-bold tracking-widest border px-2 py-0.5 rounded w-fit block mb-1 ${
+                  tabKey === 'ocupacional'
+                    ? 'text-rose-400 bg-rose-950/40 border-rose-500/30'
+                    : tabKey === 'laboratorio'
+                      ? 'text-nexus-purple bg-nexus-purple/20 border-nexus-purple/30'
+                      : 'text-nexus-blue bg-nexus-blue/20 border-nexus-blue/30'
+                }`}>{preview.badgeText}</span>
+                <h4 className="text-sm md:text-lg font-bold text-white mt-1.5">{preview.mockupTitle}</h4>
+                <p className="text-[10px] text-gray-300 mt-1 line-clamp-2 leading-relaxed">{preview.mockupDesc}</p>
+              </div>
+            </div>
+
+          </div>
+          <div className="text-center">
+            <p className="text-[10px] text-gray-500 font-sans">Visualización interactiva: La imagen superior emula la interfaz limpia y navegable que verán tus pacientes.</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="animate-fade-in-up">
@@ -173,126 +270,122 @@ export default function ServiciosSalud() {
       <section className="container mx-auto px-6 pb-24 relative z-10">
         <div className="max-w-6xl mx-auto">
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-            <button
-              onClick={() => setActiveTab('clinica')}
-              className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'clinica'
-                  ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
-                  : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'clinica' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Clínicas & Consultorios</span>
-              <h3 className="text-lg font-bold">Portal Médico de Citas</h3>
-              <p className="text-xs mt-2 opacity-80 leading-relaxed">Web para agendar citas, mostrar especialidades y dar a conocer a tu staff de médicos especialistas.</p>
-            </button>
+          {/* DISEÑO EN ESCRITORIO: Pestañas en Grid y Contenedor abajo */}
+          <div className="hidden md:block">
+            {/* Tabs Nav */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+              <button
+                onClick={() => handleTabClick('clinica')}
+                className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'clinica'
+                    ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
+                    : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'clinica' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Clínicas & Consultorios</span>
+                <h3 className="text-lg font-bold">Portal Médico de Citas</h3>
+                <p className="text-xs mt-2 opacity-80 leading-relaxed">Web para agendar citas, mostrar especialidades y dar a conocer a tu staff de médicos especialistas.</p>
+              </button>
 
-            <button
-              onClick={() => setActiveTab('ocupacional')}
-              className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'ocupacional'
-                  ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
-                  : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'ocupacional' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Salud en el Trabajo</span>
-              <h3 className="text-lg font-bold">Plataforma Ocupacional</h3>
-              <p className="text-xs mt-2 opacity-80 leading-relaxed">Portal corporativo para empresas, descarga segura de aptitudes médicas y Ley N° 29783.</p>
-            </button>
+              <button
+                onClick={() => handleTabClick('ocupacional')}
+                className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'ocupacional'
+                    ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
+                    : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'ocupacional' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Salud en el Trabajo</span>
+                <h3 className="text-lg font-bold">Plataforma Ocupacional</h3>
+                <p className="text-xs mt-2 opacity-80 leading-relaxed">Portal corporativo para empresas, descarga segura de aptitudes médicas y Ley N° 29783.</p>
+              </button>
 
-            <button
-              onClick={() => setActiveTab('laboratorio')}
-              className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'laboratorio'
-                  ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
-                  : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'laboratorio' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Centros de Diagnóstico</span>
-              <h3 className="text-lg font-bold">Laboratorio & Imágenes</h3>
-              <p className="text-xs mt-2 opacity-80 leading-relaxed">Entrega digitalizada de resultados clínicos, preparación de análisis y acreditaciones de calidad.</p>
-            </button>
+              <button
+                onClick={() => handleTabClick('laboratorio')}
+                className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'laboratorio'
+                    ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
+                    : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'laboratorio' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Centros de Diagnóstico</span>
+                <h3 className="text-lg font-bold">Laboratorio & Imágenes</h3>
+                <p className="text-xs mt-2 opacity-80 leading-relaxed">Entrega digitalizada de resultados clínicos, preparación de análisis y acreditaciones de calidad.</p>
+              </button>
+            </div>
+
+            {/* Maqueta Interactiva */}
+            <div className="glass-panel border border-white/10 rounded-3xl p-6 md:p-10 animate-fade-in-up mb-24">
+              {renderDetailContent(activeTab)}
+            </div>
           </div>
 
-          {/* Maqueta Interactiva */}
-          <div className="glass-panel border border-white/10 rounded-3xl p-6 md:p-10 animate-fade-in-up mb-24">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-
-              {/* Copy / Características */}
-              <div className="lg:col-span-5 flex flex-col gap-6">
+          {/* DISEÑO EN MÓVILES: Acordeón Interactivo Colapsable */}
+          <div className="block md:hidden space-y-4 mb-24">
+            
+            {/* Acordeón Clínica */}
+            <div id="acordeon-clinica" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+              <button
+                onClick={() => handleTabClick('clinica')}
+                className={`w-full p-5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                  activeTab === 'clinica' ? 'bg-white text-nexus-dark font-bold' : 'glass-panel text-gray-400'
+                }`}
+              >
                 <div>
-                  <span className="text-xs font-bold text-nexus-purple uppercase tracking-widest bg-nexus-purple/10 px-3 py-1 rounded-full border border-nexus-purple/20">
-                    Así se Estructura tu Sitio Web
-                  </span>
-                  <h2 className="text-2xl md:text-3.5xl font-bold text-white mt-4">
-                    {currentPreview.title}
-                  </h2>
-                  <p className="text-nexus-blue text-sm md:text-base font-medium">
-                    {currentPreview.subtitle}
-                  </p>
+                  <span className={`text-[9px] font-bold uppercase tracking-wider block mb-1 ${activeTab === 'clinica' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Clínicas & Consultorios</span>
+                  <h3 className="text-base font-bold">Portal Médico de Citas</h3>
                 </div>
-
-                <div className="bg-white/5 border border-white/5 rounded-2xl p-5 italic text-gray-300 text-xs md:text-sm leading-relaxed relative">
-                  <span className="absolute -top-3 left-4 bg-nexus-purple text-white text-xs font-bold px-2.5 py-0.5 rounded uppercase tracking-wider">El Deseo de tu Negocio</span>
-                  {currentPreview.deseosCliente}
+                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeTab === 'clinica' ? 'rotate-90 text-nexus-dark' : 'text-gray-500'}`} />
+              </button>
+              
+              {activeTab === 'clinica' && (
+                <div className="p-4 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                  {renderDetailContent('clinica')}
                 </div>
-
-                <div className="flex flex-col gap-3">
-                  <h4 className="text-xs font-bold text-white uppercase tracking-wider border-b border-white/5 pb-2">Características Clave de Conversión:</h4>
-                  {currentPreview.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5">
-                      <div className="p-1 rounded-full bg-emerald-500/10 text-emerald-400 mt-0.5 border border-emerald-500/20">
-                        <CheckCircle className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-xs text-gray-300 leading-relaxed">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Mockup de Pantalla */}
-              <div className="lg:col-span-7 flex flex-col gap-4">
-                <div className="bg-[#0b0f19] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
-
-                  {/* Browser Chrome Simulation */}
-                  <div className="bg-[#182035] px-4 py-2 border-b border-white/5 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500 block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500 block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
-                    </div>
-                    <div className="bg-white/5 rounded-lg text-[10px] text-gray-400 px-6 py-1 mx-auto w-3/4 text-center font-mono overflow-hidden whitespace-nowrap">
-                      https://tu-clinica-medica.com
-                    </div>
-                  </div>
-
-                  {/* Screenshot / Render Content */}
-                  <div className="relative h-64 md:h-[400px] overflow-hidden">
-                    <img
-                      src={currentPreview.heroImg ? (currentPreview.heroImg.startsWith('http') || currentPreview.heroImg.startsWith('data:') ? currentPreview.heroImg : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${currentPreview.heroImg}`) : ''}
-                      alt="Visualización del diseño web médico"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
-
-                    {/* Floating Web UI Simulation elements */}
-                    <div className="absolute bottom-6 left-6 right-6 z-20">
-                      <div className="max-w-xl">
-                        <span className={`text-[9px] uppercase font-bold tracking-widest border px-2 py-0.5 rounded ${activeTab === 'ocupacional'
-                            ? 'text-rose-400 bg-rose-950/40 border-rose-500/30'
-                            : activeTab === 'laboratorio'
-                              ? 'text-nexus-purple bg-nexus-purple/20 border-nexus-purple/30'
-                              : 'text-nexus-blue bg-nexus-blue/20 border-nexus-blue/30'
-                          }`}>{currentPreview.badgeText}</span>
-                        <h4 className="text-lg md:text-xl font-bold text-white mt-1.5">{currentPreview.mockupTitle}</h4>
-                        <p className="text-[10px] text-gray-300 mt-1 line-clamp-2">{currentPreview.mockupDesc}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <p className="text-xs text-gray-500 font-sans">Visualización interactiva: La imagen superior emula la interfaz limpia y navegable que verán tus pacientes.</p>
-                </div>
-              </div>
-
+              )}
             </div>
+
+            {/* Acordeón Ocupacional */}
+            <div id="acordeon-ocupacional" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+              <button
+                onClick={() => handleTabClick('ocupacional')}
+                className={`w-full p-5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                  activeTab === 'ocupacional' ? 'bg-white text-nexus-dark font-bold' : 'glass-panel text-gray-400'
+                }`}
+              >
+                <div>
+                  <span className={`text-[9px] font-bold uppercase tracking-wider block mb-1 ${activeTab === 'ocupacional' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Salud en el Trabajo</span>
+                  <h3 className="text-base font-bold">Plataforma Ocupacional</h3>
+                </div>
+                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeTab === 'ocupacional' ? 'rotate-90 text-nexus-dark' : 'text-gray-500'}`} />
+              </button>
+              
+              {activeTab === 'ocupacional' && (
+                <div className="p-4 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                  {renderDetailContent('ocupacional')}
+                </div>
+              )}
+            </div>
+
+            {/* Acordeón Laboratorio */}
+            <div id="acordeon-laboratorio" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+              <button
+                onClick={() => handleTabClick('laboratorio')}
+                className={`w-full p-5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                  activeTab === 'laboratorio' ? 'bg-white text-nexus-dark font-bold' : 'glass-panel text-gray-400'
+                }`}
+              >
+                <div>
+                  <span className={`text-[9px] font-bold uppercase tracking-wider block mb-1 ${activeTab === 'laboratorio' ? 'text-nexus-purple' : 'text-nexus-blue'}`}>Centros de Diagnóstico</span>
+                  <h3 className="text-base font-bold">Laboratorio & Imágenes</h3>
+                </div>
+                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeTab === 'laboratorio' ? 'rotate-90 text-nexus-dark' : 'text-gray-500'}`} />
+              </button>
+              
+              {activeTab === 'laboratorio' && (
+                <div className="p-4 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                  {renderDetailContent('laboratorio')}
+                </div>
+              )}
+            </div>
+
           </div>
 
           {/* NUEVO ENFOQUE: Cómo estructuramos la información de la página */}

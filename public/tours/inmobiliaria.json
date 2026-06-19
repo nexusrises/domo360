@@ -27,39 +27,15 @@
         "fuente": "Montserrat",
         "fontSize": 18,
         "fondoTransparente": false
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -3.87,
-          -3.83,
-          19.25
-        ],
-        "destino": "_self",
-        "texto": "Maravillas 2",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#f50a0a",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 13
       }
     ],
     "heading": {
-      "x": -20,
-      "y": 45
+      "x": -26,
+      "y": 67
     },
     "norteMagnetico": 145,
     "filtro": "normal",
-    "northOffset": 193
+    "northOffset": 178
   },
   "02_residencial_maravillas_1585": {
     "nombre": "Maravillas 1",
@@ -68,38 +44,37 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          17.84,
-          -0.75,
-          9.01
+          18.38,
+          0.19,
+          7.88
         ],
         "destino": "04_mara_ii_mz_c_8506",
         "texto": "Maravillas 2",
         "opacidad": 1,
-        "escala": 1,
+        "escala": 0.7,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#f50a0a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 15
+        "fijo": true,
+        "fondoTransparente": false,
+        "colorFondo": "#ffffff",
+        "colorTexto": "#000980",
+        "fontSize": 23
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          10.01,
-          0.06,
-          -17.31
+          11.04,
+          -0.62,
+          -16.66
         ],
         "destino": "_self",
         "texto": "Colegio \n\"Jose Olaya\"",
         "opacidad": 1,
-        "escala": 1,
+        "escala": 0.9,
         "icono": "ArrowDown",
         "color": "#ff0000",
         "inclinacion": 0,
@@ -107,20 +82,20 @@
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 14
+        "fontSize": 22,
+        "colorFondo": "#ffffff",
+        "colorTexto": "#0006bd",
+        "negrita": true,
+        "cursiva": false
       }
     ],
     "heading": {
-      "x": -22,
-      "y": -169
+      "x": -23,
+      "y": 134
     },
     "norteMagnetico": 0,
     "filtro": "hdr",
-    "northOffset": 265
+    "northOffset": 253
   },
   "04_mara_ii_mz_c_8506": {
     "nombre": "Maravillas 2",
@@ -133,7 +108,7 @@
           -2.16,
           11.61
         ],
-        "destino": "02_residencial_maravillas_1585",
+        "destino": "01_rm_vista_lugares_referencia_2696",
         "texto": "Maravillas   1",
         "opacidad": 1,
         "escala": 0.7,
@@ -151,6 +126,31 @@
       {
         "tipo": "hotspot",
         "posicion": [
+          -18.28,
+          -2.9,
+          -7.57
+        ],
+        "destino": "_self",
+        "texto": "COLEGIO\n\"JOSE OLAYA\"",
+        "opacidad": 1,
+        "escala": 0.6,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "fontSize": 23,
+        "fuente": "Archivo Black",
+        "colorFondo": "#f7f7f7",
+        "colorTexto": "#001b85"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
           -19.99,
           0.44,
           0.45
@@ -159,7 +159,7 @@
         "texto": "VISTA AEREA \nDE LOS PROYECTOS",
         "opacidad": 1,
         "escala": 0.6,
-        "icono": "ArrowUp",
+        "icono": "ArrowRight",
         "color": "#0a9bf5",
         "inclinacion": 0,
         "posicionTipo": "2d",
@@ -172,38 +172,14 @@
         "fuente": "Montserrat",
         "fontSize": 15,
         "colorFondo": "#3a6bdf"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -18.24,
-          -2.76,
-          -7.71
-        ],
-        "destino": "_self",
-        "texto": "Colegio \n\"Jose Olaya\"",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowRight",
-        "color": "#f59e0b",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 14
       }
     ],
     "heading": {
-      "x": -17,
-      "y": 127
+      "x": -23,
+      "y": 93
     },
     "norteMagnetico": 0,
     "filtro": "bright",
-    "northOffset": 322
+    "northOffset": 294
   }
 }

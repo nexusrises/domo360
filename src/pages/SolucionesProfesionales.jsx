@@ -47,6 +47,192 @@ export default function SolucionesProfesionales() {
 
   // Comparativa de adquisición removida para estructura estática de alto impacto
 
+  const handleStepChange = (stepId) => {
+    setActiveStep(stepId);
+    setBookingSuccess(false);
+    setSelectedTime('');
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) { // lg breakpoint
+      setTimeout(() => {
+        const element = document.getElementById(`acordeon-step-${stepId}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+    }
+  };
+
+  const renderStepContent = (stepNumber) => {
+    return (
+      <div className="bg-[#070a13] border border-white/10 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] relative w-full text-left">
+        
+        {/* Navegador Simulado */}
+        <div className="bg-slate-900 px-4 py-2.5 border-b border-white/5 flex items-center gap-2">
+          <div className="flex gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-rose-500 block"></span>
+            <span className="w-2 h-2 rounded-full bg-amber-500 block"></span>
+            <span className="w-2 h-2 rounded-full bg-emerald-500 block"></span>
+          </div>
+          <div className="bg-white/5 rounded-lg text-[10px] text-gray-500 px-6 py-1 mx-auto w-2/3 text-center font-mono overflow-hidden whitespace-nowrap">
+            {stepNumber === 1 && "https://google.com/search?q=consultoria+legal+corporativa"}
+            {stepNumber === 2 && "https://andrea-valdivia.com/blog/estrategia-legal-startup"}
+            {stepNumber === 3 && "https://andrea-valdivia.com/agendar-llamada"}
+          </div>
+        </div>
+
+        {/* Contenido Dinámico del Navegador */}
+        <div className="p-6 md:p-8 bg-[#070a13] text-white min-h-[380px] flex flex-col justify-between w-full">
+          
+          {/* FASE 1: GOOGLE SEARCH */}
+          {stepNumber === 1 && (
+            <div className="space-y-6 animate-fade-in text-left">
+              {/* Buscador de Google */}
+              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs text-gray-300">
+                <span className="text-rose-400 font-extrabold">G</span>
+                <span className="text-gray-400">consultoria legal corporativa startups peru</span>
+              </div>
+              
+              {/* Resultados */}
+              <div className="space-y-4">
+                <span className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">Resultado destacado</span>
+                <div className="p-5 rounded-2xl border border-nexus-accent/20 bg-nexus-accent/[0.02] space-y-2 relative group hover:border-nexus-accent/30 transition-all">
+                  <span className="absolute top-4 right-4 bg-nexus-accent/10 border border-nexus-accent/20 text-nexus-accent text-[8px] font-black uppercase px-2 py-0.5 rounded tracking-wider">1º Posición</span>
+                  <div className="text-[10px] text-gray-400 flex items-center gap-1">
+                    <span>andrea-valdivia.com</span>
+                    <span>&rsaquo;</span>
+                    <span>blog</span>
+                  </div>
+                  <h4 className="text-sm md:text-base font-bold text-nexus-accent hover:underline cursor-pointer" onClick={() => handleStepChange(2)}>
+                    Estructuración Legal: Cómo proteger tu startup ante rondas de inversión
+                  </h4>
+                  <p className="text-xs text-gray-400 leading-relaxed font-sans">
+                    Aprende cómo blindar tu negocio. Guía detallada sobre fusiones, contratos de socios y protección de propiedad intelectual en el Perú. Evita errores comunes que ahuyentan inversionistas.
+                  </p>
+                </div>
+
+                {/* Resultados genéricos de relleno */}
+                <div className="opacity-40 pl-5 space-y-1 text-left">
+                  <span className="text-[9px] text-gray-500">directorio-abogados.pe &rsaquo; legal</span>
+                  <h5 className="text-xs font-semibold text-blue-400">Listado de Abogados en Lima</h5>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* FASE 2: ARTÍCULO DE BLOG */}
+          {stepNumber === 2 && (
+            <div className="space-y-5 text-left animate-fade-in flex flex-col justify-between h-full">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                  <span className="text-[9px] text-nexus-purple uppercase tracking-widest font-black">Blog de Autoridad</span>
+                  <span className="text-[9px] text-gray-500">Lectura: 5 min</span>
+                </div>
+                
+                <h3 className="text-base md:text-lg font-extrabold text-white font-display leading-snug">
+                  Estructuración Legal: Cómo proteger tu startup ante rondas de inversión
+                </h3>
+                
+                <p className="text-xs text-gray-300 leading-relaxed font-sans">
+                  Para levantar capital, los inversionistas auditan tu estructura societaria. Un error común es no tener un acuerdo de socios (vesting) o patentes registradas. Un diseño contractual sólido en las etapas tempranas previene conflictos de socios y garantiza la viabilidad del financiamiento.
+                </p>
+
+                <blockquote className="border-l-2 border-nexus-purple bg-white/[0.01] p-3 rounded-r-lg italic text-[11px] text-gray-400 leading-relaxed">
+                  "Los fondos de inversión no buscan la idea perfecta; buscan mitigar riesgos legales de propiedad intelectual y control corporativo."
+                </blockquote>
+              </div>
+
+              <div className="pt-4 border-t border-white/5 flex justify-end">
+                <button 
+                  onClick={() => handleStepChange(3)}
+                  className="bg-nexus-purple hover:bg-nexus-purple/90 text-white font-bold px-5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(168,85,247,0.15)] cursor-pointer"
+                >
+                  Agendar Llamada de Diagnóstico
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* FASE 3: CALENDARIO DE RESERVAS */}
+          {stepNumber === 3 && (
+            <div className="space-y-4 text-left animate-fade-in">
+              <div className="border-b border-white/5 pb-3 text-left">
+                <h4 className="text-xs font-black uppercase text-indigo-400 tracking-widest">Reserva tu Sesión</h4>
+                <h3 className="text-sm font-bold text-white mt-1">Llamada de Diagnóstico Corporativo</h3>
+                <span className="text-[10px] text-gray-500 font-sans">30 min • Reunión vía Zoom</span>
+              </div>
+
+              {!bookingSuccess ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Selector de Fecha */}
+                  <div className="space-y-2">
+                    <label className="text-[9px] text-gray-500 uppercase tracking-wider">1. Selecciona el Día</label>
+                    <div className="grid grid-cols-3 gap-1.5 text-center font-mono">
+                      <span className="bg-white/5 border border-white/5 p-2 rounded-lg text-xs text-gray-500 select-none">Lunes</span>
+                      <span className="bg-white/5 border border-white/5 p-2 rounded-lg text-xs text-gray-500 select-none">Martes</span>
+                      <button className="bg-indigo-500/10 border border-indigo-500/30 p-2 rounded-lg text-xs text-indigo-300 font-bold hover:bg-indigo-500/20 cursor-pointer">Miér.</button>
+                    </div>
+                    <p className="text-[9px] text-indigo-400 italic font-sans leading-normal">Disponibilidad en tiempo real sincronizada con Google Calendar.</p>
+                  </div>
+
+                  {/* Selector de Hora */}
+                  <div className="space-y-2">
+                    <label className="text-[9px] text-gray-500 uppercase tracking-wider">2. Selecciona la Hora</label>
+                    <div className="grid grid-cols-2 gap-1.5 text-center">
+                      <button 
+                        onClick={() => setSelectedTime('09:00 AM')}
+                        className={`p-2 rounded-lg text-xs border font-bold transition-all cursor-pointer ${
+                          selectedTime === '09:00 AM' ? 'border-nexus-accent bg-nexus-accent/10 text-white' : 'border-white/5 hover:bg-white/5 text-gray-400'
+                        }`}
+                      >
+                        09:00 AM
+                      </button>
+                      <button 
+                        onClick={() => setSelectedTime('03:30 PM')}
+                        className={`p-2 rounded-lg text-xs border font-bold transition-all cursor-pointer ${
+                          selectedTime === '03:30 PM' ? 'border-nexus-accent bg-nexus-accent/10 text-white' : 'border-white/5 hover:bg-white/5 text-gray-400'
+                        }`}
+                      >
+                        03:30 PM
+                      </button>
+                    </div>
+                    
+                    {selectedTime && (
+                      <button 
+                        onClick={() => setBookingSuccess(true)}
+                        className="mt-3 bg-nexus-accent text-nexus-dark font-black text-[10px] uppercase tracking-wider py-2 px-3 rounded-lg w-full transition-all cursor-pointer"
+                      >
+                        Confirmar Cita ({selectedTime}) &rsaquo;
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="py-8 text-center space-y-4 animate-fade-in flex flex-col items-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                    <CheckCircle className="w-6 h-6 animate-pulse" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <h4 className="text-sm font-bold text-white">¡Reunión Agendada Exitosamente!</h4>
+                    <p className="text-xs text-gray-400 max-w-sm mx-auto leading-relaxed font-sans">
+                      Se ha reservado tu slot para el día <strong>Miércoles a las {selectedTime}</strong>. Hemos enviado la invitación de Google Calendar y el enlace de Zoom a tu correo electrónico de forma automática.
+                    </p>
+                  </div>
+                  <button 
+                    onClick={() => { setBookingSuccess(false); setSelectedTime(''); handleStepChange(1); }}
+                    className="text-[10px] text-indigo-400 hover:underline cursor-pointer uppercase tracking-wider font-bold pt-2"
+                  >
+                    Volver a iniciar simulación
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+          
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="relative animate-fade-in-up">
       {/* 1. HERO SECTION ASIMÉTRICO */}
@@ -305,7 +491,9 @@ export default function SolucionesProfesionales() {
       <section className="container mx-auto px-6 pb-24 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="glass-panel border-white/10 rounded-3xl p-6 md:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* DISEÑO EN ESCRITORIO: Simulador en Rejilla (Columnas) */}
+            <div className="hidden lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
               
               {/* Información y Pasos Interactivos */}
               <div className="lg:col-span-5 flex flex-col gap-6">
@@ -324,7 +512,7 @@ export default function SolucionesProfesionales() {
                 {/* Botones de Pasos del Embudo */}
                 <div className="flex flex-col gap-3 font-sans">
                   <button
-                    onClick={() => { setActiveStep(1); setBookingSuccess(false); setSelectedTime(''); }}
+                    onClick={() => handleStepChange(1)}
                     className={`text-left p-4 rounded-2xl border transition-all cursor-pointer ${
                       activeStep === 1
                         ? 'bg-nexus-accent/10 border-nexus-accent/35 text-white shadow-[0_0_15px_rgba(0,242,254,0.05)]'
@@ -341,7 +529,7 @@ export default function SolucionesProfesionales() {
                   </button>
 
                   <button
-                    onClick={() => { setActiveStep(2); setBookingSuccess(false); setSelectedTime(''); }}
+                    onClick={() => handleStepChange(2)}
                     className={`text-left p-4 rounded-2xl border transition-all cursor-pointer ${
                       activeStep === 2
                         ? 'bg-nexus-purple/10 border-nexus-purple/35 text-white shadow-[0_0_15px_rgba(168,85,247,0.05)]'
@@ -358,7 +546,7 @@ export default function SolucionesProfesionales() {
                   </button>
 
                   <button
-                    onClick={() => { setActiveStep(3); setBookingSuccess(false); setSelectedTime(''); }}
+                    onClick={() => handleStepChange(3)}
                     className={`text-left p-4 rounded-2xl border transition-all cursor-pointer ${
                       activeStep === 3
                         ? 'bg-indigo-500/10 border-indigo-500/35 text-white shadow-[0_0_15px_rgba(99,102,241,0.05)]'
@@ -378,174 +566,7 @@ export default function SolucionesProfesionales() {
 
               {/* Maqueta Interactiva */}
               <div className="lg:col-span-7 flex flex-col gap-4">
-                <div className="bg-[#070a13] border border-white/10 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] relative">
-                  
-                  {/* Navegador Simulado */}
-                  <div className="bg-slate-900 px-4 py-2.5 border-b border-white/5 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-rose-500 block"></span>
-                      <span className="w-2 h-2 rounded-full bg-amber-500 block"></span>
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 block"></span>
-                    </div>
-                    <div className="bg-white/5 rounded-lg text-[10px] text-gray-500 px-6 py-1 mx-auto w-2/3 text-center font-mono overflow-hidden whitespace-nowrap">
-                      {activeStep === 1 && "https://google.com/search?q=consultoria+legal+corporativa"}
-                      {activeStep === 2 && "https://andrea-valdivia.com/blog/estrategia-legal-startup"}
-                      {activeStep === 3 && "https://andrea-valdivia.com/agendar-llamada"}
-                    </div>
-                  </div>
-
-                  {/* Contenido Dinámico del Navegador */}
-                  <div className="p-6 md:p-8 bg-[#070a13] text-white min-h-[380px] flex flex-col justify-between">
-                    
-                    {/* FASE 1: GOOGLE SEARCH */}
-                    {activeStep === 1 && (
-                      <div className="space-y-6 animate-fade-in text-left">
-                        {/* Buscador de Google */}
-                        <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs text-gray-300">
-                          <span className="text-rose-400 font-extrabold">G</span>
-                          <span className="text-gray-400">consultoria legal corporativa startups peru</span>
-                        </div>
-                        
-                        {/* Resultados */}
-                        <div className="space-y-4">
-                          <span className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">Resultado destacado</span>
-                          <div className="p-5 rounded-2xl border border-nexus-accent/20 bg-nexus-accent/[0.02] space-y-2 relative group hover:border-nexus-accent/30 transition-all">
-                            <span className="absolute top-4 right-4 bg-nexus-accent/10 border border-nexus-accent/20 text-nexus-accent text-[8px] font-black uppercase px-2 py-0.5 rounded tracking-wider">1º Posición</span>
-                            <div className="text-[10px] text-gray-400 flex items-center gap-1">
-                              <span>andrea-valdivia.com</span>
-                              <span>&rsaquo;</span>
-                              <span>blog</span>
-                            </div>
-                            <h4 className="text-sm md:text-base font-bold text-nexus-accent hover:underline cursor-pointer" onClick={() => setActiveStep(2)}>
-                              Estructuración Legal: Cómo proteger tu startup ante rondas de inversión
-                            </h4>
-                            <p className="text-xs text-gray-400 leading-relaxed font-sans">
-                              Aprende cómo blindar tu negocio. Guía detallada sobre fusiones, contratos de socios y protección de propiedad intelectual en el Perú. Evita errores comunes que ahuyentan inversionistas.
-                            </p>
-                          </div>
-
-                          {/* Resultados genéricos de relleno */}
-                          <div className="opacity-40 pl-5 space-y-1">
-                            <span className="text-[9px] text-gray-500">directorio-abogados.pe &rsaquo; legal</span>
-                            <h5 className="text-xs font-semibold text-blue-400">Listado de Abogados en Lima</h5>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* FASE 2: ARTÍCULO DE BLOG */}
-                    {activeStep === 2 && (
-                      <div className="space-y-5 text-left animate-fade-in flex flex-col justify-between h-full">
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between border-b border-white/5 pb-3">
-                            <span className="text-[9px] text-nexus-purple uppercase tracking-widest font-black">Blog de Autoridad</span>
-                            <span className="text-[9px] text-gray-500">Lectura: 5 min</span>
-                          </div>
-                          
-                          <h3 className="text-base md:text-lg font-extrabold text-white font-display leading-snug">
-                            Estructuración Legal: Cómo proteger tu startup ante rondas de inversión
-                          </h3>
-                          
-                          <p className="text-xs text-gray-300 leading-relaxed font-sans">
-                            Para levantar capital, los inversionistas auditan tu estructura societaria. Un error común es no tener un acuerdo de socios (vesting) o patentes registradas. Un diseño contractual sólido en las etapas tempranas previene conflictos de socios y garantiza la viabilidad del financiamiento.
-                          </p>
-
-                          <blockquote className="border-l-2 border-nexus-purple bg-white/[0.01] p-3 rounded-r-lg italic text-[11px] text-gray-400 leading-relaxed">
-                            "Los fondos de inversión no buscan la idea perfecta; buscan mitigar riesgos legales de propiedad intelectual y control corporativo."
-                          </blockquote>
-                        </div>
-
-                        <div className="pt-4 border-t border-white/5 flex justify-end">
-                          <button 
-                            onClick={() => setActiveStep(3)}
-                            className="bg-nexus-purple hover:bg-nexus-purple/90 text-white font-bold px-5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(168,85,247,0.15)] cursor-pointer"
-                          >
-                            Agendar Llamada de Diagnóstico
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* FASE 3: CALENDARIO DE RESERVAS */}
-                    {activeStep === 3 && (
-                      <div className="space-y-4 text-left animate-fade-in">
-                        <div className="border-b border-white/5 pb-3">
-                          <h4 className="text-xs font-black uppercase text-indigo-400 tracking-widest">Reserva tu Sesión</h4>
-                          <h3 className="text-sm font-bold text-white mt-1">Llamada de Diagnóstico Corporativo</h3>
-                          <span className="text-[10px] text-gray-500">30 min • Reunión vía Zoom</span>
-                        </div>
-
-                        {!bookingSuccess ? (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {/* Selector de Fecha */}
-                            <div className="space-y-2">
-                              <label className="text-[9px] text-gray-500 uppercase tracking-wider">1. Selecciona el Día</label>
-                              <div className="grid grid-cols-3 gap-1.5 text-center font-mono">
-                                <span className="bg-white/5 border border-white/5 p-2 rounded-lg text-xs text-gray-500 select-none">Lunes</span>
-                                <span className="bg-white/5 border border-white/5 p-2 rounded-lg text-xs text-gray-500 select-none">Martes</span>
-                                <button className="bg-indigo-500/10 border border-indigo-500/30 p-2 rounded-lg text-xs text-indigo-300 font-bold hover:bg-indigo-500/20 cursor-pointer">Miér.</button>
-                              </div>
-                              <p className="text-[9px] text-indigo-400 italic font-sans leading-normal">Disponibilidad en tiempo real sincronizada con Google Calendar.</p>
-                            </div>
-
-                            {/* Selector de Hora */}
-                            <div className="space-y-2">
-                              <label className="text-[9px] text-gray-500 uppercase tracking-wider">2. Selecciona la Hora</label>
-                              <div className="grid grid-cols-2 gap-1.5 text-center">
-                                <button 
-                                  onClick={() => setSelectedTime('09:00 AM')}
-                                  className={`p-2 rounded-lg text-xs border font-bold transition-all cursor-pointer ${
-                                    selectedTime === '09:00 AM' ? 'border-nexus-accent bg-nexus-accent/10 text-white' : 'border-white/5 hover:bg-white/5 text-gray-400'
-                                  }`}
-                                >
-                                  09:00 AM
-                                </button>
-                                <button 
-                                  onClick={() => setSelectedTime('03:30 PM')}
-                                  className={`p-2 rounded-lg text-xs border font-bold transition-all cursor-pointer ${
-                                    selectedTime === '03:30 PM' ? 'border-nexus-accent bg-nexus-accent/10 text-white' : 'border-white/5 hover:bg-white/5 text-gray-400'
-                                  }`}
-                                >
-                                  03:30 PM
-                                </button>
-                              </div>
-                              
-                              {selectedTime && (
-                                <button 
-                                  onClick={() => setBookingSuccess(true)}
-                                  className="mt-3 bg-nexus-accent text-nexus-dark font-black text-[10px] uppercase tracking-wider py-2 px-3 rounded-lg w-full transition-all cursor-pointer"
-                                >
-                                  Confirmar Cita ({selectedTime}) &rsaquo;
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="py-8 text-center space-y-4 animate-fade-in flex flex-col items-center">
-                            <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                              <CheckCircle className="w-6 h-6 animate-pulse" />
-                            </div>
-                            <div className="space-y-1.5">
-                              <h4 className="text-sm font-bold text-white">¡Reunión Agendada Exitosamente!</h4>
-                              <p className="text-xs text-gray-400 max-w-sm mx-auto leading-relaxed font-sans">
-                                Se ha reservado tu slot para el día <strong>Miércoles a las {selectedTime}</strong>. Hemos enviado la invitación de Google Calendar y el enlace de Zoom a tu correo electrónico de forma automática.
-                              </p>
-                            </div>
-                            <button 
-                              onClick={() => { setBookingSuccess(false); setSelectedTime(''); setActiveStep(1); }}
-                              className="text-[10px] text-indigo-400 hover:underline cursor-pointer uppercase tracking-wider font-bold pt-2"
-                            >
-                              Volver a iniciar simulación
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    
-                  </div>
-                </div>
-
+                {renderStepContent(activeStep)}
                 <div className="text-center">
                   <p className="text-[10px] text-gray-500 font-sans">
                     Haz clic en los pasos de la izquierda para avanzar, o completa el agendamiento simulado en la Fase 3.
@@ -554,6 +575,88 @@ export default function SolucionesProfesionales() {
               </div>
 
             </div>
+
+            {/* DISEÑO EN MÓVILES: Acordeón Interactivo Colapsable */}
+            <div className="block lg:hidden space-y-4">
+              <div className="text-center mb-8">
+                <span className="text-xs font-bold text-nexus-accent uppercase tracking-widest bg-nexus-accent/10 px-3 py-1 rounded-full border border-nexus-accent/20">
+                  Interactúa y Explora
+                </span>
+                <h2 className="text-xl md:text-2xl font-bold text-white mt-4 font-display">
+                  Simulador del Embudo de Autoridad
+                </h2>
+                <p className="text-gray-400 text-xs mt-2 leading-relaxed font-sans">
+                  Toca cada paso del embudo para ver cómo viaja un cliente potencial por tu futura web.
+                </p>
+              </div>
+
+              {/* Acordeón Paso 1 */}
+              <div id="acordeon-step-1" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+                <button
+                  onClick={() => handleStepChange(1)}
+                  className={`w-full p-4.5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                    activeStep === 1 ? 'bg-nexus-accent/10 border-nexus-accent/35 text-white' : 'glass-panel text-gray-400'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] ${activeStep === 1 ? 'bg-nexus-accent text-nexus-dark' : 'bg-white/5 border border-white/10 text-white'}`}>1</span>
+                    <strong className="text-xs uppercase tracking-wider">Paso 1: Atracción Orgánica (SEO)</strong>
+                  </div>
+                  <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeStep === 1 ? 'rotate-90 text-white' : 'text-gray-500'}`} />
+                </button>
+                
+                {activeStep === 1 && (
+                  <div className="p-3 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                    {renderStepContent(1)}
+                  </div>
+                )}
+              </div>
+
+              {/* Acordeón Paso 2 */}
+              <div id="acordeon-step-2" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+                <button
+                  onClick={() => handleStepChange(2)}
+                  className={`w-full p-4.5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                    activeStep === 2 ? 'bg-nexus-purple/10 border-nexus-purple/35 text-white' : 'glass-panel text-gray-400'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] ${activeStep === 2 ? 'bg-nexus-purple text-white' : 'bg-white/5 border border-white/10 text-white'}`}>2</span>
+                    <strong className="text-xs uppercase tracking-wider">Paso 2: Nutrición & Autoridad (Blog)</strong>
+                  </div>
+                  <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeStep === 2 ? 'rotate-90 text-white' : 'text-gray-500'}`} />
+                </button>
+                
+                {activeStep === 2 && (
+                  <div className="p-3 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                    {renderStepContent(2)}
+                  </div>
+                )}
+              </div>
+
+              {/* Acordeón Paso 3 */}
+              <div id="acordeon-step-3" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+                <button
+                  onClick={() => handleStepChange(3)}
+                  className={`w-full p-4.5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                    activeStep === 3 ? 'bg-indigo-500/10 border-indigo-500/35 text-white' : 'glass-panel text-gray-400'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] ${activeStep === 3 ? 'bg-indigo-500 text-white' : 'bg-white/5 border border-white/10 text-white'}`}>3</span>
+                    <strong className="text-xs uppercase tracking-wider">Paso 3: Conversión (Reserva)</strong>
+                  </div>
+                  <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeStep === 3 ? 'rotate-90 text-white' : 'text-gray-500'}`} />
+                </button>
+                
+                {activeStep === 3 && (
+                  <div className="p-3 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                    {renderStepContent(3)}
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

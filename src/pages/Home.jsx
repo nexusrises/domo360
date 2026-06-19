@@ -183,10 +183,10 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 w-full sm:w-auto text-center">
               <Link 
-                to="/contacto" 
+                to="/servicios/Constructoras&Inmobiliarias#recorrido-360" 
                 className="inline-flex items-center justify-center btn-neon-cian px-8 py-3.5 rounded-full font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-xs md:text-sm font-sans w-full sm:w-auto"
               >
-                Agendar Asesoría Gratuita
+                Ver Recorrido 360
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 

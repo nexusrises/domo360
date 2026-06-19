@@ -27,7 +27,8 @@ import {
   Truck,
   FileText,
   MapPin,
-  Activity
+  Activity,
+  ChevronRight
 } from 'lucide-react';
 
 export default function ServiciosEmpresasComercios() {
@@ -168,7 +169,123 @@ export default function ServiciosEmpresasComercios() {
     }
   ];
 
-  const currentPreview = previews[activeTab];
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setTimeout(() => {
+        const element = document.getElementById(`acordeon-${tabId}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+    }
+  };
+
+  const renderDetailContent = (tabKey) => {
+    const preview = previews[tabKey];
+    return (
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
+
+        {/* Columna Izquierda: Información de Conversión */}
+        <div className="lg:col-span-5 flex flex-col gap-6">
+          <div>
+            <span className="text-[10px] font-bold text-nexus-purple uppercase tracking-widest bg-nexus-purple/10 px-2.5 py-1 rounded-full border border-nexus-purple/20 w-fit block">
+              Así se Estructura tu Sitio Web
+            </span>
+            <h2 className="text-xl md:text-3.5xl font-bold text-white mt-4 leading-tight">
+              {preview.title}
+            </h2>
+            <p className="text-amber-400 text-xs md:text-sm font-medium mt-1">
+              {preview.subtitle}
+            </p>
+          </div>
+
+          <div className="bg-white/5 border border-white/5 rounded-2xl p-5 italic text-gray-300 text-xs md:text-sm leading-relaxed relative mt-2 text-left">
+            <span className="absolute -top-3 left-4 bg-nexus-purple text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+              El Deseo del Empresario
+            </span>
+            {preview.deseosCliente}
+          </div>
+
+          <div className="flex flex-col gap-3 text-left">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider border-b border-white/5 pb-2">
+              Características Clave de Conversión:
+            </h4>
+            {preview.features.map((feature, idx) => (
+              <div key={idx} className="flex items-start gap-2.5">
+                <div className="p-1 rounded-full bg-emerald-500/10 text-emerald-400 mt-0.5 border border-emerald-500/20">
+                  <CheckCircle className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-xs text-gray-300 leading-relaxed">{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Columna Derecha: Mockup / Visor de Diseño */}
+        <div className="lg:col-span-7 flex flex-col gap-4 w-full">
+          <div className="bg-[#0b0f19] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative w-full">
+
+            {/* Browser Chrome Simulation Header */}
+            <div className="bg-[#182035] px-4 py-2.5 border-b border-white/5 flex items-center justify-between gap-2">
+              <div className="flex gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
+              </div>
+              <div className="bg-white/5 rounded-lg text-[10px] text-gray-400 px-6 py-1 mx-auto w-3/4 text-center font-mono overflow-hidden whitespace-nowrap">
+                {tabKey === 'asfalto' && 'https://pavimentosandinos.com/planta-y-maquinaria'}
+                {tabKey === 'metalmecanica' && 'https://nexussteel.com/catalogo-estructuras'}
+                {tabKey === 'transporte' && 'https://transportsur.com/flota-y-rutas'}
+              </div>
+            </div>
+
+            {/* Visor de Imagen y Controles */}
+            <div className="relative bg-[#070a13] min-h-[300px] md:min-h-[400px] overflow-hidden flex flex-col justify-between w-full">
+              {/* Imagen principal con transición y efecto scroll-on-hover */}
+              <div className="w-full h-[300px] md:h-[350px] overflow-hidden relative group">
+                <img
+                  src={preview.images[viewMode] ? (preview.images[viewMode].startsWith('http') || preview.images[viewMode].startsWith('data:') ? preview.images[viewMode] : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${preview.images[viewMode]}`) : ''}
+                  alt={`${tabKey} ${viewMode}`}
+                  className="w-full h-auto absolute top-0 left-0 transition-transform duration-[3000ms] ease-in-out group-hover:-translate-y-[calc(100%-300px)] md:group-hover:-translate-y-[calc(100%-350px)]"
+                />
+              </div>
+
+              {/* Controles de Conmutación del Carrusel */}
+              <div className="bg-[#121829] border-t border-white/5 px-6 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 font-sans text-left">
+                <div className="flex flex-col">
+                  <span className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Alternar Visualización</span>
+                  <span className="text-[11px] text-gray-200 font-medium font-sans">Compara el plano estructural con el render final</span>
+                </div>
+                <div className="flex bg-slate-900 border border-white/10 p-1 rounded-xl shrink-0 w-fit">
+                  <button
+                    onClick={() => setViewMode('mockup')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${viewMode === 'mockup'
+                      ? 'bg-amber-500 text-slate-950 shadow-md'
+                      : 'text-gray-400 hover:text-white'
+                      }`}
+                  >
+                    Estructura
+                  </button>
+                  <button
+                    onClick={() => setViewMode('v2')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${viewMode === 'v2'
+                      ? 'bg-nexus-accent text-slate-950 shadow-md'
+                      : 'text-gray-400 hover:text-white'
+                      }`}
+                  >
+                    Diseño V2
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    );
+  };
 
   return (
     <div className="animate-fade-in-up">
@@ -189,160 +306,135 @@ export default function ServiciosEmpresasComercios() {
       {/* Tabs Selector de Rubro / Tipo de Web */}
       <section className="container mx-auto px-6 pb-8 relative z-10">
         <div className="max-w-6xl mx-auto">
-          {/* Tabs Nav */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-            <button
-              onClick={() => setActiveTab('asfalto')}
-              className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'asfalto'
-                ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
-                : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'asfalto' ? 'text-nexus-purple' : 'text-amber-500'}`}>
-                ASFALTO Y PAVIMENTOS
-              </span>
-              <h3 className="text-lg font-bold">Asfalto & Obras Viales</h3>
-              <p className="text-xs mt-2 opacity-80 leading-relaxed">
-                Portales corporativos con catálogo de plantas de producción, pool de maquinaria pesada e historial de m² pavimentados.
-              </p>
-            </button>
 
-            <button
-              onClick={() => setActiveTab('metalmecanica')}
-              className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'metalmecanica'
-                ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
-                : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'metalmecanica' ? 'text-nexus-purple' : 'text-amber-500'}`}>
-                METALMECÁNICA E INDUSTRIAL
-              </span>
-              <h3 className="text-lg font-bold">Estructuras & Coberturas</h3>
-              <p className="text-xs mt-2 opacity-80 leading-relaxed">
-                Dossieres técnicos interactivos con planos en DWG/PDF, homologaciones de soldadura AWS e hitos de acero montado.
-              </p>
-            </button>
+          {/* DISEÑO EN ESCRITORIO: Pestañas en Grid y Contenedor abajo */}
+          <div className="hidden md:block">
+            {/* Tabs Nav */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+              <button
+                onClick={() => handleTabClick('asfalto')}
+                className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'asfalto'
+                  ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
+                  : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'asfalto' ? 'text-nexus-purple' : 'text-amber-500'}`}>
+                  ASFALTO Y PAVIMENTOS
+                </span>
+                <h3 className="text-lg font-bold">Asfalto & Obras Viales</h3>
+                <p className="text-xs mt-2 opacity-80 leading-relaxed">
+                  Portales corporativos con catálogo de plantas de producción, pool de maquinaria pesada e historial de m² pavimentados.
+                </p>
+              </button>
 
-            <button
-              onClick={() => setActiveTab('transporte')}
-              className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'transporte'
-                ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
-                : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-            >
-              <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'transporte' ? 'text-nexus-purple' : 'text-amber-500'}`}>
-                TRANSPORTE Y LOGÍSTICA
-              </span>
-              <h3 className="text-lg font-bold">Transporte & Logística Pesada</h3>
-              <p className="text-xs mt-2 opacity-80 leading-relaxed">
-                Portales B2B con mapas de cobertura, flota homologada, seguros de carga y monitoreo GPS ante el auge comercial del sur.
-              </p>
-            </button>
+              <button
+                onClick={() => handleTabClick('metalmecanica')}
+                className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'metalmecanica'
+                  ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
+                  : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'metalmecanica' ? 'text-nexus-purple' : 'text-amber-500'}`}>
+                  METALMECÁNICA E INDUSTRIAL
+                </span>
+                <h3 className="text-lg font-bold">Estructuras & Coberturas</h3>
+                <p className="text-xs mt-2 opacity-80 leading-relaxed">
+                  Dossieres técnicos interactivos con planos en DWG/PDF, homologaciones de soldadura AWS e hitos de acero montado.
+                </p>
+              </button>
+
+              <button
+                onClick={() => handleTabClick('transporte')}
+                className={`p-6 rounded-3xl text-left transition-all duration-300 border border-white/5 cursor-pointer ${activeTab === 'transporte'
+                  ? 'bg-white text-nexus-dark border-white shadow-xl translate-y-[-4px]'
+                  : 'glass-panel text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+              >
+                <span className={`text-[10px] font-bold uppercase tracking-wider block mb-2 ${activeTab === 'transporte' ? 'text-nexus-purple' : 'text-amber-500'}`}>
+                  TRANSPORTE Y LOGÍSTICA
+                </span>
+                <h3 className="text-lg font-bold">Transporte & Logística Pesada</h3>
+                <p className="text-xs mt-2 opacity-80 leading-relaxed">
+                  Portales B2B con mapas de cobertura, flota homologada, seguros de carga y monitoreo GPS ante el auge comercial del sur.
+                </p>
+              </button>
+            </div>
+
+            {/* Vitrina Digital - Muestra Visual de las Webs */}
+            <div className="glass-panel border border-white/10 rounded-3xl p-6 md:p-10 animate-fade-in-up mb-8">
+              {renderDetailContent(activeTab)}
+            </div>
           </div>
 
-          {/* Vitrina Digital - Muestra Visual de las Webs */}
-          <div className="glass-panel border border-white/10 rounded-3xl p-6 md:p-10 animate-fade-in-up mb-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-
-              {/* Columna Izquierda: Información de Conversión */}
-              <div className="lg:col-span-5 flex flex-col gap-6">
+          {/* DISEÑO EN MÓVILES: Acordeón Interactivo Colapsable */}
+          <div className="block md:hidden space-y-4 mb-12">
+            
+            {/* Acordeón Asfalto */}
+            <div id="acordeon-asfalto" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+              <button
+                onClick={() => handleTabClick('asfalto')}
+                className={`w-full p-5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                  activeTab === 'asfalto' ? 'bg-white text-nexus-dark font-bold' : 'glass-panel text-gray-400'
+                }`}
+              >
                 <div>
-                  <span className="text-xs font-bold text-nexus-purple uppercase tracking-widest bg-nexus-purple/10 px-3 py-1 rounded-full border border-nexus-purple/20">
-                    Así se Estructura tu Sitio Web
-                  </span>
-                  <h2 className="text-2xl md:text-3.5xl font-bold text-white mt-4">
-                    {currentPreview.title}
-                  </h2>
-                  <p className="text-amber-400 text-sm md:text-base font-medium">
-                    {currentPreview.subtitle}
-                  </p>
+                  <span className={`text-[9px] font-bold uppercase tracking-wider block mb-1 ${activeTab === 'asfalto' ? 'text-nexus-purple' : 'text-amber-500'}`}>ASFALTO Y PAVIMENTOS</span>
+                  <h3 className="text-base font-bold">Asfalto & Obras Viales</h3>
                 </div>
-
-                <div className="bg-white/5 border border-white/5 rounded-2xl p-5 italic text-gray-300 text-xs md:text-sm leading-relaxed relative text-left">
-                  <span className="absolute -top-3 left-4 bg-nexus-purple text-white text-xs font-bold px-2.5 py-0.5 rounded uppercase tracking-wider">
-                    El Deseo del Empresario
-                  </span>
-                  {currentPreview.deseosCliente}
+                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeTab === 'asfalto' ? 'rotate-90 text-nexus-dark' : 'text-gray-500'}`} />
+              </button>
+              
+              {activeTab === 'asfalto' && (
+                <div className="p-4 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                  {renderDetailContent('asfalto')}
                 </div>
-
-                <div className="flex flex-col gap-3 text-left">
-                  <h4 className="text-xs font-bold text-white uppercase tracking-wider border-b border-white/5 pb-2">
-                    Características Clave de Conversión:
-                  </h4>
-                  {currentPreview.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5">
-                      <div className="p-1 rounded-full bg-emerald-500/10 text-emerald-400 mt-0.5 border border-emerald-500/20">
-                        <CheckCircle className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-xs text-gray-300 leading-relaxed">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Columna Derecha: Mockup / Visor de Diseño */}
-              <div className="lg:col-span-7 flex flex-col gap-4">
-                <div className="bg-[#0b0f19] border border-white/10 rounded-3xl overflow-hidden shadow-2xl relative">
-
-                  {/* Browser Chrome Simulation Header */}
-                  <div className="bg-[#182035] px-4 py-2.5 border-b border-white/5 flex items-center justify-between gap-2">
-                    <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500 block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500 block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 block"></span>
-                    </div>
-                    <div className="bg-white/5 rounded-lg text-[10px] text-gray-400 px-6 py-1 mx-auto w-3/4 text-center font-mono overflow-hidden whitespace-nowrap">
-                      {activeTab === 'asfalto' && 'https://pavimentosandinos.com/planta-y-maquinaria'}
-                      {activeTab === 'metalmecanica' && 'https://nexussteel.com/catalogo-estructuras'}
-                      {activeTab === 'transporte' && 'https://transportsur.com/flota-y-rutas'}
-                    </div>
-                  </div>
-
-                  {/* Visor de Imagen y Controles */}
-                  <div className="relative bg-[#070a13] min-h-[400px] overflow-hidden flex flex-col justify-between">
-                    {/* Imagen principal con transición y efecto scroll-on-hover */}
-                    <div className="w-full h-[350px] overflow-hidden relative group">
-                      <img
-                        src={currentPreview.images[viewMode] ? (currentPreview.images[viewMode].startsWith('http') || currentPreview.images[viewMode].startsWith('data:') ? currentPreview.images[viewMode] : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${currentPreview.images[viewMode]}`) : ''}
-                        alt={`${activeTab} ${viewMode}`}
-                        className="w-full h-auto absolute top-0 left-0 transition-transform duration-[3000ms] ease-in-out group-hover:-translate-y-[calc(100%-350px)]"
-                      />
-
-                    </div>
-
-                    {/* Controles de Conmutación del Carrusel */}
-                    <div className="bg-[#121829] border-t border-white/5 px-6 py-3.5 flex items-center justify-between gap-4 font-sans">
-                      <div className="flex flex-col text-left">
-                        <span className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Alternar Visualización</span>
-                        <span className="text-[11px] text-gray-200 font-medium">Compara el plano estructural con el render final</span>
-                      </div>
-                      <div className="flex bg-slate-900 border border-white/10 p-1 rounded-xl shrink-0">
-                        <button
-                          onClick={() => setViewMode('mockup')}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${viewMode === 'mockup'
-                            ? 'bg-amber-500 text-slate-950 shadow-md'
-                            : 'text-gray-400 hover:text-white'
-                            }`}
-                        >
-                          Estructura
-                        </button>
-                        <button
-                          onClick={() => setViewMode('v2')}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${viewMode === 'v2'
-                            ? 'bg-nexus-accent text-slate-950 shadow-md'
-                            : 'text-gray-400 hover:text-white'
-                            }`}
-                        >
-                          Diseño V2
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
+              )}
             </div>
+
+            {/* Acordeón Metalmecánica */}
+            <div id="acordeon-metalmecanica" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+              <button
+                onClick={() => handleTabClick('metalmecanica')}
+                className={`w-full p-5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                  activeTab === 'metalmecanica' ? 'bg-white text-nexus-dark font-bold' : 'glass-panel text-gray-400'
+                }`}
+              >
+                <div>
+                  <span className={`text-[9px] font-bold uppercase tracking-wider block mb-1 ${activeTab === 'metalmecanica' ? 'text-nexus-purple' : 'text-amber-500'}`}>METALMECÁNICA E INDUSTRIAL</span>
+                  <h3 className="text-base font-bold">Estructuras & Coberturas</h3>
+                </div>
+                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeTab === 'metalmecanica' ? 'rotate-90 text-nexus-dark' : 'text-gray-500'}`} />
+              </button>
+              
+              {activeTab === 'metalmecanica' && (
+                <div className="p-4 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                  {renderDetailContent('metalmecanica')}
+                </div>
+              )}
+            </div>
+
+            {/* Acordeón Transporte */}
+            <div id="acordeon-transporte" className="rounded-3xl overflow-hidden border border-white/5 bg-nexus-dark/40 text-left">
+              <button
+                onClick={() => handleTabClick('transporte')}
+                className={`w-full p-5 text-left transition-all duration-300 flex justify-between items-center cursor-pointer ${
+                  activeTab === 'transporte' ? 'bg-white text-nexus-dark font-bold' : 'glass-panel text-gray-400'
+                }`}
+              >
+                <div>
+                  <span className={`text-[9px] font-bold uppercase tracking-wider block mb-1 ${activeTab === 'transporte' ? 'text-nexus-purple' : 'text-amber-500'}`}>TRANSPORTE Y LOGÍSTICA</span>
+                  <h3 className="text-base font-bold">Transporte & Logística Pesada</h3>
+                </div>
+                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeTab === 'transporte' ? 'rotate-90 text-nexus-dark' : 'text-gray-500'}`} />
+              </button>
+              
+              {activeTab === 'transporte' && (
+                <div className="p-4 border-t border-white/10 glass-panel animate-fade-in bg-nexus-dark/60">
+                  {renderDetailContent('transporte')}
+                </div>
+              )}
+            </div>
+
           </div>
         </div>
       </section>

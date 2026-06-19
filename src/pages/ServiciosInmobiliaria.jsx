@@ -31,6 +31,8 @@ export default function ServiciosInmobiliaria() {
   const [topLight, setTopLight] = useState(false);
   const [bottomLight, setBottomLight] = useState(false);
 
+  const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+
   // Marcadores de la sala
   const salaMarkers = [
     {
@@ -269,44 +271,59 @@ export default function ServiciosInmobiliaria() {
             <div className="relative h-64 md:h-[400px] overflow-hidden w-full">
               {projectKey === 'preventa' ? (
                 <div className="relative w-full h-full select-none bg-black">
-                  {/* Interactive House Image Swapper */}
+                  {/* Interactive House Image Swapper with preloading/absolute positioning to prevent flickering */}
                   <img
-                    src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}${
-                      !topLight && !bottomLight ? '/tour/sinluz.png' :
-                      topLight && !bottomLight ? '/tour/luzarriba.png' :
-                      !topLight && bottomLight ? '/tour/luzabajo.png' :
-                      '/tour/conluz.jpeg'
-                    }`}
-                    alt="Casa interactiva"
-                    className="w-full h-full object-cover transition-all duration-300"
+                    src={`${baseUrl}/tour/sinluz.png`}
+                    alt="Casa interactiva sin luz"
+                    style={{ opacity: !topLight && !bottomLight ? 1 : 0 }}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
                   />
-
+                  <img
+                    src={`${baseUrl}/tour/luzarriba.png`}
+                    alt="Casa interactiva luz arriba"
+                    style={{ opacity: topLight && !bottomLight ? 1 : 0 }}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+                  />
+                  <img
+                    src={`${baseUrl}/tour/luzabajo.png`}
+                    alt="Casa interactiva luz abajo"
+                    style={{ opacity: !topLight && bottomLight ? 1 : 0 }}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+                  />
+                  <img
+                    src={`${baseUrl}/tour/conluz.jpeg`}
+                    alt="Casa interactiva con luz"
+                    style={{ opacity: topLight && bottomLight ? 1 : 0 }}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+                  />
                   {/* Interactive Buttons */}
                   <button
                     onClick={() => setTopLight(!topLight)}
-                    className={`absolute top-[30%] left-[45%] -translate-x-1/2 -translate-y-1/2 px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer ${topLight
-                        ? 'bg-[#182035] text-white hover:bg-[#182035]/80'
-                        : 'bg-white text-black hover:bg-white/95 scale-105'
+                    className={`absolute top-[30%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.5)] cursor-pointer select-none z-30 active:scale-90 font-mono text-xs md:text-sm font-bold uppercase tracking-wider ${topLight
+                        ? 'bg-nexus-accent text-slate-950 shadow-[0_0_15px_rgba(0,242,254,0.6)] border-none font-black'
+                        : 'bg-slate-950/85 border border-white/25 text-white/60 hover:text-white hover:bg-slate-950/95 hover:scale-105'
                       }`}
+                    title={topLight ? 'Apagar luz superior' : 'Encender luz superior'}
                   >
-                    {topLight ? 'off' : 'on'}
+                    {topLight ? 'on' : 'off'}
                   </button>
 
                   <button
                     onClick={() => setBottomLight(!bottomLight)}
-                    className={`absolute top-[60%] left-[55%] -translate-x-1/2 -translate-y-1/2 px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer ${bottomLight
-                        ? 'bg-[#182035] text-white hover:bg-[#182035]/80'
-                        : 'bg-white text-black hover:bg-white/95 scale-105'
+                    className={`absolute top-[60%] left-[55%] -translate-x-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.5)] cursor-pointer select-none z-30 active:scale-90 font-mono text-xs md:text-sm font-bold uppercase tracking-wider ${bottomLight
+                        ? 'bg-nexus-accent text-slate-950 shadow-[0_0_15px_rgba(0,242,254,0.6)] border-none font-black'
+                        : 'bg-slate-950/85 border border-white/25 text-white/60 hover:text-white hover:bg-slate-950/95 hover:scale-105'
                       }`}
+                    title={bottomLight ? 'Apagar luz inferior' : 'Encender luz inferior'}
                   >
-                    {bottomLight ? 'off' : 'on'}
+                    {bottomLight ? 'on' : 'off'}
                   </button>
                 </div>
               ) : (
                 <img
                   src={(() => {
                     const imgPath = projectKey === 'residencial' ? '/tour/fotografiaaereamaravillas2.png' : preview.heroImg;
-                    return imgPath.startsWith('http') || imgPath.startsWith('data:') ? imgPath : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${imgPath}`;
+                    return imgPath.startsWith('http') || imgPath.startsWith('data:') ? imgPath : `${baseUrl}${imgPath}`;
                   })()}
                   alt="Visualización del diseño web"
                   className="w-full h-full object-cover"
@@ -316,8 +333,8 @@ export default function ServiciosInmobiliaria() {
             </div>
 
             {/* Floating Web UI Simulation elements (Flotante en desktop, secuencial debajo de la imagen en móvil) */}
-            <div className="relative md:absolute md:bottom-4 md:left-4 md:right-4 flex flex-col md:flex-row md:items-end justify-between gap-4 p-4 md:p-0 bg-[#0b0f19] md:bg-transparent">
-              <div className="max-w-md">
+            <div className="relative md:absolute md:bottom-4 md:left-4 md:right-4 flex flex-col md:flex-row md:items-end justify-between gap-4 p-4 md:p-0 bg-[#0b0f19] md:bg-transparent pointer-events-none z-20">
+              <div className="max-w-md pointer-events-auto text-left">
                 <span className="text-[8px] uppercase font-bold tracking-widest text-nexus-accent bg-nexus-accent/20 border border-nexus-accent/30 px-1.5 py-0.5 rounded w-fit block mb-1">Proyecto Destacado</span>
                 <h4 className="text-sm md:text-lg font-bold text-white mt-1 leading-tight">
                   {projectKey === 'residencial' ? 'Residencial Maravillas - Salida Cusco' : preview.title}
@@ -340,7 +357,7 @@ export default function ServiciosInmobiliaria() {
                       block: 'start'
                     });
                   }}
-                  className="bg-nexus-accent text-slate-950 font-bold text-[10px] px-4 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg border border-[#00f2fe]/30 hover:bg-white hover:text-black transition-all cursor-pointer whitespace-nowrap w-fit self-start md:self-end"
+                  className="pointer-events-auto bg-nexus-accent text-slate-950 font-bold text-[10px] px-4 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg border border-[#00f2fe]/30 hover:bg-white hover:text-black transition-all cursor-pointer whitespace-nowrap w-fit self-start md:self-end"
                 >
                   <span>Probar Recorrido 360°</span>
                   <ArrowRight className="w-3 h-3" />
@@ -355,7 +372,7 @@ export default function ServiciosInmobiliaria() {
                       block: 'start'
                     });
                   }}
-                  className="bg-nexus-accent text-slate-950 font-bold text-[10px] px-4 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg border border-[#00f2fe]/30 hover:bg-white hover:text-black transition-all cursor-pointer whitespace-nowrap w-fit self-start md:self-end"
+                  className="pointer-events-auto bg-nexus-accent text-slate-950 font-bold text-[10px] px-4 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg border border-[#00f2fe]/30 hover:bg-white hover:text-black transition-all cursor-pointer whitespace-nowrap w-fit self-start md:self-end"
                 >
                   <span>Probar Recorrido Obras</span>
                   <ArrowRight className="w-3 h-3" />
@@ -370,7 +387,7 @@ export default function ServiciosInmobiliaria() {
                       block: 'start'
                     });
                   }}
-                  className="bg-nexus-accent text-slate-950 font-bold text-[10px] px-4 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg border border-[#00f2fe]/30 hover:bg-white hover:text-black transition-all cursor-pointer whitespace-nowrap w-fit self-start md:self-end"
+                  className="pointer-events-auto bg-nexus-accent text-slate-950 font-bold text-[10px] px-4 py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg border border-[#00f2fe]/30 hover:bg-white hover:text-black transition-all cursor-pointer whitespace-nowrap w-fit self-start md:self-end"
                 >
                   <span>Probar Demo Preventa 360°</span>
                   <ArrowRight className="w-3 h-3" />
@@ -587,7 +604,7 @@ export default function ServiciosInmobiliaria() {
                       {/* Tarjeta de Imagen Principal */}
                       <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] bg-[#070a13] z-10">
                         <img 
-                          src={sec.img ? (sec.img.startsWith('http') || sec.img.startsWith('data:') ? sec.img : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sec.img}`) : ''} 
+                          src={sec.img ? (sec.img.startsWith('http') || sec.img.startsWith('data:') ? sec.img : `${baseUrl}${sec.img}`) : ''} 
                           alt={sec.title} 
                           className="w-full h-72 md:h-[420px] object-cover group-hover:scale-105 transition-transform duration-700" 
                         />
