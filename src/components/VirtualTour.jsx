@@ -842,18 +842,7 @@ export default function VirtualTour({
         <div className="flex items-center gap-2 pointer-events-auto">
 
 
-          {/* Botón de Pantalla Completa (Fullscreen) */}
-          <button
-            onClick={toggleFullscreen}
-            className="p-3 rounded-xl glass-panel border border-white/10 text-cyan-400 hover:text-white hover:bg-white/5 transition-all duration-200 cursor-pointer shadow-lg flex items-center justify-center bg-[#0f172a]/80"
-            title={isFullscreen ? "Salir de pantalla completa" : "Pantalla Completa (Fullscreen)"}
-          >
-            {isFullscreen ? (
-              <Minimize2 className="w-4.5 h-4.5" />
-            ) : (
-              <Maximize2 className="w-4.5 h-4.5" />
-            )}
-          </button>
+
 
           {/* Botón de Editor Privado (Solo desarrollo) */}
           {isDev && (
@@ -931,7 +920,7 @@ export default function VirtualTour({
 
       {/* Selector de Miniaturas Flotante (Muy limpio en el pie central del visor) */}
       {showThumbnails && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2.5 bg-slate-950/70 border border-white/10 p-2 rounded-2xl backdrop-blur-md shadow-2xl pointer-events-auto max-w-[90%] overflow-x-auto scrollbar-none">
+        <div className="absolute bottom-6 left-6 right-20 md:left-1/2 md:right-auto md:-translate-x-1/2 z-20 flex gap-2.5 bg-slate-950/70 border border-white/10 p-2 rounded-2xl backdrop-blur-md shadow-2xl pointer-events-auto md:max-w-[90%] overflow-x-auto scrollbar-none">
           {Object.keys(scenes).map((sceneKey) => (
             <button
               key={`thumb-${sceneKey}`}
@@ -950,6 +939,21 @@ export default function VirtualTour({
           ))}
         </div>
       )}
+
+      {/* Botón de Fullscreen nativo / simulado por CSS (Esquina inferior derecha) */}
+      <div className="absolute right-6 bottom-6 z-20 flex flex-col gap-2 pointer-events-auto">
+        <button
+          onClick={toggleFullscreen}
+          className="p-3 rounded-xl glass-panel border border-white/15 backdrop-blur-md text-cyan-400 hover:text-white hover:scale-105 active:scale-95 transition-all shadow-2xl cursor-pointer flex items-center justify-center bg-[#0f172a]/80"
+          title={isFullscreen ? "Salir de pantalla completa" : "Pantalla Completa (Fullscreen)"}
+        >
+          {isFullscreen ? (
+            <Minimize2 className="w-4.5 h-4.5" />
+          ) : (
+            <Maximize2 className="w-4.5 h-4.5" />
+          )}
+        </button>
+      </div>
 
       {/* Overlay de interacción móvil para evitar atascar el scroll vertical de la página */}
       {!isInteractive && (
