@@ -1,24 +1,65 @@
-import React, { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 export default function WhatsAppBubble() {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+
+  const messages = [
+    "¿Tienes dudas? Escríbenos 💡",
+    "¿Tu negocio necesita una web? Pregúntanos aquí 🚀",
+    "Consúltanos gratis 📲",
+    "Hablemos de tu idea sin compromiso 💬"
+  ];
+
+  useEffect(() => {
+    if (isHovered) {
+      setShowTooltip(true);
+      return;
+    }
+
+    let timeoutId;
+
+    const runCycle = (step) => {
+      if (isHovered) return;
+
+      if (step === 'show') {
+        setShowTooltip(true);
+        // Se mantiene visible durante 8 segundos
+        timeoutId = setTimeout(() => runCycle('hide'), 8000);
+      } else if (step === 'hide') {
+        setShowTooltip(false);
+        // Permanece oculto durante 30 segundos antes de cambiar al siguiente mensaje
+        timeoutId = setTimeout(() => {
+          setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
+          runCycle('show');
+        }, 30000);
+      }
+    };
+
+    // Primer tooltip aparece a los 15 segundos de cargar la página
+    timeoutId = setTimeout(() => runCycle('show'), 15000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isHovered, messages.length]);
 
   return (
     <div 
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 select-none"
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Tooltip elegante animado */}
-      <div className={`px-4 py-2 rounded-2xl glass-panel border border-[#25d366]/30 text-white font-semibold text-xs md:text-sm shadow-2xl transition-all duration-300 transform origin-right ${
+      {/* Tooltip elegante animado con auto-ajuste de ancho para móvil */}
+      <div className={`px-4 py-2.5 rounded-2xl glass-panel border border-[#25d366]/30 text-white font-semibold text-[11px] sm:text-xs shadow-2xl transition-all duration-300 transform origin-right max-w-[210px] sm:max-w-[290px] whitespace-normal ${
         showTooltip 
           ? 'opacity-100 scale-100 translate-x-0 visible' 
           : 'opacity-0 scale-95 translate-x-4 invisible pointer-events-none'
       }`}>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-[#25d366] animate-pulse"></span>
-          ¿Hablamos por WhatsApp? 💬
+        <span className="flex items-start gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#25d366] animate-pulse shrink-0 mt-1"></span>
+          <span className="leading-relaxed font-sans">{messages[currentMessageIndex]}</span>
         </span>
       </div>
 
