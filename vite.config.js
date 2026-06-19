@@ -146,7 +146,7 @@ const tourEditorApiPlugin = () => ({
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: process.env.GITHUB_ACTIONS ? '/NexusRise/' : '/',
   plugins: [react(), tourEditorApiPlugin()],
   resolve: {
     alias: {
