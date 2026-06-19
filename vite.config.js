@@ -144,10 +144,27 @@ const tourEditorApiPlugin = () => ({
   }
 });
 
+// Plugin para copiar index.html como 404.html para dar soporte de rutas limpias en GitHub Pages
+const copyIndexTo404Plugin = () => ({
+  name: 'copy-index-to-404',
+  closeBundle() {
+    try {
+      const indexHtmlPath = path.resolve(__dirname, 'dist/index.html')
+      const target404Path = path.resolve(__dirname, 'dist/404.html')
+      if (fs.existsSync(indexHtmlPath)) {
+        fs.copyFileSync(indexHtmlPath, target404Path)
+        console.log('✓ Copiado dist/index.html a dist/404.html para soporte de SPA en GitHub Pages!')
+      }
+    } catch (e) {
+      console.error('Error al copiar index.html a 404.html:', e)
+    }
+  }
+});
+
 // https://vite.dev/config/
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? '/NexusRise/' : '/',
-  plugins: [react(), tourEditorApiPlugin()],
+  plugins: [react(), tourEditorApiPlugin(), copyIndexTo404Plugin()],
   resolve: {
     alias: {
       three: path.resolve(__dirname, './node_modules/three'),
