@@ -28,7 +28,7 @@ const tourEditorApiPlugin = () => ({
             console.log("Tour ID:", tourId);
             console.log("Escenas recibidas:", JSON.stringify(scenes, null, 2));
 
-            const toursDir = path.resolve(__dirname, 'src/data/tours');
+            const toursDir = path.resolve(__dirname, 'public/tours');
             if (!fs.existsSync(toursDir)) {
               fs.mkdirSync(toursDir, { recursive: true });
             }

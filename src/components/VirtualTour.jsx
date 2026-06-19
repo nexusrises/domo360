@@ -555,7 +555,7 @@ export default function VirtualTour({
 
       // 2. Archivo físico
       try {
-        const res = await fetch(`${import.meta.env.BASE_URL.replace(/\/$/, "")}/src/data/tours/${tourId}.json`);
+        const res = await fetch(`${import.meta.env.BASE_URL.replace(/\/$/, "")}/tours/${tourId}.json`);
         if (res.ok) {
           const parsed = await res.json();
           const firstScene = Object.keys(parsed)[0];
