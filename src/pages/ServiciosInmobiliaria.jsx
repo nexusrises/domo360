@@ -405,16 +405,42 @@ export default function ServiciosInmobiliaria() {
 
   return (
     <div className={isTourExpanded ? "" : "animate-fade-in-up"}>
-      {/* Hero Section */}
-      <section className="container mx-auto px-6 pt-20 pb-16 relative z-10 text-center">
+      {/* Recorrido Virtual 360° a Gran Escala (Movido a la parte superior) */}
+      <section className="container mx-auto px-6 pt-28 pb-16 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div id="recorrido-360" className={`scroll-mt-28 ${isTourExpanded ? '' : 'reveal-on-scroll'}`}>
+            <div className="text-center mb-10">
+              <span className="text-xs uppercase text-nexus-accent font-bold tracking-widest bg-nexus-accent/10 px-3 py-1 rounded-full border border-nexus-accent/20">
+                Caso de éxito interactivo en vivo
+              </span>
+              <h1 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4 font-sans">
+                ¿Cómo un Recorrido 360° Acelera tus Ventas y Reduce Costos?
+              </h1>
+              <p className="text-gray-400 max-w-4xl mx-auto text-sm md:text-base leading-relaxed">
+                Esta es una demostración interactiva real que diseñamos para uno de nuestros clientes. Imagina a tus clientes y asesores inmobiliarios explorando cada rincón, linderos y conectividad de tu proyecto directamente desde su celular o laptop. Esta herramienta <strong>educa al comprador de forma autónoma</strong>, entrena visualmente a tu fuerza de ventas y <strong>reduce drásticamente los costos de traslado y el tiempo</strong> invertido en visitas físicas improductivas, logrando cierres de preventa de lotes en planos mucho más ágiles.
+              </p>
+            </div>
+
+            <div className={`w-full h-[400px] md:h-[580px] rounded-3xl transition-all duration-300 ${isTourExpanded
+                ? 'z-[9999]'
+                : 'overflow-hidden glass-panel border border-white/15 shadow-2xl relative z-20'
+              }`}>
+              <VirtualTour tourId="inmobiliaria" isExpanded={isTourExpanded} setIsExpanded={setIsTourExpanded} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Hero Section (Ahora debajo del recorrido 360) */}
+      <section className="container mx-auto px-6 py-16 relative z-10 text-center border-t border-white/5">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-nexus-accent/5 rounded-full blur-[80px] pointer-events-none"></div>
         <span className="text-xs uppercase text-nexus-accent font-bold tracking-widest bg-nexus-accent/10 px-3 py-1 rounded-full border border-nexus-accent/20">
           CONSTRUCTORAS & INMOBILIARIAS
         </span>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-4 mb-6 leading-tight max-w-4xl mx-auto">
+        <h2 className="text-4xl md:text-6xl font-extrabold text-white mt-4 mb-6 leading-tight max-w-4xl mx-auto">
           ¿Cómo se Vería la Página Web de tu Constructora?
-        </h1>
-        <p className="text-gray-300 max-w-2xl mx-auto text-base md:text-lg mb-12 leading-relaxed">
+        </h2>
+        <p className="text-gray-300 max-w-2xl mx-auto text-base md:text-lg mb-4 leading-relaxed">
           Explora a continuación las propuestas visuales y de contenido que diseñamos específicamente para el sector inmobiliario y de construcción, adaptadas a tus verdaderos objetivos de negocio.
         </p>
       </section>
@@ -544,31 +570,7 @@ export default function ServiciosInmobiliaria() {
         </div>
       </section>
 
-      {/* Recorrido Virtual 360° a Gran Escala */}
-      <section className="container mx-auto px-6 pb-12 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div id="recorrido-360" className={`scroll-mt-28 ${isTourExpanded ? '' : 'reveal-on-scroll revealed'}`}>
-            <div className="text-center mb-10">
-              <span className="text-xs uppercase text-nexus-accent font-bold tracking-widest bg-nexus-accent/10 px-3 py-1 rounded-full border border-nexus-accent/20">
-                Caso de éxito interactivo en vivo
-              </span>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4 font-sans">
-                ¿Cómo un Recorrido 360° Acelera tus Ventas y Reduce Costos?
-              </h2>
-              <p className="text-gray-400 max-w-4xl mx-auto text-sm md:text-base leading-relaxed">
-                Esta es una demostración interactiva real que diseñamos para uno de nuestros clientes. Imagina a tus clientes y asesores inmobiliarios explorando cada rincón, linderos y conectividad de tu proyecto directamente desde su celular o laptop. Esta herramienta <strong>educa al comprador de forma autónoma</strong>, entrena visualmente a tu fuerza de ventas y <strong>reduce drásticamente los costos de traslado y el tiempo</strong> invertido en visitas físicas improductivas, logrando cierres de preventa de lotes en planos mucho más ágiles.
-              </p>
-            </div>
 
-            <div className={`w-full h-[400px] md:h-[580px] rounded-3xl transition-all duration-300 ${isTourExpanded
-                ? 'z-[9999]'
-                : 'overflow-hidden glass-panel border border-white/15 shadow-2xl relative z-20'
-              }`}>
-              <VirtualTour tourId="inmobiliaria" isExpanded={isTourExpanded} setIsExpanded={setIsTourExpanded} />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* NUEVO ENFOQUE: Cómo estructuramos la información de la página */}
       <section className="container mx-auto px-6 pt-6 pb-8 relative z-10">

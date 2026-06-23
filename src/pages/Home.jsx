@@ -39,7 +39,7 @@ export default function Home() {
       glow: 'shadow-[0_0_50px_rgba(0,242,254,0.15)]',
       border: 'border-nexus-accent/30',
       tagColor: 'text-nexus-accent border-nexus-accent/20 bg-nexus-accent/10',
-      link: '/servicios/Constructoras&Inmobiliarias'
+      link: '/servicios/Constructoras&Inmobiliarias#recorrido-360'
     },
     {
       id: 'clinica-isabel',
@@ -159,14 +159,13 @@ export default function Home() {
         <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-nexus-purple/5 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          {/* Columna Izquierda: Contenido de Texto */}
+          {/* Columna Izquierda: Globo 3D Interactivo (SIN TOCAR) */}
+          <div className="lg:col-span-5 flex justify-center items-center relative w-full overflow-visible">
+            <InteractiveGlobe />
+          </div>
+
+          {/* Columna Derecha: Contenido de Texto */}
           <div className="lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
-            {/* Badge premium */}
-            <div className="inline-flex items-center gap-2 glass-panel px-4 py-1.5 rounded-full text-xs font-semibold text-nexus-purple mb-8 border-nexus-purple/30 animate-pulse select-none">
-              <Sparkles className="w-3.5 h-3.5 text-nexus-accent" />
-              <span>ESTÁNDAR WEB CORPORATIVO PREMIUM</span>
-            </div>
-            
             <h1 
               style={{ textWrap: 'balance' }} 
               className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-400 mb-8 leading-[1.12] tracking-tight font-display"
@@ -176,120 +175,16 @@ export default function Home() {
             
             <p 
               style={{ textWrap: 'pretty' }} 
-              className="text-base md:text-lg text-gray-200 mb-10 max-w-2xl leading-relaxed"
+              className="text-base md:text-lg text-gray-200 max-w-2xl leading-relaxed"
             >
               Creamos sitios web interactivos y experiencias 360° diseñadas para convertir visitas en clientes reales.
             </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 w-full sm:w-auto text-center">
-              <Link 
-                to="/servicios/Constructoras&Inmobiliarias#recorrido-360" 
-                className="inline-flex items-center justify-center btn-neon-cian px-8 py-3.5 rounded-full font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-xs md:text-sm font-sans w-full sm:w-auto"
-              >
-                Ver Recorrido 360
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link 
-                to="/proceso" 
-                className="inline-flex items-center justify-center glass-panel border border-white/10 text-white px-8 py-3.5 rounded-full font-bold hover:bg-white/10 transition-all duration-200 active:scale-95 text-xs md:text-sm uppercase tracking-wider font-sans w-full sm:w-auto"
-              >
-                Conocer el Método
-              </Link>
-            </div>
-          </div>
-
-          {/* Columna Derecha: Globo 3D Interactivo (SIN TOCAR) */}
-          <div className="lg:col-span-5 flex justify-center items-center relative w-full overflow-visible">
-            <InteractiveGlobe />
           </div>
         </div>
       </header>
 
-      {/* 2. ESTADÍSTICAS DE IMPACTO */}
-      <section className="container mx-auto px-6 pb-24 relative z-10 reveal-on-scroll">
-        <div className="max-w-6xl mx-auto glass-panel border-white/5 rounded-3xl p-8 md:p-10 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-nexus-blue opacity-[0.02] rounded-full blur-[80px]"></div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center">
-            {/* Stat 1 */}
-            <div className="flex flex-col items-center p-4 group cursor-pointer">
-              <div className="p-3 bg-nexus-accent/10 text-nexus-accent rounded-2xl mb-4 transition-all duration-300 group-hover:bg-nexus-accent/20 group-hover:shadow-[0_0_25px_rgba(0,242,254,0.25)] group-hover:scale-105 animate-icon-pulse-cian">
-                <Zap className="w-6 h-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
-              </div>
-              <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
-                <AnimatedCounter target={98} prefix="+" suffix="%" />
-              </span>
-              <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Optimización Lighthouse</span>
-            </div>
-
-            {/* Stat 2 */}
-            <div className="flex flex-col items-center p-4 border-l border-white/5 max-md:border-none group cursor-pointer">
-              <div className="p-3 bg-nexus-blue/10 text-nexus-blue rounded-2xl mb-4 transition-all duration-300 group-hover:bg-nexus-blue/20 group-hover:shadow-[0_0_25px_rgba(0,102,255,0.25)] group-hover:scale-105 animate-icon-pulse-blue">
-                <TrendingUp className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110" />
-              </div>
-              <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
-                <AnimatedCounter target={3} suffix="x" />
-              </span>
-              <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Más Cierre de Ventas</span>
-            </div>
-
-            {/* Stat 3 */}
-            <div className="flex flex-col items-center p-4 border-l border-white/5 max-md:border-none group cursor-pointer">
-              <div className="p-3 bg-nexus-purple/10 text-nexus-purple rounded-2xl mb-4 transition-all duration-300 group-hover:bg-nexus-purple/20 group-hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] group-hover:scale-105 animate-icon-pulse-purple">
-                <Users className="w-6 h-6 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1" />
-              </div>
-              <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
-                <AnimatedCounter target={10} prefix="+" suffix="K" />
-              </span>
-              <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Visitas en Tours 3D</span>
-            </div>
-
-            {/* Stat 4 */}
-            <div className="flex flex-col items-center p-4 border-l border-white/5 max-md:border-none group cursor-pointer">
-              <div className="p-3 bg-rose-500/10 text-rose-500 rounded-2xl mb-4 transition-all duration-300 group-hover:bg-rose-500/20 group-hover:shadow-[0_0_25px_rgba(244,63,94,0.25)] group-hover:scale-105 animate-icon-pulse-rose">
-                <Target className="w-6 h-6 transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110" />
-              </div>
-              <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
-                <AnimatedCounter target={100} suffix="%" />
-              </span>
-              <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Código Exclusivo a Medida</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 4. SECCIÓN PREMIUM DE CASOS DE ÉXITO CON SELECTOR DE PESTAÑAS */}
       <section className="container mx-auto px-6 pb-28 relative z-10 reveal-on-scroll">
-        <div className="text-center mb-12">
-          <span className="text-xs uppercase text-nexus-purple font-bold tracking-widest bg-nexus-purple/10 px-3 py-1 rounded-full border border-nexus-purple/20">Demostración de Capacidad</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4 font-display">Ingeniería Digital en Acción: Casos de Éxito de Alto Impacto</h2>
-          <p className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base">
-            Explora las plataformas web premium y experiencias 360° que hemos creado para revolucionar la presencia digital y ventas de nuestros socios.
-          </p>
-        </div>
-
-        {/* Tabs de Selección Rápida */}
-        <div className="max-w-6xl mx-auto mb-8 flex flex-wrap justify-center gap-3 md:gap-4">
-          {carouselProyectos.map((proyecto, idx) => {
-            const TabIcon = proyecto.icon;
-            const isActive = activeProject === idx;
-            return (
-              <button
-                key={proyecto.id}
-                onClick={() => setActiveProject(idx)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-2xl border text-sm font-bold transition-all duration-300 cursor-pointer ${
-                  isActive 
-                    ? `bg-gradient-to-r ${proyecto.color} text-white shadow-lg border-transparent scale-105`
-                    : 'bg-white/[0.02] border-white/5 text-gray-400 hover:text-white hover:bg-white/[0.05] hover:border-white/10'
-                }`}
-              >
-                <TabIcon className={`w-4 h-4 transition-transform duration-300 ${isActive ? 'scale-110 rotate-12' : ''}`} />
-                <span>{proyecto.category}</span>
-              </button>
-            );
-          })}
-        </div>
-
         {/* Contenedor Principal con Transición */}
         <div className="max-w-6xl mx-auto relative">
           <div className="glass-panel border-white/10 rounded-3xl p-6 md:p-12 relative overflow-hidden transition-all duration-500 hover:border-white/15">
@@ -331,31 +226,33 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Imagen/Mockup del Proyecto o Visor 360° si es Inmobiliaria 3D */}
+              {/* Imagen/Mockup del Proyecto (Estático con lazy load para optimizar carga instantánea) */}
               <div className="lg:col-span-6 relative flex justify-center items-center w-full">
-                {carouselProyectos[activeProject].id === 'sillar-inmobiliaria' ? (
-                  <PhotoSphereViewer 
-                    panorama={carouselProyectos[activeProject].imagen ? (carouselProyectos[activeProject].imagen.startsWith('http') || carouselProyectos[activeProject].imagen.startsWith('data:') ? carouselProyectos[activeProject].imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${carouselProyectos[activeProject].imagen}`) : ''} 
-                    autorotate={true} 
-                    height="100%" 
-                    showNavbar={false}
-                    interactive={false}
-                    containerClass={`w-full aspect-video rounded-2xl overflow-hidden border ${carouselProyectos[activeProject].border} ${carouselProyectos[activeProject].glow} transition-all duration-500 relative z-20 bg-black`}
-                  />
-                ) : (
-                  <div className={`w-full aspect-video rounded-2xl overflow-hidden border ${carouselProyectos[activeProject].border} ${carouselProyectos[activeProject].glow} transition-all duration-500 relative group`}>
+                <Link 
+                  to={carouselProyectos[activeProject].link}
+                  className="w-full h-full block cursor-pointer"
+                >
+                  <div className={`w-full aspect-video rounded-2xl overflow-hidden border ${carouselProyectos[activeProject].border} ${carouselProyectos[activeProject].glow} transition-all duration-500 relative group bg-black/40`}>
                     <img 
                       src={carouselProyectos[activeProject].imagen ? (carouselProyectos[activeProject].imagen.startsWith('http') || carouselProyectos[activeProject].imagen.startsWith('data:') ? carouselProyectos[activeProject].imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${carouselProyectos[activeProject].imagen}`) : ''} 
                       alt={carouselProyectos[activeProject].title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
                       onError={(e) => {
-                        // Fallback elegante en caso de que la imagen local no cargue temporalmente
                         e.target.src = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80";
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-nexus-dark/80 via-transparent to-transparent pointer-events-none"></div>
+
+                    {/* Indicador interactivo para abrir vista 360° */}
+                    {carouselProyectos[activeProject].id === 'sillar-inmobiliaria' && (
+                      <div className="absolute top-4 left-4 bg-nexus-dark/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-[10px] uppercase tracking-wider text-nexus-accent font-bold font-mono flex items-center gap-1.5 shadow-lg animate-pulse">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        Toca para abrir Recorrido 360°
+                      </div>
+                    )}
                   </div>
-                )}
+                </Link>
               </div>
 
             </div>
@@ -448,6 +345,57 @@ export default function Home() {
               </div>
             );
           })}
+
+          {/* Estadísticas de Impacto (Movidas aquí) */}
+          <div className="md:col-span-2 glass-panel border-white/5 rounded-3xl p-8 md:p-10 relative overflow-hidden reveal-on-scroll">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-nexus-blue opacity-[0.02] rounded-full blur-[80px]"></div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center">
+              {/* Stat 1 */}
+              <div className="flex flex-col items-center p-4 group cursor-pointer">
+                <div className="p-3 bg-nexus-accent/10 text-nexus-accent rounded-2xl mb-4 transition-all duration-300 group-hover:bg-nexus-accent/20 group-hover:shadow-[0_0_25px_rgba(0,242,254,0.25)] group-hover:scale-105 animate-icon-pulse-cian">
+                  <Zap className="w-6 h-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
+                </div>
+                <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
+                  <AnimatedCounter target={98} prefix="+" suffix="%" />
+                </span>
+                <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Optimización Lighthouse</span>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="flex flex-col items-center p-4 border-l border-white/5 max-md:border-none group cursor-pointer">
+                <div className="p-3 bg-nexus-blue/10 text-nexus-blue rounded-2xl mb-4 transition-all duration-300 group-hover:bg-nexus-blue/20 group-hover:shadow-[0_0_25px_rgba(0,102,255,0.25)] group-hover:scale-105 animate-icon-pulse-blue">
+                  <TrendingUp className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110" />
+                </div>
+                <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
+                  <AnimatedCounter target={3} suffix="x" />
+                </span>
+                <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Más Cierre de Ventas</span>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="flex flex-col items-center p-4 border-l border-white/5 max-md:border-none group cursor-pointer">
+                <div className="p-3 bg-nexus-purple/10 text-nexus-purple rounded-2xl mb-4 transition-all duration-300 group-hover:bg-nexus-purple/20 group-hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] group-hover:scale-105 animate-icon-pulse-purple">
+                  <Users className="w-6 h-6 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1" />
+                </div>
+                <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
+                  <AnimatedCounter target={10} prefix="+" suffix="K" />
+                </span>
+                <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Visitas en Tours 3D</span>
+              </div>
+
+              {/* Stat 4 */}
+              <div className="flex flex-col items-center p-4 border-l border-white/5 max-md:border-none group cursor-pointer">
+                <div className="p-3 bg-rose-500/10 text-rose-500 rounded-2xl mb-4 transition-all duration-300 group-hover:bg-rose-500/20 group-hover:shadow-[0_0_25px_rgba(244,63,94,0.25)] group-hover:scale-105 animate-icon-pulse-rose">
+                  <Target className="w-6 h-6 transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110" />
+                </div>
+                <span className="text-3xl md:text-4xl font-extrabold text-white font-display mb-1">
+                  <AnimatedCounter target={100} suffix="%" />
+                </span>
+                <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Código Exclusivo a Medida</span>
+              </div>
+            </div>
+          </div>
 
           {/* Card D: Proceso / CTA integrador */}
           <div className="md:col-span-2 glass-panel rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between border-white/5 hover:border-white/10 transition-all duration-300 gap-6 reveal-on-scroll reveal-delay-100 animate-pulse-glow-gradient">

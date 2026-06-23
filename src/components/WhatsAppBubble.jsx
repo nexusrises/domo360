@@ -52,7 +52,7 @@ export default function WhatsAppBubble() {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Tooltip elegante animado con auto-ajuste de ancho para móvil */}
-      <div className={`px-4 py-2.5 rounded-2xl glass-panel border border-[#25d366]/30 text-white font-semibold text-[11px] sm:text-xs shadow-2xl transition-all duration-300 transform origin-right max-w-[210px] sm:max-w-[290px] whitespace-normal ${
+      <div className={`px-4 py-2.5 rounded-2xl bg-white/90 backdrop-blur-md border border-[#25d366]/30 text-slate-800 font-bold text-[11px] sm:text-xs shadow-2xl transition-all duration-300 transform origin-right max-w-[210px] sm:max-w-[290px] whitespace-normal ${
         showTooltip 
           ? 'opacity-100 scale-100 translate-x-0 visible' 
           : 'opacity-0 scale-95 translate-x-4 invisible pointer-events-none'
