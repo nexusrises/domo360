@@ -15,7 +15,7 @@
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#129e00",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -27,15 +27,39 @@
         "fuente": "Montserrat",
         "fontSize": 18,
         "fondoTransparente": false
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -6.1,
+          -3.8,
+          18.66
+        ],
+        "destino": "_self",
+        "texto": "Maravillas  2",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#049a06",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 12
       }
     ],
     "heading": {
-      "x": -29,
-      "y": 5
+      "x": -22,
+      "y": 145
     },
     "norteMagnetico": 145,
     "filtro": "normal",
-    "northOffset": 193
+    "northOffset": 196
   },
   "02_residencial_maravillas_1585": {
     "nombre": "Maravillas 1",
@@ -102,7 +126,7 @@
         "area": "120",
         "color": "#ef4444",
         "opacidad": 1,
-        "escala": 1,
+        "escala": 0.9,
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -112,15 +136,37 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
+      },
+      {
+        "tipo": "manzana",
+        "posicion": [
+          -17.16,
+          -10,
+          2.36
+        ],
+        "texto": "b",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#3b82f6",
+        "opacidad": 1,
+        "escala": 1.1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": false,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
       }
     ],
     "heading": {
-      "x": -10,
-      "y": 123
+      "x": -13,
+      "y": 139
     },
     "norteMagnetico": 0,
     "filtro": "hdr",
-    "northOffset": 261
+    "northOffset": 259
   },
   "04_mara_ii_mz_c_8506": {
     "nombre": "Maravillas 2",
@@ -133,12 +179,12 @@
           -2.16,
           11.61
         ],
-        "destino": "01_rm_vista_lugares_referencia_2696",
+        "destino": "02_residencial_maravillas_1585",
         "texto": "Maravillas   1",
         "opacidad": 1,
         "escala": 0.7,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#01ad1d",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -200,11 +246,11 @@
       }
     ],
     "heading": {
-      "x": -38,
-      "y": 39
+      "x": -20,
+      "y": 108
     },
     "norteMagnetico": 0,
     "filtro": "bright",
-    "northOffset": 322
+    "northOffset": 299
   }
 }

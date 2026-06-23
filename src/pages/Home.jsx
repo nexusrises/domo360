@@ -113,6 +113,7 @@ export default function Home() {
       glowBg: "bg-nexus-accent",
       colorText: "text-nexus-accent",
       colorBtn: "btn-neon-cian",
+      imagen: "/tour/Vista Aerea Residencial Maravillas.jpg",
       icon: Building2
     },
     {
@@ -126,6 +127,7 @@ export default function Home() {
       glowBg: "bg-nexus-blue",
       colorText: "text-nexus-blue",
       colorBtn: "btn-neon-blue",
+      imagen: "/salud_portal_juliaca.png",
       icon: HeartPulse
     },
     {
@@ -139,6 +141,7 @@ export default function Home() {
       glowBg: "bg-amber-500",
       colorText: "text-amber-400",
       colorBtn: "btn-neon-amber",
+      imagen: "/constructora_v2.png",
       icon: Briefcase
     },
     {
@@ -152,6 +155,7 @@ export default function Home() {
       glowBg: "bg-nexus-purple",
       colorText: "text-nexus-purple",
       colorBtn: "btn-neon-purple",
+      imagen: "/legal_portal_preview.png",
       icon: Users
     }
   ];
@@ -369,7 +373,7 @@ export default function Home() {
                 {sectores[activeSector].descripcion}
               </p>
               
-              <div className="pt-4 flex items-center gap-3">
+              <div className="pt-4 flex items-center justify-between w-full">
                 {/* Flecha Izquierda */}
                 <button
                   onClick={(e) => {
@@ -382,13 +386,12 @@ export default function Home() {
                   <ChevronLeft className="w-5 h-5" />
                 </button>
 
-                {/* Botón Principal de Enlace */}
+                {/* Botón Principal de Enlace (Sin icono ArrowUpRight y responsivo) */}
                 <Link 
                   to={sectores[activeSector].enlace} 
-                  className={`inline-flex items-center justify-center ${sectores[activeSector].colorBtn} px-6 py-3.5 rounded-full font-bold text-xs md:text-sm hover:text-white group uppercase tracking-wider shadow-lg transition-all duration-300`}
+                  className={`flex-1 md:flex-initial text-center justify-center ${sectores[activeSector].colorBtn} px-4 md:px-8 py-3.5 rounded-full font-bold text-xs md:text-sm hover:text-white group uppercase tracking-wider shadow-lg transition-all duration-300`}
                 >
                   {sectores[activeSector].etiquetaBoton}
-                  <ArrowUpRight className="w-4 h-4 ml-2 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
 
                 {/* Flecha Derecha */}
@@ -405,27 +408,36 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Lado Derecho: Elemento Gráfico Levitante (Premium) */}
+            {/* Lado Derecho: Visualizador de Imagen Premium del Sector */}
             <div className="hidden md:flex flex-1 justify-center items-center relative z-10 animate-slide-right" key={`visual-${activeSector}`}>
-              <div className="relative group/visual flex justify-center items-center w-full max-w-[280px] aspect-square">
-                {/* Resplandor orbital animado */}
-                <div className={`absolute inset-4 rounded-full bg-gradient-to-tr ${
-                  sectores[activeSector].colorClass.includes('cian') ? 'from-nexus-accent/20 to-cyan-500/10' : 
-                  sectores[activeSector].colorClass.includes('blue') ? 'from-nexus-blue/20 to-indigo-500/10' : 
-                  sectores[activeSector].colorClass.includes('amber') ? 'from-amber-500/20 to-orange-500/10' : 
-                  'from-nexus-purple/20 to-pink-500/10'
-                } opacity-30 blur-2xl animate-pulse`}></div>
+              <div className="w-full max-w-[420px] aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative group/visual bg-slate-950/60 transition-all duration-500">
+                {/* Resplandor de fondo neón orbital */}
+                <div className={`absolute -inset-10 bg-gradient-to-tr ${
+                  sectores[activeSector].colorClass.includes('cian') ? 'from-nexus-accent/20 to-cyan-500/5' : 
+                  sectores[activeSector].colorClass.includes('blue') ? 'from-nexus-blue/20 to-indigo-500/5' : 
+                  sectores[activeSector].colorClass.includes('amber') ? 'from-amber-500/20 to-orange-500/5' : 
+                  'from-nexus-purple/20 to-pink-500/5'
+                } opacity-30 blur-2xl group-hover/visual:opacity-50 transition-opacity duration-700`}></div>
                 
-                {/* Anillos orbitales decorativos */}
-                <div className="absolute w-[200px] h-[200px] rounded-full border border-white/5 border-dashed animate-spin [animation-duration:35s]"></div>
-                <div className="absolute w-[240px] h-[240px] rounded-full border border-white/10 border-double animate-spin [animation-duration:18s] [animation-direction:reverse]"></div>
-
-                {/* Caja de visualización flotante */}
-                <div className="w-36 h-36 rounded-3xl bg-slate-900/90 border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden group-hover/visual:border-white/20 transition-colors duration-500 animate-float-icon">
-                  <div className={`absolute -bottom-8 -right-8 w-24 h-24 rounded-full ${sectores[activeSector].glowBg} opacity-10 blur-xl`}></div>
+                {/* Imagen del sector */}
+                <img 
+                  src={sectores[activeSector].imagen ? (sectores[activeSector].imagen.startsWith('http') || sectores[activeSector].imagen.startsWith('data:') ? sectores[activeSector].imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sectores[activeSector].imagen}`) : ''} 
+                  alt={sectores[activeSector].titulo}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover/visual:scale-105"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.src = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80";
+                  }}
+                />
+                
+                {/* Capa de sombreado y gradiente para fusionar con el fondo */}
+                <div className="absolute inset-0 bg-gradient-to-t from-nexus-dark/60 via-transparent to-transparent pointer-events-none"></div>
+                
+                {/* Marco flotante con el icono en pequeño en la esquina */}
+                <div className={`absolute top-4 right-4 p-2.5 rounded-2xl bg-slate-900/90 border border-white/10 ${sectores[activeSector].colorText} shadow-lg backdrop-blur-md transition-transform duration-300 group-hover/visual:scale-110`}>
                   {(() => {
                     const Icon = sectores[activeSector].icon;
-                    return <Icon className={`w-16 h-16 ${sectores[activeSector].colorText} drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-transform duration-700 group-hover/visual:scale-110`} />;
+                    return <Icon className="w-5 h-5" />;
                   })()}
                 </div>
               </div>
