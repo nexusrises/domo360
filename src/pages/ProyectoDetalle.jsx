@@ -266,8 +266,8 @@ export default function ProyectoDetalle() {
       <div className="container mx-auto px-6 py-32 text-center relative z-10 flex flex-col items-center justify-center min-h-[60vh]">
         <h2 className="text-3xl font-bold text-white mb-4">Caso de Estudio No Encontrado</h2>
         <p className="text-gray-400 mb-8 max-w-md">El caso de estudio al que intentas acceder no existe o ha sido modificado.</p>
-        <Link to="/portafolio" className="inline-flex bg-nexus-accent text-white px-6 py-2.5 rounded-full font-semibold transition active:scale-95">
-          Volver al Portafolio
+        <Link to="/servicios-3d" className="inline-flex bg-nexus-accent text-white px-6 py-2.5 rounded-full font-semibold transition active:scale-95">
+          Volver a Servicios 3D
         </Link>
       </div>
     );
@@ -281,11 +281,11 @@ export default function ProyectoDetalle() {
       {/* Header Caso de Estudio */}
       <section className="container mx-auto px-6 pt-28 pb-8 relative z-10">
         <Link 
-          to="/portafolio" 
+          to="/servicios-3d" 
           className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white mb-8 transition cursor-pointer group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-          Volver al Portafolio
+          Volver a Servicios 3D
         </Link>
 
         <div className="max-w-4xl">
@@ -413,7 +413,7 @@ export default function ProyectoDetalle() {
 
       {/* Nueva Sección: Ficha de Recomendación del Rubro */}
       {proyecto.solucionRecomendada && (
-        <section className="container mx-auto px-6 pb-24 relative z-10 border-t border-white/5 pt-20">
+        <section className="container mx-auto px-6 pb-12 relative z-10 pt-10">
           <div className="max-w-6xl mx-auto glass-panel border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden reveal-on-scroll">
             <div className="absolute top-[-50px] right-[-50px] w-64 h-64 bg-nexus-accent/5 rounded-full blur-[60px] pointer-events-none"></div>
             
@@ -451,7 +451,7 @@ export default function ProyectoDetalle() {
       )}
 
       {/* Testimonio y CTA */}
-      <section className="container mx-auto px-6 pb-24 border-t border-white/5 pt-20">
+      <section className="container mx-auto px-6 pb-12 pt-10">
         <div className="max-w-4xl mx-auto flex flex-col gap-12">
           {/* Bloque Testimonio Premium Dinámico */}
           <div className="reveal-on-scroll">
@@ -497,10 +497,10 @@ export default function ProyectoDetalle() {
                 Contactar Ahora
               </Link>
               <Link 
-                to="/portafolio" 
+                to="/servicios-3d" 
                 className="inline-flex items-center justify-center glass-panel border border-white/10 hover:border-white/20 text-white px-8 py-3.5 rounded-full font-semibold transition active:scale-95 text-xs md:text-sm uppercase tracking-wider font-sans w-full sm:w-auto"
               >
-                Volver al Portafolio
+                Volver a Servicios 3D
               </Link>
             </div>
           </div>

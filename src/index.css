@@ -610,3 +610,49 @@ canvas {
 canvas:active {
   cursor: grabbing !important;
 }
+
+/* Ocultar la burbuja de WhatsApp global cuando el modal de detalles del proyecto está abierto */
+body.modal-open .whatsapp-global-bubble {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transform: translateY(24px) scale(0.9) !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Animación de pulso y resplandor continuo para el botón CTA en móviles táctiles */
+@keyframes mobile-cta-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 242, 254, 0.15), 0 0 0 0px rgba(0, 242, 254, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(0, 242, 254, 0.45), 0 0 0 5px rgba(0, 242, 254, 0);
+    transform: scale(1.025);
+    background-color: rgba(0, 242, 254, 0.15);
+    border-color: rgba(0, 242, 254, 0.5);
+    color: #00f2fe;
+  }
+}
+
+@keyframes arrow-bounce-mobile {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 767px) {
+  .btn-mobile-dynamic {
+    animation: mobile-cta-glow 2.2s infinite ease-in-out;
+    background-color: rgba(0, 242, 254, 0.06) !important;
+    border-color: rgba(0, 242, 254, 0.3) !important;
+    color: #00f2fe !important;
+    text-shadow: 0 0 8px rgba(0, 242, 254, 0.2);
+  }
+  .btn-mobile-dynamic svg {
+    animation: arrow-bounce-mobile 2.2s infinite ease-in-out;
+  }
+}

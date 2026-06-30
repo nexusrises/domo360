@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function WhatsAppBubble() {
+  const location = useLocation();
   const [showTooltip, setShowTooltip] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
   const messages = [
-    "¿Quieres ver una demo de Visor 360° en tu celular? 🕶️",
-    "Acelera tus preventas con tecnología 3D y Dron 🛸",
-    "Cotiza tu recorrido 360° o lotización interactiva 📲",
-    "Hablemos de tu idea sin compromiso 💬"
+    "¿Viste alguna propiedad de tu interés? Consúltanos para enviarte planos, precios y lotes disponibles 📲",
+    "¿Te gustaría agendar una visita física o un recorrido interactivo guiado en 3D? Separa tu cita aquí 🗓️",
+    "¿Tienes dudas sobre financiamiento directo, linderos o seguridad legal? Escríbenos y te ayudamos 💬",
+    "¿Deseas vender tu casa, terreno o departamento con nosotros? Solicita tu asesoría gratuita 🏡"
+  ];
+
+  const whatsappTexts = [
+    "Hola Nexus Domo 360°, vi una propiedad de mi interés en el catálogo y me gustaría recibir los planos, precios y disponibilidad de lotes.",
+    "Hola Nexus Domo 360°, me gustaría agendar una cita para realizar una visita guiada (física o virtual 3D) a las propiedades.",
+    "Hola Nexus Domo 360°, tengo algunas preguntas y dudas generales sobre los proyectos y me gustaría que un asesor me brinde soporte.",
+    "Hola Nexus Domo 360°, soy propietario y me gustaría recibir asesoría gratuita para poner en venta mi inmueble con su plataforma."
   ];
 
   useEffect(() => {
@@ -25,29 +34,33 @@ export default function WhatsAppBubble() {
 
       if (step === 'show') {
         setShowTooltip(true);
-        // Se mantiene visible durante 8 segundos
-        timeoutId = setTimeout(() => runCycle('hide'), 8000);
+        // Se mantiene visible durante 9 segundos para permitir una lectura tranquila
+        timeoutId = setTimeout(() => runCycle('hide'), 9000);
       } else if (step === 'hide') {
         setShowTooltip(false);
-        // Permanece oculto durante 45 segundos antes de cambiar al siguiente mensaje
+        // Permanece oculto durante 20 segundos antes de cambiar al siguiente mensaje (más dinámico)
         timeoutId = setTimeout(() => {
           setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
           runCycle('show');
-        }, 45000);
+        }, 20000);
       }
     };
 
-    // Primer tooltip aparece a los 15 segundos de cargar la página
-    timeoutId = setTimeout(() => runCycle('show'), 15000);
+    // Primer tooltip aparece a los 7 segundos de cargar la página (captura rápida de atención)
+    timeoutId = setTimeout(() => runCycle('show'), 7000);
 
     return () => {
       clearTimeout(timeoutId);
     };
   }, [isHovered, messages.length]);
 
+  if (location.pathname === '/contacto') {
+    return null;
+  }
+
   return (
     <div 
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 select-none"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 select-none whatsapp-global-bubble transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -65,7 +78,7 @@ export default function WhatsAppBubble() {
 
       {/* Botón flotante interactivo */}
       <a 
-        href="https://wa.me/51951300535?text=Hola%20Nexus%20Rise,%20me%20gustar%C3%ADa%20agendar%20una%20asesor%C3%ADa%20gratuita." 
+        href={`https://wa.me/51915300535?text=${encodeURIComponent(whatsappTexts[currentMessageIndex])}`} 
         target="_blank" 
         rel="noopener noreferrer" 
         className="w-14 h-14 rounded-full bg-[#25d366] text-white flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.7)] hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 active:scale-95 group relative"

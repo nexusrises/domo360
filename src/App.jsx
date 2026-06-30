@@ -6,16 +6,10 @@ import WhatsAppBubble from './components/WhatsAppBubble';
 import ScrollToTop from './components/ScrollToTop';
 import TopographicBackground from './components/TopographicBackground';
 import Home from './pages/Home';
-import ServiciosInmobiliaria from './pages/ServiciosInmobiliaria';
-import ServiciosSalud from './pages/ServiciosSalud';
-import ServiciosEmpresasComercios from './pages/ServiciosEmpresasComercios';
-import Proceso from './pages/Proceso';
-import Portafolio from './pages/Portafolio';
-import ProyectoDetalle from './pages/ProyectoDetalle';
-import Nosotros from './pages/Nosotros';
+import InvierteSeguro from './pages/InvierteSeguro';
+import VendePropiedad from './pages/VendePropiedad';
 import Contacto from './pages/Contacto';
 import TourEditorPage from './pages/TourEditorPage';
-import SolucionesProfesionales from './pages/SolucionesProfesionales';
 
 function AppContent() {
   const location = useLocation();
@@ -67,14 +61,8 @@ function AppContent() {
         
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/servicios/Constructoras&Inmobiliarias" element={<ServiciosInmobiliaria />} />
-          <Route path="/servicios/Clínicas&CentrosMédicos" element={<ServiciosSalud />} />
-          <Route path="/servicios/empresas&comercios" element={<ServiciosEmpresasComercios />} />
-          <Route path="/servicios/Profesionales&Consultores" element={<SolucionesProfesionales />} />
-          <Route path="/proceso" element={<Proceso />} />
-          <Route path="/portafolio" element={<Portafolio />} />
-          <Route path="/portafolio/:id" element={<ProyectoDetalle />} />
-          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
+          <Route path="/invierte-seguro" element={<InvierteSeguro />} />
           <Route path="/contacto" element={<Contacto />} />
           {isDev && <Route path="/editor-360-privado/:paramTourId?" element={<TourEditorPage />} />}
         </Routes>
@@ -95,6 +83,4 @@ function App() {
   );
 }
 
-
 export default App;
-

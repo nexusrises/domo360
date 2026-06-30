@@ -163,7 +163,7 @@ const copyIndexTo404Plugin = () => ({
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? '/-/' : '/',
+  base: '/-/',
   plugins: [react(), tourEditorApiPlugin(), copyIndexTo404Plugin()],
   resolve: {
     alias: {

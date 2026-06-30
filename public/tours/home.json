@@ -3,27 +3,7 @@
     "nombre": "Sala de Exhibición Premium",
     "imagen": "/tour/sala.jpg",
     "descripcion": "Nuestra sala principal interactiva con acabados de lujo y diseño contemporáneo.",
-    "hotspots": [
-      {
-        "tipo": "imagen",
-        "posicion": [
-          -19.68,
-          -3.13,
-          -1.69
-        ],
-        "url": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600&auto=format&fit=crop",
-        "ancho": 200,
-        "alto": 150,
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "muro",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "rotacion": 0
-      }
-    ],
+    "hotspots": [],
     "heading": {
       "x": 7,
       "y": 80
@@ -35,8 +15,8 @@
     "descripcion": "Un espacio culinario y tecnológico integrado con los más altos estándares modernos.",
     "hotspots": [],
     "heading": {
-      "x": -9,
-      "y": 70
+      "x": 1,
+      "y": 143
     }
   }
 }
