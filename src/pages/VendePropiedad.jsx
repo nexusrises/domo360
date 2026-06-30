@@ -149,7 +149,7 @@ export default function VendePropiedad() {
           <div className="glass-panel border-white/10 rounded-3xl overflow-hidden relative group shadow-[0_0_30px_rgba(0,0,0,0.3)] reveal-on-scroll reveal-delay-200">
             <div className="relative h-64 sm:h-80 w-full overflow-hidden">
               <img 
-                src="/casa_estancada_puno.png" 
+                src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/casa_estancada_puno.png`} 
                 alt="Casa estancada con cartel de Se Vende en Puno" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
               />
@@ -190,7 +190,7 @@ export default function VendePropiedad() {
                   {/* Imagen de cabecera de la tarjeta */}
                   <div className="relative h-60 sm:h-72 w-full overflow-hidden">
                     <img 
-                      src={solucion.image} 
+                      src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}${solucion.image}`} 
                       alt={solucion.title} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                     />
