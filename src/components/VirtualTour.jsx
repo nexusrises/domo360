@@ -600,13 +600,8 @@ export default function VirtualTour({
   const containerRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Control interactivo táctil para evitar atascar el scroll en celulares
-  const [isInteractive, setIsInteractive] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth >= 768;
-    }
-    return true;
-  });
+  // Control interactivo táctil (activo por defecto en todos los dispositivos)
+  const [isInteractive, setIsInteractive] = useState(true);
 
   const toggleFullscreen = async () => {
     if (!containerRef.current) return;
@@ -947,7 +942,7 @@ export default function VirtualTour({
           enableDamping={true}
           dampingFactor={0.08}
           autoRotate={autoRotateState}
-          autoRotateSpeed={0.3}
+          autoRotateSpeed={-0.3}
           enabled={isInteractive}
         />
         <FovZoomController />
@@ -1123,21 +1118,6 @@ export default function VirtualTour({
         </button>
       </div>
 
-      {/* Overlay de interacción móvil para evitar atascar el scroll vertical de la página */}
-      {!isInteractive && (
-        <div 
-          onClick={() => setIsInteractive(true)}
-          className="absolute inset-0 bg-[#070a13]/40 backdrop-blur-[1.5px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#070a13]/30 z-30 pointer-events-auto"
-        >
-          <div className="bg-slate-950/90 border border-cyan-400/20 px-6 py-4 rounded-3xl shadow-2xl flex flex-col items-center gap-2.5 text-center max-w-[85%] animate-fade-in">
-            <div className="w-10 h-10 border border-cyan-400/30 rounded-full flex items-center justify-center text-cyan-400 mb-0.5 animate-pulse">
-              <Compass className="w-5 h-5 animate-spin-slow" />
-            </div>
-            <span className="text-white font-bold text-xs uppercase tracking-wider font-display">Toca para activar vista 360°</span>
-            <span className="text-[10px] text-gray-400 leading-relaxed max-w-[180px]">Permite girar el entorno con tu dedo sin congelar el scroll de la página</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 

@@ -542,7 +542,7 @@ export default function Home() {
                     tourId={selectedProperty.tourId}
                     isExpanded={false}
                     setIsExpanded={() => {}}
-                    autoRotate={false}
+                    autoRotate={true}
                     showThumbnails={true}
                   />
                 ) : (
