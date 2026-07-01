@@ -15,10 +15,10 @@ export default function WhatsAppBubble() {
   ];
 
   const whatsappTexts = [
-    "Hola Nexus Domo 360°, vi una propiedad de mi interés en el catálogo y me gustaría recibir los planos, precios y disponibilidad de lotes.",
-    "Hola Nexus Domo 360°, me gustaría agendar una cita para realizar una visita guiada (física o virtual 3D) a las propiedades.",
-    "Hola Nexus Domo 360°, tengo algunas preguntas y dudas generales sobre los proyectos y me gustaría que un asesor me brinde soporte.",
-    "Hola Nexus Domo 360°, soy propietario y me gustaría recibir asesoría gratuita para poner en venta mi inmueble con su plataforma."
+    "Hola Nexus, vi una propiedad de mi interés en el catálogo y me gustaría recibir los planos, precios y disponibilidad de lotes.",
+    "Hola Nexus, me gustaría agendar una cita para realizar una visita guiada (física o virtual 3D) a las propiedades.",
+    "Hola Nexus, tengo algunas preguntas y dudas generales sobre los proyectos y me gustaría que un asesor me brinde soporte.",
+    "Hola Nexus, soy propietario y me gustaría recibir asesoría gratuita para poner en venta mi inmueble con su plataforma."
   ];
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function WhatsAppBubble() {
 
       {/* Botón flotante interactivo */}
       <a 
-        href={`https://wa.me/51915300535?text=${encodeURIComponent(whatsappTexts[currentMessageIndex])}`} 
+        href={`https://wa.me/51951300535?text=${encodeURIComponent(whatsappTexts[currentMessageIndex])}`} 
         target="_blank" 
         rel="noopener noreferrer" 
         className="w-14 h-14 rounded-full bg-[#25d366] text-white flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.7)] hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 active:scale-95 group relative"

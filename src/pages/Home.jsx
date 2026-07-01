@@ -350,7 +350,7 @@ export default function Home() {
       </div>
 
       {/* 3. GRID DE PROPIEDADES */}
-      <section className="w-full max-w-7xl mx-auto px-6 pb-8 md:pb-12 relative z-10">
+      <section className="w-full max-w-7xl mx-auto px-3.5 md:px-6 pb-8 md:pb-12 relative z-10">
 
         {propiedadesFiltradas.length === 0 ? (
           <div className="w-full py-20 text-center bg-[#0c111d]/40 border border-white/5 rounded-3xl backdrop-blur-md">
@@ -450,7 +450,7 @@ export default function Home() {
                   </div>
 
                   {/* Pie de Tarjeta: Precio y Acción */}
-                  <div className="flex items-center justify-between gap-4 pt-1">
+                  <div className="flex flex-wrap items-center justify-between gap-3.5 pt-1">
                     <div className="flex flex-col">
                       <span className="text-[9px] text-[#00f2fe] font-bold uppercase tracking-widest">PRECIO DESDE</span>
                       <span className="text-xl font-black text-[#4ade80] font-display leading-none mt-1">{propiedad.precio}</span>
@@ -496,7 +496,7 @@ export default function Home() {
             </button>
 
             {/* ENCABEZADO SUPERIOR */}
-            <div className="p-4 md:p-8 pb-3 md:pb-4 border-b border-white/5 space-y-3 z-30 flex flex-col items-center text-center">
+            <div className="p-3.5 md:p-8 pb-1 md:pb-4 border-b border-white/5 space-y-2 md:space-y-3 z-30 flex flex-col items-center text-center">
               <div className="flex flex-wrap items-center justify-center gap-3.5 w-full">
                 <span className={`px-3 py-1 rounded-md text-[9px] font-black tracking-wider uppercase border backdrop-blur-md flex items-center gap-1.5 ${selectedProperty.tipoColor}`}>
                   <span className={`w-1 h-1 rounded-full ${selectedProperty.tipo === 'TERRENO / LOTE' ? 'bg-blue-400 animate-pulse' : 'bg-cyan-400 animate-pulse'}`}></span>
@@ -522,10 +522,10 @@ export default function Home() {
             </div>
 
             {/* CUERPO DEL MODAL */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 p-3 md:p-8 pt-4 md:pt-6 overflow-visible md:overflow-hidden h-fit md:h-[calc(100%-120px)] flex-grow">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 p-3 md:p-8 pt-2.5 md:pt-6 overflow-visible md:overflow-hidden h-fit md:h-[calc(100%-120px)] flex-grow">
 
               {/* Columna Izquierda: Visor VirtualTour 360° */}
-              <div className="relative md:col-span-7 h-[280px] sm:h-[350px] md:h-full min-h-[250px] md:min-h-[400px] bg-black rounded-2xl overflow-hidden border border-white/5 shadow-inner z-10">
+              <div className="relative md:col-span-7 h-[210px] sm:h-[280px] md:h-full min-h-[200px] md:min-h-[400px] bg-black rounded-2xl overflow-hidden border border-white/5 shadow-inner z-10">
                 {isTourLoaded ? (
                   <VirtualTour
                     tourId={selectedProperty.tourId}
@@ -550,55 +550,60 @@ export default function Home() {
               </div>
 
               {/* Columna Derecha: Información Detallada */}
-              <div className="md:col-span-5 h-auto md:h-full flex flex-col justify-between p-4 md:p-8 md:overflow-y-auto bg-transparent md:bg-[#0a0d16]/30 rounded-none md:rounded-2xl border-0 md:border border-white/5 z-20">
+              <div className="md:col-span-5 h-auto md:h-full flex flex-col justify-between px-0.5 py-4 md:p-8 md:overflow-y-auto bg-transparent md:bg-[#0a0d16]/30 rounded-none md:rounded-2xl border-0 md:border border-white/5 z-20">
 
                 {/* Contenido Informativo y Técnico */}
                 <div className="space-y-6">
 
-                  {/* Tabla/Fichas de Datos Técnicos */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col">
-                      <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Área Total</span>
-                      <span className="text-base font-black text-white mt-1.5 flex items-center gap-1.5">
-                        <Maximize2 className="w-4 h-4 text-[#00f2fe] flex-shrink-0" />
-                        {selectedProperty.area}
-                      </span>
-                    </div>
-                    <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col">
-                      <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Precio de Venta</span>
-                      <span className="text-base font-black text-[#00f2fe] mt-1.5 font-display">
-                        {selectedProperty.precio}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Separador */}
-                  <div className="h-px bg-white/5 w-full"></div>
-
-                  {/* Detalles de Ubicación Completa en el Modal */}
-                  <div className="p-4 rounded-2xl bg-[#0f1626]/40 border border-white/[0.04] space-y-3.5 text-left shadow-inner">
-                    <span className="text-[#00f2fe] text-[9px] font-black tracking-widest uppercase block">Ubicación y Referencias</span>
+                  {/* Tarjeta Técnica Unificada (Área, Precio y Ubicación) */}
+                  <div className="p-4 rounded-2xl bg-[#0f1626]/40 space-y-4 text-left shadow-inner">
                     
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-2.5">
-                        <MapPin className="w-4 h-4 text-[#00f2fe] mt-0.5 flex-shrink-0" />
-                        <div>
-                          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider block mb-0.5">Dirección Exacta</span>
-                          <span className="text-gray-200 text-xs md:text-sm font-medium">{selectedProperty.direccion}</span>
-                        </div>
+                    {/* Tabla/Fichas de Datos Técnicos */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="p-3.5 rounded-2xl bg-white/[0.02] flex flex-col">
+                        <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Área Total</span>
+                        <span className="text-base font-black text-white mt-1.5 flex items-center gap-1.5">
+                          <Maximize2 className="w-4 h-4 text-[#00f2fe] flex-shrink-0" />
+                          {selectedProperty.area}
+                        </span>
                       </div>
+                      <div className="p-3.5 rounded-2xl bg-white/[0.02] flex flex-col">
+                        <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Precio de Venta</span>
+                        <span className="text-base font-black text-[#00f2fe] mt-1.5 font-display">
+                          {selectedProperty.precio}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Separador */}
+                    <div className="h-px bg-white/5 w-full"></div>
+
+                    {/* Detalles de Ubicación Completa en el Modal */}
+                    <div className="space-y-3.5">
+                      <span className="text-[#00f2fe] text-[9px] font-black tracking-widest uppercase block">Ubicación y Referencias</span>
                       
-                      <div className="grid grid-cols-2 gap-4 pt-3 border-t border-white/[0.04]">
-                        <div>
-                          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider block mb-0.5">Urbanización / Zona</span>
-                          <span className="text-gray-200 text-xs md:text-sm font-semibold">{selectedProperty.urbanizacion}</span>
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-2.5">
+                          <MapPin className="w-4 h-4 text-[#00f2fe] mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider block mb-0.5">Dirección Exacta</span>
+                            <span className="text-gray-200 text-xs md:text-sm font-medium">{selectedProperty.direccion}</span>
+                          </div>
                         </div>
-                        <div>
-                          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider block mb-0.5">Referencia de Acceso</span>
-                          <span className="text-gray-200 text-xs md:text-sm font-medium">{selectedProperty.referencia}</span>
+                        
+                        <div className="grid grid-cols-2 gap-4 pt-3 border-t border-white/[0.04]">
+                          <div>
+                            <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider block mb-0.5">Urbanización / Zona</span>
+                            <span className="text-gray-200 text-xs md:text-sm font-semibold">{selectedProperty.urbanizacion}</span>
+                          </div>
+                          <div>
+                            <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider block mb-0.5">Referencia de Acceso</span>
+                            <span className="text-gray-200 text-xs md:text-sm font-medium">{selectedProperty.referencia}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
+
                   </div>
 
                   {/* Separador */}
@@ -632,7 +637,7 @@ export default function Home() {
                 {/* Botón de WhatsApp Corporativo */}
                 <div className="pt-6 border-t border-white/5 mt-6">
                   <a
-                    href={`https://wa.me/51915300535?text=Hola%20Nexus%20Domo%20360%C2%B0%2C%20estoy%20interesado%20en%20el%20proyecto%20*${encodeURIComponent(selectedProperty.titulo)}*%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20propiedad.`}
+                    href={`https://wa.me/51951300535?text=Hola%20Nexus%2C%20estoy%20interesado%20en%20el%20proyecto%20*${encodeURIComponent(selectedProperty.titulo)}*%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20propiedad.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center gap-4 p-4 rounded-2xl bg-[#09d261]/10 border border-[#09d261]/25 text-left hover:bg-[#09d261]/15 hover:border-[#09d261]/40 transition-all duration-300 shadow-[0_0_20px_rgba(9,210,97,0.02)] hover:shadow-[0_0_30px_rgba(9,210,97,0.1)] cursor-pointer select-none group animate-pulse-glow-green"

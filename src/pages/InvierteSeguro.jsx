@@ -261,7 +261,7 @@ export default function InvierteSeguro() {
             className="inline-flex items-center justify-center btn-neon-cian px-8 py-4 rounded-full font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 active:scale-95 group font-display"
           >
             <Search className="w-4.5 h-4.5 mr-2" />
-            🔍 Ver Propiedades Verificadas
+            Ver Propiedades Verificadas
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -705,7 +705,7 @@ export default function InvierteSeguro() {
             Agenda una llamada de asesoría gratuita con nuestros asesores inmobiliarios. Analizamos tu presupuesto y te mostramos las mejores oportunidades con planos registrados en mano.
           </p>
           <a 
-            href="https://wa.me/51915300535?text=Hola%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20inmobiliaria%20gratuita%20para%20invertir%20en%20un%20lote."
+            href="https://wa.me/51951300535?text=Hola%20Nexus%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20inmobiliaria%20gratuita%20para%20invertir%20en%20un%20lote."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center btn-neon-purple px-8 py-3.5 rounded-full font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-xs md:text-sm font-sans w-full sm:w-auto"

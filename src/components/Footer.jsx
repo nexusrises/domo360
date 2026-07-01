@@ -200,7 +200,7 @@ export default function Footer() {
       {/* Barra inferior */}
       <div className={`max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 ${isContacto ? '' : 'pt-6 border-t border-white/5'}`}>
         <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start">
-          <div className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-nexus-accent" /> +51 915 300 535</div>
+          <div className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-nexus-accent" /> +51 951 300 535</div>
           <div className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-nexus-purple" /> nexus.agencia360@gmail.com</div>
           <div className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-gray-500" /> Juliaca, Perú</div>
         </div>

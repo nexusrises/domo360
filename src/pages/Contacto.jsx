@@ -73,7 +73,7 @@ export default function Contacto() {
       }
     } else {
       if (val.length > 0 && !/^[9]\d{8}$/.test(val)) {
-        setTelefonoError('Debe empezar con 9 y tener exactamente 9 dígitos (Ej: 915300535)');
+        setTelefonoError('Debe empezar con 9 y tener exactamente 9 dígitos (Ej: 951300535)');
       } else {
         setTelefonoError('');
       }
@@ -117,7 +117,7 @@ export default function Contacto() {
         `*Estado Legal:* ${estadoLegal}\n` +
         `*Detalles:* ${sanitizedMensaje}`;
 
-      const waUrl = `https://wa.me/51915300535?text=${encodeURIComponent(baseText)}`;
+      const waUrl = `https://wa.me/51951300535?text=${encodeURIComponent(baseText)}`;
       setWhatsappLink(waUrl);
       setStatus('success');
 
@@ -205,7 +205,7 @@ export default function Contacto() {
                           type="tel" 
                           value={telefono}
                           onChange={handleTelefonoChange}
-                          placeholder="Ej: 915 300 535"
+                          placeholder="Ej: 951 300 535"
                           className={`bg-white/5 border rounded-xl p-3.5 text-sm text-white focus:outline-none transition-all font-sans ${
                             telefonoError ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/25' : 'border-white/10 focus:border-nexus-accent focus:ring-nexus-accent/35'
                           }`}
@@ -372,7 +372,7 @@ export default function Contacto() {
               
               {/* WhatsApp Corporativo Dinámico Actualizado */}
               <a 
-                href="https://wa.me/51915300535?text=Hola%20Nexus%20Domo%20360%C2%B0%2C%20deseo%20hacer%20una%20consulta%20inmobiliaria."
+                href="https://wa.me/51951300535?text=Hola%20Nexus%2C%20deseo%20hacer%20una%20consulta%20inmobiliaria."
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#09d261]/10 text-[#09d261] hover:bg-[#09d261]/20 border border-[#09d261]/15 transition duration-150 group cursor-pointer"
@@ -398,13 +398,13 @@ export default function Contacto() {
                 </div>
               </a>
 
-              <a href="tel:+51915300535" className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10 hover:border-white/15 transition duration-150 group cursor-pointer">
+              <a href="tel:+51951300535" className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10 hover:border-white/15 transition duration-150 group cursor-pointer">
                 <div className="p-2.5 rounded-xl bg-white/5 text-white">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-bold text-xs md:text-sm text-white font-display">Línea Directa</h4>
-                  <p className="text-[11px] text-gray-400 font-sans">+51 915 300 535</p>
+                  <p className="text-[11px] text-gray-400 font-sans">+51 951 300 535</p>
                 </div>
               </a>
             </div>
