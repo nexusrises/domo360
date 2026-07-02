@@ -279,7 +279,7 @@ export default function CompraSeguro() {
             >
               {peligros.map((peligro, idx) => (
                 <div key={idx} className="w-full shrink-0 flex flex-col md:flex-row items-stretch min-h-[440px] md:min-h-[480px]">
-                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-black/40 border-b md:border-b-0 md:border-r border-white/5">
+                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-transparent border-b md:border-b-0 md:border-r border-white/5">
                     <img 
                       src={peligro.imagen.startsWith('http') || peligro.imagen.startsWith('data:') ? peligro.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${peligro.imagen}`} 
                       alt={peligro.titulo} 
@@ -294,7 +294,7 @@ export default function CompraSeguro() {
                     </span>
                   </div>
 
-                  <div className="w-full md:w-1/2 p-4 sm:p-8 md:p-12 flex flex-col justify-between bg-[#0a0d14]/95">
+                  <div className="w-full md:w-1/2 p-4 sm:p-8 md:p-12 flex flex-col justify-between bg-transparent">
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-xl bg-red-500/10 flex items-center justify-center border border-red-500/20 shrink-0">
@@ -573,7 +573,7 @@ export default function CompraSeguro() {
 
       {/* 4. ASESORÍA Y SANEAMIENTO CON NUESTRO ABOGADO INMOBILIARIO */}
       <section className="container mx-auto px-3 sm:px-6 pb-20 relative z-10 border-t border-white/5 pt-12">
-        <div className="max-w-5xl mx-auto glass-panel border-white/10 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-[#0c101f]/90 to-[#070a13]/95 backdrop-blur-xl shadow-2xl group transition-all duration-300 hover:border-nexus-accent/30">
+        <div className="max-w-5xl mx-auto glass-panel border-white/10 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-[#0c101f]/65 to-[#070a13]/65 backdrop-blur-md shadow-2xl group transition-all duration-300 hover:border-nexus-accent/30">
           {/* Luces decorativas internas de fondo */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-nexus-accent/10 rounded-full blur-[90px] pointer-events-none transition-all duration-500 group-hover:bg-nexus-accent/15"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-nexus-purple/8 rounded-full blur-[90px] pointer-events-none"></div>

@@ -122,7 +122,7 @@ export default function VendePropiedad() {
       <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-white/5">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Pilar Tecnológico */}
-          <div className="glass-panel border-[#00f2fe]/20 rounded-3xl p-5 sm:p-8 bg-[#0a0d16]/60 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
+          <div className="glass-panel border-[#00f2fe]/20 rounded-3xl p-5 sm:p-8 bg-[#0a0d16]/65 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-[#00f2fe]/10 border border-[#00f2fe]/20 flex items-center justify-center text-[#00f2fe]">
                 <Camera className="w-6 h-6" />
@@ -145,7 +145,7 @@ export default function VendePropiedad() {
           </div>
 
           {/* Pilar Legal */}
-          <div className="glass-panel border-nexus-purple/20 rounded-3xl p-5 sm:p-8 bg-[#0a0d16]/60 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
+          <div className="glass-panel border-nexus-purple/20 rounded-3xl p-5 sm:p-8 bg-[#0a0d16]/65 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-nexus-purple/10 border border-nexus-purple/20 flex items-center justify-center text-nexus-purple">
                 <Gavel className="w-6 h-6" />
@@ -182,7 +182,7 @@ export default function VendePropiedad() {
         </div>
 
         <div className="max-w-5xl mx-auto relative px-0 md:px-6">
-          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)] bg-[#0a0d16]/60 backdrop-blur-md">
+          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)]">
             <div 
               className="flex transition-transform duration-500 ease-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -191,7 +191,7 @@ export default function VendePropiedad() {
                 <div key={idx} className="w-full shrink-0 flex flex-col md:flex-row items-stretch min-h-[440px] md:min-h-[480px]">
                   
                   {/* Foto de la etapa */}
-                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-black/40 border-b md:border-b-0 md:border-r border-white/5">
+                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-transparent border-b md:border-b-0 md:border-r border-white/5">
                     <img 
                       src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}${solucion.image}`} 
                       alt={solucion.title} 
@@ -207,7 +207,7 @@ export default function VendePropiedad() {
                   </div>
 
                   {/* Cuerpo */}
-                  <div className="w-full md:w-1/2 p-5 sm:p-10 bg-[#0a0d14]/60 backdrop-blur-md flex flex-col justify-between text-left">
+                  <div className="w-full md:w-1/2 p-5 sm:p-10 bg-transparent flex flex-col justify-between text-left">
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex items-center gap-4">
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${solucion.color} shrink-0`}>
@@ -270,7 +270,7 @@ export default function VendePropiedad() {
 
       {/* SECCIÓN DEL ENCARGADO (ANGEL APAZA) */}
       <section className="container mx-auto px-3 sm:px-6 pb-20 relative z-10 border-t border-white/5 pt-12">
-        <div className="max-w-5xl mx-auto glass-panel border-white/10 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-[#0c101f]/90 to-[#070a13]/95 backdrop-blur-xl shadow-2xl group transition-all duration-300 hover:border-nexus-accent/30">
+        <div className="max-w-5xl mx-auto glass-panel border-white/10 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-[#0c101f]/65 to-[#070a13]/65 backdrop-blur-md shadow-2xl group transition-all duration-300 hover:border-nexus-accent/30">
           {/* Luces decorativas internas de fondo */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-nexus-accent/10 rounded-full blur-[90px] pointer-events-none transition-all duration-500 group-hover:bg-nexus-accent/15"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-nexus-purple/8 rounded-full blur-[90px] pointer-events-none"></div>

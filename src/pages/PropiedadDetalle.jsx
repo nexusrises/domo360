@@ -129,7 +129,7 @@ export default function PropiedadDetalle() {
             <div className="lg:col-span-8 flex flex-col gap-8">
               
               {/* Descripción Completa */}
-              <div className="glass-panel border-white/5 rounded-3xl p-6 sm:p-8 space-y-4 bg-[#0a0d16]/30 backdrop-blur-md">
+              <div className="glass-panel border-white/5 rounded-3xl p-6 sm:p-8 space-y-4 bg-[#0a0d16]/65 backdrop-blur-md">
                 <h3 className="text-white text-sm md:text-base font-black tracking-wider uppercase flex items-center gap-2 font-display">
                   <span className="w-1.5 h-3.5 bg-[#00f2fe] rounded-full"></span>
                   Descripción del Proyecto
@@ -140,7 +140,7 @@ export default function PropiedadDetalle() {
               </div>
 
               {/* Beneficios */}
-              <div className="glass-panel border-white/5 rounded-3xl p-6 sm:p-8 space-y-4 bg-[#0a0d16]/30 backdrop-blur-md">
+              <div className="glass-panel border-white/5 rounded-3xl p-6 sm:p-8 space-y-4 bg-[#0a0d16]/65 backdrop-blur-md">
                 <h3 className="text-white text-sm md:text-base font-black tracking-wider uppercase flex items-center gap-2 font-display">
                   <span className="w-1.5 h-3.5 bg-[#00f2fe] rounded-full"></span>
                   Beneficios Destacados
@@ -235,7 +235,7 @@ export default function PropiedadDetalle() {
           </div>
 
           {/* Fila 3: Mapa de ubicación geográfica en Ancho Completo (Último abajo del todo) */}
-          <div className="w-full glass-panel border-white/5 rounded-3xl p-6 sm:p-8 space-y-4 bg-[#0a0d16]/30 backdrop-blur-md">
+          <div className="w-full glass-panel border-white/5 rounded-3xl p-6 sm:p-8 space-y-4 bg-[#0a0d16]/65 backdrop-blur-md">
             <h3 className="text-white text-sm md:text-base font-black tracking-wider uppercase flex items-center gap-2 font-display">
               <span className="w-1.5 h-3.5 bg-[#00f2fe] rounded-full"></span>
               Ubicación Geográfica
