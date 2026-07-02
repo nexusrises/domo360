@@ -237,7 +237,7 @@ export default function CompraSeguro() {
         </span>
         
         <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-5 mb-6 leading-[1.15] max-w-4xl mx-auto relative z-10 font-display">
-          Compra tu propiedad con absoluta <span className="text-gradient-rise">Garantía y Respaldo Legal</span>
+          Compra tu propiedad con absoluta <span className="text-gradient-rise">Garantía y <br /> Respaldo Legal</span>
         </h1>
         
         <p className="text-gray-300 max-w-3xl mx-auto text-base md:text-lg mb-10 leading-relaxed relative z-10 font-sans">

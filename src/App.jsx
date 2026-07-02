@@ -70,7 +70,7 @@ function AppContent() {
         </Routes>
       </div>
 
-      <Footer />
+      {!hideFooter && <Footer />}
       <WhatsAppBubble />
     </div>
   );
