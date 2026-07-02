@@ -107,7 +107,7 @@ export default function Home() {
       <div className="w-full max-w-3xl mx-auto px-6 mb-12 relative z-20">
         
         {/* Versión Escritorio (Desktop) */}
-        <div className="hidden md:flex bg-[#0a0e1a]/80 backdrop-blur-xl border border-white/10 rounded-full p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.65)] items-center justify-between gap-1 w-full relative">
+        <div className="hidden md:flex bg-[#0a0e1a]/60 backdrop-blur-xl border border-white/10 rounded-full p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.65)] items-center justify-between gap-1 w-full relative">
           
           {/* Campo 1: Búsqueda de ubicación */}
           <div className="flex-grow flex items-center gap-3.5 pl-6 pr-4 py-1">
@@ -187,7 +187,7 @@ export default function Home() {
         </div>
 
         {/* Versión Móvil (Mobile) Compacta e Integrada */}
-        <div className="flex md:hidden flex-col bg-[#0a0e1a]/85 backdrop-blur-xl border border-white/10 rounded-3xl p-4 shadow-[0_20px_45px_rgba(0,0,0,0.6)] gap-3.5 w-full relative text-left">
+        <div className="flex md:hidden flex-col bg-[#0a0e1a]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-4 shadow-[0_20px_45px_rgba(0,0,0,0.6)] gap-3.5 w-full relative text-left">
           
           {/* Campo Búsqueda */}
           <div className="flex items-center gap-3 bg-white/[0.02] border border-white/5 rounded-2xl px-4 py-3">
@@ -271,7 +271,7 @@ export default function Home() {
             {propiedadesFiltradas.map((propiedad) => (
               <div
                 key={propiedad.id}
-                className="group/card bg-[#0c111d]/70 backdrop-blur-md border border-white/5 rounded-3xl overflow-hidden shadow-xl hover:border-[#00f2fe]/20 hover:shadow-[0_10px_30px_rgba(0,242,254,0.05)] transition-all duration-300 flex flex-col justify-between h-full"
+                className="group/card bg-[#0c111d]/60 backdrop-blur-md border border-white/5 rounded-3xl overflow-hidden shadow-xl hover:border-[#00f2fe]/20 hover:shadow-[0_10px_30px_rgba(0,242,254,0.05)] transition-all duration-300 flex flex-col justify-between h-full"
               >
                 {/* Cabecera de la Tarjeta: Imagen de Portada y Etiquetas */}
                 <Link

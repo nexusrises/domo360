@@ -351,7 +351,7 @@ export default function CompraSeguro() {
           </div>
 
           {/* Panel Informativo del Filtro Activo */}
-          <div className="glass-panel border-white/5 rounded-3xl p-6 sm:p-10 bg-[#0a0d16]/70 backdrop-blur-md">
+          <div className="glass-panel border-white/5 rounded-3xl p-6 sm:p-10 bg-[#0a0d16]/60 backdrop-blur-md">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
               {/* Imagen del Filtro */}
@@ -413,7 +413,7 @@ export default function CompraSeguro() {
         </div>
 
         <div className="max-w-5xl mx-auto relative px-0 md:px-6">
-          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)] bg-[#0a0d16]/70 backdrop-blur-md">
+          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)] bg-[#0a0d16]/60 backdrop-blur-md">
             <div 
               className="flex transition-transform duration-500 ease-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -437,7 +437,7 @@ export default function CompraSeguro() {
                   </div>
 
                   {/* Detalle */}
-                  <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-12 flex flex-col justify-between bg-[#0a0d14]/70 backdrop-blur-md text-left">
+                  <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-12 flex flex-col justify-between bg-[#0a0d14]/60 backdrop-blur-md text-left">
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-xl bg-red-500/10 flex items-center justify-center border border-red-500/20 shrink-0">
@@ -541,7 +541,7 @@ export default function CompraSeguro() {
           {faqs.map((faq, index) => (
             <div 
               key={index} 
-              className="glass-panel border-white/5 rounded-2xl overflow-hidden bg-[#0a0d16]/70 backdrop-blur-md transition-all duration-300"
+              className="glass-panel border-white/5 rounded-2xl overflow-hidden bg-[#0a0d16]/60 backdrop-blur-md transition-all duration-300"
             >
               <button
                 onClick={() => toggleFaq(index)}

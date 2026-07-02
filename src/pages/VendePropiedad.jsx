@@ -120,7 +120,7 @@ export default function VendePropiedad() {
       <section className="container mx-auto px-6 py-12 relative z-10 border-t border-white/5">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Pilar Tecnológico */}
-          <div className="glass-panel border-[#00f2fe]/20 rounded-3xl p-8 bg-[#0a0d16]/70 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
+          <div className="glass-panel border-[#00f2fe]/20 rounded-3xl p-8 bg-[#0a0d16]/60 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-[#00f2fe]/10 border border-[#00f2fe]/20 flex items-center justify-center text-[#00f2fe]">
                 <Camera className="w-6 h-6" />
@@ -143,7 +143,7 @@ export default function VendePropiedad() {
           </div>
 
           {/* Pilar Legal */}
-          <div className="glass-panel border-nexus-purple/20 rounded-3xl p-8 bg-[#0a0d16]/70 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
+          <div className="glass-panel border-nexus-purple/20 rounded-3xl p-8 bg-[#0a0d16]/60 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-nexus-purple/10 border border-nexus-purple/20 flex items-center justify-center text-nexus-purple">
                 <Gavel className="w-6 h-6" />
@@ -180,7 +180,7 @@ export default function VendePropiedad() {
         </div>
 
         <div className="max-w-5xl mx-auto relative px-0 md:px-6">
-          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)] bg-[#0a0d16]/70 backdrop-blur-md">
+          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)] bg-[#0a0d16]/60 backdrop-blur-md">
             <div 
               className="flex transition-transform duration-500 ease-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -205,7 +205,7 @@ export default function VendePropiedad() {
                   </div>
 
                   {/* Cuerpo */}
-                  <div className="w-full md:w-1/2 p-6 sm:p-10 bg-[#0a0d14]/70 backdrop-blur-md flex flex-col justify-between text-left">
+                  <div className="w-full md:w-1/2 p-6 sm:p-10 bg-[#0a0d14]/60 backdrop-blur-md flex flex-col justify-between text-left">
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex items-center gap-4">
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${solucion.color} shrink-0`}>
@@ -282,7 +282,7 @@ export default function VendePropiedad() {
           {faqs.map((faq, idx) => (
             <div 
               key={idx} 
-              className="glass-panel border-white/5 rounded-2xl overflow-hidden bg-[#0a0d16]/70 backdrop-blur-md transition-all duration-300"
+              className="glass-panel border-white/5 rounded-2xl overflow-hidden bg-[#0a0d16]/60 backdrop-blur-md transition-all duration-300"
             >
               <button
                 onClick={() => toggleFaq(idx)}

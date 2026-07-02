@@ -155,7 +155,7 @@ export default function Contacto() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* COLUMNA IZQUIERDA: FORMULARIO PREMIUM COMPACTO (lg:col-span-7) */}
-          <div className="lg:col-span-7 glass-panel border-white/5 rounded-3xl p-6 sm:p-8 bg-[#0a0d16]/70 backdrop-blur-md relative">
+          <div className="lg:col-span-7 glass-panel border-white/5 rounded-3xl p-6 sm:p-8 bg-[#0a0d16]/60 backdrop-blur-md relative">
             {status !== 'success' ? (
               <div className="space-y-6">
                 <div className="flex items-center gap-3.5 pb-4 border-b border-white/5">
@@ -330,7 +330,7 @@ export default function Contacto() {
           <div className="lg:col-span-5 flex flex-col gap-6 text-left">
             
             {/* Canales Directos */}
-            <div className="glass-panel border-white/5 rounded-3xl p-6 flex flex-col gap-4 bg-[#0a0d16]/70 backdrop-blur-md">
+            <div className="glass-panel border-white/5 rounded-3xl p-6 flex flex-col gap-4 bg-[#0a0d16]/60 backdrop-blur-md">
               <h3 className="text-white font-bold text-base mb-2 uppercase tracking-wider font-display">Canales de Atención</h3>
               
               <a 
@@ -372,7 +372,7 @@ export default function Contacto() {
             </div>
 
             {/* Sede Central (SEO Local en Juliaca, Perú) */}
-            <div className="glass-panel border-white/5 rounded-3xl p-6 bg-[#0a0d16]/70 backdrop-blur-md relative overflow-hidden flex flex-col justify-between">
+            <div className="glass-panel border-white/5 rounded-3xl p-6 bg-[#0a0d16]/60 backdrop-blur-md relative overflow-hidden flex flex-col justify-between">
               <div className="absolute top-[-50px] left-[-50px] w-64 h-64 bg-nexus-accent opacity-[0.03] rounded-full blur-[50px] pointer-events-none"></div>
               
               <div className="mb-4">
