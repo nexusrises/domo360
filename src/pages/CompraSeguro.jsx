@@ -44,7 +44,7 @@ export default function CompraSeguro() {
   };
 
   useEffect(() => {
-    document.title = "Compra tu Propiedad Seguro y Sin Riesgos | Nexus Domo 360°";
+    document.title = "Compra tu Propiedad con Seguridad y Sin Riesgos | Nexus Domo 360°";
     window.scrollTo(0, 0);
   }, []);
 
