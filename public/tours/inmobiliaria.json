@@ -306,12 +306,12 @@
           -2.16,
           11.61
         ],
-        "destino": "01_rm_vista_lugares_referencia_2696",
+        "destino": "02_residencial_maravillas_1585",
         "texto": "Maravillas   1",
         "opacidad": 1,
         "escala": 0.7,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#1de60f",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -349,15 +349,15 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          -19.99,
-          0.44,
-          0.45
+          -19.9,
+          1.21,
+          -1.65
         ],
         "destino": "01_rm_vista_lugares_referencia_2696",
         "texto": "VISTA AEREA \nDE LOS PROYECTOS",
         "opacidad": 1,
         "escala": 0.6,
-        "icono": "ArrowRight",
+        "icono": "Camera",
         "color": "#0a9bf5",
         "inclinacion": 0,
         "posicionTipo": "2d",
