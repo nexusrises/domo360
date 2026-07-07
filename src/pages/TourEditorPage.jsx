@@ -34,6 +34,7 @@ import {
   Eye
 } from 'lucide-react';
 import { tourData as initialTourData } from '../data/tourData';
+import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
 import { useParams } from 'react-router-dom';
 
 // Función para redimensionar y comprimir imágenes 360° en el cliente
@@ -687,6 +688,7 @@ export default function TourEditorPage() {
   });
 
   const [scenes, setScenes] = useState(initialTourData);
+  const [sheetsLotes, setSheetsLotes] = useState([]);
   const [activeSceneKey, setActiveSceneKey] = useState('sala');
   const [hoveredLoteIndex, setHoveredLoteIndex] = useState(null);
 
@@ -746,14 +748,59 @@ export default function TourEditorPage() {
 
   useEffect(() => {
     const loadTourData = async () => {
+      // 1. Descargar datos de Google Sheets
+      let sheetsData = [];
+      try {
+        sheetsData = await fetchLotesFromSheets();
+        setSheetsLotes(sheetsData);
+      } catch (err) {
+        console.error("Error al obtener datos de Google Sheets en el editor:", err);
+      }
+
+      // Función helper para cruzar datos en caliente
+      const injectSheetsData = (parsedTourData, rawSheets) => {
+        if (!rawSheets || rawSheets.length === 0) return parsedTourData;
+        const projectLotes = rawSheets.filter(l => 
+          l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase()
+        );
+        if (projectLotes.length === 0) return parsedTourData;
+
+        const cloned = JSON.parse(JSON.stringify(parsedTourData));
+        Object.keys(cloned).forEach(sceneKey => {
+          const scene = cloned[sceneKey];
+          if (scene.hotspots && Array.isArray(scene.hotspots)) {
+            scene.hotspots = scene.hotspots.map(hs => {
+              if (hs.tipo === 'lote' && hs.manzana && hs.lote) {
+                const match = projectLotes.find(l => 
+                  l.manzana && l.manzana.toString().trim().toUpperCase() === hs.manzana.toString().trim().toUpperCase() &&
+                  l.lote && l.lote.toString().trim() === hs.lote.toString().trim()
+                );
+                if (match) {
+                  return {
+                    ...hs,
+                    estado: match.estado || hs.estado,
+                    precio: match.precio || hs.precio,
+                    area: match.area || hs.area,
+                    color: getColorForEstado(match.estado)
+                  };
+                }
+              }
+              return hs;
+            });
+          }
+        });
+        return cloned;
+      };
+
       const localSaved = localStorage.getItem(`nexus_tour_data_${tourId}`);
       if (localSaved && localSaved !== 'undefined') {
         try {
           // Reemplazar en caliente rutas obsoletas a /descargas_kuula/ por /tour/
           const cleanedSaved = localSaved.replace(/\/descargas_kuula\//g, '/tour/');
           const parsed = JSON.parse(cleanedSaved);
-          setScenes(parsed);
-          const firstScene = Object.keys(parsed)[0];
+          const injected = injectSheetsData(parsed, sheetsData);
+          setScenes(injected);
+          const firstScene = Object.keys(injected)[0];
           if (firstScene) {
             if (cleanedSaved !== localSaved) {
               localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
@@ -770,8 +817,9 @@ export default function TourEditorPage() {
         const res = await fetch(`/src/data/tours/${tourId}.json`);
         if (res.ok) {
           const parsed = await res.json();
-          setScenes(parsed);
-          const firstScene = Object.keys(parsed)[0];
+          const injected = injectSheetsData(parsed, sheetsData);
+          setScenes(injected);
+          const firstScene = Object.keys(injected)[0];
           if (firstScene) setActiveSceneKey(firstScene);
           localStorage.setItem(`nexus_tour_data_${tourId}`, JSON.stringify(parsed));
           return;
@@ -780,7 +828,8 @@ export default function TourEditorPage() {
         console.warn(`No se encontró archivo físico para el tour: ${tourId}`);
       }
 
-      setScenes(initialTourData);
+      const injectedFallback = injectSheetsData(initialTourData, sheetsData);
+      setScenes(injectedFallback);
       setActiveSceneKey('sala');
     };
 
@@ -1220,21 +1269,36 @@ export default function TourEditorPage() {
   // Cambiar cualquier propiedad de un hotspot/elemento de forma genérica
   const handleFieldChange = (index, field, value) => {
     const newHotspots = [...activeScene.hotspots];
-    newHotspots[index] = {
+    const updatedHotspot = {
       ...newHotspots[index],
       [field]: value
     };
-    
-    // Si se modifica el estado del lote, actualizar automáticamente su color correspondiente
-    if (field === 'estado') {
-      const mapping = {
-        'Disponible': '#22c55e',            // Verde
-        'Reservado con S/. 100': '#f59e0b', // Amarillo
-        'Financiado': '#f97316',            // Naranja
-        'Vendido': '#ef4444'                // Rojo
-      };
-      newHotspots[index].color = mapping[value] || '#22c55e';
+
+    // Si es un lote y cambia la manzana o el número de lote, intentar sincronizar con Google Sheets
+    if (updatedHotspot.tipo === 'lote' && (field === 'manzana' || field === 'lote')) {
+      const targetManzana = field === 'manzana' ? value.toUpperCase() : (updatedHotspot.manzana || '');
+      const targetLote = field === 'lote' ? value : (updatedHotspot.lote || '');
+
+      const match = sheetsLotes.find(l => 
+        l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase() &&
+        l.manzana && l.manzana.toString().trim().toUpperCase() === targetManzana.toString().trim().toUpperCase() &&
+        l.lote && l.lote.toString().trim() === targetLote.toString().trim()
+      );
+
+      if (match) {
+        updatedHotspot.estado = match.estado || updatedHotspot.estado;
+        updatedHotspot.precio = match.precio || updatedHotspot.precio;
+        updatedHotspot.area = match.area || updatedHotspot.area;
+        updatedHotspot.color = getColorForEstado(match.estado);
+      }
     }
+    
+    // Si se modifica el estado del lote manualmente (fallback), actualizar automáticamente su color
+    if (field === 'estado') {
+      updatedHotspot.color = getColorForEstado(value);
+    }
+
+    newHotspots[index] = updatedHotspot;
 
     const updated = {
       ...scenes,
@@ -2744,69 +2808,103 @@ export default function TourEditorPage() {
                                   </>
                                 )}
 
-                                {itemTipo === 'lote' && (
-                                  <>
-                                    <div className="space-y-3">
-                                      <div className="space-y-1">
-                                        <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Letra de la Manzana</label>
-                                        <input 
-                                          type="text" 
-                                          value={hs.manzana || ''} 
-                                          onChange={(e) => handleFieldChange(index, 'manzana', e.target.value.toUpperCase())}
-                                          className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
-                                          placeholder="ej: A, B, C..."
-                                        />
-                                      </div>
+                                {itemTipo === 'lote' && (() => {
+                                  const sheetsLoteMatch = sheetsLotes.find(l => 
+                                    l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase() &&
+                                    l.manzana && l.manzana.toString().trim().toUpperCase() === (hs.manzana || '').toString().trim().toUpperCase() &&
+                                    l.lote && l.lote.toString().trim() === (hs.lote || '').toString().trim()
+                                  );
 
-                                      <div className="space-y-1">
-                                        <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Número de Lote</label>
-                                        <input 
-                                          type="text" 
-                                          value={hs.lote || ''} 
-                                          onChange={(e) => handleFieldChange(index, 'lote', e.target.value)}
-                                          className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
-                                          placeholder="ej: 1, 2, 3..."
-                                        />
-                                      </div>
+                                  return (
+                                    <>
+                                      <div className="space-y-3">
+                                        {/* Estado del enlace con Sheets */}
+                                        <div className={`p-2.5 rounded-xl border text-[10px] font-bold flex items-center gap-1.5 transition-all duration-300 ${
+                                          sheetsLoteMatch 
+                                            ? 'bg-green-500/10 border-green-500/30 text-green-400' 
+                                            : (hs.manzana && hs.lote)
+                                              ? 'bg-red-500/10 border-red-500/30 text-red-400 animate-pulse'
+                                              : 'bg-slate-900 border-white/5 text-gray-400'
+                                        }`}>
+                                          <span>
+                                            {sheetsLoteMatch 
+                                              ? `✅ Sincronizado con Sheets (Fila encontrada)` 
+                                              : (hs.manzana && hs.lote)
+                                                ? `⚠️ No encontrado en Sheets (Verifica Manzana/Lote)`
+                                                : `ℹ️ Completa Manzana y Lote para enlazar con Sheets`}
+                                          </span>
+                                        </div>
 
-                                      <div className="space-y-1">
-                                        <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Estado de Disponibilidad</label>
-                                        <select
-                                          value={hs.estado || 'Disponible'}
-                                          onChange={(e) => handleFieldChange(index, 'estado', e.target.value)}
-                                          className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold cursor-pointer"
-                                        >
-                                          <option value="Disponible">Disponible (🟢 Verde)</option>
-                                          <option value="Reservado con S/. 100">Reservado con S/. 100 (🟡 Amarillo)</option>
-                                          <option value="Financiado">Financiado (🟠 Naranja)</option>
-                                          <option value="Vendido">Vendido (🔴 Rojo)</option>
-                                        </select>
-                                      </div>
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Letra de la Manzana</label>
+                                          <input 
+                                            type="text" 
+                                            value={hs.manzana || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'manzana', e.target.value.toUpperCase())}
+                                            className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
+                                            placeholder="ej: A, B, C..."
+                                          />
+                                        </div>
 
-                                      <div className="space-y-1">
-                                        <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Precio (Opcional)</label>
-                                        <input 
-                                          type="text" 
-                                          value={hs.precio || ''} 
-                                          onChange={(e) => handleFieldChange(index, 'precio', e.target.value)}
-                                          className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
-                                          placeholder="ej: S/. 45,000"
-                                        />
-                                      </div>
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Número de Lote</label>
+                                          <input 
+                                            type="text" 
+                                            value={hs.lote || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'lote', e.target.value)}
+                                            className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
+                                            placeholder="ej: 1, 2, 3..."
+                                          />
+                                        </div>
 
-                                      <div className="space-y-1">
-                                        <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Área m² (Opcional)</label>
-                                        <input 
-                                          type="text" 
-                                          value={hs.area || ''} 
-                                          onChange={(e) => handleFieldChange(index, 'area', e.target.value)}
-                                          className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
-                                          placeholder="ej: 120 m²"
-                                        />
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Estado de Disponibilidad {sheetsLoteMatch && '(En Sheets)'}</label>
+                                          <select
+                                            disabled={!!sheetsLoteMatch}
+                                            value={hs.estado || 'Disponible'}
+                                            onChange={(e) => handleFieldChange(index, 'estado', e.target.value)}
+                                            className={`w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold cursor-pointer ${
+                                              sheetsLoteMatch ? 'opacity-60 cursor-not-allowed bg-slate-950/60' : ''
+                                            }`}
+                                          >
+                                            <option value="Disponible">Disponible (🟢 Verde)</option>
+                                            <option value="Reservado con S/. 100">Reservado con S/. 100 (🟡 Amarillo)</option>
+                                            <option value="Financiado">Financiado (🟠 Naranja)</option>
+                                            <option value="Vendido">Vendido (🔴 Rojo)</option>
+                                          </select>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Precio {sheetsLoteMatch && '(En Sheets)'}</label>
+                                          <input 
+                                            type="text" 
+                                            disabled={!!sheetsLoteMatch}
+                                            value={hs.precio || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'precio', e.target.value)}
+                                            className={`w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold ${
+                                              sheetsLoteMatch ? 'opacity-60 cursor-not-allowed bg-slate-950/60' : ''
+                                            }`}
+                                            placeholder="ej: S/. 45,000"
+                                          />
+                                        </div>
+
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Área m² {sheetsLoteMatch && '(En Sheets)'}</label>
+                                          <input 
+                                            type="text" 
+                                            disabled={!!sheetsLoteMatch}
+                                            value={hs.area || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'area', e.target.value)}
+                                            className={`w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold ${
+                                              sheetsLoteMatch ? 'opacity-60 cursor-not-allowed bg-slate-950/60' : ''
+                                            }`}
+                                            placeholder="ej: 120 m²"
+                                          />
+                                        </div>
                                       </div>
-                                    </div>
-                                  </>
-                                )}
+                                    </>
+                                  );
+                                })()}
 
                                 {itemTipo === 'manzana' && (
                                   <>

@@ -31,6 +31,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { tourData } from '../data/tourData';
+import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
 
 // Map of icons for hotspots
 const IconMap = {
@@ -679,7 +680,47 @@ export default function VirtualTour({
       // Activar overlay durante la carga para evitar que hotspots aparezcan sin orientar
       setIsTransitioning(true);
 
-      const finishLoad = (parsed, firstScene) => {
+      const finishLoad = async (parsed, firstScene) => {
+        try {
+          const sheetsLotes = await fetchLotesFromSheets();
+          if (sheetsLotes && sheetsLotes.length > 0) {
+            // Filtrar lotes correspondientes al tour/proyecto actual
+            const projectLotes = sheetsLotes.filter(l => 
+              l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase()
+            );
+
+            if (projectLotes.length > 0) {
+              // Recorrer escenas y actualizar sus hotspots de tipo 'lote'
+              Object.keys(parsed).forEach(sceneKey => {
+                const scene = parsed[sceneKey];
+                if (scene.hotspots && Array.isArray(scene.hotspots)) {
+                  scene.hotspots = scene.hotspots.map(hs => {
+                    if (hs.tipo === 'lote' && hs.manzana && hs.lote) {
+                      const match = projectLotes.find(l => 
+                        l.manzana && l.manzana.toString().trim().toUpperCase() === hs.manzana.toString().trim().toUpperCase() &&
+                        l.lote && l.lote.toString().trim() === hs.lote.toString().trim()
+                      );
+
+                      if (match) {
+                        return {
+                          ...hs,
+                          estado: match.estado || hs.estado,
+                          precio: match.precio || hs.precio,
+                          area: match.area || hs.area,
+                          color: getColorForEstado(match.estado)
+                        };
+                      }
+                    }
+                    return hs;
+                  });
+                }
+              });
+            }
+          }
+        } catch (error) {
+          console.error("Error al sincronizar con Google Sheets en el visor:", error);
+        }
+
         setScenes(parsed);
         setActiveSceneKey(firstScene);
         // Dar tiempo al HeadingController de orientar la cámara antes de mostrar los hotspots

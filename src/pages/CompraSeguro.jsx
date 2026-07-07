@@ -587,7 +587,7 @@ export default function CompraSeguro() {
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-2xl blur-[12px] opacity-35 group-hover:opacity-55 transition-opacity duration-300"></div>
                 <img
                   src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/abogado_thumb.png`}
-                  alt="Dr. Carlos Ramirez - Abogado Especialista Inmobiliario"
+                  alt="Dr. Santiago Ramirez - Abogado Especialista Inmobiliario"
                   className="w-36 h-36 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-white/15 relative z-10 bg-[#070a13] shadow-md"
                   onError={(e) => {
                     e.target.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80";
@@ -595,7 +595,7 @@ export default function CompraSeguro() {
                 />
               </div>
               
-              <h4 className="text-white font-bold text-lg font-display">Dr. Carlos Ramirez</h4>
+              <h4 className="text-white font-bold text-lg font-display">Dr. Santiago Ramirez</h4>
               <p className="text-emerald-400 text-[10px] font-semibold uppercase tracking-widest mt-1 opacity-90">
                 Abogado Especialista Inmobiliario
               </p>
@@ -603,7 +603,7 @@ export default function CompraSeguro() {
               <div className="w-full border-t border-white/5 my-3.5"></div>
               
               <a
-                href="https://wa.me/51951300535?text=Hola%20Dr.%20Carlos%20Ramirez%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20sobre%20el%20estado%20legal%20de%20una%20propiedad%20para%20comprar%2Fvender%20de%20forma%20segura."
+                href="https://wa.me/51951300535?text=Hola%20Dr.%20Santiago%20Ramirez%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20sobre%20el%20estado%20legal%20de%20una%20propiedad%20para%20comprar%2Fvender%20de%20forma%20segura."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-black py-3 px-4 rounded-xl font-bold uppercase tracking-wider text-[11px] transition-all duration-200 active:scale-95 shadow-[0_0_15px_rgba(37,211,102,0.2)] gap-2 font-display cursor-pointer"
@@ -627,7 +627,7 @@ export default function CompraSeguro() {
                 </h3>
                 
                 <p className="text-gray-300 text-xs sm:text-sm leading-relaxed font-sans font-normal">
-                  La seguridad jurídica no debe beneficiar solo a una de las partes. El <strong>Dr. Carlos Ramirez</strong> se encarga de analizar los expedientes registrales y sanear la documentación correspondiente de forma neutral. Esto garantiza que el comprador reciba una propiedad limpia de deudas o gravámenes y que el vendedor reciba su pago de manera oportuna, transparente y bajo el amparo de la ley, sin que nadie resulte perjudicado.
+                  La seguridad jurídica no debe beneficiar solo a una de las partes. El <strong>Dr. Santiago Ramirez</strong> se encarga de analizar los expedientes registrales y sanear la documentación correspondiente de forma neutral. Esto garantiza que el comprador reciba una propiedad limpia de deudas o gravámenes y que el vendedor reciba su pago de manera oportuna, transparente y bajo el amparo de la ley, sin que nadie resulte perjudicado.
                 </p>
 
                 <p className="text-gray-300 text-xs sm:text-sm leading-relaxed font-sans font-normal">

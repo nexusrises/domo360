@@ -78,7 +78,7 @@ export default function WhatsAppBubble() {
 
       {/* Botón flotante interactivo */}
       <a 
-        href={`https://wa.me/51915300535?text=${encodeURIComponent(whatsappTexts[currentMessageIndex])}`} 
+        href={`https://wa.me/51951300535?text=${encodeURIComponent(whatsappTexts[currentMessageIndex])}`} 
         target="_blank" 
         rel="noopener noreferrer" 
         className="w-14 h-14 rounded-full bg-[#25d366] text-white flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.7)] hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 active:scale-95 group relative"
