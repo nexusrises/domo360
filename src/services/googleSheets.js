@@ -1,6 +1,6 @@
 // Servicio para consultar y formatear datos de lotes desde Google Sheets en tiempo real
 
-const API_URL = import.meta.env.VITE_GOOGLE_SHEETS_API_URL;
+const API_URL = import.meta.env.VITE_GOOGLE_SHEETS_API_URL || 'https://script.google.com/macros/s/AKfycbyzQdWdh8QEeoO-277fk7r36k1nAgE7Vi4B5l2yUmQ2CnZEBrrS6Jy2iCXjEWyRXArCfQ/exec';
 
 /**
  * Obtiene la lista completa de lotes registrados en la hoja de cálculo de Google Sheets.

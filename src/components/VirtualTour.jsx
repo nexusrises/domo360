@@ -672,7 +672,7 @@ export default function VirtualTour({
   };
 
   // Cargar escenas dinámicamente de localStorage o fallback a tourData
-  const [scenes, setScenes] = useState(tourData);
+  const [scenes, setScenes] = useState({});
 
   // Cargar escenas dinámicamente cuando cambia el tourId
   useEffect(() => {

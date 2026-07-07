@@ -687,9 +687,10 @@ export default function TourEditorPage() {
     return sessionStorage.getItem('nexus_editor_auth') === 'true';
   });
 
-  const [scenes, setScenes] = useState(initialTourData);
+  const [scenes, setScenes] = useState({});
   const [sheetsLotes, setSheetsLotes] = useState([]);
-  const [activeSceneKey, setActiveSceneKey] = useState('sala');
+  const [activeSceneKey, setActiveSceneKey] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const [hoveredLoteIndex, setHoveredLoteIndex] = useState(null);
 
   // Estados para el modal personalizado de renombrado de imagen
@@ -748,6 +749,7 @@ export default function TourEditorPage() {
 
   useEffect(() => {
     const loadTourData = async () => {
+      setIsLoading(true);
       // 1. Descargar datos de Google Sheets
       let sheetsData = [];
       try {
@@ -807,6 +809,7 @@ export default function TourEditorPage() {
             }
             setActiveSceneKey(firstScene);
           }
+          setIsLoading(false);
           return;
         } catch (e) {
           console.error(e);
@@ -822,6 +825,7 @@ export default function TourEditorPage() {
           const firstScene = Object.keys(injected)[0];
           if (firstScene) setActiveSceneKey(firstScene);
           localStorage.setItem(`nexus_tour_data_${tourId}`, JSON.stringify(parsed));
+          setIsLoading(false);
           return;
         }
       } catch (e) {
@@ -831,6 +835,7 @@ export default function TourEditorPage() {
       const injectedFallback = injectSheetsData(initialTourData, sheetsData);
       setScenes(injectedFallback);
       setActiveSceneKey('sala');
+      setIsLoading(false);
     };
 
     loadTourData();
@@ -1653,6 +1658,17 @@ export default function TourEditorPage() {
             className="flex-1 w-full relative overflow-hidden"
             onPointerMove={handlePointerMoveContainer}
           >
+            {isLoading && (
+              <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-sm transition-all duration-300">
+                <div className="relative flex items-center justify-center w-16 h-16 mb-4">
+                  <div className="absolute w-full h-full border-4 border-amber-500/20 rounded-full animate-pulse"></div>
+                  <div className="absolute w-full h-full border-4 border-t-amber-400 rounded-full animate-spin"></div>
+                  <Compass className="w-6 h-6 text-amber-400 animate-pulse" />
+                </div>
+                <h4 className="text-white font-bold text-sm tracking-wide uppercase font-display select-none">Cargando Panorama 3D</h4>
+                <p className="text-gray-400 text-xs mt-1 select-none">Sincronizando con Google Sheets...</p>
+              </div>
+            )}
             <Canvas 
               camera={{ position: [0, 0, 0.1] }}
               dpr={[1, 2]}
