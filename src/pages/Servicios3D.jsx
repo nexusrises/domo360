@@ -83,7 +83,7 @@ export default function Servicios3D() {
   const [filter, setFilter] = useState('todos');
 
   useEffect(() => {
-    document.title = "Servicios de Tecnología 3D y Web Inmobiliaria | Nexus Domo 360°";
+    document.title = "Servicios de Tecnología 3D y Web Inmobiliaria | Angel Domo 360°";
     window.scrollTo(0, 0);
   }, []);
 

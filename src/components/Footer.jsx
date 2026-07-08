@@ -110,11 +110,11 @@ export default function Footer() {
               onClick={handleLogoClick} 
               className="flex flex-row items-center gap-3 group select-none cursor-pointer w-fit"
             >
-              <img src={`${import.meta.env.BASE_URL}logo3.2.png`} alt="Nexus Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
+              <img src={`${import.meta.env.BASE_URL}logo3.2.png`} alt="Angel Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
 
               {/* Alineación vertical perfecta por flexbox nativo items-center sin traslaciones artificiales, con tamaño de texto responsivo para evitar desbordes en móvil */}
               <div className="text-2xl sm:text-3xl md:text-4xl font-logo flex items-center whitespace-nowrap">
-                <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105">Nexus</span>
+                <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105">Angel</span>
                 <span className="text-gradient-rise drop-shadow-[0_2px_8px_rgba(0,242,254,0.25)] ml-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">Domo 360°</span>
               </div>
             </Link>
@@ -137,7 +137,7 @@ export default function Footer() {
 
               {/* Facebook */}
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/angel.domo360" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-gray-400 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#1877f2] hover:border-[#1877f2] hover:shadow-[0_0_20px_rgba(24,119,242,0.5)] active:scale-95 group cursor-pointer" 
@@ -150,7 +150,7 @@ export default function Footer() {
 
               {/* Instagram */}
               <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/angel.domo360/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-gray-400 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-[#ee2a7b] hover:shadow-[0_0_20px_rgba(238,42,123,0.5)] active:scale-95 group cursor-pointer" 
@@ -163,7 +163,7 @@ export default function Footer() {
 
               {/* TikTok */}
               <a 
-                href="https://tiktok.com" 
+                href="https://www.tiktok.com/@angel.domo360" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-gray-400 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#010101] hover:border-white/20 hover:shadow-[0_0_20px_rgba(0,242,254,0.45)] active:scale-95 group cursor-pointer" 
@@ -205,7 +205,7 @@ export default function Footer() {
           <div className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-gray-500" /> Juliaca, Perú</div>
         </div>
         <p className="text-center md:text-right">
-          &copy; {currentYear} Nexus Domo 360°. Todos los derechos reservados.
+          &copy; {currentYear} Angel Domo 360°. Todos los derechos reservados.
         </p>
       </div>
     </footer>

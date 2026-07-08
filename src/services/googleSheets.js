@@ -2,6 +2,11 @@
 
 const API_URL = import.meta.env.VITE_GOOGLE_SHEETS_API_URL || 'https://script.google.com/macros/s/AKfycbyzQdWdh8QEeoO-277fk7r36k1nAgE7Vi4B5l2yUmQ2CnZEBrrS6Jy2iCXjEWyRXArCfQ/exec';
 
+// Caché en memoria para evitar llamadas redundantes de red
+let cachedLotes = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 60 * 1000; // 60 segundos
+
 /**
  * Obtiene la lista completa de lotes registrados en la hoja de cálculo de Google Sheets.
  * @returns {Promise<Array>} Array de lotes con campos normalizados en minúsculas.
@@ -12,15 +17,27 @@ export async function fetchLotesFromSheets() {
     return [];
   }
 
+  const now = Date.now();
+  if (cachedLotes && (now - lastFetchTime < CACHE_DURATION)) {
+    return cachedLotes;
+  }
+
   try {
     const response = await fetch(API_URL);
     if (!response.ok) {
       throw new Error(`Error en la consulta a Google Sheets: ${response.statusText}`);
     }
     const data = await response.json();
-    return Array.isArray(data) ? data : [];
+    cachedLotes = Array.isArray(data) ? data : [];
+    lastFetchTime = Date.now();
+    return cachedLotes;
   } catch (error) {
     console.error("Error al obtener los lotes desde Google Sheets:", error);
+    // Si la llamada falla, devolvemos la caché si existe como plan de respaldo
+    if (cachedLotes) {
+      console.log("Retornando datos antiguos de caché como respaldo ante fallo.");
+      return cachedLotes;
+    }
     return [];
   }
 }

@@ -29,7 +29,7 @@ export default function Contacto() {
 
   // Actualizar el título de la página
   useEffect(() => {
-    document.title = "Vender mi Propiedad con Tecnología 3D | Nexus Domo 360°";
+    document.title = "Vender mi Propiedad con Tecnología 3D | Angel Domo 360°";
     window.scrollTo(0, 0);
   }, []);
 
@@ -103,7 +103,7 @@ export default function Contacto() {
     setTimeout(() => {
       console.log('Datos de venta registrados con éxito:', payload);
       
-      const baseText = `Hola Nexus, deseo solicitar una evaluación y fotos 3D gratis para vender mi propiedad. Aquí están los detalles:\n\n` +
+      const baseText = `Hola Angel, deseo solicitar una evaluación y fotos 3D gratis para vender mi propiedad. Aquí están los detalles:\n\n` +
         `*Nombre:* ${sanitizedNombre}\n` +
         `*Teléfono:* ${sanitizedTelefono}\n` +
         `*Correo:* ${email ? sanitizeInput(email) : 'No especificado'}\n` +
@@ -334,7 +334,7 @@ export default function Contacto() {
               <h3 className="text-white font-bold text-base mb-2 uppercase tracking-wider font-display">Canales de Atención</h3>
               
               <a 
-                href="https://wa.me/51951300535?text=Hola%20Nexus%2C%20deseo%20hacer%20una%20consulta%20inmobiliaria."
+                href="https://wa.me/51951300535?text=Hola%20Angel%2C%20deseo%20hacer%20una%20consulta%20inmobiliaria."
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#09d261]/10 text-[#09d261] hover:bg-[#09d261]/20 border border-[#09d261]/15 transition duration-150 group cursor-pointer"

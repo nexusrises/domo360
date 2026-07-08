@@ -13,6 +13,7 @@ import {
   Store
 } from 'lucide-react';
 import { propiedades } from '../data/propiedadesData';
+import { fetchLotesFromSheets } from '../services/googleSheets';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,7 +33,12 @@ export default function Home() {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    document.title = "Nexus Domo 360° | Venta de Casas y Propiedades en el Sur del Perú";
+    document.title = "Angel Domo 360° | Venta de Casas y Propiedades en el Sur del Perú";
+    
+    // Precargar la caché de Google Sheets en segundo plano al montar la página de inicio
+    fetchLotesFromSheets().catch((err) => {
+      console.warn("Fallo al precargar lotes desde Google Sheets:", err);
+    });
   }, []);
 
   // Intervalo para cambiar la palabra con micro-animaciones premium

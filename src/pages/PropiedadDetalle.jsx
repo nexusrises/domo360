@@ -20,7 +20,7 @@ export default function PropiedadDetalle() {
     setIsTourLoaded(false);
     const timer = setTimeout(() => {
       setIsTourLoaded(true);
-    }, 400);
+    }, 100);
 
     window.scrollTo(0, 0);
 
@@ -29,7 +29,7 @@ export default function PropiedadDetalle() {
 
   useEffect(() => {
     if (propiedad) {
-      document.title = `${propiedad.titulo} | Nexus Domo 360°`;
+      document.title = `${propiedad.titulo} | Angel Domo 360°`;
     }
   }, [propiedad]);
 
@@ -207,7 +207,7 @@ export default function PropiedadDetalle() {
                 {/* Enlace WhatsApp Dinámico */}
                 <div className="pt-2">
                   <a
-                    href={`https://wa.me/51951300535?text=Hola%20Nexus%2C%20estoy%20interesado%20en%20el%20proyecto%20*${encodeURIComponent(propiedad.titulo)}*%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20propiedad.`}
+                    href={`https://wa.me/51951300535?text=Hola%20Angel%2C%20estoy%20interesado%20en%20el%20proyecto%20*${encodeURIComponent(propiedad.titulo)}*%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20propiedad.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center gap-3.5 p-4 rounded-2xl bg-[#09d261]/10 border border-[#09d261]/25 text-left hover:bg-[#09d261]/15 hover:border-[#09d261]/40 transition-all duration-300 shadow-[0_0_20px_rgba(9,210,97,0.02)] hover:shadow-[0_0_30px_rgba(9,210,97,0.1)] cursor-pointer select-none group"

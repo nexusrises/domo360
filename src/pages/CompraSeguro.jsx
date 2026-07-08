@@ -44,7 +44,7 @@ export default function CompraSeguro() {
   };
 
   useEffect(() => {
-    document.title = "Compra tu Propiedad con Seguridad y Sin Riesgos | Nexus Domo 360°";
+    document.title = "Compra tu Propiedad con Seguridad y Sin Riesgos | Angel Domo 360°";
     window.scrollTo(0, 0);
   }, []);
 
@@ -753,7 +753,7 @@ export default function CompraSeguro() {
             Agenda una llamada de asesoría gratuita con nuestro Abogado Inmobiliario. Revisamos tu caso y te asesoramos sobre el estado legal y los planos antes de firmar cualquier minuta.
           </p>
           <a 
-            href="https://wa.me/51951300535?text=Hola%20Nexus%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20con%20el%20abogado%20inmobiliario%20para%20comprar%20de%20forma%20segura."
+            href="https://wa.me/51951300535?text=Hola%20Angel%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20con%20el%20abogado%20inmobiliario%20para%20comprar%20de%20forma%20segura."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center btn-neon-purple px-8 py-3.5 rounded-full font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-xs md:text-sm font-sans w-full sm:w-auto"

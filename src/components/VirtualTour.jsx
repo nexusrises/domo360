@@ -592,6 +592,33 @@ export default function VirtualTour({
   const setIsExpanded = propSetIsExpanded !== undefined ? propSetIsExpanded : localSetIsExpanded;
 
   const [activeSceneKey, setActiveSceneKey] = useState('__loading__');
+  const [scenes, setScenes] = useState({});
+
+  const activeScene = scenes[activeSceneKey] || { nombre: '', imagen: '', hotspots: [], heading: { x: 0, y: 0 }, filtro: 'normal' };
+  const displayImage = activeScene.imagen ? (activeScene.imagen.startsWith('http') || activeScene.imagen.startsWith('data:') ? activeScene.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${activeScene.imagen}`) : '';
+
+  // Estado para verificar si la textura panorámica actual ha terminado de descargarse en caché
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Pre-cargar la imagen panorámica en segundo plano para evitar bloqueos/flicker de React Three Fiber y pantallas negras
+  useEffect(() => {
+    if (!displayImage) {
+      setImageLoaded(false);
+      return;
+    }
+    setImageLoaded(false);
+    const img = new Image();
+    img.src = displayImage;
+    const handleLoad = () => setImageLoaded(true);
+    const handleError = () => setImageLoaded(true); // Fallback de seguridad
+    img.addEventListener('load', handleLoad);
+    img.addEventListener('error', handleError);
+    return () => {
+      img.removeEventListener('load', handleLoad);
+      img.removeEventListener('error', handleError);
+    };
+  }, [displayImage]);
+
   // Iniciar con overlay activo para cubrir el frame inicial de carga y orientación de cámara
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
@@ -672,7 +699,6 @@ export default function VirtualTour({
   };
 
   // Cargar escenas dinámicamente de localStorage o fallback a tourData
-  const [scenes, setScenes] = useState({});
 
   // Cargar escenas dinámicamente cuando cambia el tourId
   useEffect(() => {
@@ -681,6 +707,13 @@ export default function VirtualTour({
       setIsTransitioning(true);
 
       const finishLoad = async (parsed, firstScene) => {
+        // 1. Cargar las escenas locales de inmediato para iniciar la descarga de texturas e interactividad sin demoras
+        setScenes(parsed);
+        setActiveSceneKey(firstScene);
+        // Dar tiempo al HeadingController de orientar la cámara antes de mostrar los hotspots
+        setTimeout(() => setIsTransitioning(false), 350);
+
+        // 2. Cargar datos de Google Sheets en segundo plano de manera no bloqueante
         try {
           const sheetsLotes = await fetchLotesFromSheets();
           if (sheetsLotes && sheetsLotes.length > 0) {
@@ -690,9 +723,12 @@ export default function VirtualTour({
             );
 
             if (projectLotes.length > 0) {
+              // Clonar el objeto parsed para no mutar el estado directamente
+              const updatedScenes = JSON.parse(JSON.stringify(parsed));
+              
               // Recorrer escenas y actualizar sus hotspots de tipo 'lote'
-              Object.keys(parsed).forEach(sceneKey => {
-                const scene = parsed[sceneKey];
+              Object.keys(updatedScenes).forEach(sceneKey => {
+                const scene = updatedScenes[sceneKey];
                 if (scene.hotspots && Array.isArray(scene.hotspots)) {
                   scene.hotspots = scene.hotspots.map(hs => {
                     if (hs.tipo === 'lote' && hs.manzana && hs.lote) {
@@ -715,16 +751,14 @@ export default function VirtualTour({
                   });
                 }
               });
+
+              // Actualizar el estado con los lotes actualizados de Google Sheets
+              setScenes(updatedScenes);
             }
           }
         } catch (error) {
           console.error("Error al sincronizar con Google Sheets en el visor:", error);
         }
-
-        setScenes(parsed);
-        setActiveSceneKey(firstScene);
-        // Dar tiempo al HeadingController de orientar la cámara antes de mostrar los hotspots
-        setTimeout(() => setIsTransitioning(false), 350);
       };
 
       // 1. LocalStorage
@@ -788,8 +822,7 @@ export default function VirtualTour({
     return () => window.removeEventListener('storage', handleStorageChange);
   }, [tourId]);
 
-  const activeScene = scenes[activeSceneKey] || { nombre: '', imagen: '', hotspots: [], heading: { x: 0, y: 0 }, filtro: 'normal' };
-  const displayImage = activeScene.imagen ? (activeScene.imagen.startsWith('http') || activeScene.imagen.startsWith('data:') ? activeScene.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${activeScene.imagen}`) : '';
+
 
   const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
 
@@ -934,8 +967,8 @@ export default function VirtualTour({
           setShowDragHint(false);
         }}
       >
-        <Suspense fallback={<LoaderFallback />}>
-          {displayImage && <PanoramaSphere imagePath={displayImage} />}
+        <Suspense fallback={null}>
+          {imageLoaded && displayImage && <PanoramaSphere imagePath={displayImage} />}
 
           {activeScene.hotspots?.map((hs, index) => (
             <Hotspot
@@ -1141,6 +1174,21 @@ export default function VirtualTour({
           >
             <ChevronRight className="w-4 h-4" />
           </button>
+        </div>
+      )}
+
+      {/* Indicador de Carga HTML Inteligente */}
+      {(!imageLoaded || activeSceneKey === '__loading__') && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070a13] z-40">
+          <div className="flex flex-col items-center justify-center bg-slate-950/90 border border-cyan-500/20 backdrop-blur-lg px-8 py-6 rounded-3xl text-center shadow-2xl min-w-[260px] animate-fade-in">
+            <div className="relative flex items-center justify-center w-16 h-16 mb-4">
+              <div className="absolute w-full h-full border-4 border-cyan-500/20 rounded-full"></div>
+              <div className="absolute w-full h-full border-4 border-t-cyan-400 rounded-full animate-spin"></div>
+              <Compass className="w-6 h-6 text-cyan-400 animate-pulse" />
+            </div>
+            <h4 className="text-white font-bold text-sm tracking-wide uppercase font-display">Cargando Entorno 3D</h4>
+            <p className="text-gray-400 text-xs mt-1">Descargando texturas en alta definición...</p>
+          </div>
         </div>
       )}
 

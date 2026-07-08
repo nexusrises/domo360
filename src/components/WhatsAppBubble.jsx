@@ -15,10 +15,10 @@ export default function WhatsAppBubble() {
   ];
 
   const whatsappTexts = [
-    "Hola Nexus, busco comprar un lote en Juliaca/Puno de forma segura y deseo ver opciones libres de tráfico de tierras o dobles ventas.",
-    "Hola Nexus, soy propietario y deseo asesoría gratuita de su abogado y el servicio multimedia de dron y 360° para vender mi propiedad.",
-    "Hola Nexus, vi su plataforma interactiva y me gustaría cotizar el desarrollo de una página web personalizada para mi empresa inmobiliaria.",
-    "Hola Nexus, estoy interesado en implementar mapas interactivos de lotizaciones y tours virtuales en la página web de mi constructora/inmobiliaria."
+    "Hola Angel, busco comprar un lote en Juliaca/Puno de forma segura y deseo ver opciones libres de tráfico de tierras o dobles ventas.",
+    "Hola Angel, soy propietario y deseo asesoría gratuita de su abogado y el servicio multimedia de dron y 360° para vender mi propiedad.",
+    "Hola Angel, vi su plataforma interactiva y me gustaría cotizar el desarrollo de una página web personalizada para mi empresa inmobiliaria.",
+    "Hola Angel, estoy interesado en implementar mapas interactivos de lotizaciones y tours virtuales en la página web de mi constructora/inmobiliaria."
   ];
 
   useEffect(() => {

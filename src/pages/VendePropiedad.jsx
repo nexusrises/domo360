@@ -52,7 +52,7 @@ export default function VendePropiedad() {
   };
 
   useEffect(() => {
-    document.title = "Vende tu Propiedad más Rápido | Nexus Domo 360°";
+    document.title = "Vende tu Propiedad más Rápido | Angel Domo 360°";
     window.scrollTo(0, 0);
   }, []);
 
