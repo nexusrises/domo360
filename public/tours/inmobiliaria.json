@@ -1,21 +1,21 @@
 {
-  "01_rm_vista_lugares_referencia_2696": {
-    "nombre": "Vista aerea",
-    "imagen": "/tour/01_rm_vista_lugares_referencia.jpg",
+  "1783649099549_dji_20260709215928_0019_d_4658": {
+    "nombre": "Vista Aerea",
+    "imagen": "/tour/inmobiliaria/1783649099549_DJI_20260709215928_0019_D.jpg",
     "hotspots": [
       {
         "tipo": "hotspot",
         "posicion": [
-          -17.7,
-          -7.85,
-          5.01
+          -12.58,
+          -15.45,
+          1.7
         ],
-        "destino": "02_residencial_maravillas_1585",
-        "texto": "Maravillas  1",
+        "destino": "cam_20260709084321_0011_d_2667",
+        "texto": "",
         "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#00ff2a",
+        "escala": 0.8,
+        "icono": "Info",
+        "color": "#00ff04",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -23,24 +23,493 @@
         "fijo": false,
         "negrita": false,
         "cursiva": false,
-        "mostrarTextoSiempre": false,
+        "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 18,
-        "fondoTransparente": false
+        "fontSize": 13
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          -6.92,
-          -4.08,
-          18.31
+          2.27,
+          -2.9,
+          -19.66
         ],
-        "destino": "04_mara_ii_mz_c_8506",
-        "texto": "Maravillas  2",
+        "destino": "_self",
+        "texto": "segundo\npuente peatonal",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#0af545",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.24,
+          -0.56,
+          -19.54
+        ],
+        "destino": "_self",
+        "texto": "EN CONSTRUCCION\n\" UTP \"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -1.04,
+          0.73,
+          19.96
+        ],
+        "destino": "_self",
+        "texto": "glorioso\n\" Comercio  32  \"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -28,
+      "y": 13
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 195
+  },
+  "cam_20260709084321_0011_d_2667": {
+    "nombre": "Puerta de Ingreso",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084321_0011_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          0.74,
+          -2.94,
+          -19.77
+        ],
+        "destino": "cam_20260709084258_0010_d_2666",
+        "texto": "Ingreso",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#31c926",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 12
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -2.39,
+          17.17,
+          9.98
+        ],
+        "destino": "1783649099549_dji_20260709215928_0019_d_4658",
+        "texto": "Vista Aerea",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#0a8ff5",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": 4,
+      "y": -39
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 139
+  },
+  "cam_20260709084258_0010_d_2666": {
+    "nombre": "primer piso 1",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084258_0010_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -3.37,
+          -2.4,
+          -19.57
+        ],
+        "destino": "cam_20260709084321_0011_d_2667",
+        "texto": "Calle",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#47f564",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -1.88,
+          9.37,
+          17.57
+        ],
+        "destino": "cam_20260709084856_0020_d_2676",
+        "texto": "segundo piso",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#5dfd60",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.31,
+          -0.63,
+          5.16
+        ],
+        "destino": "cam_20260709084114_0007_d_2663",
+        "texto": "Tienda",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowLeft",
+        "color": "#48f73b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -3,
+      "y": 133
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 273
+  },
+  "cam_20260709084114_0007_d_2663": {
+    "nombre": "primer piso 2",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084114_0007_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -16.17,
+          -2.17,
+          -11.57
+        ],
+        "destino": "cam_20260709084258_0010_d_2666",
+        "texto": "Salida / gradas",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          3.73,
+          -2.19,
+          -19.53
+        ],
+        "destino": "cam_20260709084054_0006_d_2662",
+        "texto": "vista central",
+        "opacidad": 1,
+        "escala": 1.4,
+        "icono": "ArrowDown",
+        "color": "#50f763",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -18,
+      "y": -21
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 69
+  },
+  "cam_20260709084054_0006_d_2662": {
+    "nombre": "primer piso 3",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084054_0006_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -15.83,
+          -2.27,
+          -12.01
+        ],
+        "destino": "cam_20260709084258_0010_d_2666",
+        "texto": "Salida / Gradas",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#53f35e",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": false,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -13.74,
+          -2.18,
+          14.37
+        ],
+        "destino": "cam_20260709084114_0007_d_2663",
+        "texto": "vista 1",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#64f775",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.02,
+          -2.55,
+          -19.43
+        ],
+        "destino": "cam_20260709084220_0009_d_2665",
+        "texto": "ss.hh.",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          14.5,
+          -2.45,
+          -13.56
+        ],
+        "destino": "cam_20260709084134_0008_d_2664",
+        "texto": "vista 2",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#5ef360",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -7,
+      "y": 36
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 31
+  },
+  "cam_20260709084134_0008_d_2664": {
+    "nombre": "primer piso 4",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084134_0008_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          7.74,
+          -1.74,
+          -18.36
+        ],
+        "destino": "cam_20260709084054_0006_d_2662",
+        "texto": "vista  central",
+        "opacidad": 1,
+        "escala": 1.3,
+        "icono": "ArrowDown",
+        "color": "#4cf067",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.89,
+          -2.06,
+          -0.05
+        ],
+        "destino": "cam_20260709084220_0009_d_2665",
+        "texto": "ss.hh.",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.57,
+          -0.19,
+          -4.1
+        ],
+        "destino": "cam_20260709084258_0010_d_2666",
+        "texto": "Salioda / Gradas",
+        "opacidad": 1,
+        "escala": 0.8,
+        "icono": "ArrowRight",
+        "color": "#44f370",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": 1,
+      "y": -119
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 231
+  },
+  "cam_20260709084220_0009_d_2665": {
+    "nombre": "primer piso 5",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084220_0009_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -18.47,
+          -1.16,
+          7.59
+        ],
+        "destino": "cam_20260709084054_0006_d_2662",
+        "texto": "Vista Central",
+        "opacidad": 0.7,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#46fb5b",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -54,458 +523,614 @@
       }
     ],
     "heading": {
-      "x": -29,
-      "y": 124
+      "x": -24,
+      "y": 65
     },
-    "norteMagnetico": 145,
+    "norteMagnetico": 0,
     "filtro": "normal",
-    "northOffset": 178
+    "northOffset": 282
   },
-  "02_residencial_maravillas_1585": {
-    "nombre": "Maravillas 1",
-    "imagen": "/tour/02_residencial_maravillas.jpg",
+  "cam_20260709084856_0020_d_2676": {
+    "nombre": "gradas",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084856_0020_D.JPG",
     "hotspots": [
       {
         "tipo": "hotspot",
         "posicion": [
-          18.38,
-          0.19,
-          7.88
+          -16.21,
+          -11.41,
+          2.68
         ],
-        "destino": "04_mara_ii_mz_c_8506",
-        "texto": "Maravillas 2",
+        "destino": "cam_20260709084258_0010_d_2666",
+        "texto": "Tienda / Salida",
         "opacidad": 1,
-        "escala": 0.7,
-        "icono": "ArrowDown",
-        "color": "#f50a0a",
+        "escala": 1,
+        "icono": "ArrowLeft",
+        "color": "#42ff71",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
-        "fijo": true,
-        "fondoTransparente": false,
-        "colorFondo": "#ffffff",
-        "colorTexto": "#000980",
-        "fontSize": 23
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 12
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          11.04,
-          -0.62,
-          -16.66
+          -2.02,
+          -7.88,
+          18.27
         ],
-        "destino": "_self",
-        "texto": "Colegio \n\"Jose Olaya\"",
+        "destino": "cam_20260709084641_0017_d_2670",
+        "texto": "Departamento",
         "opacidad": 1,
-        "escala": 0.9,
+        "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#3df56b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -17.96,
+          4.77,
+          7.39
+        ],
+        "destino": "cam_20260709085059_0023_d_2679",
+        "texto": "terraza",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#3fec3c",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -17,
+      "y": 94
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 24
+  },
+  "cam_20260709084641_0017_d_2670": {
+    "nombre": "sala",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084641_0017_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          14.57,
+          -1.8,
+          -13.58
+        ],
+        "destino": "cam_20260709084856_0020_d_2676",
+        "texto": "Gradas / Salida",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowLeft",
+        "color": "#12f33f",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.77,
+          -2.72,
+          1.29
+        ],
+        "destino": "cam_20260709084938_0021_d_2677",
+        "texto": "SS.HH.",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.51,
+          -0.86,
+          19.47
+        ],
+        "destino": "cam_20260709084542_0015_d_2672",
+        "texto": "Sala",
+        "opacidad": 1,
+        "escala": 1,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#2cf26e",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "fontSize": 22,
-        "colorFondo": "#ffffff",
-        "colorTexto": "#0006bd",
-        "negrita": true,
-        "cursiva": false
-      },
-      {
-        "tipo": "manzana",
-        "posicion": [
-          -17.33,
-          -9.69,
-          2.39
-        ],
-        "texto": "MZ B",
-        "colorTexto": "#ffffff",
-        "colorFondo": "#fc0303",
-        "opacidad": 1,
-        "escala": 1.4,
-        "inclinacion": 0,
-        "posicionTipo": "piso",
-        "escalaZoom": false,
-        "sombra": false,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "rotacion": 0
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -17.67,
-          -6.81,
-          6.43
-        ],
-        "manzana": "B",
-        "lote": "1",
-        "estado": "Vendido",
-        "precio": "S/. 45,000",
-        "area": "159 m²",
-        "color": "#ef4444",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
       },
       {
-        "tipo": "lote",
+        "tipo": "hotspot",
         "posicion": [
-          -16.64,
-          -8.31,
-          7.35
+          -18.26,
+          -2.03,
+          -7.89
         ],
-        "manzana": "B",
-        "lote": "2",
-        "estado": "Vendido",
-        "precio": "S/. 43,000",
-        "area": "160 m²",
-        "color": "#ef4444",
+        "destino": "cam_20260709084512_0014_d_2673",
+        "texto": "Habitacion 1",
         "opacidad": 1,
         "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#26f749",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": true,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -8,
+      "y": -14
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 2
+  },
+  "cam_20260709084542_0015_d_2672": {
+    "nombre": "sala",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084542_0015_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -6.63,
+          -2.94,
+          -18.64
+        ],
+        "destino": "cam_20260709084813_0019_d_2675",
+        "texto": "habitacion 2",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#0af545",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
       },
       {
-        "tipo": "lote",
+        "tipo": "hotspot",
         "posicion": [
-          -14.75,
-          -9.92,
-          9.16
+          -2.47,
+          -0.46,
+          19.84
         ],
-        "manzana": "B",
-        "lote": "3",
-        "estado": "Vendido",
-        "precio": "S/. 43,000",
-        "area": "160 m²",
-        "color": "#ef4444",
+        "destino": "cam_20260709084602_0016_d_2671",
+        "texto": "cocina",
         "opacidad": 1,
         "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#1efa2d",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": true,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
       },
       {
-        "tipo": "lote",
+        "tipo": "hotspot",
         "posicion": [
-          -12.8,
-          -11.43,
-          10.27
+          19.53,
+          -4.16,
+          -1.21
         ],
-        "manzana": "B",
-        "lote": "4",
-        "estado": "Vendido",
-        "precio": "S/. 45,000",
-        "area": "160 m²",
-        "color": "#ef4444",
+        "destino": "cam_20260709084641_0017_d_2670",
+        "texto": "sala",
         "opacidad": 1,
         "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#22dd48",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": true,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -6,
+      "y": -150
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 281
+  },
+  "cam_20260709084602_0016_d_2671": {
+    "nombre": "cocina",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084602_0016_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -3.96,
+          -2.88,
+          -19.39
+        ],
+        "destino": "cam_20260709084542_0015_d_2672",
+        "texto": "sala",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#25f829",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
       },
       {
-        "tipo": "lote",
+        "tipo": "hotspot",
         "posicion": [
-          -14.79,
-          -11.26,
-          7.38
+          19.44,
+          -1.54,
+          -4.45
         ],
-        "manzana": "B",
-        "lote": "5",
-        "estado": "Disponible",
-        "precio": "S/. 32,000",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
+        "destino": "cam_20260709084856_0020_d_2676",
+        "texto": "Gradas",
+        "opacidad": 0.6,
         "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#f59e0b",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": true,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -16,
+      "y": -94
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 106
+  },
+  "cam_20260709084512_0014_d_2673": {
+    "nombre": "cuarto 1",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084512_0014_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.13,
+          -3.14,
+          -4.91
+        ],
+        "destino": "cam_20260709084641_0017_d_2670",
+        "texto": "sala",
+        "opacidad": 0.7,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0af526",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -14,
+      "y": -77
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 192
+  },
+  "cam_20260709084813_0019_d_2675": {
+    "nombre": "cuarto 2",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084813_0019_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          12.36,
+          -1.81,
+          -15.62
+        ],
+        "destino": "cam_20260709084542_0015_d_2672",
+        "texto": "sala",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowLeft",
+        "color": "#45f748",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -7,
+      "y": 161
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 97
+  },
+  "cam_20260709084938_0021_d_2677": {
+    "nombre": "ss.hh.",
+    "imagen": "/tour/casasalidapuno/CAM_20260709084938_0021_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.09,
+          -2.16,
+          19.46
+        ],
+        "destino": "cam_20260709084641_0017_d_2670",
+        "texto": "sala",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#1fdb2c",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -16,
+      "y": 135
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 102
+  },
+  "cam_20260709085059_0023_d_2679": {
+    "nombre": "gradas 2",
+    "imagen": "/tour/casasalidapuno/CAM_20260709085059_0023_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          2.81,
+          -10.56,
+          -16.75
+        ],
+        "destino": "cam_20260709084856_0020_d_2676",
+        "texto": "gradas / departamento",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#2ac63c",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
       },
       {
-        "tipo": "lote",
+        "tipo": "hotspot",
         "posicion": [
-          -15.38,
-          -11.67,
-          5.22
+          -3.83,
+          4.98,
+          -18.99
         ],
-        "manzana": "B",
-        "lote": "6",
-        "estado": "Disponible",
-        "precio": "S/. 35,001",
-        "area": "160 m²",
-        "color": "#22c55e",
+        "destino": "cam_20260709085158_0024_d_2680",
+        "texto": "terraza",
         "opacidad": 1,
         "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#20d924",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": true,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -33,
+      "y": -39
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 284
+  },
+  "cam_20260709085158_0024_d_2680": {
+    "nombre": "terraza",
+    "imagen": "/tour/casasalidapuno/CAM_20260709085158_0024_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          5.95,
+          -10.03,
+          -16.24
+        ],
+        "destino": "cam_20260709085059_0023_d_2679",
+        "texto": "gradas",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowLeft",
+        "color": "#12d915",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
       },
       {
-        "tipo": "lote",
+        "tipo": "hotspot",
         "posicion": [
-          -15.83,
-          -11.82,
-          3.11
+          -16.77,
+          -4.98,
+          -9.7
         ],
-        "manzana": "B",
-        "lote": "7",
-        "estado": "Disponible",
-        "precio": "S/. 32,000",
-        "area": "160 m²",
-        "color": "#22c55e",
+        "destino": "cam_20260709085257_0025_d_2681",
+        "texto": "terraza",
         "opacidad": 1,
         "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#1fd63d",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": true,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -24,
+      "y": -49
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 283
+  },
+  "cam_20260709085257_0025_d_2681": {
+    "nombre": "terraza 2",
+    "imagen": "/tour/casasalidapuno/CAM_20260709085257_0025_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          17.52,
+          0.09,
+          9.65
+        ],
+        "destino": "cam_20260709085158_0024_d_2680",
+        "texto": "gradas",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#29e326",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
       },
       {
-        "tipo": "lote",
+        "tipo": "hotspot",
         "posicion": [
-          -16.01,
-          -11.97,
-          0.61
+          2.18,
+          -1.63,
+          -19.81
         ],
-        "manzana": "B",
-        "lote": "8",
-        "estado": "Disponible",
-        "precio": "S/. 32,000",
-        "area": "160 m²",
-        "color": "#22c55e",
+        "destino": "cam_20260709085338_0026_d_2682",
+        "texto": "terraza",
         "opacidad": 1,
         "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#2bda36",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -16.04,
-          -11.8,
-          -1.85
-        ],
-        "manzana": "B",
-        "lote": "9",
-        "estado": "Disponible",
-        "precio": "S/. 35,002",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -15.77,
-          -11.54,
-          -4.25
-        ],
-        "manzana": "B",
-        "lote": "10",
-        "estado": "Disponible",
-        "precio": "S/. 32,000",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -17.83,
-          -8.64,
-          -2.7
-        ],
-        "manzana": "B",
-        "lote": "11",
-        "estado": "Disponible",
-        "precio": "S/. 32,000",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -18.59,
-          -6.91,
-          -2.56
-        ],
-        "manzana": "B",
-        "lote": "12",
-        "estado": "Disponible",
-        "precio": "S/. 35,003",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -18.3,
-          -8.07,
-          0.22
-        ],
-        "manzana": "B",
-        "lote": "13",
-        "estado": "Disponible",
-        "precio": "S/. 32,000",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -18.14,
-          -8.11,
-          2.32
-        ],
-        "manzana": "B",
-        "lote": "14",
-        "estado": "Disponible",
-        "precio": "S/. 32,000",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "lote",
-        "posicion": [
-          -17.82,
-          -8.02,
-          4.27
-        ],
-        "manzana": "B",
-        "lote": "15",
-        "estado": "Disponible",
-        "precio": "S/. 35,004",
-        "area": "160 m²",
-        "color": "#22c55e",
-        "opacidad": 1,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
+        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
@@ -513,76 +1138,28 @@
     ],
     "heading": {
       "x": -12,
-      "y": 80
+      "y": 15
     },
     "norteMagnetico": 0,
-    "filtro": "hdr",
-    "northOffset": 253
+    "filtro": "normal"
   },
-  "04_mara_ii_mz_c_8506": {
-    "nombre": "Maravillas 2",
-    "imagen": "/tour/04_mara_ii_mz_c.jpg",
+  "cam_20260709085338_0026_d_2682": {
+    "nombre": "terraza 3",
+    "imagen": "/tour/casasalidapuno/CAM_20260709085338_0026_D.JPG",
     "hotspots": [
       {
         "tipo": "hotspot",
         "posicion": [
-          -16.13,
-          -2.31,
-          11.59
+          16,
+          -1.17,
+          11.95
         ],
-        "destino": "02_residencial_maravillas_1585",
-        "texto": "Maravillas   1",
+        "destino": "cam_20260709085257_0025_d_2681",
+        "texto": "terraza",
         "opacidad": 1,
-        "escala": 0.7,
+        "escala": 1,
         "icono": "ArrowDown",
-        "color": "#04ff00",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "fontSize": 21
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -18.28,
-          -2.9,
-          -7.57
-        ],
-        "destino": "_self",
-        "texto": "COLEGIO\n\"JOSE OLAYA\"",
-        "opacidad": 1,
-        "escala": 0.6,
-        "icono": "ArrowDown",
-        "color": "#f59e0b",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "fontSize": 23,
-        "fuente": "Archivo Black",
-        "colorFondo": "#f7f7f7",
-        "colorTexto": "#001b85"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -19.99,
-          0.44,
-          0.45
-        ],
-        "destino": "01_rm_vista_lugares_referencia_2696",
-        "texto": "VISTA AEREA \nDE LOS PROYECTOS",
-        "opacidad": 1,
-        "escala": 0.6,
-        "icono": "Camera",
-        "color": "#0a9bf5",
+        "color": "#1bde3c",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -591,17 +1168,97 @@
         "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 15,
-        "colorFondo": "#3a6bdf"
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          10.53,
+          -1.56,
+          16.93
+        ],
+        "destino": "cam_20260709085406_0027_d_2683",
+        "texto": "multiservicios",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowRight",
+        "color": "#1fe03f",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -10.89,
+          16.56,
+          -2.65
+        ],
+        "destino": "1783649099549_dji_20260709215928_0019_d_4658",
+        "texto": "Vista Aerea",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#3977f3",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
       }
     ],
     "heading": {
-      "x": -23,
-      "y": 93
+      "x": -3,
+      "y": 178
     },
     "norteMagnetico": 0,
-    "filtro": "bright",
-    "northOffset": 294
+    "filtro": "normal",
+    "northOffset": 345
+  },
+  "cam_20260709085406_0027_d_2683": {
+    "nombre": "multiservicios terraza",
+    "imagen": "/tour/casasalidapuno/CAM_20260709085406_0027_D.JPG",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -11.08,
+          -1.42,
+          16.59
+        ],
+        "destino": "cam_20260709085338_0026_d_2682",
+        "texto": "terraza",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#1ddd56",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -3,
+      "y": 46
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 101
   }
 }

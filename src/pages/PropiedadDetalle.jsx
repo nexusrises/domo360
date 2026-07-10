@@ -10,6 +10,34 @@ import {
 import VirtualTour from '../components/VirtualTour';
 import { propiedades } from '../data/propiedadesData';
 
+const getArticuloTipo = (prop) => {
+  if (!prop) return 'la propiedad';
+  const t = prop.tipo ? prop.tipo.toUpperCase() : '';
+  const titulo = prop.titulo ? prop.titulo.trim().toUpperCase() : '';
+  
+  if (t.includes('CASA')) {
+    if (titulo.startsWith('CASA')) return 'la';
+    return 'la casa';
+  }
+  if (t.includes('OFICINA')) {
+    if (titulo.startsWith('OFICINA')) return 'la';
+    return 'la oficina';
+  }
+  if (t.includes('DEPARTAMENTO')) {
+    if (titulo.startsWith('DEPARTAMENTO') || titulo.startsWith('APARTMENT') || titulo.startsWith('SMART APARTMENT')) return 'el';
+    return 'el departamento';
+  }
+  if (t.includes('TIENDA') || t.includes('LOCAL')) {
+    if (titulo.startsWith('LOCAL') || titulo.startsWith('TIENDA')) return 'el';
+    return 'el local';
+  }
+  if (t.includes('TERRENO') || t.includes('LOTE')) {
+    if (titulo.startsWith('LOTE') || titulo.startsWith('TERRENO') || titulo.startsWith('RESIDENCIAL')) return 'el';
+    return 'el proyecto';
+  }
+  return 'la propiedad';
+};
+
 export default function PropiedadDetalle() {
   const { slug } = useParams();
   const propiedad = propiedades.find((p) => p.slug === slug);
@@ -132,7 +160,7 @@ export default function PropiedadDetalle() {
               <div className="glass-panel border-white/5 rounded-3xl p-6 sm:p-8 space-y-4 bg-[#0a0d16]/65 backdrop-blur-md">
                 <h3 className="text-white text-sm md:text-base font-black tracking-wider uppercase flex items-center gap-2 font-display">
                   <span className="w-1.5 h-3.5 bg-[#00f2fe] rounded-full"></span>
-                  Descripción del Proyecto
+                  {propiedad.tipo.toUpperCase() === 'CASA' ? 'Descripción de la Casa' : 'Descripción del Proyecto'}
                 </h3>
                 <p className="text-[#e4e7ec] text-sm md:text-base leading-relaxed font-sans text-left tracking-wide font-normal">
                   {propiedad.descripcionCompleta}
@@ -207,7 +235,7 @@ export default function PropiedadDetalle() {
                 {/* Enlace WhatsApp Dinámico */}
                 <div className="pt-2">
                   <a
-                    href={`https://wa.me/51951300535?text=Hola%20Angel%2C%20estoy%20interesado%20en%20el%20proyecto%20*${encodeURIComponent(propiedad.titulo)}*%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20propiedad.`}
+                    href={`https://wa.me/51951300535?text=Hola%20Angel%2C%20estoy%20interesado%20en%20${getArticuloTipo(propiedad)}%20*${encodeURIComponent(propiedad.titulo)}*%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20propiedad.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center gap-3.5 p-4 rounded-2xl bg-[#09d261]/10 border border-[#09d261]/25 text-left hover:bg-[#09d261]/15 hover:border-[#09d261]/40 transition-all duration-300 shadow-[0_0_20px_rgba(9,210,97,0.02)] hover:shadow-[0_0_30px_rgba(9,210,97,0.1)] cursor-pointer select-none group"
@@ -251,7 +279,7 @@ export default function PropiedadDetalle() {
                   loading="lazy"
                   referrerPolicy="strict-origin-when-cross-origin"
                   title={`Mapa de ubicación de ${propiedad.titulo}`}
-                  className="w-full h-full filter invert-[0.9] hue-rotate-[180deg] contrast-[1.2]"
+                  className="w-full h-full"
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center bg-[#070a13]/50">

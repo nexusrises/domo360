@@ -365,9 +365,64 @@ function CameraRefAssigner({ cameraRef }) {
   return null;
 }
 
+// Componente memorizado para cada tarjeta de imagen individual para evitar re-renderizados innecesarios
+const ProjectImageItem = React.memo(function ProjectImageItem({ 
+  img, 
+  isSelected, 
+  imageSelectorMode, 
+  onClick 
+}) {
+  const handleClick = () => {
+    onClick(img);
+  };
+
+  return (
+    <div
+      onClick={handleClick}
+      className={`bg-slate-950 border rounded-2xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg flex flex-col group select-none relative ${
+        isSelected ? 'border-amber-500 ring-2 ring-amber-500/30' : 'border-white/5 hover:border-amber-400/40'
+      }`}
+    >
+      {/* Indicador visual de selección en modo Tour */}
+      {imageSelectorMode === 'tour' && (
+        <div className={`absolute top-2.5 right-2.5 z-10 w-5 h-5 rounded-full flex items-center justify-center border transition-all ${
+          isSelected 
+            ? 'bg-amber-500 border-amber-400 text-slate-950 font-bold text-[10px]' 
+            : 'bg-black/40 border-white/30 text-transparent'
+        }`}>
+          {isSelected ? '✓' : ''}
+        </div>
+      )}
+
+      <div className="aspect-video w-full bg-slate-900 border-b border-white/5 overflow-hidden flex items-center justify-center relative">
+        <img 
+          src={img.url ? (img.url.startsWith('http') || img.url.startsWith('data:') ? img.url : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${img.url}`) : ''} 
+          alt={img.name} 
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span className="text-[10px] bg-amber-500 text-slate-950 font-bold py-1 px-2.5 rounded-full uppercase tracking-wider shadow">
+            {imageSelectorMode === 'tour' ? (isSelected ? 'Quitar' : 'Marcar') : 'Seleccionar'}
+          </span>
+        </div>
+      </div>
+      <div className="p-2.5 flex flex-col justify-between flex-1">
+        <span className="text-[10px] font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1 break-all" title={img.name}>
+          {img.name}
+        </span>
+        <span className="text-[8px] font-semibold text-gray-500 uppercase tracking-wider mt-1 block">
+          {img.category}
+        </span>
+      </div>
+    </div>
+  );
+});
+
 // Componente Modal interactivo para seleccionar imágenes ya cargadas en el servidor del proyecto
 function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSelectorMode }) {
   const [images, setImages] = useState([]);
+  const [folders, setFolders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Imágenes Generales');
   const [searchTerm, setSearchTerm] = useState('');
@@ -380,62 +435,70 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const fetchImages = async () => {
-      setImages([]); // Reset de imágenes anteriores
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/list-project-images?tourId=${tourId}`);
-        if (res.ok) {
-          const data = await res.json();
-          setImages(data.images || []);
-          
-          if (data.images && data.images.length > 0) {
-            const categories = [...new Set(data.images.map(img => img.category))];
-            if (categories.includes('Imágenes Generales')) {
-              setActiveCategory('Imágenes Generales');
-            } else if (categories.length > 0) {
-              setActiveCategory(categories[0]);
-            }
+  const fetchImages = async (isFirstLoad = false) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/list-project-images?tourId=${tourId}`);
+      if (res.ok) {
+        const data = await res.json();
+        setImages(data.images || []);
+        const fetchedFolders = data.folders || [];
+        setFolders(fetchedFolders);
+        
+        if (isFirstLoad) {
+          const availableCategories = ['Imágenes Generales', ...fetchedFolders.map(f => `Tour: ${f}`)];
+          const currentTourCategory = availableCategories.find(
+            cat => cat.toLowerCase() === `tour: ${tourId.toLowerCase()}`
+          );
+          if (currentTourCategory) {
+            setActiveCategory(currentTourCategory);
+          } else if (availableCategories.includes('Imágenes Generales')) {
+            setActiveCategory('Imágenes Generales');
+          } else if (availableCategories.length > 0) {
+            setActiveCategory(availableCategories[0]);
           }
         }
-      } catch (err) {
-        console.error('Error al listar imágenes del proyecto:', err);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (err) {
+      console.error('Error al listar imágenes del proyecto:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchImages();
+  useEffect(() => {
+    if (isOpen) {
+      fetchImages(true);
+    }
   }, [isOpen, tourId]);
 
   if (!isOpen) return null;
 
-  const categories = [...new Set(images.map(img => img.category))];
+  const categories = ['Imágenes Generales', ...folders.map(f => `Tour: ${f}`)];
 
-  const filteredImages = images.filter(img => {
-    const matchesCategory = img.category === activeCategory;
-    const matchesSearch = img.name.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredImages = React.useMemo(() => {
+    return images.filter(img => {
+      const matchesCategory = img.category.toLowerCase() === activeCategory.toLowerCase();
+      const matchesSearch = img.name.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [images, activeCategory, searchTerm]);
 
-  const handleItemClick = (img) => {
+  const handleItemClick = React.useCallback((img) => {
     if (imageSelectorMode === 'hotspot') {
-      // Selección única e inmediata para hotspot
       onSelect([{ url: img.url, filename: img.name }]);
       onClose();
     } else {
-      // Selección múltiple para agregar al tour
-      const isAlreadySelected = selectedItems.some(item => item.url === img.url);
-      if (isAlreadySelected) {
-        setSelectedItems(selectedItems.filter(item => item.url !== img.url));
-      } else {
-        setSelectedItems([...selectedItems, { url: img.url, filename: img.name }]);
-      }
+      setSelectedItems(prev => {
+        const isAlreadySelected = prev.some(item => item.url === img.url);
+        if (isAlreadySelected) {
+          return prev.filter(item => item.url !== img.url);
+        } else {
+          return [...prev, { url: img.url, filename: img.name }];
+        }
+      });
     }
-  };
+  }, [imageSelectorMode, onSelect, onClose]);
 
   const handleConfirmSelection = () => {
     if (selectedItems.length > 0) {
@@ -443,6 +506,30 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
       onClose();
     }
   };
+
+  // Lógica para seleccionar/desmarcar todo en el filtro activo
+  const allFilteredAreSelected = React.useMemo(() => {
+    return filteredImages.length > 0 && filteredImages.every(img => 
+      selectedItems.some(item => item.url === img.url)
+    );
+  }, [filteredImages, selectedItems]);
+
+  const handleToggleSelectAll = React.useCallback(() => {
+    if (allFilteredAreSelected) {
+      const filteredUrls = filteredImages.map(img => img.url);
+      setSelectedItems(prev => prev.filter(item => !filteredUrls.includes(item.url)));
+    } else {
+      setSelectedItems(prev => {
+        const newItems = [...prev];
+        filteredImages.forEach(img => {
+          if (!newItems.some(item => item.url === img.url)) {
+            newItems.push({ url: img.url, filename: img.name });
+          }
+        });
+        return newItems;
+      });
+    }
+  }, [allFilteredAreSelected, filteredImages]);
 
   return (
     <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={onClose}>
@@ -477,7 +564,7 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
 
         {/* Filtros */}
         <div className="px-6 py-3 border-b border-white/5 bg-slate-950/40 flex flex-col sm:flex-row gap-3 items-center justify-between shrink-0">
-          <div className="flex gap-1 bg-slate-950 p-1 rounded-xl border border-white/5 w-full sm:w-auto">
+          <div className="flex gap-1 bg-slate-950 p-1 rounded-xl border border-white/5 w-full sm:w-auto overflow-x-auto scrollbar-none">
             {categories.length === 0 ? (
               <span className="text-[10px] text-gray-500 px-3 py-1.5">Sin categorías</span>
             ) : (
@@ -485,7 +572,7 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 ${
                     activeCategory === cat
                       ? 'bg-amber-500 text-slate-950 shadow-md'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -497,13 +584,23 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
             )}
           </div>
 
-          <input
-            type="text"
-            placeholder="Buscar por nombre..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-slate-950 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-amber-400 font-medium w-full sm:w-64"
-          />
+          <div className="flex gap-2 w-full sm:w-auto items-center shrink-0">
+            {imageSelectorMode === 'tour' && filteredImages.length > 0 && (
+              <button
+                onClick={handleToggleSelectAll}
+                className="px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-amber-400/40 text-[10px] font-bold uppercase tracking-wider text-amber-400 hover:text-amber-300 transition-all cursor-pointer bg-slate-950/60 select-none shrink-0"
+              >
+                {allFilteredAreSelected ? 'Desmarcar Todo' : 'Seleccionar Todo'}
+              </button>
+            )}
+            <input
+              type="text"
+              placeholder="Buscar por nombre..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="bg-slate-950 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-amber-400 font-medium w-full sm:w-64"
+            />
+          </div>
         </div>
 
         {/* Grid de imágenes */}
@@ -517,53 +614,22 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
             <div className="w-full h-full flex flex-col items-center justify-center py-20 text-center border border-dashed border-white/5 rounded-2xl">
               <ImageIcon className="w-12 h-12 text-gray-750 mb-2" />
               <span className="text-xs text-gray-400 font-semibold">No se encontraron imágenes</span>
-              <p className="text-[10px] text-gray-600 mt-1 max-w-md">No hay archivos coincidentes en la carpeta seleccionada de `public/descargas_kuula/` o `public/tour/{tourId}/`</p>
+              <p className="text-[10px] text-gray-600 mt-1 max-w-md">
+                Esta carpeta está vacía. Puedes subir una imagen nueva para esta categoría usando el botón de abajo.
+              </p>
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {filteredImages.map((img) => {
                 const isSelected = selectedItems.some(item => item.url === img.url);
                 return (
-                  <div
+                  <ProjectImageItem
                     key={img.url}
-                    onClick={() => handleItemClick(img)}
-                    className={`bg-slate-950 border rounded-2xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg flex flex-col group select-none relative ${
-                      isSelected ? 'border-amber-500 ring-2 ring-amber-500/30' : 'border-white/5 hover:border-amber-400/40'
-                    }`}
-                  >
-                    {/* Indicador visual de selección en modo Tour */}
-                    {imageSelectorMode === 'tour' && (
-                      <div className={`absolute top-2.5 right-2.5 z-10 w-5 h-5 rounded-full flex items-center justify-center border transition-all ${
-                        isSelected 
-                          ? 'bg-amber-500 border-amber-400 text-slate-950 font-bold text-[10px]' 
-                          : 'bg-black/40 border-white/30 text-transparent'
-                      }`}>
-                        {isSelected ? '✓' : ''}
-                      </div>
-                    )}
-
-                    <div className="aspect-video w-full bg-slate-900 border-b border-white/5 overflow-hidden flex items-center justify-center relative">
-                      <img 
-                        src={img.url ? (img.url.startsWith('http') || img.url.startsWith('data:') ? img.url : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${img.url}`) : ''} 
-                        alt={img.name} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <span className="text-[10px] bg-amber-500 text-slate-950 font-bold py-1 px-2.5 rounded-full uppercase tracking-wider shadow">
-                          {imageSelectorMode === 'tour' ? (isSelected ? 'Quitar' : 'Marcar') : 'Seleccionar'}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-2.5 flex flex-col justify-between flex-1">
-                      <span className="text-[10px] font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1 break-all" title={img.name}>
-                        {img.name}
-                      </span>
-                      <span className="text-[8px] font-semibold text-gray-500 uppercase tracking-wider mt-1 block">
-                        {img.category}
-                      </span>
-                    </div>
-                  </div>
+                    img={img}
+                    isSelected={isSelected}
+                    imageSelectorMode={imageSelectorMode}
+                    onClick={handleItemClick}
+                  />
                 );
               })}
             </div>
@@ -589,11 +655,16 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
                     const rawName = file.name.replace(/\.[^/.]+$/, "");
                     const finalFilename = `${Date.now()}_${rawName}.jpg`;
                     
+                    // Determinar a qué carpeta subir basándonos en la pestaña activa
+                    const targetUploadFolder = activeCategory.startsWith('Tour: ') 
+                      ? activeCategory.replace('Tour: ', '') 
+                      : tourId;
+
                     const res = await fetch('/api/upload-tour-image', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
-                        tourId,
+                        tourId: targetUploadFolder,
                         filename: finalFilename,
                         base64
                       })
@@ -601,6 +672,8 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
                     if (res.ok) {
                       const data = await res.json();
                       if (imageSelectorMode === 'tour') {
+                        // Refrescar lista de imágenes del servidor
+                        await fetchImages(false);
                         setSelectedItems([...selectedItems, { url: data.url, filename: finalFilename }]);
                       } else {
                         onSelect([{ url: data.url, filename: finalFilename }]);

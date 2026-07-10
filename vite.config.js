@@ -95,34 +95,40 @@ const tourEditorApiPlugin = () => ({
           const tourId = urlObj.searchParams.get('tourId') || 'inmobiliaria';
 
           const imagesList = [];
+          const folders = [];
 
-          // 1. Escanear public/tour/
-          const descargasDir = path.resolve(__dirname, 'public/tour');
-          if (fs.existsSync(descargasDir)) {
-            const files = fs.readdirSync(descargasDir);
-            files.forEach(file => {
-              // Solo archivos directos en public/tour (evitando subcarpetas de tours especificos)
-              const filePath = path.join(descargasDir, file);
-              if (/\.(jpg|jpeg|png|webp|gif)$/i.test(file) && fs.statSync(filePath).isFile()) {
-                imagesList.push({
-                  name: file,
-                  url: `/tour/${file}`,
-                  category: 'Imágenes Generales'
-                });
-              }
-            });
-          }
+          // Escanear dinámicamente public/tour/ y sus subcarpetas
+          const tourBaseDir = path.resolve(__dirname, 'public/tour');
+          if (fs.existsSync(tourBaseDir)) {
+            const items = fs.readdirSync(tourBaseDir);
+            items.forEach(item => {
+              const itemPath = path.join(tourBaseDir, item);
+              const stats = fs.statSync(itemPath);
 
-          // 2. Escanear public/tour/${tourId}/
-          const tourDir = path.resolve(__dirname, `public/tour/${tourId}`);
-          if (fs.existsSync(tourDir)) {
-            const files = fs.readdirSync(tourDir);
-            files.forEach(file => {
-              if (/\.(jpg|jpeg|png|webp|gif)$/i.test(file)) {
-                imagesList.push({
-                  name: file,
-                  url: `/tour/${tourId}/${file}`,
-                  category: `Tour: ${tourId}`
+              if (stats.isFile()) {
+                // Archivos directamente en public/tour/ son Imágenes Generales
+                if (/\.(jpg|jpeg|png|webp|gif)$/i.test(item)) {
+                  imagesList.push({
+                    name: item,
+                    url: `/tour/${item}`,
+                    category: 'Imágenes Generales'
+                  });
+                }
+              } else if (stats.isDirectory()) {
+                // Registrar el nombre de la carpeta (tour)
+                folders.push(item);
+
+                // Subcarpetas de public/tour/ representan tours específicos
+                const subfolderFiles = fs.readdirSync(itemPath);
+                subfolderFiles.forEach(file => {
+                  const filePath = path.join(itemPath, file);
+                  if (fs.statSync(filePath).isFile() && /\.(jpg|jpeg|png|webp|gif)$/i.test(file)) {
+                    imagesList.push({
+                      name: file,
+                      url: `/tour/${item}/${file}`,
+                      category: `Tour: ${item}`
+                    });
+                  }
                 });
               }
             });
@@ -131,7 +137,7 @@ const tourEditorApiPlugin = () => ({
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
           res.setHeader('Access-Control-Allow-Origin', '*');
-          res.end(JSON.stringify({ success: true, images: imagesList }));
+          res.end(JSON.stringify({ success: true, images: imagesList, folders }));
         } catch (e) {
           res.statusCode = 500;
           res.end(JSON.stringify({ error: e.message }));

@@ -768,13 +768,30 @@ export default function VirtualTour({
           // Reemplazar en caliente rutas obsoletas a /descargas_kuula/ por /tour/
           const cleanedSaved = localSaved.replace(/\/descargas_kuula\//g, '/tour/');
           const parsed = JSON.parse(cleanedSaved);
-          const firstScene = Object.keys(parsed)[0];
-          if (firstScene) {
-            if (cleanedSaved !== localSaved) {
-              localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
+          
+          // Validación de consistencia para evitar datos cruzados del editor en local
+          let isConsistent = true;
+          if (tourId === 'inmobiliaria') {
+            const hasCasaImages = Object.values(parsed).some(scene => 
+              scene.imagen && scene.imagen.includes('casasalidapuno')
+            );
+            if (hasCasaImages) {
+              isConsistent = false;
             }
-            finishLoad(parsed, firstScene);
-            return;
+          }
+
+          if (!isConsistent) {
+            console.warn(`Detectados datos inconsistentes en localStorage para el tour ${tourId}. Limpiando...`);
+            localStorage.removeItem(`nexus_tour_data_${tourId}`);
+          } else {
+            const firstScene = Object.keys(parsed)[0];
+            if (firstScene) {
+              if (cleanedSaved !== localSaved) {
+                localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
+              }
+              finishLoad(parsed, firstScene);
+              return;
+            }
           }
         } catch (e) {
           console.error(e);
