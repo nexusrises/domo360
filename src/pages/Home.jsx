@@ -22,7 +22,7 @@ export default function Home() {
   const categorias = [
     { id: 'todos', label: 'Todos', labelShort: 'Todos', icon: Grid, count: propiedades.length },
     { id: 'terrenos', label: 'Terrenos / Lotizaciones', labelShort: 'Terrenos', icon: Map, count: propiedades.filter(p => p.tipo === 'TERRENO / LOTE').length },
-    { id: 'casas', label: 'Casas y Departamentos', labelShort: 'Casas/Dptos', icon: HomeIcon, count: propiedades.filter(p => p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length },
+    { id: 'casas', label: 'Casas y Departamentos', labelShort: 'Casas/Dptos', icon: HomeIcon, count: propiedades.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length },
     { id: 'oficinas', label: 'Oficinas Corporativas', labelShort: 'Oficinas', icon: Briefcase, count: propiedades.filter(p => p.tipo === 'OFICINA').length },
     { id: 'tiendas', label: 'Tiendas / Locales', labelShort: 'Tiendas/Locales', icon: Store, count: propiedades.filter(p => p.tipo === 'TIENDA / LOCAL').length }
   ];
@@ -58,7 +58,7 @@ export default function Home() {
   const propiedadesFiltradas = propiedades.filter((p) => {
     const matchCategory = activeCategory === 'todos' ||
       (activeCategory === 'terrenos' && p.tipo === 'TERRENO / LOTE') ||
-      (activeCategory === 'casas' && (p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO')) ||
+      (activeCategory === 'casas' && (p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO')) ||
       (activeCategory === 'oficinas' && p.tipo === 'OFICINA') ||
       (activeCategory === 'tiendas' && p.tipo === 'TIENDA / LOCAL');
 
@@ -153,7 +153,7 @@ export default function Home() {
               >
                 <option value="todos">Todos ({propiedades.length})</option>
                 <option value="terrenos">Terrenos ({propiedades.filter(p => p.tipo === 'TERRENO / LOTE').length})</option>
-                <option value="casas">Casas y Dptos ({propiedades.filter(p => p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
+                <option value="casas">Casas y Dptos ({propiedades.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
                 <option value="oficinas">Oficinas ({propiedades.filter(p => p.tipo === 'OFICINA').length})</option>
                 <option value="tiendas">Tiendas ({propiedades.filter(p => p.tipo === 'TIENDA / LOCAL').length})</option>
               </select>
@@ -229,7 +229,7 @@ export default function Home() {
               >
                 <option value="todos">Todos ({propiedades.length})</option>
                 <option value="terrenos">Terrenos ({propiedades.filter(p => p.tipo === 'TERRENO / LOTE').length})</option>
-                <option value="casas">Casas y Dptos ({propiedades.filter(p => p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
+                <option value="casas">Casas y Dptos ({propiedades.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
                 <option value="oficinas">Oficinas ({propiedades.filter(p => p.tipo === 'OFICINA').length})</option>
                 <option value="tiendas">Tiendas ({propiedades.filter(p => p.tipo === 'TIENDA / LOCAL').length})</option>
               </select>
@@ -274,108 +274,119 @@ export default function Home() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
-            {propiedadesFiltradas.map((propiedad) => (
-              <div
-                key={propiedad.id}
-                className="group/card bg-[#0c111d]/60 backdrop-blur-md border border-white/5 rounded-3xl overflow-hidden shadow-xl hover:border-[#00f2fe]/20 hover:shadow-[0_10px_30px_rgba(0,242,254,0.05)] transition-all duration-300 flex flex-col justify-between h-full"
-              >
-                {/* Cabecera de la Tarjeta: Imagen de Portada y Etiquetas */}
-                <Link
-                  to={`/${propiedad.slug}`}
-                  className="relative block aspect-video w-full overflow-hidden bg-black/40 border-b border-white/5 cursor-pointer"
+            {propiedadesFiltradas.map((propiedad) => {
+              const esCasaODepto = propiedad.tipo?.toUpperCase().includes('CASA') || 
+                                   propiedad.tipo?.toUpperCase().includes('DEPARTAMENTO') || 
+                                   propiedad.tipo?.toUpperCase().includes('OFICINA') || 
+                                   propiedad.tipo?.toUpperCase().includes('LOCAL') || 
+                                   propiedad.tipo?.toUpperCase().includes('TIENDA');
+              return (
+                <div
+                  key={propiedad.id}
+                  className="group/card bg-[#0c111d]/60 backdrop-blur-md border border-white/5 rounded-3xl overflow-hidden shadow-xl hover:border-[#00f2fe]/20 hover:shadow-[0_10px_30px_rgba(0,242,254,0.05)] transition-all duration-300 flex flex-col justify-between h-full"
                 >
-                  <img
-                    src={propiedad.portada.startsWith('http') || propiedad.portada.startsWith('data:') ? propiedad.portada : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${propiedad.portada}`}
-                    alt={propiedad.titulo}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.src = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/30 pointer-events-none"></div>
+                  {/* Cabecera de la Tarjeta: Imagen de Portada y Etiquetas */}
+                  <Link
+                    to={`/${propiedad.slug}`}
+                    className="relative block aspect-video w-full overflow-hidden bg-black/40 border-b border-white/5 cursor-pointer"
+                  >
+                    <img
+                      src={propiedad.portada.startsWith('http') || propiedad.portada.startsWith('data:') ? propiedad.portada : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${propiedad.portada}`}
+                      alt={propiedad.titulo}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.src = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80";
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/30 pointer-events-none"></div>
 
-                  {/* Etiqueta de Tipo de Propiedad */}
-                  <span className={`absolute top-4 left-4 px-3 py-1.5 rounded-md text-[9px] font-black tracking-wider uppercase border backdrop-blur-md flex items-center gap-1.5 ${propiedad.tipoColor}`}>
-                    <span className={`w-1 h-1 rounded-full ${propiedad.tipo === 'TERRENO / LOTE' ? 'bg-blue-400 animate-pulse' : 'bg-cyan-400 animate-pulse'}`}></span>
-                    {propiedad.tipo}
-                  </span>
-
-                  {/* Etiqueta Vista 360° */}
-                  {propiedad.tiene360 && (
-                    <span
-                      className="absolute top-4 right-4 bg-[#05140b]/95 border border-[#09d261]/45 text-[#4ade80] px-3 py-1.5 rounded-md text-[9px] font-black tracking-wider uppercase backdrop-blur-md flex items-center gap-1.5 shadow-[0_2px_8px_rgba(9,210,97,0.15)]"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#09d261] animate-pulse"></span>
-                      Vista 360°
+                    {/* Etiqueta de Tipo de Propiedad */}
+                    <span className={`absolute top-4 left-4 px-3 py-1.5 rounded-md text-[9px] font-black tracking-wider uppercase border backdrop-blur-md flex items-center gap-1.5 ${propiedad.tipoColor}`}>
+                      <span className={`w-1 h-1 rounded-full ${propiedad.tipo === 'TERRENO / LOTE' ? 'bg-blue-400 animate-pulse' : 'bg-cyan-400 animate-pulse'}`}></span>
+                      {propiedad.tipo}
                     </span>
-                  )}
-                </Link>
 
-                {/* Contenido de la Tarjeta */}
-                <div className="p-6 flex flex-col flex-grow">
-                  {/* Ubicación */}
-                  <div className="flex items-center gap-1.5 text-[#00f2fe] text-xs font-bold mb-2.5">
-                    <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-                    <span className="truncate">{propiedad.ubicacion}</span>
-                  </div>
+                    {/* Etiqueta Vista 360° */}
+                    {propiedad.tiene360 && (
+                      <span
+                        className="absolute top-4 right-4 bg-[#05140b]/95 border border-[#09d261]/45 text-[#4ade80] px-3 py-1.5 rounded-md text-[9px] font-black tracking-wider uppercase backdrop-blur-md flex items-center gap-1.5 shadow-[0_2px_8px_rgba(9,210,97,0.15)]"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#09d261] animate-pulse"></span>
+                        Vista 360°
+                      </span>
+                    )}
+                  </Link>
 
-                  {/* Título */}
-                  <h3 className="text-xl md:text-2xl font-black text-white mb-3 font-display group-hover/card:text-[#00f2fe] transition-colors duration-300 leading-snug">
-                    {propiedad.titulo}
-                  </h3>
+                  {/* Contenido de la Tarjeta */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    {/* Ubicación */}
+                    <div className="flex items-center gap-1.5 text-[#00f2fe] text-xs font-bold mb-2.5">
+                      <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span className="truncate">{propiedad.ubicacion}</span>
+                    </div>
 
-                  {/* Descripción corta */}
-                  <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-4 flex-grow">
-                    {propiedad.descripcionCorta}
-                  </p>
+                    {/* Título */}
+                    <h3 className="text-white text-base md:text-lg font-black font-display leading-snug tracking-tight mb-2 flex items-start">
+                      <Link to={`/${propiedad.slug}`} className="hover:text-[#00f2fe] transition-colors duration-200 text-left">
+                        {propiedad.titulo}
+                      </Link>
+                    </h3>
 
-                  {/* Ficha de Ubicación Detallada */}
-                  <div className="bg-[#0f1626]/60 border border-white/[0.04] rounded-2xl p-3.5 mb-4 space-y-2.5 text-left shadow-inner">
-                    <div className="flex items-start gap-2">
-                      <span className="text-[#00f2fe] mt-0.5 flex-shrink-0 font-bold text-[9px] bg-[#00f2fe]/10 border border-[#00f2fe]/20 px-1.5 py-0.5 rounded">DIR</span>
+                    {/* Descripción Corta */}
+                    <p className="text-gray-400 text-xs md:text-sm font-sans leading-relaxed tracking-wide mb-4 text-left font-normal line-clamp-3">
+                      {propiedad.descripcionCorta}
+                    </p>
+
+                    {/* Datos de la Ubicación */}
+                    <div className="p-4 rounded-2xl bg-[#080d1a]/25 border border-white/[0.03] space-y-2 mt-auto mb-4 text-left">
                       <div className="flex flex-col min-w-0">
-                        <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider leading-none mb-0.5">Dirección</span>
+                        <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider leading-none mb-1">Dirección</span>
                         <span className="text-gray-200 text-xs font-medium truncate" title={propiedad.direccion}>{propiedad.direccion}</span>
                       </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3.5 pt-2 border-t border-white/[0.04]">
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider leading-none mb-1">Urbanización</span>
-                        <span className="text-gray-200 text-xs font-semibold break-words leading-tight" title={propiedad.urbanizacion}>{propiedad.urbanizacion}</span>
+                      
+                      <div className="grid grid-cols-2 gap-3.5 pt-2 border-t border-white/[0.03]">
+                        <div className="flex flex-col min-w-0">
+                          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider leading-none mb-1">Urbanización</span>
+                          <span className="text-gray-200 text-xs font-semibold break-words leading-tight" title={propiedad.urbanizacion}>{propiedad.urbanizacion}</span>
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider leading-none mb-1">Referencia</span>
+                          <span className="text-gray-200 text-xs font-medium break-words leading-tight" title={propiedad.referencia}>{propiedad.referencia}</span>
+                        </div>
                       </div>
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider leading-none mb-1">Referencia</span>
-                        <span className="text-gray-200 text-xs font-medium break-words leading-tight" title={propiedad.referencia}>{propiedad.referencia}</span>
+                    </div>
+
+                    {/* Área */}
+                    <div className="flex items-center gap-2 text-gray-300 text-xs font-bold py-3.5 border-t border-b border-white/5 mb-4">
+                      <Maximize2 className="w-4 h-4 text-[#00f2fe] flex-shrink-0" />
+                      <span>
+                        {esCasaODepto ? 'Área: ' : 'Área desde: '}
+                        <span className="text-[#00f2fe]">{propiedad.area}</span>
+                      </span>
+                    </div>
+
+                    {/* Pie de Tarjeta: Precio y Acción */}
+                    <div className="flex flex-wrap items-center justify-between gap-3.5 pt-1">
+                      <div className="flex flex-col">
+                        <span className="text-[9px] text-[#00f2fe] font-bold uppercase tracking-widest">
+                          {esCasaODepto ? 'PRECIO ESPECIAL' : 'PRECIO DESDE'}
+                        </span>
+                        <span className="text-xl font-black text-[#4ade80] font-display leading-none mt-1">{propiedad.precio}</span>
                       </div>
+
+                      <Link
+                        to={`/${propiedad.slug}`}
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-white/5 border border-white/10 hover:bg-[#00f2fe] hover:text-black hover:border-[#00f2fe] hover:shadow-[0_0_15px_rgba(0,242,254,0.25)] transition-all duration-300 cursor-pointer select-none btn-mobile-dynamic"
+                      >
+                        Ver Proyecto
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
                     </div>
-                  </div>
-
-                  {/* Área */}
-                  <div className="flex items-center gap-2 text-gray-300 text-xs font-bold py-3.5 border-t border-b border-white/5 mb-4">
-                    <Maximize2 className="w-4 h-4 text-[#00f2fe] flex-shrink-0" />
-                    <span>Área desde: <span className="text-[#00f2fe]">{propiedad.area}</span></span>
-                  </div>
-
-                  {/* Pie de Tarjeta: Precio y Acción */}
-                  <div className="flex flex-wrap items-center justify-between gap-3.5 pt-1">
-                    <div className="flex flex-col">
-                      <span className="text-[9px] text-[#00f2fe] font-bold uppercase tracking-widest">PRECIO DESDE</span>
-                      <span className="text-xl font-black text-[#4ade80] font-display leading-none mt-1">{propiedad.precio}</span>
-                    </div>
-
-                    <Link
-                      to={`/${propiedad.slug}`}
-                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-white/5 border border-white/10 hover:bg-[#00f2fe] hover:text-black hover:border-[#00f2fe] hover:shadow-[0_0_15px_rgba(0,242,254,0.25)] transition-all duration-300 cursor-pointer select-none btn-mobile-dynamic"
-                    >
-                      Ver Proyecto
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </section>
