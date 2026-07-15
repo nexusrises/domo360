@@ -15,6 +15,28 @@ import {
 import { propiedades } from '../data/propiedadesData';
 import { fetchLotesFromSheets } from '../services/googleSheets';
 
+const renderPrecio = (precio) => {
+  if (!precio) return null;
+  const precioStr = String(precio).trim();
+  
+  if (precioStr.includes('$')) {
+    const valor = precioStr.replace('$', '').trim();
+    return (
+      <>
+        $. {valor} <span className="text-white font-semibold text-sm ml-0.5">Dol.</span>
+      </>
+    );
+  } else if (precioStr.includes('S/.')) {
+    const valor = precioStr.replace('S/.', '').trim();
+    return (
+      <>
+        S/. {valor} <span className="text-white font-semibold text-sm ml-0.5">Sol.</span>
+      </>
+    );
+  }
+  return precio;
+};
+
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('todos');
@@ -379,7 +401,7 @@ export default function Home() {
                         <span className="text-[9px] text-[#00f2fe] font-bold uppercase tracking-widest">
                           {esCasaODepto ? 'PRECIO ESPECIAL' : 'PRECIO DESDE'}
                         </span>
-                        <span className="text-xl font-black text-[#4ade80] font-display leading-none mt-1">{propiedad.precio}</span>
+                        <span className="text-2xl font-black text-[#4ade80] font-display leading-none mt-1">{renderPrecio(propiedad.precio)}</span>
                       </div>
 
                       <Link

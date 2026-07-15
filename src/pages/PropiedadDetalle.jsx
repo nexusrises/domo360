@@ -11,6 +11,28 @@ import {
 import VirtualTour from '../components/VirtualTour';
 import { propiedades } from '../data/propiedadesData';
 
+const renderPrecio = (precio) => {
+  if (!precio) return null;
+  const precioStr = String(precio).trim();
+  
+  if (precioStr.includes('$')) {
+    const valor = precioStr.replace('$', '').trim();
+    return (
+      <>
+        $. {valor} <span className="text-white/90 font-bold text-xs md:text-sm ml-1.5 tracking-wide select-none">Dol.</span>
+      </>
+    );
+  } else if (precioStr.includes('S/.')) {
+    const valor = precioStr.replace('S/.', '').trim();
+    return (
+      <>
+        S/. {valor} <span className="text-white/90 font-bold text-xs md:text-sm ml-1.5 tracking-wide select-none">Sol.</span>
+      </>
+    );
+  }
+  return precio;
+};
+
 const getArticuloTipo = (prop) => {
   if (!prop) return 'la propiedad';
   const t = prop.tipo ? prop.tipo.toUpperCase() : '';
@@ -193,30 +215,30 @@ export default function PropiedadDetalle() {
               
               <div className="flex flex-col gap-6 p-6 sm:p-8 bg-[#0a0d16]/40 rounded-3xl border border-white/5 backdrop-blur-md shadow-2xl">
                 
-                {/* Datos Técnicos (Área y Precio) */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col text-left">
-                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest leading-none">Área Total</span>
-                    <span className="text-sm md:text-base font-black text-white mt-1.5 flex items-center gap-1.5">
-                      <Maximize2 className="w-4 h-4 text-[#00f2fe]" />
+                {/* Datos Técnicos (Área, Medidas y Precio) */}
+                <div className="flex flex-col gap-4">
+                  <div className="p-4 rounded-2xl bg-[#0f1626]/40 border border-white/5 flex flex-col text-left">
+                    <span className="text-[9px] text-[#00f2fe] font-bold uppercase tracking-widest leading-none mb-1.5">Área Total</span>
+                    <span className="text-xl md:text-2xl font-black text-white flex items-center gap-2">
+                      <Maximize2 className="w-5 h-5 text-[#00f2fe]" />
                       {propiedad.area}
                     </span>
                   </div>
-                  <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col text-left">
-                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest leading-none">Precio Especial</span>
-                    <span className="text-sm md:text-base font-black text-[#4ade80] mt-1.5 font-display">
-                      {propiedad.precio}
-                    </span>
-                  </div>
                   {propiedad.medidas && (
-                    <div className="col-span-2 p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col text-left">
-                      <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest leading-none">Medidas de Terreno</span>
-                      <span className="text-sm md:text-base font-black text-white mt-1.5 flex items-center gap-1.5">
-                        <Ruler className="w-4 h-4 text-[#00f2fe]" />
+                    <div className="p-4 rounded-2xl bg-[#0f1626]/40 border border-white/5 flex flex-col text-left">
+                      <span className="text-[9px] text-[#00f2fe] font-bold uppercase tracking-widest leading-none mb-1.5">Medidas de Terreno</span>
+                      <span className="text-base font-black text-white flex items-center gap-2">
+                        <Ruler className="w-5 h-5 text-[#00f2fe]" />
                         {propiedad.medidas}
                       </span>
                     </div>
                   )}
+                  <div className="p-4 rounded-2xl bg-[#0f1626]/40 border border-white/5 flex flex-col text-left">
+                    <span className="text-[9px] text-[#00f2fe] font-bold uppercase tracking-widest leading-none mb-1.5">Precio Especial</span>
+                    <span className="text-xl md:text-2xl font-black text-[#4ade80] font-display flex items-baseline gap-1">
+                      {renderPrecio(propiedad.precio)}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Dirección y Referencias de Ubicación */}
