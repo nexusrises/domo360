@@ -717,9 +717,10 @@ export default function VirtualTour({
         try {
           const sheetsLotes = await fetchLotesFromSheets();
           if (sheetsLotes && sheetsLotes.length > 0) {
-            // Filtrar lotes correspondientes al tour/proyecto actual
+            // Filtrar lotes correspondientes al tour/proyecto actual (soportando alias como inmobiliaria7)
+            const targetProject = tourId.toLowerCase().startsWith('inmobiliaria') ? 'inmobiliaria' : tourId.toLowerCase();
             const projectLotes = sheetsLotes.filter(l => 
-              l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase()
+              l.proyecto && l.proyecto.toString().trim().toLowerCase() === targetProject
             );
 
             if (projectLotes.length > 0) {

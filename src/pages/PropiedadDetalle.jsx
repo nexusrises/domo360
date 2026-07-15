@@ -5,7 +5,8 @@ import {
   Maximize2, 
   ArrowLeft, 
   ExternalLink, 
-  Check 
+  Check,
+  Ruler 
 } from 'lucide-react';
 import VirtualTour from '../components/VirtualTour';
 import { propiedades } from '../data/propiedadesData';
@@ -207,6 +208,15 @@ export default function PropiedadDetalle() {
                       {propiedad.precio}
                     </span>
                   </div>
+                  {propiedad.medidas && (
+                    <div className="col-span-2 p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col text-left">
+                      <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest leading-none">Medidas de Terreno</span>
+                      <span className="text-sm md:text-base font-black text-white mt-1.5 flex items-center gap-1.5">
+                        <Ruler className="w-4 h-4 text-[#00f2fe]" />
+                        {propiedad.medidas}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Dirección y Referencias de Ubicación */}

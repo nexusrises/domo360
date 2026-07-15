@@ -358,12 +358,19 @@ export default function Home() {
                     </div>
 
                     {/* Área */}
-                    <div className="flex items-center gap-2 text-gray-300 text-xs font-bold py-3.5 border-t border-b border-white/5 mb-4">
-                      <Maximize2 className="w-4 h-4 text-[#00f2fe] flex-shrink-0" />
-                      <span>
-                        {esCasaODepto ? 'Área: ' : 'Área desde: '}
-                        <span className="text-[#00f2fe]">{propiedad.area}</span>
-                      </span>
+                    <div className="flex items-center justify-between text-gray-300 text-xs font-bold py-3.5 border-t border-b border-white/5 mb-4">
+                      <div className="flex items-center gap-2">
+                        <Maximize2 className="w-4 h-4 text-[#00f2fe] flex-shrink-0" />
+                        <span>
+                          {esCasaODepto ? 'Área: ' : 'Área desde: '}
+                          <span className="text-[#00f2fe]">{propiedad.area}</span>
+                        </span>
+                      </div>
+                      {propiedad.medidasCortas && (
+                        <span className="text-gray-300 text-xs font-bold tracking-wide pr-1">
+                          Medidas: <span className="text-[#00f2fe] font-black">{propiedad.medidasCortas}</span>
+                        </span>
+                      )}
                     </div>
 
                     {/* Pie de Tarjeta: Precio y Acción */}

@@ -1,12 +1,256 @@
 {
-  "casa_campestre": {
-    "nombre": "Hacienda del Sol Campestre",
-    "imagen": "/tour/casa_campestre.jpg",
-    "descripcion": "Hermosa casa residencial campestre con acabados de sillar y vista al volcán Misti.",
-    "hotspots": [],
+  "vistaaereacasa_1030": {
+    "nombre": "vistaaereacasa",
+    "imagen": "/tour/collasuyo/vistaaereacasa.jpg",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          9.83,
+          -17.33,
+          -1.77
+        ],
+        "destino": "patio_3892",
+        "texto": "Casa en \nVENTA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0af539",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          2.3,
+          0.87,
+          -19.85
+        ],
+        "destino": "1784086584925_dji_20260709022843_0019_d_3893",
+        "texto": "Micro 23",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0af526",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.15,
+          -0.19,
+          -5.77
+        ],
+        "destino": "_self",
+        "texto": "Cementerio\n\"La  Capilla\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 18
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -9.16,
+          -3.32,
+          17.47
+        ],
+        "destino": "_self",
+        "texto": "Final de la \nMicro  10",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 17
+      }
+    ],
     "heading": {
-      "x": 0,
-      "y": 0
-    }
+      "x": -51,
+      "y": -114
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 198
+  },
+  "patio_3892": {
+    "nombre": "patio",
+    "imagen": "/tour/collasuyo/patio.jpg",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -11.38,
+          16.44,
+          0.61
+        ],
+        "destino": "vistaaereacasa_1030",
+        "texto": "Vista Aerea",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#0a45f5",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -2,
+      "y": 62
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 190
+  },
+  "1784086584925_dji_20260709022843_0019_d_3893": {
+    "nombre": "Entrada por la Micro 23",
+    "imagen": "/tour/collasuyo/1784086584925_DJI_20260709022843_0019_D.jpg",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.62,
+          -2.84,
+          -2.61
+        ],
+        "destino": "vistaaereacasa_1030",
+        "texto": "Ubicación \nde la Casa",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0af531",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -18.47,
+          -7.22,
+          2.59
+        ],
+        "destino": "_self",
+        "texto": "Mercado \n\"Collasuyo\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 17,
+        "rotacion": 0
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -2.23,
+          0.51,
+          19.87
+        ],
+        "destino": "_self",
+        "texto": "Praderas del Inka",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 16
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -7.75,
+          -1.75,
+          -18.35
+        ],
+        "destino": "_self",
+        "texto": "Cementerio \n\"La Capilla\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 18
+      }
+    ],
+    "heading": {
+      "x": -18,
+      "y": 44
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 101
   }
 }

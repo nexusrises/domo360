@@ -31,7 +31,8 @@ import {
   Home,
   Link,
   Map,
-  Eye
+  Eye,
+  Folder
 } from 'lucide-react';
 import { tourData as initialTourData } from '../data/tourData';
 import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
@@ -370,10 +371,18 @@ const ProjectImageItem = React.memo(function ProjectImageItem({
   img, 
   isSelected, 
   imageSelectorMode, 
-  onClick 
+  onClick,
+  onDelete
 }) {
   const handleClick = () => {
     onClick(img);
+  };
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    if (onDelete) {
+      onDelete(img);
+    }
   };
 
   return (
@@ -383,6 +392,17 @@ const ProjectImageItem = React.memo(function ProjectImageItem({
         isSelected ? 'border-amber-500 ring-2 ring-amber-500/30' : 'border-white/5 hover:border-amber-400/40'
       }`}
     >
+      {/* Botón Eliminar Imagen (Basurero) */}
+      {onDelete && (
+        <button
+          onClick={handleDelete}
+          className="absolute top-2.5 left-2.5 z-20 w-6 h-6 rounded-lg bg-red-650 hover:bg-red-650 text-white flex items-center justify-center border border-red-500 transition-all opacity-0 group-hover:opacity-100 hover:scale-105 active:scale-95 shadow-md shadow-red-950/20"
+          title="Eliminar esta imagen del servidor permanentemente"
+        >
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
+      )}
+
       {/* Indicador visual de selección en modo Tour */}
       {imageSelectorMode === 'tour' && (
         <div className={`absolute top-2.5 right-2.5 z-10 w-5 h-5 rounded-full flex items-center justify-center border transition-all ${
@@ -472,8 +492,6 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
     }
   }, [isOpen, tourId]);
 
-  if (!isOpen) return null;
-
   const categories = ['Imágenes Generales', ...folders.map(f => `Tour: ${f}`)];
 
   const filteredImages = React.useMemo(() => {
@@ -531,6 +549,39 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
     }
   }, [allFilteredAreSelected, filteredImages]);
 
+  const handleDeleteImage = async (img) => {
+    const confirm = window.confirm(`¿Estás seguro de que deseas eliminar permanentemente la imagen "${img.name}" de la carpeta del proyecto? Esta acción no se puede deshacer.`);
+    if (!confirm) return;
+
+    try {
+      const folder = activeCategory.startsWith('Tour: ') 
+        ? activeCategory.replace('Tour: ', '') 
+        : tourId;
+
+      const res = await fetch('/api/delete-tour-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tourId: folder,
+          filename: img.name
+        })
+      });
+
+      if (res.ok) {
+        setSelectedItems(prev => prev.filter(item => item.url !== img.url));
+        await fetchImages(false);
+      } else {
+        const err = await res.json();
+        alert(`Error al eliminar la imagen: ${err.error}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error de conexión al intentar eliminar la imagen.');
+    }
+  };
+
+  if (!isOpen) return null;
+
   return (
     <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={onClose}>
       <div 
@@ -562,78 +613,102 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
           </button>
         </div>
 
-        {/* Filtros */}
-        <div className="px-6 py-3 border-b border-white/5 bg-slate-950/40 flex flex-col sm:flex-row gap-3 items-center justify-between shrink-0">
-          <div className="flex gap-1 bg-slate-950 p-1 rounded-xl border border-white/5 w-full sm:w-auto overflow-x-auto scrollbar-none">
+        {/* Cuerpo del Explorador de Carpetas de Dos Columnas */}
+        <div className="flex-1 flex overflow-hidden min-h-[400px]">
+          
+          {/* Columna Izquierda: Sidebar de Carpetas */}
+          <div className="w-60 border-r border-white/10 bg-slate-950/40 flex flex-col shrink-0 overflow-y-auto p-4 gap-1.5 scrollbar-none select-none">
+            <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-2 px-2.5">
+              Explorador de Tours
+            </span>
             {categories.length === 0 ? (
-              <span className="text-[10px] text-gray-500 px-3 py-1.5">Sin categorías</span>
+              <span className="text-xs text-gray-500 italic px-2.5">Sin carpetas</span>
             ) : (
-              categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 ${
-                    activeCategory === cat
-                      ? 'bg-amber-500 text-slate-950 shadow-md'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))
-            )}
-          </div>
-
-          <div className="flex gap-2 w-full sm:w-auto items-center shrink-0">
-            {imageSelectorMode === 'tour' && filteredImages.length > 0 && (
-              <button
-                onClick={handleToggleSelectAll}
-                className="px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-amber-400/40 text-[10px] font-bold uppercase tracking-wider text-amber-400 hover:text-amber-300 transition-all cursor-pointer bg-slate-950/60 select-none shrink-0"
-              >
-                {allFilteredAreSelected ? 'Desmarcar Todo' : 'Seleccionar Todo'}
-              </button>
-            )}
-            <input
-              type="text"
-              placeholder="Buscar por nombre..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-slate-950 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-amber-400 font-medium w-full sm:w-64"
-            />
-          </div>
-        </div>
-
-        {/* Grid de imágenes */}
-        <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-white/10 min-h-[300px]">
-          {loading ? (
-            <div className="w-full h-full flex flex-col items-center justify-center py-20">
-              <div className="w-10 h-10 border-4 border-amber-500/20 border-t-amber-400 rounded-full animate-spin"></div>
-              <span className="text-xs text-gray-400 mt-3 font-semibold">Buscando imágenes locales...</span>
-            </div>
-          ) : filteredImages.length === 0 ? (
-            <div className="w-full h-full flex flex-col items-center justify-center py-20 text-center border border-dashed border-white/5 rounded-2xl">
-              <ImageIcon className="w-12 h-12 text-gray-750 mb-2" />
-              <span className="text-xs text-gray-400 font-semibold">No se encontraron imágenes</span>
-              <p className="text-[10px] text-gray-600 mt-1 max-w-md">
-                Esta carpeta está vacía. Puedes subir una imagen nueva para esta categoría usando el botón de abajo.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {filteredImages.map((img) => {
-                const isSelected = selectedItems.some(item => item.url === img.url);
+              categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                const displayName = cat.replace('Tour: ', '');
                 return (
-                  <ProjectImageItem
-                    key={img.url}
-                    img={img}
-                    isSelected={isSelected}
-                    imageSelectorMode={imageSelectorMode}
-                    onClick={handleItemClick}
-                  />
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-left text-xs font-bold transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/10'
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <Folder className={`w-4 h-4 shrink-0 ${isActive ? 'text-slate-950' : 'text-amber-500'}`} />
+                    <span className="truncate">{displayName}</span>
+                  </button>
                 );
-              })}
+              })
+            )}
+          </div>
+
+          {/* Columna Derecha: Panel de Contenido e Imágenes */}
+          <div className="flex-grow flex flex-col overflow-hidden bg-slate-900/20">
+            
+            {/* Cabecera del Panel (Buscador y Selección) */}
+            <div className="px-6 py-3 border-b border-white/5 bg-slate-950/30 flex flex-col sm:flex-row gap-3 items-center justify-between shrink-0">
+              <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider select-none">
+                Carpeta activa: <span className="text-amber-400 font-extrabold">{activeCategory.replace('Tour: ', '')}</span>
+              </div>
+              
+              <div className="flex gap-2 w-full sm:w-auto items-center shrink-0">
+                {imageSelectorMode === 'tour' && filteredImages.length > 0 && (
+                  <button
+                    onClick={handleToggleSelectAll}
+                    className="px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-amber-400/40 text-[10px] font-bold uppercase tracking-wider text-amber-400 hover:text-amber-300 transition-all cursor-pointer bg-slate-950/60 select-none shrink-0"
+                  >
+                    {allFilteredAreSelected ? 'Desmarcar Todo' : 'Seleccionar Todo'}
+                  </button>
+                )}
+                <input
+                  type="text"
+                  placeholder="Buscar por nombre..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="bg-slate-950 border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-amber-400 font-medium w-full sm:w-60"
+                />
+              </div>
             </div>
-          )}
+
+            {/* Grid de imágenes del Tour seleccionado */}
+            <div className="flex-grow overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-white/10 min-h-[300px]">
+              {loading ? (
+                <div className="w-full h-full flex flex-col items-center justify-center py-20 select-none">
+                  <div className="w-10 h-10 border-4 border-amber-500/20 border-t-amber-400 rounded-full animate-spin"></div>
+                  <span className="text-xs text-gray-400 mt-3 font-semibold">Cargando archivos locales...</span>
+                </div>
+              ) : filteredImages.length === 0 ? (
+                <div className="w-full h-full flex flex-col items-center justify-center py-20 text-center border border-dashed border-white/5 rounded-2xl select-none">
+                  <ImageIcon className="w-12 h-12 text-gray-700 mb-2" />
+                  <span className="text-xs text-gray-400 font-bold">Carpeta vacía</span>
+                  <p className="text-[10px] text-gray-600 mt-1.5 max-w-xs leading-relaxed">
+                    No hay imágenes registradas en esta carpeta. Puedes subir tus fotos 360° utilizando el botón del pie de página.
+                  </p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {filteredImages.map((img) => {
+                    const isSelected = selectedItems.some(item => item.url === img.url);
+                    return (
+                      <ProjectImageItem
+                        key={img.url}
+                        img={img}
+                        isSelected={isSelected}
+                        imageSelectorMode={imageSelectorMode}
+                        onClick={handleItemClick}
+                        onDelete={handleDeleteImage}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+          </div>
+
         </div>
 
         {/* Footer con subida directa */}
@@ -835,8 +910,9 @@ export default function TourEditorPage() {
       // Función helper para cruzar datos en caliente
       const injectSheetsData = (parsedTourData, rawSheets) => {
         if (!rawSheets || rawSheets.length === 0) return parsedTourData;
+        const targetProject = tourId.toLowerCase().startsWith('inmobiliaria') ? 'inmobiliaria' : tourId.toLowerCase();
         const projectLotes = rawSheets.filter(l => 
-          l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase()
+          l.proyecto && l.proyecto.toString().trim().toLowerCase() === targetProject
         );
         if (projectLotes.length === 0) return parsedTourData;
 

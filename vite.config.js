@@ -29,19 +29,32 @@ const tourEditorApiPlugin = () => ({
             console.log("Escenas recibidas:", JSON.stringify(scenes, null, 2));
 
             const toursDir = path.resolve(__dirname, 'public/tours');
+            const srcToursDir = path.resolve(__dirname, 'src/data/tours');
+
             if (!fs.existsSync(toursDir)) {
               fs.mkdirSync(toursDir, { recursive: true });
             }
+            if (!fs.existsSync(srcToursDir)) {
+              fs.mkdirSync(srcToursDir, { recursive: true });
+            }
 
+            // Escribir en la carpeta pública (para producción)
             fs.writeFileSync(
               path.join(toursDir, `${tourId}.json`), 
               JSON.stringify(scenes, null, 2),
               'utf-8'
             );
 
+            // Escribir en la carpeta src (para mantener actualizado el editor local)
+            fs.writeFileSync(
+              path.join(srcToursDir, `${tourId}.json`), 
+              JSON.stringify(scenes, null, 2),
+              'utf-8'
+            );
+
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ success: true, message: `Configuración guardada en src/data/tours/${tourId}.json` }));
+            res.end(JSON.stringify({ success: true, message: `Configuración guardada en public/tours/ y src/data/tours/ para ${tourId}.json` }));
           } catch (e) {
             res.statusCode = 500;
             res.end(JSON.stringify({ error: e.message }));
@@ -142,6 +155,51 @@ const tourEditorApiPlugin = () => ({
           res.statusCode = 500;
           res.end(JSON.stringify({ error: e.message }));
         }
+        return;
+      }
+
+      // Endpoint 4: Eliminar un archivo de imagen en la carpeta del proyecto
+      if (req.method === 'POST' && req.url?.startsWith('/api/delete-tour-image')) {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+          try {
+            const { tourId, filename } = JSON.parse(body);
+            if (!tourId || !filename) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: 'Faltan parámetros: tourId o filename' }));
+              return;
+            }
+
+            // Sanitizar para evitar path traversal
+            const cleanFilename = path.basename(filename);
+            const cleanTourId = path.basename(tourId);
+
+            const filePath = path.resolve(__dirname, `public/tour/${cleanTourId}/${cleanFilename}`);
+            const fallbackPath = path.resolve(__dirname, `public/tour/${cleanFilename}`);
+
+            let deleted = false;
+            if (fs.existsSync(filePath)) {
+              fs.unlinkSync(filePath);
+              deleted = true;
+            } else if (fs.existsSync(fallbackPath)) {
+              fs.unlinkSync(fallbackPath);
+              deleted = true;
+            }
+
+            if (deleted) {
+              res.statusCode = 200;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ success: true, message: 'Imagen eliminada con éxito' }));
+            } else {
+              res.statusCode = 404;
+              res.end(JSON.stringify({ error: 'No se encontró el archivo de imagen especificado en el disco' }));
+            }
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
         return;
       }
 
