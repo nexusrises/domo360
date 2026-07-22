@@ -24,34 +24,37 @@ export const propiedades = [
     ],
     area: '85 m²',
     precio: '$179,000',
-    portada: '/tour/casasalidapuno/portadacasa1.png',
+    portada: '/tour/casasalidapuno/portadacasa1.webp',
     tourId: 'casasalidapuno'
   },
   {
     id: 2,
     slug: 'santa-maria',
-    titulo: 'Santa Maria',
+    titulo: 'Terreno en la Salida a Cusco (Urb. Escuri)',
     tipo: 'TERRENO / LOTE',
     tipoColor: 'bg-[#080d1a]/95 text-[#59b2ff] border-blue-500/45 shadow-[0_2px_8px_rgba(59,130,246,0.15)]',
     tiene360: true,
-    ubicacion: 'Salida a Puno, Juliaca - Puno',
-    direccion: 'Av. Circunvalación Norte Km 4.5',
-    urbanizacion: 'Urb. Pte. Maravillas',
-    referencia: 'A 3 cuadras del Pte. Maravillas',
-    mapsLink: 'https://maps.google.com/?q=-15.434612,-70.1434597',
-    mapsIframe: 'https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d4792.382800364904!2d-70.1434597!3d-15.434612!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDI2JzA0LjQiUyA3MMKwMDgnMzUuMyJX!5e1!3m2!1ses!2spe!4v1782271697782!5m2!1ses!2spe',
-    descripcionCorta: 'Condominio exclusivo de terrenos campestres rodeado de los majestuosos Apus del Valle Sagrado. Diseñado bajo...',
-    descripcionCompleta: 'Valle Hermoso Residencial Club es un condominio campestre exclusivo diseñado para quienes buscan vivir en armonía con la naturaleza en el corazón del Valle Sagrado de los Incas. Ofrece un diseño urbanístico de vanguardia integrado con el entorno paisajístico, ideal para residencias de campo familiares o proyectos turísticos boutique.',
+    ubicacion: 'Salida a Cusco, Juliaca - Puno',
+    direccion: 'Jr. Los Próceres, Sector Escuri',
+    urbanizacion: 'Urb. Escuri',
+    referencia: 'A 2 cuadras de la autopista Salida a Cusco y a 2 cuadras del cerro Pojracasi',
+    mapsLink: 'https://maps.google.com/?q=-15.4651081,-70.1368113',
+    mapsIframe: 'https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d712.2871755641689!2d-70.13681134631337!3d-15.465108135443552!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDI3JzU0LjQiUyA3MMKwMDgnMTEuNyJX!5e1!3m2!1ses!2spe!4v1784674726991!5m2!1ses!2spe',
+    descripcionCorta: 'Excelente lote de 108 m² en venta a solo 2 cuadras de la pista Salida a Cusco y a 2 cuadras del cerro Pojracasi. Cuenta con servicios básicos (luz, agua, desagüe) y transporte de Micro 9 a 1 cuadra...',
+    descripcionCompleta: 'Excelente oportunidad de inversión en este TERRENO / LOTE en venta con un área total de 108 m², estratégicamente ubicado a tan solo 2 cuadras de la autopista Salida a Cusco y a 2 cuadras del cerro Pojracasi, en la Urbanización Escuri (distrito de San Miguel, Juliaca).\n\nEl lote cuenta con medidas óptimas de 6.00 metros de frentera por 18.00 metros de largo, ideal para la construcción de una residencia familiar o proyecto inmobiliario. Destaca por disponer de todos los servicios básicos completamente habilitados (luz, agua y desagüe), además de una excelente accesibilidad urbana, ya que la línea de transporte público (Micro 9) transita a solo 1 cuadra del predio.',
     beneficios: [
-      'Pórtico de ingreso monumental controlado las 24 horas con seguridad privada.',
-      'Habilitación urbana completa con redes de agua potable, desagüe y electricidad subterránea.',
-      'Vías de acceso pavimentadas con veredas y cunetas de evacuación pluvial.',
-      'Más de 10,000 m² de áreas verdes destinadas a parques, senderos ecológicos y zonas de fogata.',
-      'Reglamento interno de construcción que garantiza la armonía arquitectónica y plusvalía.'
+      'Ubicación privilegiada a solo 2 cuadras de la autopista principal Salida a Cusco.',
+      'Excelente referencia geográfica: a solo 2 cuadras del cerro Pojracasi.',
+      'Área total de 108 m² con medidas perimétricas óptimas: 6 m de frentera por 18 m de largo.',
+      'Cuenta con todos los servicios básicos totalmente instalados (luz, agua potable y desagüe).',
+      'Excelente transporte urbano: paso fluido de la línea de Micro 9 a solo 1 cuadra del predio.',
+      'Documentación legal saneada lista para transferencia e inscripción inmediata.'
     ],
-    area: '160 m²',
-    precio: 'S/. 32,000',
-    portada: '/tour/fotografiaaereamaravillas2.png',
+    area: '108 m²',
+    medidas: '6.00 m de frentera por 18.00 m de largo',
+    medidasCortas: '6m x 18m',
+    precio: '$79,000',
+    portada: '/tour/procedes/1784676005704_vistacasa.webp',
     tourId: 'santamaria'
   },
   {
@@ -81,7 +84,7 @@ export const propiedades = [
     medidas: '7.35 m de frentera por 18.00 m de fondo',
     medidasCortas: '7.35m x 18m',
     precio: 'S/. 149,000',
-    portada: '/tour/collasuyo/portada.jpeg',
+    portada: '/tour/collasuyo/portada.webp',
     tourId: 'casa_campestre'
   },
   {
@@ -108,7 +111,7 @@ export const propiedades = [
     ],
     area: '160 m²',
     precio: 'S/. 32,000',
-    portada: '/tour/fotografiaaereamaravillas2.png',
+    portada: '/tour/fotografiaaereamaravillas2.webp',
     tourId: 'inmobiliaria7'
   },
   {
@@ -135,7 +138,7 @@ export const propiedades = [
     ],
     area: '95 m²',
     precio: '$98,000',
-    portada: '/tour/departamento_smart.jpg',
+    portada: '/tour/departamento_smart.webp',
     tourId: 'departamento_smart'
   },
   {
@@ -162,7 +165,7 @@ export const propiedades = [
     ],
     area: '120 m²',
     precio: 'S/. 35,000',
-    portada: '/tour/casa_campestre.jpg',
+    portada: '/tour/casa_campestre.webp',
     tourId: 'lote_nuevo'
   },
   {
@@ -189,7 +192,7 @@ export const propiedades = [
     ],
     area: '65 m²',
     precio: '$120,000',
-    portada: '/tour/local_comercial.jpg',
+    portada: '/tour/local_comercial.webp',
     tourId: 'tienda'
   },
   {
@@ -216,7 +219,7 @@ export const propiedades = [
     ],
     area: '140 m²',
     precio: '$85,000',
-    portada: '/tour/casasalidapuno/portadacasa1.png',
+    portada: '/tour/casasalidapuno/portadacasa1.webp',
     tourId: 'casa_nueva'
   },
   {
@@ -243,7 +246,7 @@ export const propiedades = [
     ],
     area: '85 m²',
     precio: '$75,000',
-    portada: '/tour/oficina_premium.jpg',
+    portada: '/tour/oficina_premium.webp',
     tourId: 'oficina'
   }
 ];

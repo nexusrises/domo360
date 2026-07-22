@@ -48,7 +48,7 @@ const proyectos = [
     tag: 'Tour Virtual 360°',
     desc: '¿Clientes que no pueden viajar para conocer el departamento piloto o casa de campo? Desarrollamos un recorrido virtual interactivo en alta definición. Los compradores exploren cada habitación, la terraza con vista al paisaje y la distribución exacta, reduciendo las visitas presenciales infructuosas en un 75%.',
     icon: Eye,
-    imagen: '/tour/sala.jpg',
+    imagen: '/tour/sala.webp',
     color: 'text-nexus-purple bg-nexus-purple/15 border-nexus-purple/30',
     shadow: 'hover:shadow-[0_8px_32px_rgba(139,92,246,0.15)] hover:border-nexus-purple/40',
     colSpan: 'md:col-span-1'
@@ -60,7 +60,7 @@ const proyectos = [
     tag: 'Tomas con Dron',
     desc: '¿Compradores preocupados por la accesibilidad y el estado de las obras del condominio? Realizamos un levantamiento multimedia aéreo con drones y demarcamos digitalmente los linderos en 3D sobre imágenes reales de alta resolución, facilitando la visualización del entorno comercial y las vías pavimentadas.',
     icon: Video,
-    imagen: '/tour/02_residencial_maravillas.jpg',
+    imagen: '/tour/02_residencial_maravillas.webp',
     color: 'text-amber-400 bg-amber-500/15 border-amber-500/30',
     shadow: 'hover:shadow-[0_8px_32px_rgba(245,158,11,0.15)] hover:border-amber-500/40',
     colSpan: 'md:col-span-1'
@@ -72,7 +72,7 @@ const proyectos = [
     tag: 'Desarrollo Web Inmobiliario',
     desc: '¿Constructoras que pierden preventas al carecer de una presencia digital profesional y transparente? Diseñamos y desarrollamos el portal corporativo para Sierra Capital, integrando su portafolio de proyectos, visores inmersivos 360° y formularios de reservas directos, logrando un incremento de +40% en ventas virtuales.',
     icon: Cpu,
-    imagen: '/tour/seo_thumb.png',
+    imagen: '/tour/seo_thumb.webp',
     color: 'text-blue-400 bg-blue-500/15 border-blue-500/30',
     shadow: 'hover:shadow-[0_8px_32px_rgba(59,130,246,0.15)] hover:border-blue-500/40',
     colSpan: 'md:col-span-2'

@@ -766,8 +766,10 @@ export default function VirtualTour({
       const localSaved = localStorage.getItem(`nexus_tour_data_${tourId}`);
       if (localSaved && localSaved !== 'undefined') {
         try {
-          // Reemplazar en caliente rutas obsoletas a /descargas_kuula/ por /tour/
-          const cleanedSaved = localSaved.replace(/\/descargas_kuula\//g, '/tour/');
+          // Reemplazar en caliente rutas obsoletas a /descargas_kuula/ por /tour/ y extensiones viejas a .webp
+          const cleanedSaved = localSaved
+            .replace(/\/descargas_kuula\//g, '/tour/')
+            .replace(/\.(jpg|jpeg|png)(["'?])/gi, '.webp$2');
           const parsed = JSON.parse(cleanedSaved);
           
           // Validación de consistencia para evitar datos cruzados del editor en local

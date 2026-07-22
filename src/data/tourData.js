@@ -1,7 +1,7 @@
 export const tourData = {
   sala: {
     nombre: "Sala de Exhibición Premium",
-    imagen: "/tour/sala.jpg",
+    imagen: "/tour/sala.webp",
     descripcion: "Nuestra sala principal interactiva con acabados de lujo y diseño contemporáneo.",
     hotspots: [
       {
@@ -41,7 +41,7 @@ export const tourData = {
   },
   cocina: {
     nombre: "Cocina / Laboratorio Tecnológico",
-    imagen: "/tour/cocina.jpg",
+    imagen: "/tour/cocina.webp",
     descripcion: "Un espacio culinario y tecnológico integrado con los más altos estándares modernos.",
     hotspots: [
       {

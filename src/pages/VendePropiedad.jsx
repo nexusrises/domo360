@@ -20,7 +20,7 @@ export default function VendePropiedad() {
     {
       title: "1. Filtro y Saneamiento Legal",
       description: "Revisamos detalladamente los títulos, partidas registrales de la SUNARP y el autovalúo del predio. Saneamos preventivamente de la mano de nuestro Abogado Inmobiliario cualquier observación legal para evitar trabas y asegurar firmas rápidas en la notaría.",
-      image: "/filtro_sunarp_juliaca.png",
+      image: "/filtro_sunarp_juliaca.webp",
       tag: "Fase 1: Seguridad jurídica",
       icon: <Gavel className="w-5 h-5" />,
       color: "text-[#00f2fe] bg-[#00f2fe]/10 border-[#00f2fe]/20"
@@ -28,7 +28,7 @@ export default function VendePropiedad() {
     {
       title: "2. Sesión Multimedia con Dron",
       description: "Nos trasladamos a tu predio para realizar vuelos de alta resolución con dron y capturar fotografías 360° panorámicas. Creamos un recorrido interactivo profesional que publicamos en nuestro catálogo y mostramos de forma digital.",
-      image: "/vuelos_dron_preview.png",
+      image: "/vuelos_dron_preview.webp",
       tag: "Fase 2: Producción visual premium",
       icon: <Camera className="w-5 h-5" />,
       color: "text-nexus-purple bg-nexus-purple/10 border-nexus-purple/20"
@@ -36,7 +36,7 @@ export default function VendePropiedad() {
     {
       title: "3. Campaña en Redes Sociales",
       description: "No publicamos anuncios aburridos. Diseñamos campañas pagadas de alto impacto y de forma cruzada en Facebook, Instagram y portales inmobiliarios clave, apuntando directo a inversionistas interesados con presupuesto en el altiplano.",
-      image: "/ficha_web_preview.png",
+      image: "/ficha_web_preview.webp",
       tag: "Fase 3: Marketing de alta conversión",
       icon: <Share2 className="w-5 h-5" />,
       color: "text-indigo-400 bg-indigo-400/10 border-indigo-400/20"
@@ -283,7 +283,7 @@ export default function VendePropiedad() {
                 {/* Efecto glow celeste/purple alrededor de la imagen */}
                 <div className="absolute inset-0 bg-gradient-to-r from-nexus-accent to-nexus-purple rounded-2xl blur-[12px] opacity-35 group-hover:opacity-55 transition-opacity duration-300"></div>
                 <img
-                  src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/miembros/angel.png`}
+                  src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/miembros/angel.webp`}
                   alt="Angel Apaza - Asesoría Comercial & Tecnología"
                   className="w-36 h-36 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-white/15 relative z-10 bg-[#070a13] shadow-md"
                   onError={(e) => {

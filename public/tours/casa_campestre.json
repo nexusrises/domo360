@@ -1,7 +1,117 @@
 {
+  "1784086584925_dji_20260709022843_0019_d_3893": {
+    "nombre": "Entrada por la Micro 23",
+    "imagen": "/tour/collasuyo/1784086584925_DJI_20260709022843_0019_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.62,
+          -2.84,
+          -2.61
+        ],
+        "destino": "vistaaereacasa_1030",
+        "texto": "Ubicación \nde la Casa",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0af531",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -18.47,
+          -7.22,
+          2.59
+        ],
+        "destino": "_self",
+        "texto": "Mercado \n\"Collasuyo\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 17,
+        "rotacion": 0
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -2.23,
+          0.51,
+          19.87
+        ],
+        "destino": "_self",
+        "texto": "Praderas del Inka",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 16
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -7.75,
+          -1.75,
+          -18.35
+        ],
+        "destino": "_self",
+        "texto": "Cementerio \n\"La Capilla\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 18
+      }
+    ],
+    "heading": {
+      "x": -18,
+      "y": 44
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "northOffset": 101
+  },
   "vistaaereacasa_1030": {
     "nombre": "vistaaereacasa",
-    "imagen": "/tour/collasuyo/vistaaereacasa.jpg",
+    "imagen": "/tour/collasuyo/vistaaereacasa.webp",
     "hotspots": [
       {
         "tipo": "hotspot",
@@ -109,7 +219,7 @@
   },
   "patio_3892": {
     "nombre": "patio",
-    "imagen": "/tour/collasuyo/patio.jpg",
+    "imagen": "/tour/collasuyo/patio.webp",
     "hotspots": [
       {
         "tipo": "hotspot",
@@ -142,115 +252,5 @@
     "norteMagnetico": 0,
     "filtro": "normal",
     "northOffset": 190
-  },
-  "1784086584925_dji_20260709022843_0019_d_3893": {
-    "nombre": "Entrada por la Micro 23",
-    "imagen": "/tour/collasuyo/1784086584925_DJI_20260709022843_0019_D.jpg",
-    "hotspots": [
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -19.62,
-          -2.84,
-          -2.61
-        ],
-        "destino": "vistaaereacasa_1030",
-        "texto": "Ubicación \nde la Casa",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#0af531",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 15
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -18.47,
-          -7.22,
-          2.59
-        ],
-        "destino": "_self",
-        "texto": "Mercado \n\"Collasuyo\"",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 17,
-        "rotacion": 0
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -2.23,
-          0.51,
-          19.87
-        ],
-        "destino": "_self",
-        "texto": "Praderas del Inka",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 16
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -7.75,
-          -1.75,
-          -18.35
-        ],
-        "destino": "_self",
-        "texto": "Cementerio \n\"La Capilla\"",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 18
-      }
-    ],
-    "heading": {
-      "x": -18,
-      "y": 44
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "northOffset": 101
   }
 }

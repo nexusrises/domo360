@@ -53,7 +53,7 @@ export default function CompraSeguro() {
       id: 1,
       titulo: "1. Tráfico de tierras o múltiples dueños",
       descripcion: "Es el fraude más común en terrenos sin independizar en el altiplano. Estafadores venden un mismo lote a dos o más personas distintas utilizando minutas y documentos de posesión falsificados. Los compradores terminan en largos y costosos litigios judiciales por la posesión física de la propiedad.",
-      imagen: "/trafico_tierras_puno.png",
+      imagen: "/trafico_tierras_puno.webp",
       tag: "⚠️ Riesgo de Doble Venta",
       icon: <AlertTriangle className="w-5 h-5 text-red-400" />,
       solucion: "Evitamos ventas duplicadas mediante estudio registral SUNARP obligatorio antes de publicar."
@@ -62,7 +62,7 @@ export default function CompraSeguro() {
       id: 2,
       titulo: "2. Cargas o hipotecas ocultas",
       descripcion: "Muchas propiedades o casas en venta en Juliaca arrastran deudas imprevistas, embargos por créditos bancarios impagos, litigios de herencias familiares no declarados o cargas técnicas que impiden construir legalmente. El comprador descubre la deuda recién cuando acude a formalizar su firma ante notaría.",
-      imagen: "/hipoteca_oculta_puno.png",
+      imagen: "/hipoteca_oculta_puno.webp",
       tag: "🔒 Cargas Financieras Ocultas",
       icon: <Lock className="w-5 h-5 text-red-400" />,
       solucion: "Filtramos deudas, gravámenes y realizamos estudio de títulos completo con asesores legales."
@@ -71,7 +71,7 @@ export default function CompraSeguro() {
       id: 3,
       titulo: "3. Linderos y medidas falsas",
       descripcion: "Terrenos que en los documentos de compraventa dicen medir una superficie determinada (ej. 160 m²), pero al medir físicamente en campo, el lote resulta ser mucho más angosto debido a invasiones de vecinos colindantes o errores de delimitación topográfica en el plano inicial de lotización.",
-      imagen: "/medidas_falsas_puno.png",
+      imagen: "/medidas_falsas_puno.webp",
       tag: "📐 Medidas Físicas Falsas",
       icon: <Scale className="w-5 h-5 text-red-400" />,
       solucion: "Verificamos mediciones perimétricas exactas en campo mediante levantamiento topográfico con dron."
@@ -170,7 +170,7 @@ export default function CompraSeguro() {
       bgColor: "bg-nexus-accent/10",
       borderColor: "border-nexus-accent/20",
       glowColor: "shadow-[0_0_15px_rgba(6,182,212,0.15)]",
-      imagen: "/filtro_sunarp_juliaca.png",
+      imagen: "/filtro_sunarp_juliaca.webp",
       puntos: [
         "Estudio completo de títulos y copia literal archivada",
         "Verificación de gravámenes, cargas judiciales e hipotecas",
@@ -187,7 +187,7 @@ export default function CompraSeguro() {
       bgColor: "bg-nexus-purple/10",
       borderColor: "border-nexus-purple/20",
       glowColor: "shadow-[0_0_15px_rgba(168,85,247,0.15)]",
-      imagen: "/filtro_municipal_juliaca.png",
+      imagen: "/filtro_municipal_juliaca.webp",
       puntos: [
         "Validación de autovalúo al día (formularios HR y PU)",
         "Verificación de deudas de arbitrios o multas municipales",
@@ -204,7 +204,7 @@ export default function CompraSeguro() {
       bgColor: "bg-indigo-400/10",
       borderColor: "border-indigo-400/20",
       glowColor: "shadow-[0_0_15px_rgba(129,140,248,0.15)]",
-      imagen: "/filtro_dron_juliaca.png",
+      imagen: "/filtro_dron_juliaca.webp",
       puntos: [
         "Inspección física en campo y linderos perimétricos",
         "Levantamiento topográfico aéreo digital mediante dron",

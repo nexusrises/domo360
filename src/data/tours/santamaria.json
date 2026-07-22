@@ -1,112 +1,385 @@
 {
-  "1784040804236_dji_20260710011846_0020_d_6991": {
-    "nombre": "DJI 20260710011846 0020 D",
-    "imagen": "/tour/santamaria/1784040804236_DJI_20260710011846_0020_D.jpg",
-    "hotspots": [],
+  "1784676002078_pistasalidacusco_5577": {
+    "nombre": "pistasalidacusco",
+    "imagen": "/tour/procedes/1784676002078_pistasalidacusco.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.31,
+          -5.65,
+          -18.7
+        ],
+        "destino": "1784675997119_frentera_5576",
+        "texto": "Ubicación\ndel LOTE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#00ff33",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 12
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -17.62,
+          -2.15,
+          -9.21
+        ],
+        "destino": "_self",
+        "texto": "Cerrito Pojracasi\n",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          7.68,
+          -0.28,
+          18.47
+        ],
+        "texto": "AEROPUERTO  INTERNACIONAL INCA MANCO CAPAC",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": false,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.98,
+          0.26,
+          -0.78
+        ],
+        "destino": "_self",
+        "texto": "Salida a Cusco",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          19.65,
+          -0.14,
+          -3.7
+        ],
+        "texto": "Centro de la ciudad \nde JULIACA",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.26,
+          0.58,
+          -19.53
+        ],
+        "destino": "1784676010083_vistapanoramica_5579",
+        "texto": "VISTA AEREA\nDEL TERRENO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0af526",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 11
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          4.14,
+          -1.41,
+          -19.52
+        ],
+        "destino": "_self",
+        "texto": "COLEGIO \nHORACIO ZEVALLOS GÁMEZ ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
     "heading": {
-      "x": 0,
-      "y": 0
+      "x": -20,
+      "y": -35
     },
     "norteMagnetico": 0,
-    "filtro": "normal"
+    "filtro": "normal",
+    "northOffset": 67
   },
-  "1784040812666_dji_20260710012046_0021_d_6992": {
-    "nombre": "DJI 20260710012046 0021 D",
-    "imagen": "/tour/santamaria/1784040812666_DJI_20260710012046_0021_D.jpg",
-    "hotspots": [],
+  "1784675997119_frentera_5576": {
+    "nombre": "frentera",
+    "imagen": "/tour/procedes/1784675997119_frentera.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          2.34,
+          6.79,
+          18.67
+        ],
+        "destino": "1784676002078_pistasalidacusco_5577",
+        "texto": "VISTA AEREA\nSALIDA A CUSCO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#00ff2a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
     "heading": {
-      "x": 0,
-      "y": 0
+      "x": 12,
+      "y": 151
     },
     "norteMagnetico": 0,
-    "filtro": "normal"
+    "filtro": "hdr",
+    "northOffset": 116
   },
-  "1784042192752_cam_20260709124256_0035_d_7976": {
-    "nombre": "CAM 20260709124256 0035 D",
-    "imagen": "/tour/santamaria/1784042192752_CAM_20260709124256_0035_D.jpg",
-    "hotspots": [],
+  "1784676010083_vistapanoramica_5579": {
+    "nombre": "vistapanoramica",
+    "imagen": "/tour/procedes/1784676010083_vistapanoramica.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.05,
+          -3.93,
+          -4.64
+        ],
+        "destino": "1784676002078_pistasalidacusco_5577",
+        "texto": "Vista de la  \nSALIDA CUSCO",
+        "opacidad": 1,
+        "escala": 0.9,
+        "icono": "ArrowDown",
+        "color": "#0af526",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 16
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          1.86,
+          -4.5,
+          19.4
+        ],
+        "destino": "_self",
+        "texto": "Vista del\nCERRITO POJRACASI",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 14
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -12.33,
+          -15.36,
+          -3.45
+        ],
+        "texto": "Pasa la \"MICRO  9\"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -0.86,
+          0.43,
+          -19.98
+        ],
+        "texto": "Centro de la ciudad \nde JULIACA",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": false,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          18.27,
+          -0.31,
+          -8.14
+        ],
+        "texto": "AEROPUERTO  INTERNACIONAL INCA MANCO CAPAC",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": false,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -2.3,
+          -19.8,
+          -1.59
+        ],
+        "destino": "1784675997119_frentera_5576",
+        "texto": "LOTE EN VETA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Info",
+        "color": "#49f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -18.76,
+          -2.54,
+          -6.46
+        ],
+        "destino": "_self",
+        "texto": "COLEGIO \nHORACIO ZEVALLOS GÁMEZ ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#ff0000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
     "heading": {
-      "x": 0,
-      "y": 0
+      "x": -56,
+      "y": 71
     },
     "norteMagnetico": 0,
-    "filtro": "normal"
-  },
-  "1784042150332_cam_20260709123653_0028_d_7969": {
-    "nombre": "CAM 20260709123653 0028 D",
-    "imagen": "/tour/santamaria/1784042150332_CAM_20260709123653_0028_D.jpg",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal"
-  },
-  "1784042156635_cam_20260709123729_0029_d_7970": {
-    "nombre": "CAM 20260709123729 0029 D",
-    "imagen": "/tour/santamaria/1784042156635_CAM_20260709123729_0029_D.jpg",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal"
-  },
-  "1784042165143_cam_20260709123806_0030_d_7971": {
-    "nombre": "CAM 20260709123806 0030 D",
-    "imagen": "/tour/santamaria/1784042165143_CAM_20260709123806_0030_D.jpg",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal"
-  },
-  "1784042171849_cam_20260709123911_0031_d_7972": {
-    "nombre": "CAM 20260709123911 0031 D",
-    "imagen": "/tour/santamaria/1784042171849_CAM_20260709123911_0031_D.jpg",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal"
-  },
-  "1784042177761_cam_20260709123958_0032_d_7973": {
-    "nombre": "CAM 20260709123958 0032 D",
-    "imagen": "/tour/santamaria/1784042177761_CAM_20260709123958_0032_D.jpg",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal"
-  },
-  "1784042182983_cam_20260709124043_0033_d_7974": {
-    "nombre": "CAM 20260709124043 0033 D",
-    "imagen": "/tour/santamaria/1784042182983_CAM_20260709124043_0033_D.jpg",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal"
-  },
-  "1784042187925_cam_20260709124200_0034_d_7975": {
-    "nombre": "CAM 20260709124200 0034 D",
-    "imagen": "/tour/santamaria/1784042187925_CAM_20260709124200_0034_D.jpg",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal"
+    "filtro": "normal",
+    "northOffset": 193
   }
 }

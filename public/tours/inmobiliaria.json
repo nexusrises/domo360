@@ -1,7 +1,7 @@
 {
   "01_rm_vista_lugares_referencia_2696": {
     "nombre": "Vista aerea",
-    "imagen": "/tour/01_rm_vista_lugares_referencia.jpg",
+    "imagen": "/tour/01_rm_vista_lugares_referencia.webp",
     "hotspots": [
       {
         "tipo": "hotspot",
@@ -63,7 +63,7 @@
   },
   "02_residencial_maravillas_1585": {
     "nombre": "Maravillas 1",
-    "imagen": "/tour/02_residencial_maravillas.jpg",
+    "imagen": "/tour/02_residencial_maravillas.webp",
     "hotspots": [
       {
         "tipo": "hotspot",
@@ -521,7 +521,7 @@
   },
   "04_mara_ii_mz_c_8506": {
     "nombre": "Maravillas 2",
-    "imagen": "/tour/04_mara_ii_mz_c.jpg",
+    "imagen": "/tour/04_mara_ii_mz_c.webp",
     "hotspots": [
       {
         "tipo": "hotspot",

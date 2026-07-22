@@ -38,7 +38,7 @@ import { tourData as initialTourData } from '../data/tourData';
 import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
 import { useParams } from 'react-router-dom';
 
-// Función para redimensionar y comprimir imágenes 360° en el cliente
+// Función para redimensionar y comprimir imágenes 360° en el cliente (WebP alta fidelidad)
 const optimizePanoramaImage = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -64,8 +64,8 @@ const optimizePanoramaImage = (file) => {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
 
-        // Exportar a JPG con calidad 0.85 (balance óptimo de nitidez y peso)
-        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+        // Exportar a WebP con calidad 0.82 (balance óptimo de nitidez 4K y alto rendimiento de carga)
+        const compressedBase64 = canvas.toDataURL('image/webp', 0.82);
         resolve(compressedBase64);
       };
       img.onerror = (err) => reject(err);
@@ -74,7 +74,7 @@ const optimizePanoramaImage = (file) => {
   });
 };
 
-// Función para redimensionar y comprimir imágenes normales (tarjetas de imagen en 3D)
+// Función para redimensionar y comprimir imágenes normales (tarjetas de imagen en 3D) en WebP
 const optimizeNormalImage = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -100,8 +100,8 @@ const optimizeNormalImage = (file) => {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
 
-        // Exportar a JPG con calidad 0.85
-        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+        // Exportar a WebP con calidad 0.82
+        const compressedBase64 = canvas.toDataURL('image/webp', 0.82);
         resolve(compressedBase64);
       };
       img.onerror = (err) => reject(err);
@@ -719,50 +719,60 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
               <span>Subir archivo nuevo desde PC</span>
               <input 
                 type="file" 
-                accept="image/*"
+                multiple
+                accept="image/*,.webp,.jpg,.jpeg,.png"
                 onChange={async (e) => {
-                  const file = e.target.files[0];
-                  if (!file) return;
+                  const files = Array.from(e.target.files || []);
+                  if (files.length === 0) return;
                   
                   setLoading(true);
+                  const uploadedItems = [];
+                  
                   try {
-                    const base64 = await (imageSelectorMode === 'tour' ? optimizePanoramaImage(file) : optimizeNormalImage(file));
-                    const rawName = file.name.replace(/\.[^/.]+$/, "");
-                    const finalFilename = `${Date.now()}_${rawName}.jpg`;
-                    
-                    // Determinar a qué carpeta subir basándonos en la pestaña activa
                     const targetUploadFolder = activeCategory.startsWith('Tour: ') 
                       ? activeCategory.replace('Tour: ', '') 
                       : tourId;
 
-                    const res = await fetch('/api/upload-tour-image', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({
-                        tourId: targetUploadFolder,
-                        filename: finalFilename,
-                        base64
-                      })
-                    });
-                    if (res.ok) {
-                      const data = await res.json();
-                      if (imageSelectorMode === 'tour') {
-                        // Refrescar lista de imágenes del servidor
-                        await fetchImages(false);
-                        setSelectedItems([...selectedItems, { url: data.url, filename: finalFilename }]);
+                    for (let i = 0; i < files.length; i++) {
+                      const file = files[i];
+                      const base64 = await (imageSelectorMode === 'tour' ? optimizePanoramaImage(file) : optimizeNormalImage(file));
+                      const rawName = file.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9_-]/g, "_");
+                      const finalFilename = `${Date.now()}_${rawName}.webp`;
+
+                      const res = await fetch('/api/upload-tour-image', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          tourId: targetUploadFolder,
+                          filename: finalFilename,
+                          base64
+                        })
+                      });
+
+                      if (res.ok) {
+                        const data = await res.json();
+                        uploadedItems.push({ url: data.url, filename: finalFilename });
                       } else {
-                        onSelect([{ url: data.url, filename: finalFilename }]);
+                        const err = await res.json();
+                        alert(`Error al subir ${file.name}: ${err.error}`);
+                      }
+                    }
+
+                    if (uploadedItems.length > 0) {
+                      if (imageSelectorMode === 'tour') {
+                        await fetchImages(false);
+                        setSelectedItems(prev => [...prev, ...uploadedItems]);
+                      } else {
+                        onSelect(uploadedItems);
                         onClose();
                       }
-                    } else {
-                      const err = await res.json();
-                      alert(`Error al subir: ${err.error}`);
                     }
                   } catch (err) {
                     console.error(err);
-                    alert('Error al procesar la imagen.');
+                    alert('Error al optimizar y subir las imágenes.');
                   } finally {
                     setLoading(false);
+                    e.target.value = '';
                   }
                 }}
                 className="hidden" 
@@ -947,7 +957,9 @@ export default function TourEditorPage() {
       if (localSaved && localSaved !== 'undefined') {
         try {
           // Reemplazar en caliente rutas obsoletas a /descargas_kuula/ por /tour/
-          const cleanedSaved = localSaved.replace(/\/descargas_kuula\//g, '/tour/');
+          const cleanedSaved = localSaved
+            .replace(/\/descargas_kuula\//g, '/tour/')
+            .replace(/\.(jpg|jpeg|png)(["'?])/gi, '.webp$2');
           const parsed = JSON.parse(cleanedSaved);
           const injected = injectSheetsData(parsed, sheetsData);
           setScenes(injected);
@@ -1556,18 +1568,18 @@ export default function TourEditorPage() {
     }
   };
 
-  // Subir Nueva Imagen (Guardado físico local con compresión y optimización en cliente)
+  // Subir Nueva Imagen (Guardado físico local con compresión y optimización en cliente WebP)
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     try {
-      // Optimizar y comprimir en el cliente usando canvas
+      // Optimizar y comprimir en el cliente usando canvas a formato WebP
       const base64 = await optimizePanoramaImage(file);
       
-      // Asegurar extensión .jpg por la conversión a JPEG
-      const rawName = file.name.replace(/\.[^/.]+$/, "");
-      const finalFilename = `${rawName}.jpg`;
+      // Extensión .webp para máxima compresión y fidelidad
+      const rawName = file.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9_-]/g, "_");
+      const finalFilename = `${Date.now()}_${rawName}.webp`;
 
       const res = await fetch('/api/upload-tour-image', {
         method: 'POST',
@@ -1594,7 +1606,7 @@ export default function TourEditorPage() {
         };
         saveToLocal(updated, true);
         setActiveSceneKey(sceneId);
-        alert(`Imagen panorámica "${file.name}" optimizada con éxito y guardada en: public/tour/${tourId}/`);
+        alert(`Imagen panorámica "${file.name}" optimizada a WebP con éxito y guardada en: public/tour/${tourId}/`);
       } else {
         const err = await res.json();
         alert(`Error al subir imagen: ${err.error}`);
@@ -1605,7 +1617,7 @@ export default function TourEditorPage() {
     }
   };
 
-  // Subir imagen del complemento de tarjeta de imagen
+  // Subir imagen del complemento de tarjeta de imagen (WebP)
   const handleHotspotImageUpload = async (e, index) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -1614,8 +1626,8 @@ export default function TourEditorPage() {
       // Optimizar la imagen antes de subirla
       const base64 = await optimizeNormalImage(file);
       
-      const rawName = file.name.replace(/\.[^/.]+$/, "");
-      const finalFilename = `${Date.now()}_${rawName}.jpg`;
+      const rawName = file.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9_-]/g, "_");
+      const finalFilename = `${Date.now()}_${rawName}.webp`;
 
       const res = await fetch('/api/upload-tour-image', {
         method: 'POST',
