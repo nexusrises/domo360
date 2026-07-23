@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import WhatsAppBubble from './components/WhatsAppBubble';
 import ScrollToTop from './components/ScrollToTop';
 import TopographicBackground from './components/TopographicBackground';
+import LandingPage from './pages/LandingPage';
 import Home from './pages/Home';
 import CompraSeguro from './pages/CompraSeguro';
 import VendePropiedad from './pages/VendePropiedad';
@@ -15,7 +16,8 @@ import PropiedadDetalle from './pages/PropiedadDetalle';
 function AppContent() {
   const location = useLocation();
   const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
-  const hideFooter = location.pathname === '/contacto';
+  const isLandingPage = location.pathname === '/' || location.pathname === '';
+  const hideFooter = location.pathname === '/contacto' || isLandingPage;
 
   // Configuración del IntersectionObserver para apariciones dinámicas al hacer scroll (optimizado para móviles)
   React.useEffect(() => {
@@ -23,8 +25,8 @@ function AppContent() {
     const timer = setTimeout(() => {
       const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -25px 0px', // Relajado de -100px a -25px para compatibilidad móvil
-        threshold: 0.01 // Reducido de 0.05 a 0.01 para dispararse de inmediato con el mínimo contacto
+        rootMargin: '0px 0px -25px 0px',
+        threshold: 0.01
       };
 
       observer = new IntersectionObserver((entries) => {
@@ -38,7 +40,7 @@ function AppContent() {
 
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
       revealElements.forEach((el) => observer.observe(el));
-    }, 180); // Ligeramente incrementado para asegurar el render de rutas dinámicas
+    }, 180);
 
     return () => {
       clearTimeout(timer);
@@ -58,10 +60,21 @@ function AppContent() {
       <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-nexus-blue opacity-10 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
       <div>
-        <Navbar />
+        {/* Renderizado condicional del Navbar global (solo fuera de la Landing principal) */}
+        {!isLandingPage && <Navbar />}
         
         <Routes>
-          <Route path="/" element={<Home />} />
+          {/* Landing Page Principal de Nexus Rise */}
+          <Route path="/" element={<LandingPage />} />
+
+          {/* Rutas de la Plataforma Domo 360 */}
+          <Route path="/domo360" element={<Home />} />
+          <Route path="/domo360/vende-tu-propiedad" element={<VendePropiedad />} />
+          <Route path="/domo360/compra-seguro" element={<CompraSeguro />} />
+          <Route path="/domo360/contacto" element={<Contacto />} />
+          <Route path="/domo360/:slug" element={<PropiedadDetalle />} />
+
+          {/* Compatibilidad con rutas directas anteriores */}
           <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
           <Route path="/compra-seguro" element={<CompraSeguro />} />
           <Route path="/contacto" element={<Contacto />} />
@@ -86,6 +99,3 @@ function App() {
 }
 
 export default App;
-// Deploy Trigger v4
-
-

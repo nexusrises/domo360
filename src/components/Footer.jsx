@@ -110,7 +110,7 @@ export default function Footer() {
               onClick={handleLogoClick} 
               className="flex flex-row items-center gap-3 group select-none cursor-pointer w-fit"
             >
-              <img src={`${import.meta.env.BASE_URL}logo3.2.png`} alt="Angel Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
+              <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Angel Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
 
               {/* Alineación vertical perfecta por flexbox nativo items-center sin traslaciones artificiales, con tamaño de texto responsivo para evitar desbordes en móvil */}
               <div className="text-2xl sm:text-3xl md:text-4xl font-logo flex items-center whitespace-nowrap">
@@ -180,7 +180,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-3 md:col-start-6">
             <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Mapa del Sitio</h3>
             <ul className="flex flex-col gap-2.5 text-sm">
-              <li><Link to="/" className={`transition duration-150 ${location.pathname === '/' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
+              <li><Link to="/domo360" className={`transition duration-150 ${location.pathname === '/domo360' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
               <li><Link to="/compra-seguro" className={`transition duration-150 ${location.pathname === '/compra-seguro' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Compra con Seguridad</Link></li>
               <li><Link to="/vende-tu-propiedad" className={`transition duration-150 ${location.pathname === '/vende-tu-propiedad' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Vende tu Propiedad</Link></li>
               <li><Link to="/contacto" className={`transition duration-150 ${location.pathname === '/contacto' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Contactar</Link></li>
@@ -204,9 +204,19 @@ export default function Footer() {
           <div className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-nexus-purple" /> nexus.agencia360@gmail.com</div>
           <div className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-gray-500" /> Juliaca, Perú</div>
         </div>
-        <p className="text-center md:text-right">
-          &copy; {currentYear} Angel Domo 360°. Todos los derechos reservados.
-        </p>
+        <div className="flex flex-col items-center md:items-end text-center md:text-right gap-1">
+          <p>
+            &copy; {currentYear} Angel Domo 360°. Todos los derechos reservados.
+          </p>
+          <Link 
+            to="/" 
+            className="text-[11px] font-mono text-cyan-400/80 hover:text-nexus-accent transition-colors flex items-center justify-center md:justify-end gap-1.5 group mt-1"
+            title="Ir a la Landing Page corporativa de Nexus Rise"
+          >
+            <span>⚡ Desarrollado por Nexus Rise - Software & 360° Studio</span>
+            <span className="group-hover:translate-x-0.5 transition-transform">↗</span>
+          </Link>
+        </div>
       </div>
     </footer>
   );

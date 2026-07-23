@@ -129,7 +129,7 @@ export default function MemberCard({ name, role, education, description, status,
         {/* Avatar / Foto del integrante en Rectángulo Horizontal Cristalino con efecto de agua fluyendo */}
         <div className="w-44 h-28 rounded-2xl bg-gradient-to-r from-[#1e3a8a] via-[#00d2ff] to-[#1e3a8a] p-[1.8px] mb-4 flex items-center justify-center shadow-[0_0_20px_rgba(0,210,255,0.25)] relative overflow-hidden backdrop-blur-md border border-blue-500/20 avatar-water-border">
           <img 
-            src={photoUrl ? (photoUrl.startsWith('http') || photoUrl.startsWith('data:') ? photoUrl : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${photoUrl}`) : `${import.meta.env.BASE_URL}logo2.png`} 
+            src={photoUrl ? (photoUrl.startsWith('http') || photoUrl.startsWith('data:') ? photoUrl : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${photoUrl}`) : `${import.meta.env.BASE_URL}logo2.webp`} 
             alt={`Foto de ${name}`} 
             className="w-full h-full rounded-2xl object-cover bg-[#070a13]"
           />

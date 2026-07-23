@@ -90,11 +90,11 @@ export default function PropiedadDetalle() {
         <h2 className="text-4xl font-bold text-white mb-6">Propiedad no encontrada</h2>
         <p className="text-xl text-gray-400 max-w-2xl mb-8">El proyecto solicitado no existe o ha sido retirado.</p>
         <Link 
-          to="/" 
+          to="/domo360" 
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold uppercase tracking-wider text-xs text-white bg-white/5 border border-white/10 hover:bg-[#00f2fe] hover:text-black hover:border-[#00f2fe] transition-all duration-300"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver al Inicio
+          Volver al Catálogo
         </Link>
       </div>
     );
@@ -107,7 +107,7 @@ export default function PropiedadDetalle() {
         {/* Barra Superior con botón Volver y Categoría */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
-            to="/"
+            to="/domo360"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider text-gray-400 hover:text-white bg-white/[0.02] border border-white/5 hover:bg-white/5 hover:border-white/15 transition-all duration-200 select-none cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4 text-[#00f2fe]" />

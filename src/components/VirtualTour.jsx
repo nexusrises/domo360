@@ -619,6 +619,21 @@ export default function VirtualTour({
     };
   }, [displayImage]);
 
+  // Pre-cargar todas las imágenes de las escenas del tour activo para respuesta ultrarrápida al navegar
+  useEffect(() => {
+    if (!scenes || Object.keys(scenes).length === 0) return;
+    Object.values(scenes).forEach(sc => {
+      if (sc && sc.imagen) {
+        const fullUrl = sc.imagen.startsWith('http') || sc.imagen.startsWith('data:')
+          ? sc.imagen
+          : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sc.imagen}`;
+        const img = new Image();
+        img.src = fullUrl;
+      }
+    });
+  }, [scenes]);
+
+
   // Iniciar con overlay activo para cubrir el frame inicial de carga y orientación de cámara
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [showHelp, setShowHelp] = useState(false);

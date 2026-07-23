@@ -7,19 +7,107 @@ export default function WhatsAppBubble() {
   const [isHovered, setIsHovered] = useState(false);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
-  const messages = [
-    "¿Buscas comprar un lote en Juliaca sin riesgo de estafas? Te enviamos planos de terrenos con títulos limpios y auditados en SUNARP 📲",
-    "¿Quieres vender tu propiedad rápido y sin trabas notariales? Saneamos tus títulos con nuestro abogado y te hacemos fotos 360° gratis 🏡",
-    "¿Eres agente o constructora y quieres una web interactiva con planos 3D y recorridos 360° como esta? Cotiza tu web aquí 💻",
-    "¿Quieres duplicar tus ventas inmobiliarias con mapas de lotes dinámicos y tours virtuales? Desarrollamos tu sistema a medida 🚀"
-  ];
+  // Obtener mensajes y textos de WhatsApp adaptados dinámicamente según la sub-página visitada
+  const getContextualContent = () => {
+    const path = location.pathname.toLowerCase();
 
-  const whatsappTexts = [
-    "Hola Angel, busco comprar un lote en Juliaca/Puno de forma segura y deseo ver opciones libres de tráfico de tierras o dobles ventas.",
-    "Hola Angel, soy propietario y deseo asesoría gratuita de su abogado y el servicio multimedia de dron y 360° para vender mi propiedad.",
-    "Hola Angel, vi su plataforma interactiva y me gustaría cotizar el desarrollo de una página web personalizada para mi empresa inmobiliaria.",
-    "Hola Angel, estoy interesado en implementar mapas interactivos de lotizaciones y tours virtuales en la página web de mi constructora/inmobiliaria."
-  ];
+    // 1. Sub-página: Vende tu Propiedad
+    if (path.includes('vende-tu-propiedad')) {
+      return {
+        messages: [
+          "¿Quieres vender tu casa o terreno rápido y al mejor precio de mercado? Te regalamos fotos 360° y tomas de dron 🚁📸",
+          "¿Tienes un lote o casa y no sabes cómo sanear sus documentos para venderlo? Nuestro equipo legal te ayuda gratis ⚖️🏡",
+          "Publicamos tu propiedad con tecnología 3D y la mostramos a compradores calificados en todo Juliaca y Puno 🚀",
+          "¿Quieres que digitalicemos tu inmueble en 360° para venderlo sin perder tiempo con curiosos? Escríbenos hoy 📲"
+        ],
+        whatsappTexts: [
+          "Hola Angel, soy propietario y deseo vender mi propiedad. Me gustaría recibir asesoría legal y el servicio de fotos 360° y dron.",
+          "Hola Angel, necesito ayuda para sanear los documentos de mi propiedad para ponerla en venta de forma rápida.",
+          "Hola Angel, me interesa publicar mi terreno/casa en el portal Domo 360° con recorridos virtuales y fotos de dron.",
+          "Hola Angel, deseo coordinar una visita para la toma de fotos 360° y la publicación de mi propiedad."
+        ]
+      };
+    }
+
+    // 2. Sub-página: Compra con Seguridad
+    if (path.includes('compra-seguro')) {
+      return {
+        messages: [
+          "¿Tienes dudas legales sobre una propiedad que quieres comprar en Juliaca? Consulta gratis con nuestro abogado ⚖️🛡️",
+          "Evita estafas, dobles ventas o hipotecas ocultas. Auditamos el título de tu lote en SUNARP antes de que firmes 📑✅",
+          "¿Quieres verificar si un terreno tiene partida registrada y plano independizado? Te ayudamos en minutos por WhatsApp 📲",
+          "Protege el dinero de tu familia. Te asesoramos paso a paso en el saneamiento y compra legal de inmuebles en Puno 🏡🛡️"
+        ],
+        whatsappTexts: [
+          "Hola Angel, estoy en la sección Compra Seguro y me gustaría una consulta gratuita con su abogado sobre el estado legal de una propiedad.",
+          "Hola Angel, deseo auditar la partida registral y documentos de un terreno antes de realizar la compra.",
+          "Hola Angel, necesito asesoría legal para verificar si un lote cuenta con plano independizado y título limpio en SUNARP.",
+          "Hola Angel, me gustaría agendar una asesoría de compra segura para revisar la documentación de una vivienda."
+        ]
+      };
+    }
+
+    // 3. Sub-página: Detalle de Propiedad Específica
+    const pathParts = path.split('/').filter(Boolean);
+    const isDetail = (pathParts.length >= 2 && pathParts[0] === 'domo360' && !['vende-tu-propiedad', 'compra-seguro', 'contacto'].includes(pathParts[1])) || 
+                     (pathParts.length === 1 && !['domo360', 'vende-tu-propiedad', 'compra-seguro', 'contacto'].includes(pathParts[0]));
+    
+    if (isDetail) {
+      return {
+        messages: [
+          "¿Te interesa esta propiedad? Escríbeme y te envío la ficha técnica completa y el enlace de Google Maps 📍📲",
+          "¿Quieres agendar una visita presencial para ver esta casa o terreno? Reservamos tu cita de inmediato 🗓️🏡",
+          "¿Deseas saber las facilidades de pago o el estado legal de esta propiedad? Consúltanos directamente por WhatsApp 💬"
+        ],
+        whatsappTexts: [
+          "Hola Angel, estoy interesado en recibir más información, ubicación en Google Maps y agendar una visita para esta propiedad.",
+          "Hola Angel, me interesa visitar esta propiedad y quisiera coordinar fecha y hora para la visita presencial.",
+          "Hola Angel, quisiera consultar el precio final y las facilidades de pago para esta propiedad."
+        ]
+      };
+    }
+
+    // 4. Sub-página: Catálogo General de Proyectos / Domo 360 (/domo360)
+    if (path.includes('domo360')) {
+      return {
+        messages: [
+          "¿Buscas comprar un lote o casa en Juliaca sin riesgo de estafas? Te enviamos opciones con títulos limpios en SUNARP 📲🏡",
+          "¿Deseas conocer más detalles de nuestras propiedades digitalizadas en 360°? Escríbeme y te envío planos y ubicación 📍",
+          "¿Buscas un terreno comercial o residencial con alta plusvalía en la región? Te asesoramos en vivo por WhatsApp 🚀",
+          "¿Quieres agendar una visita guiada a los lotes o casas disponibles? Escríbenos para reservar tu horario 🗓️📲"
+        ],
+        whatsappTexts: [
+          "Hola Angel, estoy viendo los proyectos inmobiliarios en Domo 360° y me gustaría recibir información sobre terrenos y casas disponibles.",
+          "Hola Angel, busco opciones de terrenos en Juliaca/Puno con documentación saneada e inscritos en SUNARP.",
+          "Hola Angel, me gustaría coordinar una reunión/visita para ver opciones de lotes comerciales y residenciales.",
+          "Hola Angel, quisiera que me envíen la lista de precios y planos de los proyectos disponibles."
+        ]
+      };
+    }
+
+    // 5. Landing Page Principal de Nexus Rise (Ruta '/')
+    return {
+      messages: [
+        "¿Buscas una página web moderna e interactiva para tu empresa en la región Puno? Cotiza tu web a medida aquí 💻✨",
+        "¿Quieres destacar frente a tu competencia con recorridos virtuales 360° y desarrollo web corporativo? Escríbenos hoy 🚀",
+        "¿Necesitas una plataforma web inmobiliaria, tienda online o sistema corporativo rápido y seguro? Hablemos por WhatsApp 💼⚡",
+        "Digitalizamos tu negocio con diseño web de nivel internacional y alta conversión. ¡Solicita tu cotización gratis! 🌐📲"
+      ],
+      whatsappTexts: [
+        "Hola Nexus Rise, me interesa cotizar el desarrollo de una página web profesional e interactiva para mi empresa.",
+        "Hola Nexus Rise, deseo información sobre la implementación de tours 360° y páginas webs corporativas a medida.",
+        "Hola Nexus Rise, busco desarrollar un sistema web / tienda digital para mi negocio y me gustaría solicitar una propuesta.",
+        "Hola Nexus Rise, vi sus proyectos interactivos y deseo asesoría gratuita para digitalizar mi empresa en la región."
+      ]
+    };
+  };
+
+  const { messages, whatsappTexts } = getContextualContent();
+
+  // Resetear el índice al cambiar de ruta para que empiece en el primer mensaje de la sección
+  useEffect(() => {
+    setCurrentMessageIndex(0);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (isHovered) {
@@ -34,29 +122,28 @@ export default function WhatsAppBubble() {
 
       if (step === 'show') {
         setShowTooltip(true);
-        // Se mantiene visible durante 9 segundos para permitir una lectura tranquila
         timeoutId = setTimeout(() => runCycle('hide'), 9000);
       } else if (step === 'hide') {
         setShowTooltip(false);
-        // Permanece oculto durante 20 segundos antes de cambiar al siguiente mensaje (más dinámico)
         timeoutId = setTimeout(() => {
           setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
           runCycle('show');
-        }, 20000);
+        }, 18000);
       }
     };
 
-    // Primer tooltip aparece a los 7 segundos de cargar la página (captura rápida de atención)
-    timeoutId = setTimeout(() => runCycle('show'), 7000);
+    timeoutId = setTimeout(() => runCycle('show'), 6000);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [isHovered, messages.length]);
+  }, [isHovered, messages.length, location.pathname]);
 
-  if (location.pathname === '/contacto') {
+  if (location.pathname === '/contacto' || location.pathname === '/domo360/contacto') {
     return null;
   }
+
+  const safeIndex = currentMessageIndex % messages.length;
 
   return (
     <div 
@@ -65,20 +152,20 @@ export default function WhatsAppBubble() {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Tooltip elegante animado con auto-ajuste de ancho para móvil */}
-      <div className={`px-4 py-2.5 rounded-2xl bg-white/90 backdrop-blur-md border border-[#25d366]/30 text-slate-800 font-bold text-[11px] sm:text-xs shadow-2xl transition-all duration-300 transform origin-right max-w-[210px] sm:max-w-[290px] whitespace-normal ${
+      <div className={`px-4 py-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#25d366]/40 text-slate-800 font-bold text-[11px] sm:text-xs shadow-2xl transition-all duration-300 transform origin-right max-w-[220px] sm:max-w-[300px] whitespace-normal ${
         showTooltip 
           ? 'opacity-100 scale-100 translate-x-0 visible' 
           : 'opacity-0 scale-95 translate-x-4 invisible pointer-events-none'
       }`}>
         <span className="flex items-start gap-2">
           <span className="w-2 h-2 rounded-full bg-[#25d366] animate-pulse shrink-0 mt-1"></span>
-          <span className="leading-relaxed font-sans">{messages[currentMessageIndex]}</span>
+          <span className="leading-relaxed font-sans">{messages[safeIndex]}</span>
         </span>
       </div>
 
       {/* Botón flotante interactivo */}
       <a 
-        href={`https://wa.me/51951300535?text=${encodeURIComponent(whatsappTexts[currentMessageIndex])}`} 
+        href={`https://wa.me/51951300535?text=${encodeURIComponent(whatsappTexts[safeIndex])}`} 
         target="_blank" 
         rel="noopener noreferrer" 
         className="w-14 h-14 rounded-full bg-[#25d366] text-white flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.7)] hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 active:scale-95 group relative"

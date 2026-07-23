@@ -20,6 +20,8 @@ dist-ssr
 # AI / Agentic configurations
 .skills/
 .gemini/
+scratch/
+
 
 # Editor directories and files
 .vscode/*

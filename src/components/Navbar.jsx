@@ -34,8 +34,8 @@ export default function Navbar() {
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" onClick={handleLinkClick} className="text-2xl md:text-3xl font-logo flex items-center gap-2 group select-none tracking-wide whitespace-nowrap">
-          <img src={`${import.meta.env.BASE_URL}logo3.2.png`} alt="Angel Domo 360 Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-300 group-hover:scale-110" />
+        <Link to="/domo360" onClick={handleLinkClick} className="text-2xl md:text-3xl font-logo flex items-center gap-2 group select-none tracking-wide whitespace-nowrap">
+          <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Angel Domo 360 Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-300 group-hover:scale-110" />
 
           <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105">Angel</span>
           <span className="text-gradient-rise drop-shadow-[0_2px_8px_rgba(0,242,254,0.25)] ml-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">Domo 360°</span>
@@ -44,8 +44,8 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wider">
           <Link 
-            to="/" 
-            className={`hover:text-nexus-accent transition-colors duration-200 py-2 uppercase ${isActive('/') ? 'text-nexus-accent' : 'text-white'}`}
+            to="/domo360" 
+            className={`hover:text-nexus-accent transition-colors duration-200 py-2 uppercase ${isActive('/domo360') ? 'text-nexus-accent' : 'text-white'}`}
           >
             Proyectos
           </Link>
@@ -90,9 +90,9 @@ export default function Navbar() {
       }`}>
         <div className="flex flex-col gap-4 text-base font-semibold">
           <Link 
-            to="/" 
+            to="/domo360" 
             onClick={handleLinkClick}
-            className={`p-2 rounded-xl hover:bg-white/5 ${isActive('/') ? 'text-nexus-accent' : 'text-white'}`}
+            className={`p-2 rounded-xl hover:bg-white/5 ${isActive('/domo360') ? 'text-nexus-accent' : 'text-white'}`}
           >
             Proyectos
           </Link>
