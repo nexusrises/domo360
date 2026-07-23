@@ -79,7 +79,7 @@ export default function LandingPage() {
         {/* Botones de Acción CTA */}
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <Link
-            to="/domo360"
+            to="/proyectos"
             className="w-full sm:w-auto px-8 py-4 rounded-2xl btn-neon-cian text-xs font-black uppercase tracking-wider flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(0,242,254,0.4)] hover:shadow-[0_0_45px_rgba(0,242,254,0.7)] transition-all duration-300 active:scale-95"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
@@ -113,7 +113,7 @@ export default function LandingPage() {
               </h3>
             </div>
             <Link 
-              to="/domo360"
+              to="/proyectos"
               className="text-xs text-nexus-accent hover:underline font-mono font-bold flex items-center gap-1"
             >
               Ver Catálogo Completo <ArrowRight className="w-3.5 h-3.5" />
@@ -132,7 +132,7 @@ export default function LandingPage() {
                 <div className="relative z-10 flex flex-col h-full bg-[#080d19] rounded-[22px] overflow-hidden p-5 sm:p-6">
                   {/* Portada con efecto Zoom */}
                   <Link 
-                    to={`/domo360/${propiedad.slug}`}
+                    to={`/${propiedad.slug}`}
                     className="relative block aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 group-hover:border-cyan-400/50 transition duration-300 mb-5"
                   >
                     <img 
@@ -175,7 +175,7 @@ export default function LandingPage() {
                   </div>
 
                   <h4 className="text-white text-xl font-black font-display leading-snug tracking-tight mb-2 group-hover:text-cyan-300 transition-colors">
-                    <Link to={`/domo360/${propiedad.slug}`}>
+                    <Link to={`/${propiedad.slug}`}>
                       {propiedad.titulo}
                     </Link>
                   </h4>
@@ -198,7 +198,7 @@ export default function LandingPage() {
 
                   {/* Botón CTA Interactivo */}
                   <Link
-                    to={`/domo360/${propiedad.slug}`}
+                    to={`/${propiedad.slug}`}
                     className="w-full mt-auto py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 font-black uppercase tracking-wider text-xs flex items-center justify-center gap-2 group/btn shadow-[0_0_20px_rgba(0,242,254,0.25)] hover:shadow-[0_0_30px_rgba(0,242,254,0.5)] transition-all duration-300"
                   >
                     <Eye className="w-4 h-4 text-black" />
@@ -416,7 +416,7 @@ export default function LandingPage() {
             </div>
 
             <Link
-              to="/domo360"
+              to="/proyectos"
               className="px-6 py-3 rounded-xl bg-gradient-to-r from-nexus-accent to-nexus-blue text-black font-extrabold text-sm uppercase tracking-wider flex items-center gap-2 shrink-0 shadow-[0_0_20px_rgba(0,242,254,0.4)] hover:scale-105 active:scale-95 transition-all"
             >
               <span>🔗 Ir a la plataforma completa</span>
@@ -438,9 +438,9 @@ export default function LandingPage() {
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400 font-mono">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>Acceso directo disponible en: <strong>nexusrise.com/domo360</strong></span>
+              <span>Acceso directo disponible en: <strong>nexusrises.github.io/domo360/proyectos</strong></span>
             </div>
-            <Link to="/domo360" className="text-nexus-accent hover:underline flex items-center gap-1 font-sans font-semibold text-sm">
+            <Link to="/proyectos" className="text-nexus-accent hover:underline flex items-center gap-1 font-sans font-semibold text-sm">
               Ver catálogo completo de propiedades 360° <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

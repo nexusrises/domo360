@@ -64,21 +64,23 @@ function AppContent() {
         {!isLandingPage && <Navbar />}
         
         <Routes>
-          {/* Landing Page Principal de Nexus Rise */}
+          {/* Landing Page Principal */}
           <Route path="/" element={<LandingPage />} />
 
-          {/* Rutas de la Plataforma Domo 360 */}
+          {/* Rutas de la Plataforma */}
+          <Route path="/proyectos" element={<Home />} />
+          <Route path="/catalogo" element={<Home />} />
+          <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
+          <Route path="/compra-seguro" element={<CompraSeguro />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/:slug" element={<PropiedadDetalle />} />
+
+          {/* Compatibilidad con rutas directas anteriores o escritas manualmente */}
           <Route path="/domo360" element={<Home />} />
           <Route path="/domo360/vende-tu-propiedad" element={<VendePropiedad />} />
           <Route path="/domo360/compra-seguro" element={<CompraSeguro />} />
           <Route path="/domo360/contacto" element={<Contacto />} />
           <Route path="/domo360/:slug" element={<PropiedadDetalle />} />
-
-          {/* Compatibilidad con rutas directas anteriores */}
-          <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
-          <Route path="/compra-seguro" element={<CompraSeguro />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/:slug" element={<PropiedadDetalle />} />
           {isDev && <Route path="/editor-360-privado/:paramTourId?" element={<TourEditorPage />} />}
         </Routes>
       </div>

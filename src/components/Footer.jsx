@@ -180,7 +180,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-3 md:col-start-6">
             <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Mapa del Sitio</h3>
             <ul className="flex flex-col gap-2.5 text-sm">
-              <li><Link to="/domo360" className={`transition duration-150 ${location.pathname === '/domo360' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
+              <li><Link to="/proyectos" className={`transition duration-150 ${location.pathname === '/proyectos' || location.pathname === '/catalogo' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
               <li><Link to="/compra-seguro" className={`transition duration-150 ${location.pathname === '/compra-seguro' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Compra con Seguridad</Link></li>
               <li><Link to="/vende-tu-propiedad" className={`transition duration-150 ${location.pathname === '/vende-tu-propiedad' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Vende tu Propiedad</Link></li>
               <li><Link to="/contacto" className={`transition duration-150 ${location.pathname === '/contacto' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Contactar</Link></li>

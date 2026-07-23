@@ -62,7 +62,7 @@ export default function LandingNavbar() {
         {/* Desktop Navigation Links (Solo Plataforma Domo360) */}
         <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-wider uppercase text-gray-300">
           <Link 
-            to="/domo360" 
+            to="/proyectos" 
             className="hover:text-nexus-accent transition-colors py-2 flex items-center gap-1.5 text-purple-300 bg-purple-500/10 px-4 py-1.5 rounded-full border border-purple-500/20"
           >
             Plataforma Domo360 <ExternalLink className="w-3 h-3" />
@@ -104,7 +104,7 @@ export default function LandingNavbar() {
       }`}>
         <div className="flex flex-col gap-3 text-sm font-semibold uppercase tracking-wider">
           <Link 
-            to="/domo360" 
+            to="/proyectos" 
             onClick={() => setIsOpen(false)}
             className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-300 font-bold flex items-center justify-between"
           >

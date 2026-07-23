@@ -67,8 +67,8 @@ export default function WhatsAppBubble() {
       };
     }
 
-    // 4. Sub-página: Catálogo General de Proyectos / Domo 360 (/domo360)
-    if (path.includes('domo360')) {
+    // 4. Sub-página: Catálogo General de Proyectos (/proyectos o /catalogo)
+    if (path.includes('proyectos') || path.includes('catalogo') || path.includes('domo360')) {
       return {
         messages: [
           "¿Buscas comprar un lote o casa en Juliaca sin riesgo de estafas? Te enviamos opciones con títulos limpios en SUNARP 📲🏡",
