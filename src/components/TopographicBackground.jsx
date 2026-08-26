@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // SISTEMA DE CONTROL DE PROPIEDADES AVANZADO (Basado en la especificación oficial de Framer TerrainLines)
 const CONFIG = {
@@ -41,6 +42,10 @@ const CONFIG = {
 export default function TopographicBackground() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000, tx: -1000, ty: -1000, active: false });
+  const location = useLocation();
+  const isLightPage = location.pathname !== '/' && location.pathname !== '' && !location.pathname.startsWith('/editor-360-privado');
+  const isLightRef = useRef(isLightPage);
+  isLightRef.current = isLightPage;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -238,9 +243,15 @@ export default function TopographicBackground() {
 
           // Mapear gradiente de colores basado en la altura y atenuación de opacidad
           const lineGrad = ctx.createLinearGradient(0, 0, width, 0);
-          lineGrad.addColorStop(0, CONFIG.colors.gradStart.replace('opacity', (opacity * 0.35).toString()));
-          lineGrad.addColorStop(0.5, CONFIG.colors.gradEnd.replace('opacity', opacity.toString()));
-          lineGrad.addColorStop(1, CONFIG.colors.gradAccent.replace('opacity', (opacity * 0.45).toString()));
+          if (isLightRef.current) {
+            lineGrad.addColorStop(0, `rgba(37, 99, 235, ${(opacity * 0.45).toFixed(3)})`);
+            lineGrad.addColorStop(0.5, `rgba(2, 132, 199, ${(opacity * 0.85).toFixed(3)})`);
+            lineGrad.addColorStop(1, `rgba(124, 58, 237, ${(opacity * 0.55).toFixed(3)})`);
+          } else {
+            lineGrad.addColorStop(0, CONFIG.colors.gradStart.replace('opacity', (opacity * 0.35).toString()));
+            lineGrad.addColorStop(0.5, CONFIG.colors.gradEnd.replace('opacity', opacity.toString()));
+            lineGrad.addColorStop(1, CONFIG.colors.gradAccent.replace('opacity', (opacity * 0.45).toString()));
+          }
 
           ctx.strokeStyle = lineGrad;
           ctx.stroke();
@@ -283,8 +294,11 @@ export default function TopographicBackground() {
           // Halo difuso de brillo neón
           const glowSize = size * CONFIG.pulses.glowRadius;
           const glowGrad = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, glowSize);
-          glowGrad.addColorStop(0, p.color);
-          glowGrad.addColorStop(0.3, p.color.replace('0.95', '0.35'));
+          const particleColor = isLightRef.current
+            ? (p.color.includes('254') ? 'rgba(2, 132, 199, 0.95)' : 'rgba(124, 58, 237, 0.95)')
+            : p.color;
+          glowGrad.addColorStop(0, particleColor);
+          glowGrad.addColorStop(0.3, particleColor.replace('0.95', '0.45'));
           glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
           ctx.fillStyle = glowGrad;
@@ -293,7 +307,7 @@ export default function TopographicBackground() {
           ctx.fill();
 
           // Núcleo brillante
-          ctx.fillStyle = '#ffffff';
+          ctx.fillStyle = isLightRef.current ? '#0284c7' : '#ffffff';
           ctx.beginPath();
           ctx.arc(pt.x, pt.y, size * CONFIG.pulses.headSizeFactor, 0, Math.PI * 2);
           ctx.fill();

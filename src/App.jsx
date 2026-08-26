@@ -18,6 +18,7 @@ function AppContent() {
   const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
   const isLandingPage = location.pathname === '/' || location.pathname === '';
   const hideFooter = location.pathname === '/contacto' || isLandingPage;
+  const isLightPage = !isLandingPage && !location.pathname.startsWith('/editor-360-privado');
 
   // Configuración del IntersectionObserver para apariciones dinámicas al hacer scroll (optimizado para móviles)
   React.useEffect(() => {
@@ -51,13 +52,19 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-nexus-dark overflow-x-hidden relative text-white flex flex-col justify-between">
+    <div className={`min-h-screen overflow-x-hidden relative flex flex-col justify-between transition-colors duration-300 ${
+      isLightPage ? 'bg-[#f5f4ef] text-slate-900' : 'bg-nexus-dark text-white'
+    }`}>
       {/* Fondo Topográfico Interactivo Fijo (TerrainLines) Global */}
       <TopographicBackground />
 
       {/* Luces de fondo (Efecto glow premium) */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-nexus-purple opacity-10 rounded-full blur-[120px] pointer-events-none z-0"></div>
-      <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-nexus-blue opacity-10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+      {!isLightPage && (
+        <>
+          <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-nexus-purple opacity-10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+          <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-nexus-blue opacity-10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+        </>
+      )}
 
       <div>
         {/* Renderizado condicional del Navbar global (solo fuera de la Landing principal) */}

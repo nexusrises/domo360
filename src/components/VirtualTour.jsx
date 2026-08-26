@@ -55,18 +55,59 @@ const IconMap = {
   Map
 };
 
-// CSS Filter mapping
-const getFilterCss = (filtro) => {
-  switch (filtro) {
-    case 'grayscale':
-      return 'grayscale(100%)';
-    case 'cold':
-      return 'contrast(1.1) brightness(0.95) saturate(1.3) hue-rotate(180deg)';
+// CSS Filter & Color Calibration mapping
+const getFilterCss = (filtro, colorSettings) => {
+  const settings = colorSettings || (typeof filtro === 'object' ? filtro : null);
+  const filterKey = typeof filtro === 'string' ? filtro : (settings?.preset || 'normal');
+
+  let baseFilter = '';
+  switch (filterKey) {
+    case 'interior_luminoso':
+    case 'bright':
+      baseFilter = 'brightness(1.12) contrast(1.06) saturate(1.15)';
+      break;
+    case 'drone_cielo_azul':
+    case 'vivid':
+      baseFilter = 'contrast(1.18) saturate(1.28) brightness(1.03) hue-rotate(-5deg)';
+      break;
+    case 'atardecer_dorado':
     case 'warm':
-      return 'sepia(50%) contrast(1.1) saturate(1.2)';
+      baseFilter = 'sepia(28%) saturate(1.3) contrast(1.1) brightness(1.03)';
+      break;
+    case 'hdr_arquitectura':
+    case 'hdr':
+      baseFilter = 'contrast(1.22) saturate(1.22) brightness(1.06)';
+      break;
+    case 'cold':
+      baseFilter = 'hue-rotate(18deg) saturate(1.15) contrast(1.08) brightness(1.02)';
+      break;
+    case 'blanco_negro':
+    case 'grayscale':
+      baseFilter = 'grayscale(100%) contrast(1.25)';
+      break;
     default:
-      return 'none';
+      baseFilter = '';
   }
+
+  if (settings && (settings.brillo !== undefined || settings.contraste !== undefined || settings.saturacion !== undefined || settings.temperatura !== undefined)) {
+    const bVal = (settings.brillo ?? 100) / 100;
+    const cVal = (settings.contraste ?? 100) / 100;
+    const sVal = (settings.saturacion ?? 100) / 100;
+    const temp = settings.temperatura ?? 0;
+    
+    let tempFilter = '';
+    if (temp > 0) {
+      tempFilter = `sepia(${temp * 0.5}%)`;
+    } else if (temp < 0) {
+      tempFilter = `hue-rotate(${temp * 0.6}deg)`;
+    }
+
+    const sliderFilters = `brightness(${bVal}) contrast(${cVal}) saturate(${sVal}) ${tempFilter}`.trim();
+    if (!baseFilter) return sliderFilters || 'none';
+    return `${baseFilter} ${sliderFilters}`.trim();
+  }
+
+  return baseFilter || 'none';
 };
 
 // Controlador de zoom real para visor 360° usando FOV (Field of View)
@@ -118,6 +159,7 @@ function PanoramaSphere({ imagePath, onPointerDown }) {
       texture.minFilter = THREE.LinearFilter;
       texture.magFilter = THREE.LinearFilter;
       texture.generateMipmaps = false;
+      texture.colorSpace = THREE.SRGBColorSpace; // Calibración de color sRGB nativo sin oscurecimiento
       texture.needsUpdate = true;
     }
   }, [texture]);
@@ -995,8 +1037,13 @@ export default function VirtualTour({
       <Canvas
         camera={{ position: [0, 0, 0.1] }}
         dpr={[1, 2]}
+        gl={{
+          antialias: true,
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.05
+        }}
         className="w-full h-[calc(100%-50px)] md:h-full cursor-grab active:cursor-grabbing"
-        style={{ filter: getFilterCss(filtro) }}
+        style={{ filter: getFilterCss(activeScene?.filtro || filtro, activeScene?.colorSettings) }}
         onPointerDown={() => {
           setAutoRotateState(false);
           setShowDragHint(false);

@@ -230,24 +230,24 @@ export default function CompraSeguro() {
 
       {/* 1. HERO SECTION */}
       <section className="container mx-auto px-6 pt-28 pb-16 relative z-10 text-center reveal-on-scroll">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-gradient-to-r from-nexus-accent/10 to-nexus-purple/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-gradient-to-r from-sky-400/15 to-purple-400/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
         
-        <span className="text-xs uppercase text-nexus-accent font-bold tracking-widest bg-nexus-accent/10 px-3.5 py-1.5 rounded-full border border-nexus-accent/20 relative z-10 inline-block">
+        <span className="text-xs uppercase text-[#008b99] font-bold tracking-widest bg-[#008b99]/10 px-3.5 py-1.5 rounded-full border border-[#008b99]/30 relative z-10 inline-block font-display">
           CERO RIESGOS DE ESTAFAS
         </span>
         
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-5 mb-6 leading-[1.15] max-w-4xl mx-auto relative z-10 font-display">
+        <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mt-5 mb-6 leading-[1.15] max-w-4xl mx-auto relative z-10 font-display">
           Compra tu propiedad con absoluta <span className="text-gradient-rise">Garantía y <br /> Respaldo Legal</span>
         </h1>
         
-        <p className="text-gray-300 max-w-3xl mx-auto text-base md:text-lg mb-10 leading-relaxed relative z-10 font-sans">
+        <p className="text-slate-600 max-w-3xl mx-auto text-base md:text-lg mb-10 leading-relaxed relative z-10 font-sans font-medium">
           En el mercado inmobiliario del departamento de Puno y el sur del Perú, la seguridad de tu dinero es lo primero. En Nexus Domo 360° filtramos legal, técnica y físicamente cada terreno, lote y casa antes de publicarlo en nuestro portal. Nuestro Abogado Inmobiliario dedicado audita cada título en la SUNARP y sanea la documentación correspondiente para que compres sin riesgos de estafas.
         </p>
 
         <div className="flex justify-center relative z-10">
           <Link
-            to="/"
-            className="inline-flex items-center justify-center btn-neon-cian px-8 py-4 rounded-full font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 active:scale-95 group font-display"
+            to="/proyectos"
+            className="inline-flex items-center justify-center bg-slate-900 text-white hover:bg-[#00c4ee] hover:text-black border border-slate-900 hover:border-[#00c4ee] px-8 py-4 rounded-full font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 active:scale-95 group font-display shadow-md"
           >
             <Search className="w-4.5 h-4.5 mr-2" />
             Ver Propiedades Verificadas
@@ -259,17 +259,17 @@ export default function CompraSeguro() {
       {/* 2. LA REALIDAD DEL MERCADO (PELIGROS) */}
       <section className="container mx-auto px-3 sm:px-6 pb-10 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16 reveal-on-scroll">
-          <span className="text-xs uppercase text-red-400 font-bold tracking-widest bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">ALERTAS DEL MERCADO</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mt-4 font-display">
+          <span className="text-xs uppercase text-red-600 font-bold tracking-widest bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">ALERTAS DEL MERCADO</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mt-4 font-display">
             Los 3 mayores peligros al comprar un terreno en Juliaca (y cómo te protegemos)
           </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans font-medium">
             Comprar un lote de manera informal puede costar los ahorros de toda tu vida. A continuación, te mostramos los riesgos más comunes y cómo te protegemos de ellos de forma activa.
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto relative px-0 md:px-6 reveal-on-scroll">
-          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)]">
+          <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white relative group shadow-[0_15px_45px_rgba(15,23,42,0.08)]">
             <div 
               className="flex transition-transform duration-500 ease-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -279,45 +279,44 @@ export default function CompraSeguro() {
             >
               {peligros.map((peligro, idx) => (
                 <div key={idx} className="w-full shrink-0 flex flex-col md:flex-row items-stretch min-h-[440px] md:min-h-[480px]">
-                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-transparent border-b md:border-b-0 md:border-r border-white/5">
+                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-slate-100 border-b md:border-b-0 md:border-r border-slate-200/80">
                     <img 
                       src={peligro.imagen.startsWith('http') || peligro.imagen.startsWith('data:') ? peligro.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${peligro.imagen}`} 
                       alt={peligro.titulo} 
                       className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#0a0d14] via-transparent to-transparent md:via-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#0a0d14]/50 via-transparent to-transparent pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-900/60 via-transparent to-transparent"></div>
                     
-                    <span className="absolute top-6 left-6 text-[10px] uppercase font-black tracking-widest bg-red-950/80 border border-red-500/30 backdrop-blur-md px-3.5 py-2 rounded-full text-red-400 shadow-lg select-none">
+                    <span className="absolute top-6 left-6 text-[10px] uppercase font-black tracking-widest bg-red-600 text-white border border-red-500 backdrop-blur-md px-3.5 py-2 rounded-full shadow-md select-none">
                       {peligro.tag}
                     </span>
                   </div>
 
-                  <div className="w-full md:w-1/2 p-4 sm:p-8 md:p-12 flex flex-col justify-between bg-transparent">
+                  <div className="w-full md:w-1/2 p-4 sm:p-8 md:p-12 flex flex-col justify-between bg-white">
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-xl bg-red-500/10 flex items-center justify-center border border-red-500/20 shrink-0">
                           {peligro.icon}
                         </div>
-                        <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-white font-display leading-tight text-left">
+                        <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-slate-900 font-display leading-tight text-left">
                           {peligro.titulo}
                         </h3>
                       </div>
                       
-                      <p className="text-gray-300 text-xs sm:text-sm leading-relaxed text-left font-sans font-normal tracking-wide">
+                      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-left font-sans font-normal tracking-wide">
                         {peligro.descripcion}
                       </p>
                     </div>
 
-                    <div className="mt-6 md:mt-8 pt-4 md:pt-5 border-t border-white/5 flex items-start gap-2.5 text-[#4ade80] text-[11px] sm:text-xs leading-relaxed text-left font-semibold font-sans">
-                      <div className="p-0.5 rounded-full bg-[#09d261]/10 border border-[#09d261]/20 text-[#09d261] shrink-0 mt-0.5">
+                    <div className="mt-6 md:mt-8 pt-4 md:pt-5 border-t border-slate-200 flex items-start gap-2.5 text-emerald-700 text-[11px] sm:text-xs leading-relaxed text-left font-bold font-sans">
+                      <div className="p-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 shrink-0 mt-0.5">
                         <svg className="w-3.5 h-3.5 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
                       <div>
-                        <span className="text-[#4ade80] font-black uppercase tracking-wider text-[9px] block mb-1 font-display">Garantía de Compra Segura</span>
+                        <span className="text-emerald-700 font-black uppercase tracking-wider text-[9px] block mb-1 font-display">Garantía de Compra Segura</span>
                         {peligro.solucion}
                       </div>
                     </div>
@@ -330,10 +329,10 @@ export default function CompraSeguro() {
           <div className="flex items-center justify-center gap-6 mt-8">
             <button
               onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-red-500/10 hover:border-red-500/30 transition-all duration-200 active:scale-95 focus:outline-none cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-red-50 hover:border-red-400 transition-all duration-200 active:scale-95 focus:outline-none cursor-pointer shadow-sm"
               aria-label="Anterior"
             >
-              <ChevronLeft className="w-5 h-5 text-red-400" />
+              <ChevronLeft className="w-5 h-5 text-red-500" />
             </button>
 
             <div className="flex justify-center gap-2">
@@ -342,7 +341,7 @@ export default function CompraSeguro() {
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
                   className={`h-2 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${
-                    currentSlide === idx ? 'w-8 bg-red-500' : 'w-2 bg-white/20 hover:bg-white/40'
+                    currentSlide === idx ? 'w-8 bg-red-500' : 'w-2 bg-slate-300 hover:bg-slate-400'
                   }`}
                   aria-label={`Ir al peligro ${idx + 1}`}
                 />
@@ -351,10 +350,10 @@ export default function CompraSeguro() {
 
             <button
               onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-red-500/10 hover:border-red-500/30 transition-all duration-200 active:scale-95 focus:outline-none cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-red-50 hover:border-red-400 transition-all duration-200 active:scale-95 focus:outline-none cursor-pointer shadow-sm"
               aria-label="Siguiente"
             >
-              <ChevronRight className="w-5 h-5 text-red-400" />
+              <ChevronRight className="w-5 h-5 text-red-500" />
             </button>
           </div>
         </div>
@@ -363,11 +362,11 @@ export default function CompraSeguro() {
       {/* 3. PROTOCOLO DE SEGURIDAD (STEPPER) */}
       <section className="container mx-auto px-6 pb-12 relative z-10 pt-10">
         <div className="max-w-4xl mx-auto text-center mb-16 reveal-on-scroll">
-          <span className="text-xs uppercase text-nexus-purple font-bold tracking-widest bg-nexus-purple/10 px-3 py-1 rounded-full border border-nexus-purple/20">PROTOCOLO DE SEGURIDAD</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mt-4 font-display">
+          <span className="text-xs uppercase text-purple-700 font-bold tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">PROTOCOLO DE SEGURIDAD</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mt-4 font-display">
             Nuestro Protocolo de Verificación de 3 Niveles
           </h2>
-          <p className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans font-medium">
             No dejamos nada al azar. Cada inmueble y lote listado en Nexus Domo 360° atraviesa un riguroso proceso de tres filtros independientes liderados por nuestro Abogado Inmobiliario antes de ser publicado.
           </p>
         </div>
@@ -380,12 +379,12 @@ export default function CompraSeguro() {
               return (
                 <>
                   <div className="w-[40%] flex flex-col justify-between relative py-4">
-                    <div className="absolute left-12 top-12 bottom-12 w-0.5 bg-white/10 z-0">
+                    <div className="absolute left-12 top-12 bottom-12 w-0.5 bg-slate-200 z-0">
                       <div 
-                        className="w-full bg-gradient-to-b from-nexus-accent via-nexus-purple to-indigo-400 transition-all duration-500 rounded-full"
+                        className="w-full bg-gradient-to-b from-sky-500 via-purple-500 to-indigo-500 transition-all duration-500 rounded-full"
                         style={{ 
                           height: `${(stepToShow / (pasos.length - 1)) * 100}%`,
-                          boxShadow: '0 0 10px rgba(6, 182, 212, 0.5)'
+                          boxShadow: '0 0 10px rgba(6, 182, 212, 0.4)'
                         }}
                       />
                     </div>
@@ -396,26 +395,26 @@ export default function CompraSeguro() {
                         onClick={() => setActiveStep(idx)}
                         className={`w-full flex items-center gap-6 p-6 rounded-2xl border text-left transition-all duration-300 relative z-10 focus:outline-none cursor-pointer ${
                           stepToShow === idx 
-                            ? `glass-panel ${paso.borderColor} ${paso.glowColor} bg-[#0a0d14]/70` 
-                            : 'border-transparent hover:bg-white/[0.02] bg-transparent'
+                            ? `bg-white border-slate-300 shadow-[0_10px_30px_rgba(15,23,42,0.08)]` 
+                            : 'border-transparent hover:bg-white/60 bg-transparent'
                         }`}
                       >
                         <div className={`w-14 h-14 rounded-xl flex items-center justify-center font-display text-xl font-black shrink-0 border transition-all duration-300 ${
                           stepToShow === idx 
-                            ? `${paso.bgColor} ${paso.color} ${paso.borderColor}` 
-                            : 'bg-white/5 border-white/5 text-gray-500'
+                            ? `bg-slate-900 text-white border-slate-900` 
+                            : 'bg-slate-100 border-slate-200 text-slate-500'
                         }`}>
                           {paso.numero}
                         </div>
 
                         <div className="space-y-1">
                           <span className={`text-[10px] uppercase font-black tracking-wider transition-colors duration-300 ${
-                            stepToShow === idx ? paso.color : 'text-gray-500'
+                            stepToShow === idx ? 'text-[#008b99]' : 'text-slate-500'
                           }`}>
                             Nivel {paso.numero}
                           </span>
                           <h3 className={`font-bold text-base lg:text-lg font-display transition-colors duration-300 ${
-                            stepToShow === idx ? 'text-white' : 'text-gray-400 hover:text-gray-300'
+                            stepToShow === idx ? 'text-slate-900' : 'text-slate-600 hover:text-slate-900'
                           }`}>
                             {paso.titulo.split(': ')[1] || paso.titulo}
                           </h3>
@@ -424,8 +423,8 @@ export default function CompraSeguro() {
                     ))}
                   </div>
 
-                  <div className="w-[60%] glass-panel border border-white/5 rounded-3xl overflow-hidden flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#0a0d14]/60">
-                    <div className="w-full h-64 lg:h-72 relative overflow-hidden bg-black/30 border-b border-white/5">
+                  <div className="w-[60%] bg-white border border-slate-200/90 rounded-3xl overflow-hidden flex flex-col justify-between shadow-[0_20px_50px_rgba(15,23,42,0.06)]">
+                    <div className="w-full h-64 lg:h-72 relative overflow-hidden bg-slate-900/10 border-b border-slate-200">
                       {pasos.map((paso, idx) => (
                         <div 
                           key={paso.id}
@@ -439,30 +438,30 @@ export default function CompraSeguro() {
                             className="w-full h-full object-cover" 
                             loading="lazy"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-[#0a0d14]/40 to-transparent"></div>
-                          <span className={`absolute top-6 right-6 text-[9px] uppercase font-black tracking-widest px-3 py-1.5 rounded-full border backdrop-blur-md shadow-md ${paso.bgColor} ${paso.color} ${paso.borderColor}`}>
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                          <span className="absolute top-6 right-6 text-[9px] uppercase font-black tracking-widest px-3 py-1.5 rounded-full border backdrop-blur-md shadow-md bg-slate-900 text-white border-slate-800">
                             Filtro Activo
                           </span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="p-8 lg:p-10 flex-1 flex flex-col justify-between space-y-6">
+                    <div className="p-8 lg:p-10 flex-1 flex flex-col justify-between space-y-6 bg-white">
                       <div className="space-y-4">
-                        <h3 className="font-bold text-xl lg:text-2xl font-display text-white transition-colors duration-300">
+                        <h3 className="font-bold text-xl lg:text-2xl font-display text-slate-900 transition-colors duration-300">
                           {pasos[stepToShow].titulo}
                         </h3>
-                        <p className="text-gray-300 text-xs lg:text-sm leading-relaxed font-sans font-normal">
+                        <p className="text-slate-600 text-xs lg:text-sm leading-relaxed font-sans font-medium">
                           {pasos[stepToShow].descripcion}
                         </p>
                       </div>
 
-                      <div className="border-t border-white/5 pt-6">
-                        <span className="text-[10px] uppercase font-black tracking-widest text-gray-500 block mb-3.5 font-display">Tareas de Auditoría Legal y Técnica</span>
+                      <div className="border-t border-slate-200 pt-6">
+                        <span className="text-[10px] uppercase font-black tracking-widest text-slate-500 block mb-3.5 font-display">Tareas de Auditoría Legal y Técnica</span>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                           {pasos[stepToShow].puntos.map((punto, idx) => (
-                            <div key={idx} className="flex items-start gap-2 text-[11px] lg:text-xs text-gray-300 font-sans leading-relaxed">
-                              <div className={`p-0.5 rounded-full mt-0.5 shrink-0 border ${pasos[stepToShow].bgColor} ${pasos[stepToShow].color} ${pasos[stepToShow].borderColor}`}>
+                            <div key={idx} className="flex items-start gap-2 text-[11px] lg:text-xs text-slate-700 font-sans leading-relaxed font-medium">
+                              <div className="p-0.5 rounded-full mt-0.5 shrink-0 border bg-[#008b99]/10 text-[#008b99] border-[#008b99]/30">
                                 <svg className="w-3 h-3 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
@@ -487,8 +486,8 @@ export default function CompraSeguro() {
                 <div 
                   key={paso.id} 
                   id={`acordeon-nivel-${idx}`}
-                  className={`glass-panel border rounded-2xl overflow-hidden transition-all duration-300 scroll-mt-24 ${
-                    isOpen ? `${paso.borderColor} ${paso.glowColor} bg-[#0a0d14]/80` : 'border-white/5 bg-[#0a0d14]/40'
+                  className={`bg-white border rounded-2xl overflow-hidden transition-all duration-300 scroll-mt-24 ${
+                    isOpen ? 'border-slate-300 shadow-md' : 'border-slate-200/90'
                   }`}
                 >
                   <button
@@ -498,26 +497,26 @@ export default function CompraSeguro() {
                     <div className="flex items-center gap-4">
                       <div className={`w-11 h-11 rounded-lg flex items-center justify-center font-display text-sm font-black shrink-0 border transition-all duration-300 ${
                         isOpen 
-                          ? `${paso.bgColor} ${paso.color} ${paso.borderColor}` 
-                          : 'bg-white/5 border-white/5 text-gray-500'
+                          ? 'bg-slate-900 text-white border-slate-900' 
+                          : 'bg-slate-100 border-slate-200 text-slate-500'
                       }`}>
                         {paso.numero}
                       </div>
                       
                       <div>
                         <span className={`text-[9px] uppercase font-bold tracking-widest block ${
-                          isOpen ? paso.color : 'text-gray-500'
+                          isOpen ? 'text-[#008b99]' : 'text-slate-500'
                         }`}>
                           Nivel {paso.numero}
                         </span>
-                        <h3 className="font-bold text-sm sm:text-base font-display text-white leading-tight">
+                        <h3 className="font-bold text-sm sm:text-base font-display text-slate-900 leading-tight">
                           {paso.titulo.split(': ')[1] || paso.titulo}
                         </h3>
                       </div>
                     </div>
 
-                    <div className={`w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 text-white' : 'rotate-0 text-gray-500'
+                    <div className={`w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center transition-transform duration-300 ${
+                      isOpen ? 'rotate-180 text-slate-900' : 'rotate-0 text-slate-500'
                     }`}>
                       <ChevronDown className="w-4 h-4" />
                     </div>
@@ -526,32 +525,32 @@ export default function CompraSeguro() {
                   <div 
                     className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
                       isOpen 
-                        ? 'grid-rows-[1fr] opacity-100 border-t border-white/5' 
+                        ? 'grid-rows-[1fr] opacity-100 border-t border-slate-200' 
                         : 'grid-rows-[0fr] opacity-0 pointer-events-none'
                     }`}
                   >
-                    <div className="overflow-hidden">
-                      <div className="w-full h-44 relative bg-black/30 overflow-hidden">
+                    <div className="overflow-hidden bg-white">
+                      <div className="w-full h-44 relative bg-slate-100 overflow-hidden">
                         <img 
                           src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}${paso.imagen}`} 
                           alt={paso.titulo} 
                           className="w-full h-full object-cover" 
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d14] via-[#0a0d14]/40 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                       </div>
 
                       <div className="p-5 space-y-5">
-                        <p className="text-gray-300 text-xs leading-relaxed font-sans">
+                        <p className="text-slate-600 text-xs leading-relaxed font-sans font-medium">
                           {paso.descripcion}
                         </p>
 
-                        <div className="border-t border-white/5 pt-4">
-                          <span className="text-[9px] uppercase font-black tracking-widest text-gray-500 block mb-3 font-display">Tareas de Auditoría Legal y Técnica</span>
+                        <div className="border-t border-slate-200 pt-4">
+                          <span className="text-[9px] uppercase font-black tracking-widest text-slate-500 block mb-3 font-display">Tareas de Auditoría Legal y Técnica</span>
                           <div className="flex flex-col gap-3">
                             {paso.puntos.map((punto, pIdx) => (
-                              <div key={pIdx} className="flex items-start gap-2.5 text-[11px] text-gray-300 font-sans leading-relaxed">
-                                <div className={`p-0.5 rounded-full mt-0.5 shrink-0 border ${paso.bgColor} ${paso.color} ${paso.borderColor}`}>
+                              <div key={pIdx} className="flex items-start gap-2.5 text-[11px] text-slate-700 font-sans leading-relaxed">
+                                <div className="p-0.5 rounded-full mt-0.5 shrink-0 border bg-[#008b99]/10 text-[#008b99] border-[#008b99]/30">
                                   <svg className="w-2.5 h-2.5 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                   </svg>
@@ -572,35 +571,34 @@ export default function CompraSeguro() {
       </section>
 
       {/* 4. ASESORÍA Y SANEAMIENTO CON NUESTRO ABOGADO INMOBILIARIO */}
-      <section className="container mx-auto px-3 sm:px-6 pb-20 relative z-10 border-t border-white/5 pt-12">
-        <div className="max-w-5xl mx-auto glass-panel border-white/10 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-[#0c101f]/65 to-[#070a13]/65 backdrop-blur-md shadow-2xl group transition-all duration-300 hover:border-nexus-accent/30">
+      <section className="container mx-auto px-3 sm:px-6 pb-20 relative z-10 border-t border-slate-200/80 pt-12">
+        <div className="max-w-5xl mx-auto border border-slate-200/90 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-white shadow-xl group transition-all duration-300">
           {/* Luces decorativas internas de fondo */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-nexus-accent/10 rounded-full blur-[90px] pointer-events-none transition-all duration-500 group-hover:bg-nexus-accent/15"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-nexus-purple/8 rounded-full blur-[90px] pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-80 h-80 bg-sky-400/10 rounded-full blur-[90px] pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-400/10 rounded-full blur-[90px] pointer-events-none"></div>
 
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
             
             {/* Tarjeta Física de Contacto del Abogado */}
-            <div className="w-full lg:w-[320px] shrink-0 bg-[#070a14]/65 border border-white/10 rounded-3xl p-6 flex flex-col items-center text-center shadow-xl backdrop-blur-md hover:border-nexus-accent/20 transition-all duration-300">
+            <div className="w-full lg:w-[320px] shrink-0 bg-slate-50 border border-slate-200 rounded-3xl p-6 flex flex-col items-center text-center shadow-md">
               <div className="relative group mb-5">
-                {/* Efecto glow emerald/cyan alrededor de la imagen */}
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-2xl blur-[12px] opacity-35 group-hover:opacity-55 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-2xl blur-[12px] opacity-35 transition-opacity duration-300"></div>
                 <img
                   src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/abogado_thumb.png`}
                   alt="Dr. Santiago Ramirez - Abogado Especialista Inmobiliario"
-                  className="w-36 h-36 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-white/15 relative z-10 bg-[#070a13] shadow-md"
+                  className="w-36 h-36 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-slate-200 relative z-10 bg-slate-100 shadow-md"
                   onError={(e) => {
                     e.target.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80";
                   }}
                 />
               </div>
               
-              <h4 className="text-white font-bold text-lg font-display">Dr. Santiago Ramirez</h4>
-              <p className="text-emerald-400 text-[10px] font-semibold uppercase tracking-widest mt-1 opacity-90">
+              <h4 className="text-slate-900 font-bold text-lg font-display">Dr. Santiago Ramirez</h4>
+              <p className="text-emerald-700 text-[10px] font-bold uppercase tracking-widest mt-1">
                 Abogado Especialista Inmobiliario
               </p>
               
-              <div className="w-full border-t border-white/5 my-3.5"></div>
+              <div className="w-full border-t border-slate-200 my-3.5"></div>
               
               <a
                 href="https://wa.me/51951300535?text=Hola%20Dr.%20Santiago%20Ramirez%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20sobre%20el%20estado%20legal%20de%20una%20propiedad%20para%20comprar%2Fvender%20de%20forma%20segura."
@@ -618,55 +616,55 @@ export default function CompraSeguro() {
             {/* Información de Respaldo Legal y Beneficios */}
             <div className="flex-1 space-y-5 flex flex-col justify-between text-left">
               <div className="space-y-3.5">
-                <span className="text-[9px] uppercase font-black tracking-widest text-[#4ade80] bg-[#4ade80]/10 px-3 py-1.5 rounded-full border border-[#4ade80]/20 inline-block font-display">
+                <span className="text-[9px] uppercase font-black tracking-widest text-emerald-700 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 inline-block font-display">
                   SANEAMIENTO Y RESPALDO LEGAL BILATERAL
                 </span>
                 
-                <h3 className="text-2xl md:text-3xl font-bold text-white font-display leading-tight">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 font-display leading-tight">
                   Protección Jurídica para Comprador y Vendedor
                 </h3>
                 
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed font-sans font-normal">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium">
                   La seguridad jurídica no debe beneficiar solo a una de las partes. El <strong>Dr. Santiago Ramirez</strong> se encarga de analizar los expedientes registrales y sanear la documentación correspondiente de forma neutral. Esto garantiza que el comprador reciba una propiedad limpia de deudas o gravámenes y que el vendedor reciba su pago de manera oportuna, transparente y bajo el amparo de la ley, sin que nadie resulte perjudicado.
                 </p>
 
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed font-sans font-normal">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium">
                   Revisamos tu caso de forma preventiva y te asesoramos sobre el estado legal y los planos del predio antes de firmar cualquier minuta en la notaría.
                 </p>
               </div>
 
               {/* Listado de Beneficios Clave */}
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[11px] text-gray-300 pt-3 border-t border-white/5 font-sans">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[11px] text-slate-700 pt-3 border-t border-slate-200 font-sans font-medium">
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-[#4ade80]/10 border border-[#4ade80]/20 flex items-center justify-center text-emerald-400 shrink-0">
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
                   </div>
                   <span>Estudio de Copia Literal en SUNARP</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-[#4ade80]/10 border border-[#4ade80]/20 flex items-center justify-center text-emerald-400 shrink-0">
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
                   </div>
                   <span>Filtro de hipotecas y embargos</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-[#4ade80]/10 border border-[#4ade80]/20 flex items-center justify-center text-emerald-400 shrink-0">
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
                   </div>
                   <span>Redacción de minutas y contratos</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-[#4ade80]/10 border border-[#4ade80]/20 flex items-center justify-center text-emerald-400 shrink-0">
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
                   </div>
                   <span>Acompañamiento completo en Notaría</span>
                 </li>
               </ul>
 
-              <div className="pt-3 border-t border-white/5">
+              <div className="pt-3 border-t border-slate-200">
                 <Link
-                  to="/"
-                  className="inline-flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 text-white px-6 py-2.5 rounded-xl font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-[10px] font-sans w-full sm:w-auto text-center"
+                  to="/proyectos"
+                  className="inline-flex items-center justify-center bg-slate-900 hover:bg-[#00c4ee] hover:text-black border border-slate-900 hover:border-[#00c4ee] text-white px-6 py-2.5 rounded-xl font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-[10px] font-sans w-full sm:w-auto text-center shadow-sm"
                 >
                   Ver Propiedades Aptas
                   <ArrowRight className="w-4.5 h-4.5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -681,11 +679,11 @@ export default function CompraSeguro() {
       {/* 5. SECCIÓN DE PREGUNTAS FRECUENTES (FAQs) */}
       <section className="container mx-auto px-6 pb-16 relative z-10 pt-10">
         <div className="max-w-4xl mx-auto text-center mb-16 reveal-on-scroll">
-          <span className="text-xs uppercase text-nexus-purple font-bold tracking-widest bg-nexus-purple/10 px-3 py-1 rounded-full border border-nexus-purple/20">INVERSIONISTAS INFORMADOS</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mt-4 font-display">
+          <span className="text-xs uppercase text-purple-700 font-bold tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">INVERSIONISTAS INFORMADOS</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mt-4 font-display">
             Preguntas Frecuentes
           </h2>
-          <p className="text-gray-200 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans font-medium">
             Resolvemos tus dudas legales, técnicas y procedimentales para que compres tu próximo lote con total seguridad.
           </p>
         </div>
@@ -694,18 +692,18 @@ export default function CompraSeguro() {
           {faqs.map((faq, idx) => (
             <div 
               key={idx} 
-              className="glass-panel border-white/5 rounded-2xl overflow-hidden transition-colors duration-200"
+              className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-sm transition-colors duration-200"
             >
               <h3>
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full px-6 py-5 text-left flex justify-between items-center gap-4 hover:bg-white/[0.02] transition-colors focus:outline-none"
+                  className="w-full px-6 py-5 text-left flex justify-between items-center gap-4 hover:bg-slate-50 transition-colors focus:outline-none cursor-pointer"
                 >
-                  <span className="font-bold text-sm md:text-base text-white font-display leading-snug">
+                  <span className="font-bold text-sm md:text-base text-slate-900 font-display leading-snug">
                     {faq.question}
                   </span>
                   <ChevronDown 
-                    className={`w-5 h-5 text-nexus-accent transition-transform duration-300 shrink-0 ${
+                    className={`w-5 h-5 text-[#008b99] transition-transform duration-300 shrink-0 ${
                       openFaq === idx ? 'rotate-180' : 'rotate-0'
                     }`} 
                   />
@@ -717,7 +715,7 @@ export default function CompraSeguro() {
                   openFaq === idx ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <div className="px-6 pb-6 pt-2 text-gray-400 text-xs md:text-sm leading-relaxed border-t border-white/5 font-sans">
+                <div className="px-6 pb-6 pt-2 text-slate-600 text-xs md:text-sm leading-relaxed border-t border-slate-200/80 font-sans font-medium">
                   {faq.answer}
                 </div>
               </div>
@@ -744,19 +742,19 @@ export default function CompraSeguro() {
 
       {/* 6. CTA FINAL */}
       <section className="container mx-auto px-6 pb-24">
-        <div className="max-w-4xl mx-auto glass-panel border-nexus-purple/20 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden reveal-on-scroll">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-nexus-purple opacity-[0.03] rounded-full blur-[80px]"></div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-display">
+        <div className="max-w-4xl mx-auto bg-white border border-slate-200/90 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden reveal-on-scroll shadow-xl">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-purple-400/10 rounded-full blur-[80px]"></div>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 font-display">
             ¿Deseas comprar tu lote de forma 100% segura?
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base mb-10 leading-relaxed font-sans">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base mb-10 leading-relaxed font-sans font-medium">
             Agenda una llamada de asesoría gratuita con nuestro Abogado Inmobiliario. Revisamos tu caso y te asesoramos sobre el estado legal y los planos antes de firmar cualquier minuta.
           </p>
           <a 
             href="https://wa.me/51951300535?text=Hola%20Angel%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20con%20el%20abogado%20inmobiliario%20para%20comprar%20de%20forma%20segura."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center btn-neon-purple px-8 py-3.5 rounded-full font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-xs md:text-sm font-sans w-full sm:w-auto"
+            className="inline-flex items-center justify-center bg-slate-900 text-white hover:bg-[#00c4ee] hover:text-black px-8 py-3.5 rounded-full font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-xs md:text-sm font-sans w-full sm:w-auto shadow-md"
           >
             Agendar Asesoría Legal Gratuita
             <ArrowRight className="w-4.5 h-4.5 ml-2 group-hover:translate-x-1 transition-transform" />

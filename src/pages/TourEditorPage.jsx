@@ -133,24 +133,59 @@ const IconMap = {
   Map
 };
 
-// CSS Filter mapping
-const getFilterCss = (filtro) => {
-  switch (filtro) {
-    case 'grayscale':
-      return 'grayscale(100%) contrast(1.25)';
-    case 'vivid':
-      return 'contrast(1.12) saturate(1.3) brightness(1.02)';
+// CSS Filter & Color Calibration mapping
+const getFilterCss = (filtro, colorSettings) => {
+  const settings = colorSettings || (typeof filtro === 'object' ? filtro : null);
+  const filterKey = typeof filtro === 'string' ? filtro : (settings?.preset || 'normal');
+
+  let baseFilter = '';
+  switch (filterKey) {
+    case 'interior_luminoso':
     case 'bright':
-      return 'brightness(1.08) contrast(1.02) saturate(1.15)';
-    case 'hdr':
-      return 'contrast(1.25) saturate(1.25) brightness(0.98)';
+      baseFilter = 'brightness(1.12) contrast(1.06) saturate(1.15)';
+      break;
+    case 'drone_cielo_azul':
+    case 'vivid':
+      baseFilter = 'contrast(1.18) saturate(1.28) brightness(1.03) hue-rotate(-5deg)';
+      break;
+    case 'atardecer_dorado':
     case 'warm':
-      return 'sepia(30%) contrast(1.1) saturate(1.25) brightness(1.01)';
+      baseFilter = 'sepia(28%) saturate(1.3) contrast(1.1) brightness(1.03)';
+      break;
+    case 'hdr_arquitectura':
+    case 'hdr':
+      baseFilter = 'contrast(1.22) saturate(1.22) brightness(1.06)';
+      break;
     case 'cold':
-      return 'hue-rotate(12deg) saturate(1.15) contrast(1.08)';
+      baseFilter = 'hue-rotate(18deg) saturate(1.15) contrast(1.08) brightness(1.02)';
+      break;
+    case 'blanco_negro':
+    case 'grayscale':
+      baseFilter = 'grayscale(100%) contrast(1.25)';
+      break;
     default:
-      return 'none';
+      baseFilter = '';
   }
+
+  if (settings && (settings.brillo !== undefined || settings.contraste !== undefined || settings.saturacion !== undefined || settings.temperatura !== undefined)) {
+    const bVal = (settings.brillo ?? 100) / 100;
+    const cVal = (settings.contraste ?? 100) / 100;
+    const sVal = (settings.saturacion ?? 100) / 100;
+    const temp = settings.temperatura ?? 0;
+    
+    let tempFilter = '';
+    if (temp > 0) {
+      tempFilter = `sepia(${temp * 0.5}%)`;
+    } else if (temp < 0) {
+      tempFilter = `hue-rotate(${temp * 0.6}deg)`;
+    }
+
+    const sliderFilters = `brightness(${bVal}) contrast(${cVal}) saturate(${sVal}) ${tempFilter}`.trim();
+    if (!baseFilter) return sliderFilters || 'none';
+    return `${baseFilter} ${sliderFilters}`.trim();
+  }
+
+  return baseFilter || 'none';
 };
 
 // Componente de Zoom por FOV
@@ -887,6 +922,7 @@ export default function TourEditorPage() {
         const rawName = item.filename.replace(/\.[^/.]+$/, "");
         // Crear un id de escena único concatenando timestamp secuencial
         const sceneId = rawName.toLowerCase().replace(/[^a-z0-9]/g, '_') + '_' + (Date.now() + index).toString().slice(-4);
+        const initialPreset = item.preset || 'normal';
         
         updated[sceneId] = {
           nombre: rawName.replace(/^[0-9]+_/, '').replace(/_/g, ' '), // Nombre legible y limpio
@@ -894,7 +930,14 @@ export default function TourEditorPage() {
           hotspots: [],
           heading: { x: 0, y: 0 },
           norteMagnetico: 0,
-          filtro: 'normal'
+          filtro: initialPreset,
+          colorSettings: {
+            preset: initialPreset,
+            brillo: 100,
+            contraste: 100,
+            saturacion: 100,
+            temperatura: 0
+          }
         };
         lastSceneId = sceneId;
       });
@@ -1834,7 +1877,7 @@ export default function TourEditorPage() {
               camera={{ position: [0, 0, 0.1] }}
               dpr={[1, 2]}
               className="w-full h-full"
-              style={{ filter: getFilterCss(activeScene.filtro) }}
+              style={{ filter: getFilterCss(activeScene?.filtro, activeScene?.colorSettings) }}
               gl={{ 
                 antialias: true, 
                 toneMapping: THREE.ACESFilmicToneMapping, 
@@ -2320,10 +2363,10 @@ export default function TourEditorPage() {
         <div className="w-[20%] min-w-[300px] h-full bg-slate-950 border-l border-white/10 flex flex-col z-20">
           
           {/* Navegación por Pestañas */}
-          <div className="flex border-b border-white/10 text-[10px] uppercase font-bold tracking-wider select-none shrink-0">
+          <div className="flex border-b border-white/10 text-[9.5px] uppercase font-bold tracking-wider select-none shrink-0">
             <button
               onClick={() => setActiveTab('añadir')}
-              className={`flex-1 py-3.5 text-center transition-all border-b-2 font-mono ${
+              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
                 activeTab === 'añadir'
                   ? 'border-amber-400 text-amber-400 bg-white/5'
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
@@ -2333,7 +2376,7 @@ export default function TourEditorPage() {
             </button>
             <button
               onClick={() => setActiveTab('elementos')}
-              className={`flex-1 py-3.5 text-center transition-all border-b-2 font-mono ${
+              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
                 activeTab === 'elementos'
                   ? 'border-amber-400 text-amber-400 bg-white/5'
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
@@ -2342,8 +2385,18 @@ export default function TourEditorPage() {
               ✏️ Elementos
             </button>
             <button
+              onClick={() => setActiveTab('filtros')}
+              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
+                activeTab === 'filtros'
+                  ? 'border-amber-400 text-amber-400 bg-white/5'
+                  : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              🎨 Filtros
+            </button>
+            <button
               onClick={() => setActiveTab('ajustes')}
-              className={`flex-1 py-3.5 text-center transition-all border-b-2 font-mono ${
+              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
                 activeTab === 'ajustes'
                   ? 'border-amber-400 text-amber-400 bg-white/5'
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
@@ -2356,6 +2409,231 @@ export default function TourEditorPage() {
           {/* Contenido de la Pestaña Activa */}
           <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-white/10">
             
+            {/* Pestaña: FILTROS Y CALIBRACIÓN DE IMAGEN */}
+            {activeTab === 'filtros' && (
+              <div className="space-y-4 animate-fade-in">
+                {/* Cabecera con nombre de la imagen activa */}
+                <div className="p-3.5 bg-slate-900/80 border border-white/10 rounded-2xl flex items-center justify-between">
+                  <div className="min-w-0 pr-2">
+                    <span className="text-[9px] font-bold text-amber-400 uppercase tracking-widest block">Calibrando Escena</span>
+                    <h4 className="text-white font-bold text-xs truncate mt-0.5" title={activeScene.nombre || activeSceneKey}>
+                      {activeScene.nombre || activeSceneKey}
+                    </h4>
+                  </div>
+                  <button
+                    onClick={() => {
+                      const updated = {
+                        ...scenes,
+                        [activeSceneKey]: {
+                          ...activeScene,
+                          filtro: 'normal',
+                          colorSettings: {
+                            preset: 'original',
+                            brillo: 100,
+                            contraste: 100,
+                            saturacion: 100,
+                            temperatura: 0
+                          }
+                        }
+                      };
+                      saveToLocal(updated);
+                    }}
+                    className="text-[9px] text-gray-400 hover:text-white bg-slate-950 px-2.5 py-1 rounded-xl border border-white/10 transition-colors font-medium cursor-pointer shrink-0"
+                    title="Restablecer valores a los colores originales del archivo"
+                  >
+                    Restablecer
+                  </button>
+                </div>
+
+                {/* Presets 1-Clic Inmobiliarios */}
+                <div className="space-y-2 p-3.5 bg-slate-900/50 border border-white/5 rounded-2xl">
+                  <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wider block flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    Presets Profesionales (1-Clic)
+                  </span>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { id: 'normal', label: '🌿 Original', desc: 'Fiel a la foto' },
+                      { id: 'interior_luminoso', label: '💡 Interior Luz', desc: '+Luz y sombras' },
+                      { id: 'drone_cielo_azul', label: '🚁 Drone Cielo', desc: '+Cielo y nitidez' },
+                      { id: 'atardecer_dorado', label: '🌅 Atardecer', desc: 'Tono dorado cálido' },
+                      { id: 'hdr_arquitectura', label: '🏛️ HDR Pro', desc: 'Contraste dinámico' },
+                      { id: 'blanco_negro', label: '🖤 B&N Elegante', desc: 'Monocromo fino' }
+                    ].map((preset) => {
+                      const currentPreset = activeScene.colorSettings?.preset || activeScene.filtro || 'normal';
+                      const isSelected = currentPreset === preset.id || (preset.id === 'interior_luminoso' && currentPreset === 'bright') || (preset.id === 'drone_cielo_azul' && currentPreset === 'vivid') || (preset.id === 'atardecer_dorado' && currentPreset === 'warm') || (preset.id === 'hdr_arquitectura' && currentPreset === 'hdr') || (preset.id === 'blanco_negro' && currentPreset === 'grayscale');
+                      
+                      return (
+                        <button
+                          key={preset.id}
+                          onClick={() => {
+                            const currentSettings = activeScene.colorSettings || {};
+                            const updated = {
+                              ...scenes,
+                              [activeSceneKey]: {
+                                ...activeScene,
+                                filtro: preset.id,
+                                colorSettings: {
+                                  ...currentSettings,
+                                  preset: preset.id
+                                }
+                              }
+                            };
+                            saveToLocal(updated);
+                          }}
+                          className={`p-2.5 rounded-xl text-left border transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-amber-500/20 border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
+                              : 'bg-slate-950/80 border-white/5 hover:border-white/20 hover:bg-slate-900'
+                          }`}
+                        >
+                          <span className={`text-[10px] font-bold block ${isSelected ? 'text-amber-400' : 'text-gray-200'}`}>
+                            {preset.label}
+                          </span>
+                          <span className="text-[8px] text-gray-500 block mt-0.5 truncate">
+                            {preset.desc}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Sliders Manuales de Precisión */}
+                <div className="space-y-3.5 p-3.5 bg-slate-900/50 border border-white/5 rounded-2xl">
+                  <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wider block">
+                    Calibración Manual Fina
+                  </span>
+
+                  {/* Brillo */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-center text-[9px] font-bold text-gray-400">
+                      <span>☀️ Brillo / Exposición</span>
+                      <span className="font-mono text-white">{(activeScene.colorSettings?.brillo ?? 100)}%</span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="50"
+                      max="160"
+                      step="1"
+                      value={activeScene.colorSettings?.brillo ?? 100}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        const currentSettings = activeScene.colorSettings || { preset: activeScene.filtro || 'normal' };
+                        const updated = {
+                          ...scenes,
+                          [activeSceneKey]: {
+                            ...activeScene,
+                            colorSettings: {
+                              ...currentSettings,
+                              brillo: val
+                            }
+                          }
+                        };
+                        saveToLocal(updated);
+                      }}
+                      className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    />
+                  </div>
+
+                  {/* Contraste */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-center text-[9px] font-bold text-gray-400">
+                      <span>🌓 Contraste</span>
+                      <span className="font-mono text-white">{(activeScene.colorSettings?.contraste ?? 100)}%</span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="50"
+                      max="160"
+                      step="1"
+                      value={activeScene.colorSettings?.contraste ?? 100}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        const currentSettings = activeScene.colorSettings || { preset: activeScene.filtro || 'normal' };
+                        const updated = {
+                          ...scenes,
+                          [activeSceneKey]: {
+                            ...activeScene,
+                            colorSettings: {
+                              ...currentSettings,
+                              contraste: val
+                            }
+                          }
+                        };
+                        saveToLocal(updated);
+                      }}
+                      className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    />
+                  </div>
+
+                  {/* Saturación */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-center text-[9px] font-bold text-gray-400">
+                      <span>🎨 Saturación de Color</span>
+                      <span className="font-mono text-white">{(activeScene.colorSettings?.saturacion ?? 100)}%</span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="0"
+                      max="200"
+                      step="1"
+                      value={activeScene.colorSettings?.saturacion ?? 100}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        const currentSettings = activeScene.colorSettings || { preset: activeScene.filtro || 'normal' };
+                        const updated = {
+                          ...scenes,
+                          [activeSceneKey]: {
+                            ...activeScene,
+                            colorSettings: {
+                              ...currentSettings,
+                              saturacion: val
+                            }
+                          }
+                        };
+                        saveToLocal(updated);
+                      }}
+                      className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    />
+                  </div>
+
+                  {/* Temperatura (Cálido / Frío) */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-center text-[9px] font-bold text-gray-400">
+                      <span>🌡️ Temperatura (Frío / Cálido)</span>
+                      <span className="font-mono text-white">
+                        {(activeScene.colorSettings?.temperatura ?? 0) > 0 ? `+${activeScene.colorSettings?.temperatura}° Cálido` : (activeScene.colorSettings?.temperatura ?? 0) < 0 ? `${activeScene.colorSettings?.temperatura}° Frío` : 'Neutro'}
+                      </span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="-50"
+                      max="50"
+                      step="1"
+                      value={activeScene.colorSettings?.temperatura ?? 0}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        const currentSettings = activeScene.colorSettings || { preset: activeScene.filtro || 'normal' };
+                        const updated = {
+                          ...scenes,
+                          [activeSceneKey]: {
+                            ...activeScene,
+                            colorSettings: {
+                              ...currentSettings,
+                              temperatura: val
+                            }
+                          }
+                        };
+                        saveToLocal(updated);
+                      }}
+                      className="w-full h-1 bg-gradient-to-r from-blue-500 via-gray-700 to-amber-500 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Pestaña: AJUSTES */}
             {activeTab === 'ajustes' && (
               <div className="space-y-5 animate-fade-in">
@@ -2395,7 +2673,6 @@ export default function TourEditorPage() {
                   </p>
                 </div>
 
-
                 {/* Zoom de Visualización Slider */}
                 <div className="space-y-2 pt-1.5 border-t border-white/5">
                   <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
@@ -2410,33 +2687,6 @@ export default function TourEditorPage() {
                     onChange={(e) => setZoomFov(parseInt(e.target.value))}
                     className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
-                </div>
-
-                {/* Filtros de Imagen */}
-                <div className="space-y-2 pt-3 border-t border-white/5">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">Filtro de Escena</span>
-                  <select
-                    value={activeScene.filtro || 'normal'}
-                    onChange={(e) => {
-                      const updated = {
-                        ...scenes,
-                        [activeSceneKey]: {
-                          ...activeScene,
-                          filtro: e.target.value
-                        }
-                      };
-                      saveToLocal(updated);
-                    }}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 transition-all font-semibold"
-                  >
-                    <option value="normal">Normal (Sin Filtro)</option>
-                    <option value="vivid">Mejora de Color (Vívido)</option>
-                    <option value="bright">Luminoso (Interiores Amplios)</option>
-                    <option value="hdr">HDR Realista (Alto Detalle)</option>
-                    <option value="warm">Cálido Atardecer (Warm)</option>
-                    <option value="cold">Frío Refrescante (Cool)</option>
-                    <option value="grayscale">Blanco y Negro Artístico</option>
-                  </select>
                 </div>
 
                 {/* Vista Inicial (Heading) */}

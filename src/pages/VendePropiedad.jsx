@@ -87,24 +87,24 @@ export default function VendePropiedad() {
     <div className="animate-fade-in font-sans pb-16">
       {/* 1. HERO SECTION */}
       <section className="container mx-auto px-6 pt-28 pb-16 relative z-10 text-center">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-gradient-to-r from-nexus-accent/10 to-nexus-purple/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-gradient-to-r from-sky-400/15 to-purple-400/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
         
-        <span className="text-xs uppercase text-nexus-accent font-black tracking-widest bg-nexus-accent/10 px-3.5 py-1.5 rounded-full border border-nexus-accent/20 relative z-10 inline-block shadow-[0_2px_10px_rgba(6,182,212,0.15)] font-display">
+        <span className="text-xs uppercase text-[#008b99] font-black tracking-widest bg-[#008b99]/10 px-3.5 py-1.5 rounded-full border border-[#008b99]/30 relative z-10 inline-block shadow-sm font-display">
           TECNOLOGÍA PREMIUM A COSTO CERO PARA TI
         </span>
         
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-5 mb-6 leading-[1.15] max-w-4xl mx-auto relative z-10 font-display">
+        <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mt-5 mb-6 leading-[1.15] max-w-4xl mx-auto relative z-10 font-display">
           Vendemos tu propiedad más rápido con <span className="text-gradient-rise">Tecnología y <br /> Respaldo Legal</span>
         </h1>
         
-        <p className="text-gray-300 max-w-3xl mx-auto text-base md:text-lg mb-10 leading-relaxed relative z-10 font-sans">
+        <p className="text-slate-600 max-w-3xl mx-auto text-base md:text-lg mb-10 leading-relaxed relative z-10 font-sans font-medium">
           Unimos el marketing digital inmersivo de última generación con el saneamiento documental preventivo de nuestro Abogado Inmobiliario. Captamos compradores reales y firmamos sin trabas notariales. Todo financiado por nosotros.
         </p>
 
         <div className="flex justify-center items-center gap-4 relative z-10">
           <Link
             to="/contacto"
-            className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-black px-8 py-4 rounded-full font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 active:scale-95 shadow-[0_0_20px_rgba(37,211,102,0.25)] gap-2.5 font-display"
+            className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-black px-8 py-4 rounded-full font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 active:scale-95 shadow-[0_4px_15px_rgba(37,211,102,0.25)] gap-2.5 font-display"
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.156 5.158 0 11.516 0c3.08.001 5.976 1.2 8.154 3.379 2.179 2.18 3.377 5.078 3.377 8.16-.003 6.36-5.159 11.516-11.516 11.516-1.996-.001-3.957-.521-5.69-1.513L0 24zm6.59-4.846c1.6.95 3.197 1.45 4.917 1.451 5.438 0 9.864-4.426 9.867-9.864.001-2.63-1.023-5.105-2.883-6.967C16.689 1.912 14.213.887 11.59.887c-5.44 0-9.866 4.426-9.869 9.866-.001 1.782.47 3.522 1.365 5.066l-.993 3.626 3.71-.973zm12.355-6.726c-.346-.173-2.046-1.01-2.362-1.124-.316-.115-.547-.173-.778.173-.23.346-.893 1.124-1.094 1.355-.2.23-.4.26-.746.086-1.393-.696-2.302-1.218-3.123-2.624-.22-.376.22-.35.63-1.162.068-.136.034-.256-.017-.359-.05-.103-.43-1.036-.59-1.422-.155-.373-.325-.32-.475-.328-.123-.007-.264-.009-.406-.009-.142 0-.373.053-.568.267-.194.214-.742.726-.742 1.77 0 1.044.759 2.052.864 2.193.106.14 1.494 2.28 3.618 3.196.505.218.9.348 1.21.446.508.162.97.139 1.336.085.407-.06 1.246-.51 1.421-.998.175-.488.175-.905.123-.998-.052-.093-.19-.14-.537-.313z"/>
@@ -113,55 +113,55 @@ export default function VendePropiedad() {
           </Link>
         </div>
         
-        <p className="text-[10px] sm:text-xs text-gray-400 mt-4 leading-relaxed font-sans italic">
+        <p className="text-[10px] sm:text-xs text-slate-500 mt-4 leading-relaxed font-sans italic font-medium">
           ¡Inicia tu registro online y agenda la producción con dron y fotos 360° gratis!
         </p>
       </section>
 
       {/* 2. EXPLICACIÓN DEL COMBO LEGAL-TECNOLÓGICO */}
-      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-white/5">
+      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Pilar Tecnológico */}
-          <div className="glass-panel border-[#00f2fe]/20 rounded-3xl p-5 sm:p-8 bg-[#0a0d16]/65 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
+          <div className="border border-slate-200/90 rounded-3xl p-5 sm:p-8 bg-white backdrop-blur-md text-left space-y-4 flex flex-col justify-between shadow-md">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#00f2fe]/10 border border-[#00f2fe]/20 flex items-center justify-center text-[#00f2fe]">
+              <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99]">
                 <Camera className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-bold text-white font-display">Pilar Tecnológico Premium</h3>
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-sans">
+              <h3 className="text-2xl font-bold text-slate-900 font-display">Pilar Tecnológico Premium</h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans font-medium">
                 Llevamos tu propiedad al siguiente nivel visual. Realizamos tomas y videos aéreos con Dron en calidad 4K para ubicar accesos y entorno, capturamos panoramas 360° equirrectangulares para recorridos interactivos y diseñamos una ficha web dedicada de alta velocidad.
               </p>
             </div>
-            <ul className="space-y-2.5 pt-4 border-t border-white/5">
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-300">
-                <Check className="w-4 h-4 text-[#00f2fe] shrink-0" />
+            <ul className="space-y-2.5 pt-4 border-t border-slate-200">
+              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                <Check className="w-4 h-4 text-[#008b99] shrink-0" />
                 <span>Recorridos interactivos 360° móviles</span>
               </li>
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-300">
-                <Check className="w-4 h-4 text-[#00f2fe] shrink-0" />
+              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                <Check className="w-4 h-4 text-[#008b99] shrink-0" />
                 <span>Tomas y videos profesionales con Dron 4K</span>
               </li>
             </ul>
           </div>
 
           {/* Pilar Legal */}
-          <div className="glass-panel border-nexus-purple/20 rounded-3xl p-5 sm:p-8 bg-[#0a0d16]/65 backdrop-blur-md text-left space-y-4 flex flex-col justify-between">
+          <div className="border border-slate-200/90 rounded-3xl p-5 sm:p-8 bg-white backdrop-blur-md text-left space-y-4 flex flex-col justify-between shadow-md">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-nexus-purple/10 border border-nexus-purple/20 flex items-center justify-center text-nexus-purple">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-700">
                 <Gavel className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-bold text-white font-display">Pilar de Respaldo Legal</h3>
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-sans">
+              <h3 className="text-2xl font-bold text-slate-900 font-display">Pilar de Respaldo Legal</h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans font-medium">
                 El marketing no sirve si la venta se traba al firmar. Nuestro Abogado Inmobiliario audita de forma preventiva tu Copia Literal (SUNARP) y formularios municipales (PU/HR) para solucionar cualquier observación técnica o legal de manera rápida e impecable.
               </p>
             </div>
-            <ul className="space-y-2.5 pt-4 border-t border-white/5">
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-300">
-                <Check className="w-4 h-4 text-nexus-purple shrink-0" />
+            <ul className="space-y-2.5 pt-4 border-t border-slate-200">
+              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                <Check className="w-4 h-4 text-purple-600 shrink-0" />
                 <span>Saneamiento preventivo de títulos SUNARP</span>
               </li>
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-300">
-                <Check className="w-4 h-4 text-nexus-purple shrink-0" />
+              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                <Check className="w-4 h-4 text-purple-600 shrink-0" />
                 <span>Redacción de contratos de compraventa seguros</span>
               </li>
             </ul>
@@ -170,19 +170,19 @@ export default function VendePropiedad() {
       </section>
 
       {/* 3. PROCESO EN 3 PASOS ("Saneamos, Grabamos y Vendemos") */}
-      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-white/5">
+      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <span className="text-xs uppercase text-nexus-purple font-bold tracking-widest bg-nexus-purple/10 px-3 py-1 rounded-full border border-nexus-purple/20">¿CÓMO TRABAJAMOS?</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mt-4 font-display">
+          <span className="text-xs uppercase text-purple-700 font-bold tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">¿CÓMO TRABAJAMOS?</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mt-4 font-display">
             Saneamos, Grabamos y Vendemos
           </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans font-medium">
             Un proceso ágil y transparente diseñado para maximizar el valor comercial de tu propiedad y acelerar la firma del contrato.
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto relative px-0 md:px-6">
-          <div className="overflow-hidden rounded-3xl border border-white/5 glass-panel relative group shadow-[0_15px_60px_rgba(0,0,0,0.6)]">
+          <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white relative group shadow-[0_15px_45px_rgba(15,23,42,0.06)]">
             <div 
               className="flex transition-transform duration-500 ease-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -191,7 +191,7 @@ export default function VendePropiedad() {
                 <div key={idx} className="w-full shrink-0 flex flex-col md:flex-row items-stretch min-h-[440px] md:min-h-[480px]">
                   
                   {/* Foto de la etapa */}
-                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-transparent border-b md:border-b-0 md:border-r border-white/5">
+                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-slate-100 border-b md:border-b-0 md:border-r border-slate-200">
                     <img 
                       src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}${solucion.image}`} 
                       alt={solucion.title} 
@@ -200,35 +200,35 @@ export default function VendePropiedad() {
                         e.target.src = "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80";
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#0a0d14] via-transparent to-transparent"></div>
-                    <span className="absolute top-6 left-6 text-[10px] uppercase font-black tracking-widest bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/10 text-white font-display">
+                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-900/60 via-transparent to-transparent"></div>
+                    <span className="absolute top-6 left-6 text-[10px] uppercase font-black tracking-widest bg-slate-900 text-white backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-800 font-display">
                       {solucion.tag}
                     </span>
                   </div>
 
                   {/* Cuerpo */}
-                  <div className="w-full md:w-1/2 p-5 sm:p-10 bg-transparent flex flex-col justify-between text-left">
+                  <div className="w-full md:w-1/2 p-5 sm:p-10 bg-white flex flex-col justify-between text-left">
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex items-center gap-4">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${solucion.color} shrink-0`}>
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center border bg-slate-100 border-slate-200 text-[#008b99] shrink-0">
                           {solucion.icon}
                         </div>
-                        <h3 className="font-bold text-xl md:text-2xl text-white font-display">
+                        <h3 className="font-bold text-xl md:text-2xl text-slate-900 font-display">
                           {solucion.title}
                         </h3>
                       </div>
                       
-                      <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-sans font-normal">
+                      <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans font-medium">
                         {solucion.description}
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-5 border-t border-white/5 flex items-start gap-2.5 text-[#00f2fe] text-xs leading-relaxed font-semibold font-sans">
-                      <div className="p-0.5 rounded-full bg-[#00f2fe]/10 border border-[#00f2fe]/20 text-[#00f2fe] shrink-0 mt-0.5">
+                    <div className="mt-8 pt-5 border-t border-slate-200 flex items-start gap-2.5 text-[#008b99] text-xs leading-relaxed font-bold font-sans">
+                      <div className="p-0.5 rounded-full bg-[#008b99]/10 border border-[#008b99]/20 text-[#008b99] shrink-0 mt-0.5">
                         <Check className="w-3.5 h-3.5 stroke-[3]" />
                       </div>
                       <div>
-                        <span className="text-[#00f2fe] font-black uppercase tracking-wider text-[9px] block mb-1 font-display">Compromiso Exclusivo</span>
+                        <span className="text-[#008b99] font-black uppercase tracking-wider text-[9px] block mb-1 font-display">Compromiso Exclusivo</span>
                         Asumimos el 100% de la inversión de esta etapa sin cobros anticipados.
                       </div>
                     </div>
@@ -243,7 +243,7 @@ export default function VendePropiedad() {
           <div className="flex items-center justify-center gap-6 mt-8">
             <button
               onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-[#00f2fe]/10 hover:border-[#00f2fe]/30 transition-all duration-200 active:scale-95 cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-all duration-200 active:scale-95 cursor-pointer shadow-sm"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -253,14 +253,14 @@ export default function VendePropiedad() {
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
                   className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    currentSlide === idx ? 'w-8 bg-nexus-accent' : 'w-2 bg-white/20 hover:bg-white/45'
+                    currentSlide === idx ? 'w-8 bg-[#008b99]' : 'w-2 bg-slate-300 hover:bg-slate-400'
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-[#00f2fe]/10 hover:border-[#00f2fe]/30 transition-all duration-200 active:scale-95 cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-all duration-200 active:scale-95 cursor-pointer shadow-sm"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -269,35 +269,33 @@ export default function VendePropiedad() {
       </section>
 
       {/* SECCIÓN DEL ENCARGADO (ANGEL APAZA) */}
-      <section className="container mx-auto px-3 sm:px-6 pb-20 relative z-10 border-t border-white/5 pt-12">
-        <div className="max-w-5xl mx-auto glass-panel border-white/10 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-[#0c101f]/65 to-[#070a13]/65 backdrop-blur-md shadow-2xl group transition-all duration-300 hover:border-nexus-accent/30">
-          {/* Luces decorativas internas de fondo */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-nexus-accent/10 rounded-full blur-[90px] pointer-events-none transition-all duration-500 group-hover:bg-nexus-accent/15"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-nexus-purple/8 rounded-full blur-[90px] pointer-events-none"></div>
+      <section className="container mx-auto px-3 sm:px-6 pb-20 relative z-10 border-t border-slate-200/80 pt-12">
+        <div className="max-w-5xl mx-auto border border-slate-200/90 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-white shadow-xl group transition-all duration-300">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-sky-400/10 rounded-full blur-[90px] pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-400/10 rounded-full blur-[90px] pointer-events-none"></div>
 
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
             
             {/* Tarjeta Física de Contacto de Angel Apaza */}
-            <div className="w-full lg:w-[320px] shrink-0 bg-[#070a14]/65 border border-white/10 rounded-3xl p-6 flex flex-col items-center text-center shadow-xl backdrop-blur-md hover:border-nexus-accent/20 transition-all duration-300">
+            <div className="w-full lg:w-[320px] shrink-0 bg-slate-50 border border-slate-200 rounded-3xl p-6 flex flex-col items-center text-center shadow-md">
               <div className="relative group mb-5">
-                {/* Efecto glow celeste/purple alrededor de la imagen */}
-                <div className="absolute inset-0 bg-gradient-to-r from-nexus-accent to-nexus-purple rounded-2xl blur-[12px] opacity-35 group-hover:opacity-55 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-purple-500 rounded-2xl blur-[12px] opacity-35 transition-opacity duration-300"></div>
                 <img
                   src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/miembros/angel.webp`}
                   alt="Angel Apaza - Asesoría Comercial & Tecnología"
-                  className="w-36 h-36 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-white/15 relative z-10 bg-[#070a13] shadow-md"
+                  className="w-36 h-36 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-slate-200 relative z-10 bg-slate-100 shadow-md"
                   onError={(e) => {
                     e.target.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80";
                   }}
                 />
               </div>
               
-              <h4 className="text-white font-bold text-lg font-display">Angel Apaza</h4>
-              <p className="text-nexus-accent text-[10px] font-semibold uppercase tracking-widest mt-1 opacity-90">
+              <h4 className="text-slate-900 font-bold text-lg font-display">Angel Apaza</h4>
+              <p className="text-[#008b99] text-[10px] font-bold uppercase tracking-widest mt-1">
                 Asesoría Comercial & Tecnología
               </p>
               
-              <div className="w-full border-t border-white/5 my-3.5"></div>
+              <div className="w-full border-t border-slate-200 my-3.5"></div>
               
               <a
                 href="https://wa.me/51951300535?text=Hola%20Angel%20Apaza%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20sobre%20la%20venta%20de%20mi%20propiedad%20con%20tecnolog%C3%ADa%20360%20o%20sobre%20servicios%20para%20mi%20inmobiliaria."
@@ -315,55 +313,55 @@ export default function VendePropiedad() {
             {/* Información Simplificada de Tecnología y Beneficios */}
             <div className="flex-1 space-y-5 flex flex-col justify-between text-left">
               <div className="space-y-3.5">
-                <span className="text-[9px] uppercase font-black tracking-widest text-[#00f2fe] bg-[#00f2fe]/10 px-3 py-1.5 rounded-full border border-[#00f2fe]/20 inline-block font-display">
+                <span className="text-[9px] uppercase font-black tracking-widest text-[#008b99] bg-cyan-500/10 px-3 py-1.5 rounded-full border border-cyan-500/20 inline-block font-display">
                   TECNOLOGÍA 360° E INNOVACIÓN INMOBILIARIA
                 </span>
                 
-                <h3 className="text-2xl md:text-3xl font-bold text-white font-display leading-tight">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 font-display leading-tight">
                   Visualización 3D e Innovación para Vender tu Inmueble
                 </h3>
                 
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed font-sans font-normal">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium">
                   Aceleramos la venta de tu propiedad (terreno, casa o departamento) en el sur de Perú usando <strong>recorridos virtuales 360° y tomas aéreas con dron</strong>. Estas herramientas estratégicas de marketing están <strong>completamente incluidas dentro de nuestra comisión estándar por venta exitosa</strong> (sin ningún tipo de cobro anticipado ni inversiones de tu parte).
                 </p>
 
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed font-sans font-normal">
-                  ¿Eres una **empresa constructora o inmobiliaria**? Te ayudo a digitalizar tus proyectos mediante mapas interactivos 3D y recorridos virtuales de última generación diseñados a tu medida.
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium">
+                  ¿Eres una <strong>empresa constructora o inmobiliaria</strong>? Te ayudo a digitalizar tus proyectos mediante mapas interactivos 3D y recorridos virtuales de última generación diseñados a tu medida.
                 </p>
               </div>
 
               {/* Listado de Beneficios Clave */}
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[11px] text-gray-300 pt-3 border-t border-white/5 font-sans">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[11px] text-slate-700 pt-3 border-t border-slate-200 font-sans font-medium">
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-nexus-accent shrink-0">
-                    <Check className="w-3 h-3 text-nexus-accent" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
+                    <Check className="w-3 h-3 text-[#008b99]" />
                   </div>
                   <span>Recorridos virtuales 360° interactivos</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-nexus-accent shrink-0">
-                    <Check className="w-3 h-3 text-nexus-accent" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
+                    <Check className="w-3 h-3 text-[#008b99]" />
                   </div>
                   <span>Tomas y videos aéreos con Dron 4K</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-nexus-accent shrink-0">
-                    <Check className="w-3 h-3 text-nexus-accent" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
+                    <Check className="w-3 h-3 text-[#008b99]" />
                   </div>
                   <span>Gestión comercial de visitas y clientes</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-nexus-accent shrink-0">
-                    <Check className="w-3 h-3 text-nexus-accent" />
+                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
+                    <Check className="w-3 h-3 text-[#008b99]" />
                   </div>
                   <span>Portales interactivos 3D a medida</span>
                 </li>
               </ul>
 
-              <div className="pt-3 border-t border-white/5">
+              <div className="pt-3 border-t border-slate-200">
                 <a 
                   href="mailto:nexus.agencia360@gmail.com?subject=Consulta%20Inmobiliaria%20/%20Tecnol%C3%B3gica%20-%20Angel%20Apaza"
-                  className="inline-flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 text-white px-6 py-2.5 rounded-xl font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-[10px] font-sans w-full sm:w-auto text-center"
+                  className="inline-flex items-center justify-center bg-slate-900 hover:bg-[#00c4ee] hover:text-black text-white px-6 py-2.5 rounded-xl font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-[10px] font-sans w-full sm:w-auto text-center shadow-sm"
                 >
                   nexus.agencia360@gmail.com
                   <ArrowRight className="w-4.5 h-4.5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -378,11 +376,11 @@ export default function VendePropiedad() {
       {/* 4. PREGUNTAS FRECUENTES (FAQs) */}
       <section className="container mx-auto px-6 py-12 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <HelpCircle className="w-8 h-8 text-nexus-accent mx-auto mb-4" />
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight font-display">
+          <HelpCircle className="w-8 h-8 text-[#008b99] mx-auto mb-4" />
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight font-display">
             Preguntas Frecuentes de Propietarios
           </h2>
-          <p className="text-gray-300 text-sm md:text-base mt-4 leading-relaxed font-sans">
+          <p className="text-slate-600 text-sm md:text-base mt-4 leading-relaxed font-sans font-medium">
             Despejamos las inquietudes más comunes sobre nuestro servicio premium de corretaje exclusivo y despliegue tecnológico.
           </p>
         </div>
@@ -391,24 +389,24 @@ export default function VendePropiedad() {
           {faqs.map((faq, idx) => (
             <div 
               key={idx} 
-              className="glass-panel border-white/5 rounded-2xl overflow-hidden bg-[#0a0d16]/60 backdrop-blur-md transition-all duration-300"
+              className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-sm backdrop-blur-md transition-all duration-300"
             >
               <h3>
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full flex items-center justify-between p-6 text-white text-sm sm:text-base font-bold text-left hover:bg-white/[0.02] transition cursor-pointer select-none font-display focus:outline-none"
+                  className="w-full flex items-center justify-between p-6 text-slate-900 text-sm sm:text-base font-bold text-left hover:bg-slate-50 transition cursor-pointer select-none font-display focus:outline-none"
                 >
                   <span>{faq.question}</span>
-                  <ChevronDown className={`w-5 h-5 text-nexus-accent transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-5 h-5 text-[#008b99] transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
               </h3>
               
               <div 
                 className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  openFaq === idx ? 'max-h-[300px] border-t border-white/5 opacity-100' : 'max-h-0 opacity-0'
+                  openFaq === idx ? 'max-h-[300px] border-t border-slate-200 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <p className="p-6 text-gray-300 text-xs sm:text-sm leading-relaxed font-sans font-normal tracking-wide">
+                <p className="p-6 text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium tracking-wide">
                   {faq.answer}
                 </p>
               </div>

@@ -90,20 +90,26 @@ export default function Footer() {
     }
   };
 
+  const isLightPage = location.pathname !== '/' && location.pathname !== '' && !location.pathname.startsWith('/editor-360-privado');
+
   return (
-    <footer ref={footerRef} className={`w-full bg-[#070a12] border-t border-white/5 relative z-10 pb-8 overflow-hidden ${isContacto ? 'pt-8' : 'pt-5'}`}>
+    <footer ref={footerRef} className={`w-full relative z-10 pb-8 overflow-hidden ${isContacto ? 'pt-8' : 'pt-5'} ${
+      isLightPage ? 'bg-[#efece6] border-t border-slate-300/80 text-slate-800' : 'bg-[#070a12] border-t border-white/5'
+    }`}>
       {/* Glow de fondo decorativo - bouncing */}
       {!isContacto && (
         <div
           ref={glowRef}
           style={{ width: GLOW_W, height: GLOW_H, willChange: 'transform' }}
-          className="absolute top-0 left-0 bg-nexus-accent opacity-[0.07] rounded-full blur-[90px] pointer-events-none"
+          className={`absolute top-0 left-0 rounded-full blur-[90px] pointer-events-none ${
+            isLightPage ? 'bg-sky-400 opacity-[0.12]' : 'bg-nexus-accent opacity-[0.07]'
+          }`}
         />
       )}
 
       {!isContacto && (
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-12 gap-10 mb-3">
-          {/* Columna 1: Brand Info (ocupa toda la anchura en móvil, 4 de 12 en escritorio; centrada en móvil) */}
+          {/* Columna 1: Brand Info */}
           <div className="flex flex-col gap-4 col-span-2 md:col-span-4 items-center text-center md:items-start md:text-left">
             <Link 
               to="/" 
@@ -112,13 +118,12 @@ export default function Footer() {
             >
               <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Angel Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
 
-              {/* Alineación vertical perfecta por flexbox nativo items-center sin traslaciones artificiales, con tamaño de texto responsivo para evitar desbordes en móvil */}
               <div className="text-2xl sm:text-3xl md:text-4xl font-logo flex items-center whitespace-nowrap">
-                <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-105">Angel</span>
+                <span className={`transition-transform duration-300 group-hover:scale-105 ${isLightPage ? 'text-slate-900' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]'}`}>Angel</span>
                 <span className="text-gradient-rise drop-shadow-[0_2px_8px_rgba(0,242,254,0.25)] ml-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">Domo 360°</span>
               </div>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className={`text-sm leading-relaxed ${isLightPage ? 'text-slate-600 font-medium' : 'text-gray-400'}`}>
               El primer portal inmobiliario interactivo del sur de Perú. Conectamos compradores e inversionistas con terrenos y viviendas seguras utilizando tomas aéreas de dron y recorridos virtuales 360° de alta definición.
             </p>
             <div className="flex flex-wrap gap-3 mt-4 justify-center md:justify-start">
@@ -127,7 +132,9 @@ export default function Footer() {
                 href="https://youtube.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-gray-400 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#ff0000] hover:border-[#ff0000] hover:shadow-[0_0_20px_rgba(255,0,0,0.5)] active:scale-95 group cursor-pointer" 
+                className={`w-10 h-10 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#ff0000] hover:border-[#ff0000] hover:shadow-[0_0_20px_rgba(255,0,0,0.5)] active:scale-95 group cursor-pointer ${
+                  isLightPage ? 'border-slate-300 bg-white/70 text-slate-600' : 'border-white/10 bg-white/[0.03] text-gray-400'
+                }`}
                 aria-label="YouTube"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
@@ -140,7 +147,9 @@ export default function Footer() {
                 href="https://www.facebook.com/angel.domo360" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-gray-400 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#1877f2] hover:border-[#1877f2] hover:shadow-[0_0_20px_rgba(24,119,242,0.5)] active:scale-95 group cursor-pointer" 
+                className={`w-10 h-10 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#1877f2] hover:border-[#1877f2] hover:shadow-[0_0_20px_rgba(24,119,242,0.5)] active:scale-95 group cursor-pointer ${
+                  isLightPage ? 'border-slate-300 bg-white/70 text-slate-600' : 'border-white/10 bg-white/[0.03] text-gray-400'
+                }`}
                 aria-label="Facebook"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
@@ -153,7 +162,9 @@ export default function Footer() {
                 href="https://www.instagram.com/angel.domo360/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-gray-400 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-[#ee2a7b] hover:shadow-[0_0_20px_rgba(238,42,123,0.5)] active:scale-95 group cursor-pointer" 
+                className={`w-10 h-10 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-[#ee2a7b] hover:shadow-[0_0_20px_rgba(238,42,123,0.5)] active:scale-95 group cursor-pointer ${
+                  isLightPage ? 'border-slate-300 bg-white/70 text-slate-600' : 'border-white/10 bg-white/[0.03] text-gray-400'
+                }`}
                 aria-label="Instagram"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
@@ -166,7 +177,9 @@ export default function Footer() {
                 href="https://www.tiktok.com/@angel.domo360" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-gray-400 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#010101] hover:border-white/20 hover:shadow-[0_0_20px_rgba(0,242,254,0.45)] active:scale-95 group cursor-pointer" 
+                className={`w-10 h-10 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#010101] hover:border-slate-800 hover:shadow-[0_0_20px_rgba(0,180,216,0.35)] active:scale-95 group cursor-pointer ${
+                  isLightPage ? 'border-slate-300 bg-white/70 text-slate-600' : 'border-white/10 bg-white/[0.03] text-gray-400'
+                }`}
                 aria-label="TikTok"
               >
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
@@ -176,21 +189,21 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Columna 2: Sitemap (ocupa 1 columna en móvil, 3 en escritorio) */}
+          {/* Columna 2: Sitemap */}
           <div className="col-span-1 md:col-span-3 md:col-start-6">
-            <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Mapa del Sitio</h3>
-            <ul className="flex flex-col gap-2.5 text-sm">
-              <li><Link to="/proyectos" className={`transition duration-150 ${location.pathname === '/proyectos' || location.pathname === '/catalogo' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
-              <li><Link to="/compra-seguro" className={`transition duration-150 ${location.pathname === '/compra-seguro' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Compra con Seguridad</Link></li>
-              <li><Link to="/vende-tu-propiedad" className={`transition duration-150 ${location.pathname === '/vende-tu-propiedad' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Vende tu Propiedad</Link></li>
-              <li><Link to="/contacto" className={`transition duration-150 ${location.pathname === '/contacto' ? 'text-nexus-accent font-bold' : 'text-gray-400 hover:text-white'}`}>Contactar</Link></li>
+            <h3 className={`font-semibold mb-4 text-sm uppercase tracking-wider ${isLightPage ? 'text-slate-900' : 'text-white'}`}>Mapa del Sitio</h3>
+            <ul className="flex flex-col gap-2.5 text-sm font-medium">
+              <li><Link to="/proyectos" className={`transition duration-150 ${location.pathname === '/proyectos' || location.pathname === '/catalogo' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
+              <li><Link to="/compra-seguro" className={`transition duration-150 ${location.pathname === '/compra-seguro' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Compra con Seguridad</Link></li>
+              <li><Link to="/vende-tu-propiedad" className={`transition duration-150 ${location.pathname === '/vende-tu-propiedad' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Vende tu Propiedad</Link></li>
+              <li><Link to="/contacto" className={`transition duration-150 ${location.pathname === '/contacto' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Contactar</Link></li>
             </ul>
           </div>
 
-          {/* Columna 3: ¿LISTO PARA EMPEZAR? (ocupa 1 columna en móvil, 4 en escritorio) */}
+          {/* Columna 3: ¿LISTO PARA EMPEZAR? */}
           <div className="flex flex-col gap-4 col-span-1 md:col-span-4 md:col-start-9">
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider">¿LISTO PARA EMPEZAR?</h3>
-            <p className="text-sm text-gray-400 leading-relaxed font-sans">
+            <h3 className={`font-semibold text-sm uppercase tracking-wider ${isLightPage ? 'text-slate-900' : 'text-white'}`}>¿LISTO PARA EMPEZAR?</h3>
+            <p className={`text-sm leading-relaxed font-sans ${isLightPage ? 'text-slate-600 font-medium' : 'text-gray-400'}`}>
               Agenda una sesión de asesoría gratuita para recibir acompañamiento personalizado y encontrar tu terreno o casa ideal en Juliaca con total seguridad legal.
             </p>
           </div>
@@ -198,19 +211,23 @@ export default function Footer() {
       )}
 
       {/* Barra inferior */}
-      <div className={`max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 ${isContacto ? '' : 'pt-6 border-t border-white/5'}`}>
-        <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start">
-          <div className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-nexus-accent" /> +51 951 300 535</div>
-          <div className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-nexus-purple" /> nexus.agencia360@gmail.com</div>
-          <div className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-gray-500" /> Juliaca, Perú</div>
+      <div className={`max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs ${
+        isLightPage ? 'text-slate-500' : 'text-gray-500'
+      } ${isContacto ? '' : isLightPage ? 'pt-6 border-t border-slate-300/80' : 'pt-6 border-t border-white/5'}`}>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start font-medium">
+          <div className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-[#008b99]" /> +51 951 300 535</div>
+          <div className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-purple-600" /> nexus.agencia360@gmail.com</div>
+          <div className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-slate-500" /> Juliaca, Perú</div>
         </div>
         <div className="flex flex-col items-center md:items-end text-center md:text-right gap-1">
-          <p>
+          <p className="font-medium">
             &copy; {currentYear} Angel Domo 360°. Todos los derechos reservados.
           </p>
           <Link 
             to="/" 
-            className="text-[11px] font-mono text-cyan-400/80 hover:text-nexus-accent transition-colors flex items-center justify-center md:justify-end gap-1.5 group mt-1"
+            className={`text-[11px] font-mono transition-colors flex items-center justify-center md:justify-end gap-1.5 group mt-1 ${
+              isLightPage ? 'text-cyan-800 hover:text-slate-950' : 'text-cyan-400/80 hover:text-nexus-accent'
+            }`}
             title="Ir a la Landing Page corporativa de Nexus Rise"
           >
             <span>⚡ Desarrollado por Nexus Rise - Software & 360° Studio</span>
