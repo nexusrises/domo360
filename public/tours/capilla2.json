@@ -1,0 +1,215 @@
+{
+  "vista_aerea_terreno": {
+    "nombre": "VISTA  TERRENO",
+    "imagen": "/tour/capilla2/1789270685796_DJI_20260911114136_0015_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          1.52,
+          19.26,
+          5.16
+        ],
+        "destino": "entorno_capilla",
+        "texto": "Ver Entorno La Capilla",
+        "icono": "Camera",
+        "color": "#f59e0b",
+        "escala": 1.7,
+        "opacidad": 1,
+        "posicionTipo": "2d",
+        "escalaZoom": true,
+        "sombra": true,
+        "fontSize": 15
+      },
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            12.19,
+            -11.13,
+            -11.29
+          ],
+          [
+            16.13,
+            -10.55,
+            5.34
+          ],
+          [
+            11.49,
+            -13.64,
+            9.05
+          ],
+          [
+            6.18,
+            -15.31,
+            -11.28
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.45,
+        "colorBorde": "#fbff00",
+        "grosorBorde": 8,
+        "texto": "Lote 1",
+        "manzana": "SOLAR",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "44000",
+        "area": "147.70",
+        "fijo": false,
+        "mostrarEtiqueta": true,
+        "mostrarBorde": true,
+        "mostrarRelleno": true
+      }
+    ],
+    "filtro": "drone_cielo_azul",
+    "heading": {
+      "x": -46,
+      "y": -66
+    },
+    "northOffset": 289
+  },
+  "entorno_capilla": {
+    "nombre": "VISTA AEREA SUPERIO",
+    "imagen": "/tour/capilla2/1789270692287_DJI_20260911113912_0014_D.webp",
+    "hotspots": [
+      {
+        "tipo": "texto",
+        "posicion": [
+          3.69,
+          -4.15,
+          -19.21
+        ],
+        "texto": "CEMENTERIO \nLA CAPILLA",
+        "colorTexto": "#f9f21a",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "muro",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Unbounded",
+        "rotacion": 0,
+        "fontSize": 26,
+        "fondoTransparente": true
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          2.68,
+          0.54,
+          -19.81
+        ],
+        "destino": "_self",
+        "texto": "UNAJ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 14
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.73,
+          -0.72,
+          -3.21
+        ],
+        "destino": "_self",
+        "texto": "ESSALUD",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.09,
+          -1.51,
+          -5.78
+        ],
+        "destino": "_self",
+        "texto": "EL PENAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": false,
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          0.61,
+          -19.98,
+          0.63
+        ],
+        "destino": "vista_aerea_terreno",
+        "texto": "TERRENO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#5cf50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 12
+      }
+    ],
+    "filtro": "drone_cielo_azul",
+    "heading": {
+      "x": -10,
+      "y": -47
+    },
+    "northOffset": 75
+  },
+  "vista_panoramica_terreno": {
+    "nombre": "VISTA PANORÁMICA",
+    "imagen": "/tour/capilla2/1789272552976_DJI_20260911125336_0017_D.webp",
+    "hotspots": [],
+    "filtro": "drone_cielo_azul",
+    "heading": {
+      "x": 0,
+      "y": 0
+    }
+  }
+}

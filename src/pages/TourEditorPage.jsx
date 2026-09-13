@@ -32,8 +32,17 @@ import {
   Link,
   Map,
   Eye,
-  Folder
+  Folder,
+  FolderPlus,
+  Check,
+  X,
+  Square,
+  Minus,
+  Spline,
+  PenTool,
+  Maximize2
 } from 'lucide-react';
+import Polygon3D from '../components/Polygon3D';
 import { tourData as initialTourData } from '../data/tourData';
 import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
 import { useParams } from 'react-router-dom';
@@ -482,11 +491,15 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
   const [activeCategory, setActiveCategory] = useState('Imágenes Generales');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
+  const [isCreatingFolder, setIsCreatingFolder] = useState(false);
+  const [newFolderName, setNewFolderName] = useState('');
 
   // Limpiar seleccionados al abrir la modal
   useEffect(() => {
     if (isOpen) {
       setSelectedItems([]);
+      setIsCreatingFolder(false);
+      setNewFolderName('');
     }
   }, [isOpen]);
 
@@ -584,6 +597,70 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
     }
   }, [allFilteredAreSelected, filteredImages]);
 
+  const handleCreateFolder = async (e) => {
+    if (e) e.preventDefault();
+    const cleanName = newFolderName.trim();
+    if (!cleanName) return;
+
+    try {
+      setLoading(true);
+      const res = await fetch('/api/create-tour-folder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ folderName: cleanName })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        await fetchImages(false);
+        setActiveCategory(`Tour: ${data.folderName}`);
+        setIsCreatingFolder(false);
+        setNewFolderName('');
+      } else {
+        const err = await res.json();
+        alert(`Error al crear la carpeta: ${err.error || 'Error desconocido'}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error de conexión al intentar crear la carpeta.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteFolder = async (cat, e) => {
+    e.stopPropagation();
+    const folderName = cat.replace('Tour: ', '');
+    const confirm = window.confirm(
+      `¿Estás seguro de que deseas eliminar permanentemente la carpeta "${folderName}" con todas sus imágenes y archivos de configuración asociados?\n\nEsta acción no se puede deshacer.`
+    );
+    if (!confirm) return;
+
+    try {
+      setLoading(true);
+      const res = await fetch('/api/delete-tour-folder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ folderName })
+      });
+
+      if (res.ok) {
+        if (activeCategory === cat) {
+          setActiveCategory('Imágenes Generales');
+        }
+        await fetchImages(false);
+      } else {
+        const err = await res.json();
+        alert(`Error al eliminar la carpeta: ${err.error || 'Error desconocido'}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error de conexión al intentar eliminar la carpeta.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleDeleteImage = async (img) => {
     const confirm = window.confirm(`¿Estás seguro de que deseas eliminar permanentemente la imagen "${img.name}" de la carpeta del proyecto? Esta acción no se puede deshacer.`);
     if (!confirm) return;
@@ -618,7 +695,7 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={onClose}>
       <div 
         className="bg-slate-900 border border-white/10 rounded-3xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
@@ -652,29 +729,101 @@ function ProjectImageSelectorModal({ isOpen, onClose, onSelect, tourId, imageSel
         <div className="flex-1 flex overflow-hidden min-h-[400px]">
           
           {/* Columna Izquierda: Sidebar de Carpetas */}
-          <div className="w-60 border-r border-white/10 bg-slate-950/40 flex flex-col shrink-0 overflow-y-auto p-4 gap-1.5 scrollbar-none select-none">
-            <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-2 px-2.5">
-              Explorador de Tours
-            </span>
+          <div className="w-64 border-r border-white/10 bg-slate-950/40 flex flex-col shrink-0 overflow-y-auto p-4 gap-1.5 scrollbar-none select-none">
+            <div className="flex items-center justify-between px-2 mb-2">
+              <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block">
+                Explorador de Tours
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsCreatingFolder(prev => !prev);
+                  setNewFolderName('');
+                }}
+                className="flex items-center gap-1 text-[10px] font-bold text-amber-400 hover:text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 px-2 py-1 rounded-lg transition-all cursor-pointer"
+                title="Crear nueva carpeta de propiedad"
+              >
+                <FolderPlus className="w-3 h-3" />
+                <span>Nueva</span>
+              </button>
+            </div>
+
+            {/* Formulario rápido para crear nueva carpeta */}
+            {isCreatingFolder && (
+              <form 
+                onSubmit={handleCreateFolder}
+                className="p-2.5 rounded-xl bg-slate-900 border border-amber-500/30 flex flex-col gap-2 mb-2 animate-fade-in shadow-xl"
+              >
+                <span className="text-[9px] font-bold text-amber-400 uppercase tracking-wider">Nombre de Carpeta</span>
+                <input
+                  type="text"
+                  placeholder="ej: casa_playa"
+                  value={newFolderName}
+                  onChange={(e) => setNewFolderName(e.target.value)}
+                  autoFocus
+                  className="bg-slate-950 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white outline-none focus:border-amber-400 font-semibold"
+                />
+                <div className="flex gap-1.5 justify-end">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsCreatingFolder(false);
+                      setNewFolderName('');
+                    }}
+                    className="px-2 py-1 rounded-lg text-[10px] text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 font-bold transition-all cursor-pointer"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={!newFolderName.trim()}
+                    className="px-2.5 py-1 rounded-lg text-[10px] text-slate-950 bg-amber-500 hover:bg-amber-400 font-bold disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer flex items-center gap-1"
+                  >
+                    <Check className="w-3 h-3" />
+                    <span>Crear</span>
+                  </button>
+                </div>
+              </form>
+            )}
+
             {categories.length === 0 ? (
               <span className="text-xs text-gray-500 italic px-2.5">Sin carpetas</span>
             ) : (
               categories.map((cat) => {
                 const isActive = activeCategory === cat;
                 const displayName = cat.replace('Tour: ', '');
+                const isGeneral = cat === 'Imágenes Generales';
+
                 return (
-                  <button
+                  <div
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-left text-xs font-bold transition-all duration-200 cursor-pointer ${
+                    className={`group w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-xs font-bold transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/10'
                         : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <Folder className={`w-4 h-4 shrink-0 ${isActive ? 'text-slate-950' : 'text-amber-500'}`} />
-                    <span className="truncate">{displayName}</span>
-                  </button>
+                    <div className="flex items-center gap-2.5 truncate flex-1 min-w-0 pr-1">
+                      <Folder className={`w-4 h-4 shrink-0 ${isActive ? 'text-slate-950' : 'text-amber-500'}`} />
+                      <span className="truncate">{displayName}</span>
+                    </div>
+
+                    {!isGeneral && (
+                      <button
+                        type="button"
+                        onClick={(e) => handleDeleteFolder(cat, e)}
+                        title={`Eliminar carpeta "${displayName}"`}
+                        className={`p-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer shrink-0 ${
+                          isActive 
+                            ? 'hover:bg-slate-950/20 text-slate-950 hover:text-red-950' 
+                            : 'hover:bg-red-500/20 text-gray-400 hover:text-red-400'
+                        }`}
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
                 );
               })
             )}
@@ -1004,36 +1153,51 @@ export default function TourEditorPage() {
             .replace(/\/descargas_kuula\//g, '/tour/')
             .replace(/\.(jpg|jpeg|png)(["'?])/gi, '.webp$2');
           const parsed = JSON.parse(cleanedSaved);
-          const injected = injectSheetsData(parsed, sheetsData);
-          setScenes(injected);
-          const firstScene = Object.keys(injected)[0];
-          if (firstScene) {
-            if (cleanedSaved !== localSaved) {
-              localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
+          if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            const injected = injectSheetsData(parsed, sheetsData);
+            const firstScene = Object.keys(injected)[0];
+            if (firstScene) {
+              setScenes(injected);
+              if (cleanedSaved !== localSaved) {
+                localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
+              }
+              setActiveSceneKey(firstScene);
+              setIsLoading(false);
+              return;
             }
-            setActiveSceneKey(firstScene);
           }
-          setIsLoading(false);
-          return;
         } catch (e) {
           console.error(e);
         }
       }
 
-      try {
-        const res = await fetch(`/src/data/tours/${tourId}.json`);
-        if (res.ok) {
-          const parsed = await res.json();
-          const injected = injectSheetsData(parsed, sheetsData);
-          setScenes(injected);
-          const firstScene = Object.keys(injected)[0];
-          if (firstScene) setActiveSceneKey(firstScene);
-          localStorage.setItem(`nexus_tour_data_${tourId}`, JSON.stringify(parsed));
-          setIsLoading(false);
-          return;
+      // Intentar cargar desde el archivo físico
+      const tourUrls = [
+        `${import.meta.env.BASE_URL.replace(/\/$/, "")}/tours/${tourId}.json`,
+        `/tours/${tourId}.json`,
+        `/src/data/tours/${tourId}.json`
+      ];
+
+      for (const url of tourUrls) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const parsed = await res.json();
+            if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+              const injected = injectSheetsData(parsed, sheetsData);
+              const firstScene = Object.keys(injected)[0];
+              if (firstScene) {
+                setScenes(injected);
+                setActiveSceneKey(firstScene);
+                localStorage.setItem(`nexus_tour_data_${tourId}`, JSON.stringify(parsed));
+                setIsLoading(false);
+                return;
+              }
+            }
+          }
+        } catch (e) {
+          console.warn(`No se pudo cargar tour desde ${url}:`, e);
         }
-      } catch (e) {
-        console.warn(`No se encontró archivo físico para el tour: ${tourId}`);
       }
 
       const injectedFallback = injectSheetsData(initialTourData, sheetsData);
@@ -1075,6 +1239,7 @@ export default function TourEditorPage() {
   // Referencias para diferenciar click de drag
   const isDraggingHotspot = useRef(false);
   const dragIndex = useRef(null);
+  const dragVertexIndex = useRef({ hotspotIndex: null, vertexIndex: null });
 
   const activeScene = scenes[activeSceneKey] || { nombre: '', imagen: '', hotspots: [], heading: { x: 0, y: 0 }, norteMagnetico: 0, filtro: 'normal' };
   const displayImage = activeScene.imagen ? (activeScene.imagen.startsWith('http') || activeScene.imagen.startsWith('data:') ? activeScene.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${activeScene.imagen}`) : '';
@@ -1100,6 +1265,11 @@ export default function TourEditorPage() {
   // Manejador global de pointer up para evitar bloqueos
   useEffect(() => {
     const handleGlobalPointerUp = () => {
+      if (dragVertexIndex.current.hotspotIndex !== null) {
+        dragVertexIndex.current = { hotspotIndex: null, vertexIndex: null };
+        setIsDragging(false);
+        saveToLocal(scenes);
+      }
       if (isDraggingHotspot.current) {
         isDraggingHotspot.current = false;
         dragIndex.current = null;
@@ -1232,9 +1402,172 @@ export default function TourEditorPage() {
     setActiveTab('elementos');
   };
 
+  // Calcular 4 vértices iniciales en abanico frente a la cámara para polígonos
+  const getSpawnPolygonVertices = () => {
+    const dir = new THREE.Vector3();
+    const up = new THREE.Vector3(0, 1, 0);
+    if (cameraRef.current) {
+      cameraRef.current.getWorldDirection(dir);
+    } else {
+      dir.set(0, 0, -1);
+    }
+    const right = new THREE.Vector3().crossVectors(dir, up).normalize();
+    const localUp = new THREE.Vector3().crossVectors(right, dir).normalize();
+
+    const size = 3.5;
+    const dist = 20;
+    const center = dir.clone().multiplyScalar(dist);
+
+    const p0 = center.clone().add(right.clone().multiplyScalar(-size)).add(localUp.clone().multiplyScalar(size)).normalize().multiplyScalar(dist);
+    const p1 = center.clone().add(right.clone().multiplyScalar(size)).add(localUp.clone().multiplyScalar(size)).normalize().multiplyScalar(dist);
+    const p2 = center.clone().add(right.clone().multiplyScalar(size)).add(localUp.clone().multiplyScalar(-size)).normalize().multiplyScalar(dist);
+    const p3 = center.clone().add(right.clone().multiplyScalar(-size)).add(localUp.clone().multiplyScalar(-size)).normalize().multiplyScalar(dist);
+
+    return [
+      [parseFloat(p0.x.toFixed(2)), parseFloat(p0.y.toFixed(2)), parseFloat(p0.z.toFixed(2))],
+      [parseFloat(p1.x.toFixed(2)), parseFloat(p1.y.toFixed(2)), parseFloat(p1.z.toFixed(2))],
+      [parseFloat(p2.x.toFixed(2)), parseFloat(p2.y.toFixed(2)), parseFloat(p2.z.toFixed(2))],
+      [parseFloat(p3.x.toFixed(2)), parseFloat(p3.y.toFixed(2)), parseFloat(p3.z.toFixed(2))]
+    ];
+  };
+
+  // Calcular 2 vértices iniciales para línea
+  const getSpawnLineVertices = () => {
+    const dir = new THREE.Vector3();
+    const up = new THREE.Vector3(0, 1, 0);
+    if (cameraRef.current) {
+      cameraRef.current.getWorldDirection(dir);
+    } else {
+      dir.set(0, 0, -1);
+    }
+    const right = new THREE.Vector3().crossVectors(dir, up).normalize();
+    const dist = 20;
+    const center = dir.clone().multiplyScalar(dist);
+
+    const p0 = center.clone().add(right.clone().multiplyScalar(-4)).normalize().multiplyScalar(dist);
+    const p1 = center.clone().add(right.clone().multiplyScalar(4)).normalize().multiplyScalar(dist);
+
+    return [
+      [parseFloat(p0.x.toFixed(2)), parseFloat(p0.y.toFixed(2)), parseFloat(p0.z.toFixed(2))],
+      [parseFloat(p1.x.toFixed(2)), parseFloat(p1.y.toFixed(2)), parseFloat(p1.z.toFixed(2))]
+    ];
+  };
+
+  // Agregar Polígono / Lote 3D
+  const handleAddPolygon = () => {
+    const newPoly = {
+      tipo: 'poligono',
+      vertices: getSpawnPolygonVertices(),
+      color: '#22c55e',
+      opacidad: 0.45,
+      colorBorde: '#ffffff',
+      grosorBorde: 2,
+      texto: 'Lote 1',
+      manzana: 'A',
+      lote: '1',
+      estado: 'Disponible',
+      precio: '',
+      area: '',
+      fijo: false
+    };
+    const updated = {
+      ...scenes,
+      [activeSceneKey]: {
+        ...activeScene,
+        hotspots: [...(activeScene.hotspots || []), newPoly]
+      }
+    };
+    saveToLocal(updated);
+    setActiveHotspotIndex((activeScene.hotspots || []).length);
+    setActiveTab('elementos');
+  };
+
+  // Agregar Línea de Tramo / Delimitación
+  const handleAddLine = () => {
+    const newLine = {
+      tipo: 'linea',
+      vertices: getSpawnLineVertices(),
+      colorBorde: '#ffffff',
+      grosorBorde: 3,
+      texto: 'Tramo de calle',
+      fijo: false
+    };
+    const updated = {
+      ...scenes,
+      [activeSceneKey]: {
+        ...activeScene,
+        hotspots: [...(activeScene.hotspots || []), newLine]
+      }
+    };
+    saveToLocal(updated);
+    setActiveHotspotIndex((activeScene.hotspots || []).length);
+    setActiveTab('elementos');
+  };
+
+  // Añadir un vértice a un polígono o línea existente
+  const handleAddVertex = (hotspotIdx) => {
+    const newHotspots = [...(activeScene.hotspots || [])];
+    const item = newHotspots[hotspotIdx];
+    if (!item || !item.vertices || item.vertices.length < 2) return;
+
+    const last = item.vertices[item.vertices.length - 1];
+    const first = item.vertices[0];
+    const midPoint = [
+      parseFloat(((last[0] + first[0]) / 2).toFixed(2)),
+      parseFloat(((last[1] + first[1]) / 2).toFixed(2)),
+      parseFloat(((last[2] + first[2]) / 2).toFixed(2))
+    ];
+
+    const newVertices = [...item.vertices, midPoint];
+    newHotspots[hotspotIdx] = {
+      ...item,
+      vertices: newVertices
+    };
+    const updated = {
+      ...scenes,
+      [activeSceneKey]: {
+        ...activeScene,
+        hotspots: newHotspots
+      }
+    };
+    saveToLocal(updated);
+  };
+
+  // Eliminar un vértice de un polígono o línea
+  const handleDeleteVertex = (hotspotIdx, vertexIdx) => {
+    const newHotspots = [...(activeScene.hotspots || [])];
+    const item = newHotspots[hotspotIdx];
+    if (!item || !item.vertices) return;
+    const minVertices = item.tipo === 'linea' ? 2 : 3;
+    if (item.vertices.length <= minVertices) {
+      alert(`Un ${item.tipo} debe tener al menos ${minVertices} vértices.`);
+      return;
+    }
+
+    const targetIdx = vertexIdx !== undefined ? vertexIdx : item.vertices.length - 1;
+    const newVertices = item.vertices.filter((_, idx) => idx !== targetIdx);
+    newHotspots[hotspotIdx] = {
+      ...item,
+      vertices: newVertices
+    };
+    const updated = {
+      ...scenes,
+      [activeSceneKey]: {
+        ...activeScene,
+        hotspots: newHotspots
+      }
+    };
+    saveToLocal(updated);
+  };
+
+  const handleVertexDragStart = (hotspotIndex, vertexIndex) => {
+    dragVertexIndex.current = { hotspotIndex, vertexIndex };
+    setIsDragging(true);
+  };
+
   // Mover el punto interactivo seleccionado por drag
   const handlePointerMoveContainer = (e) => {
-    if (isDraggingHotspot.current && dragIndex.current !== null && cameraRef.current) {
+    if (cameraRef.current) {
       const rect = e.currentTarget.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -1248,23 +1581,68 @@ export default function TourEditorPage() {
       raycaster.ray.intersectSphere(targetSphere, intersectionPoint);
 
       if (intersectionPoint) {
-        const newHotspots = [...activeScene.hotspots];
-        if (newHotspots[dragIndex.current] && !newHotspots[dragIndex.current].fijo) {
-          newHotspots[dragIndex.current].posicion = [
-            parseFloat(intersectionPoint.x.toFixed(2)),
-            parseFloat(intersectionPoint.y.toFixed(2)),
-            parseFloat(intersectionPoint.z.toFixed(2))
-          ];
-          const updated = {
-            ...scenes,
-            [activeSceneKey]: {
-              ...activeScene,
-              hotspots: newHotspots
-            }
-          };
-          setScenes(updated);
+        // Caso 1: Arrastrar un vértice de polígono / línea
+        if (dragVertexIndex.current.hotspotIndex !== null && dragVertexIndex.current.vertexIndex !== null) {
+          const { hotspotIndex, vertexIndex } = dragVertexIndex.current;
+          const newHotspots = [...(activeScene.hotspots || [])];
+          const item = newHotspots[hotspotIndex];
+          if (item && item.vertices && item.vertices[vertexIndex] && !item.fijo) {
+            const newVertices = [...item.vertices];
+            newVertices[vertexIndex] = [
+              parseFloat(intersectionPoint.x.toFixed(2)),
+              parseFloat(intersectionPoint.y.toFixed(2)),
+              parseFloat(intersectionPoint.z.toFixed(2))
+            ];
+            newHotspots[hotspotIndex] = {
+              ...item,
+              vertices: newVertices
+            };
+            const updated = {
+              ...scenes,
+              [activeSceneKey]: {
+                ...activeScene,
+                hotspots: newHotspots
+              }
+            };
+            setScenes(updated);
+          }
+          return;
+        }
+
+        // Caso 2: Arrastrar un punto interactivo tradicional
+        if (isDraggingHotspot.current && dragIndex.current !== null) {
+          const newHotspots = [...activeScene.hotspots];
+          if (newHotspots[dragIndex.current] && !newHotspots[dragIndex.current].fijo) {
+            newHotspots[dragIndex.current].posicion = [
+              parseFloat(intersectionPoint.x.toFixed(2)),
+              parseFloat(intersectionPoint.y.toFixed(2)),
+              parseFloat(intersectionPoint.z.toFixed(2))
+            ];
+            const updated = {
+              ...scenes,
+              [activeSceneKey]: {
+                ...activeScene,
+                hotspots: newHotspots
+              }
+            };
+            setScenes(updated);
+          }
         }
       }
+    }
+  };
+
+  const handlePointerUpContainer = () => {
+    if (dragVertexIndex.current.hotspotIndex !== null) {
+      saveToLocal(scenes);
+      dragVertexIndex.current = { hotspotIndex: null, vertexIndex: null };
+      setIsDragging(false);
+    }
+    if (isDraggingHotspot.current) {
+      saveToLocal(scenes);
+      isDraggingHotspot.current = false;
+      dragIndex.current = null;
+      setIsDragging(false);
     }
   };
 
@@ -1861,6 +2239,7 @@ export default function TourEditorPage() {
           <div 
             className="flex-1 w-full relative overflow-hidden"
             onPointerMove={handlePointerMoveContainer}
+            onPointerUp={handlePointerUpContainer}
           >
             {isLoading && (
               <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-sm transition-all duration-300">
@@ -1888,8 +2267,50 @@ export default function TourEditorPage() {
               <Suspense fallback={<LoaderFallback />}>
                 {displayImage && <PanoramaSphere imagePath={displayImage} />}
                 
-                {activeScene.hotspots?.map((hs, index) => {
+                {(!imageSelectorOpen && !renameModalOpen) && activeScene.hotspots?.map((hs, index) => {
                   const itemTipo = hs.tipo || 'hotspot';
+
+                  // Renderizado de Polígonos 3D y Líneas de Tramo
+                  if (itemTipo === 'poligono' || itemTipo === 'linea') {
+                    const sheetsLoteMatch = sheetsLotes.find(l => 
+                      l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase() &&
+                      l.manzana && l.manzana.toString().trim().toUpperCase() === (hs.manzana || '').toString().trim().toUpperCase() &&
+                      l.lote && l.lote.toString().trim() === (hs.lote || '').toString().trim()
+                    );
+
+                    const estadoFinal = sheetsLoteMatch?.estado || hs.estado;
+                    const colorFinal = sheetsLoteMatch ? getColorForEstado(sheetsLoteMatch.estado) : (hs.color || '#22c55e');
+
+                    return (
+                      <Polygon3D
+                        key={index}
+                        index={index}
+                        vertices={hs.vertices || []}
+                        color={colorFinal}
+                        opacidad={hs.opacidad ?? 0.45}
+                        colorBorde={hs.colorBorde || '#ffffff'}
+                        grosorBorde={hs.grosorBorde || 2}
+                        esLinea={itemTipo === 'linea'}
+                        isSelected={activeHotspotIndex === index}
+                        isEditor={true}
+                        onSelect={(idx) => {
+                          setActiveHotspotIndex(idx);
+                          setActiveTab('elementos');
+                        }}
+                        onVertexDragStart={handleVertexDragStart}
+                        datosLote={{
+                          manzana: hs.manzana,
+                          lote: hs.lote,
+                          estado: estadoFinal,
+                          precio: sheetsLoteMatch?.precio || hs.precio,
+                          area: sheetsLoteMatch?.area || hs.area,
+                          texto: hs.texto,
+                          color: colorFinal
+                        }}
+                      />
+                    );
+                  }
+
                   const shadowFilter = hs.sombra 
                     ? 'drop-shadow(0 10px 15px rgba(0,0,0,0.65))' 
                     : 'none';
@@ -1918,6 +2339,7 @@ export default function TourEditorPage() {
                         center 
                         distanceFactor={distFactor}
                         transform={isTransform}
+                        zIndexRange={[50, 0]}
                       >
                         <div 
                           onPointerDown={(e) => {
@@ -2842,6 +3264,38 @@ export default function TourEditorPage() {
                   <ChevronRight className="w-4 h-4 text-gray-500" />
                 </button>
 
+                <button
+                  onClick={handleAddPolygon}
+                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-emerald-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-105 transition-transform">
+                      <Square className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white">Polígono / Lote 3D</h4>
+                      <p className="text-[10px] text-gray-500 mt-0.5">Área delimitada con color, transparencia y esquinas libres</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                </button>
+
+                <button
+                  onClick={handleAddLine}
+                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-blue-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover:scale-105 transition-transform">
+                      <Spline className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white">Línea / Delimitación</h4>
+                      <p className="text-[10px] text-gray-500 mt-0.5">Línea de tramo para calles o límites perimétricos</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                </button>
+
                 <p className="text-[9px] text-gray-500 italic mt-6 leading-relaxed bg-white/5 p-3 rounded-xl border border-white/5">
                   💡 Los elementos nuevos se insertarán directamente en el centro de tu campo visual actual. Podrás arrastrarlos libremente por la pantalla para reubicarlos.
                 </p>
@@ -2900,6 +3354,24 @@ export default function TourEditorPage() {
                                     <span>🏡 Lote Mz {hs.manzana || 'A'}-{hs.lote || '1'}</span>
                                   </>
                                 )}
+                                {itemTipo === 'poligono' && (
+                                  <>
+                                    <span 
+                                      className="w-2.5 h-2.5 rounded-sm inline-block shrink-0 border border-white/20" 
+                                      style={{ backgroundColor: hs.color || '#22c55e' }}
+                                    />
+                                    <span>📐 {hs.manzana ? `Mz ${hs.manzana}-${hs.lote || '1'}` : (hs.texto || 'Lote 3D')}</span>
+                                  </>
+                                )}
+                                {itemTipo === 'linea' && (
+                                  <>
+                                    <span 
+                                      className="w-3 h-0.5 inline-block shrink-0 rounded-full" 
+                                      style={{ backgroundColor: hs.color || '#f59e0b' }}
+                                    />
+                                    <span>📏 {hs.texto || 'Línea 3D'}</span>
+                                  </>
+                                )}
                                 {itemTipo === 'manzana' && (
                                   <>
                                     <span 
@@ -2931,7 +3403,9 @@ export default function TourEditorPage() {
                                 {itemTipo === 'hotspot' && 'Conexión'}
                                 {itemTipo === 'texto' && 'Texto'}
                                 {itemTipo === 'imagen' && 'Imagen'}
-                                {itemTipo === 'lote' && 'Lote'}
+                                {itemTipo === 'lote' && 'Lote Pin'}
+                                {itemTipo === 'poligono' && 'Polígono 3D'}
+                                {itemTipo === 'linea' && 'Línea 3D'}
                                 {itemTipo === 'manzana' && 'Manzana'}
                               </span>
                             </div>
@@ -3353,6 +3827,432 @@ export default function TourEditorPage() {
                                     </div>
                                   </>
                                 )}
+
+                                {itemTipo === 'poligono' && (() => {
+                                  const sheetsLoteMatch = sheetsLotes.find(l => 
+                                    l.proyecto && l.proyecto.toString().trim().toLowerCase() === tourId.toLowerCase() &&
+                                    l.manzana && l.manzana.toString().trim().toUpperCase() === (hs.manzana || '').toString().trim().toUpperCase() &&
+                                    l.lote && l.lote.toString().trim() === (hs.lote || '').toString().trim()
+                                  );
+
+                                  return (
+                                    <div className="space-y-3">
+                                      {/* Estado del enlace con Sheets */}
+                                      <div className={`p-2.5 rounded-xl border text-[10px] font-bold flex items-center gap-1.5 transition-all duration-300 ${
+                                        sheetsLoteMatch 
+                                          ? 'bg-green-500/10 border-green-500/30 text-green-400' 
+                                          : (hs.manzana && hs.lote)
+                                            ? 'bg-red-500/10 border-red-500/30 text-red-400 animate-pulse'
+                                            : 'bg-slate-900 border-white/5 text-gray-400'
+                                      }`}>
+                                        <span>
+                                          {sheetsLoteMatch 
+                                            ? `✅ Sincronizado con Sheets (Fila encontrada)` 
+                                            : (hs.manzana && hs.lote)
+                                              ? `⚠️ No encontrado en Sheets (Verifica Manzana/Lote)`
+                                              : `ℹ️ Completa Manzana y Lote para enlazar con Sheets`}
+                                        </span>
+                                      </div>
+
+                                      <div className="grid grid-cols-2 gap-2">
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Manzana</label>
+                                          <input 
+                                            type="text" 
+                                            value={hs.manzana || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'manzana', e.target.value.toUpperCase())}
+                                            className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
+                                            placeholder="ej: A"
+                                          />
+                                        </div>
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">N° Lote</label>
+                                          <input 
+                                            type="text" 
+                                            value={hs.lote || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'lote', e.target.value)}
+                                            className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
+                                            placeholder="ej: 1"
+                                          />
+                                        </div>
+                                      </div>
+
+                                      <div className="space-y-1">
+                                        <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Estado {sheetsLoteMatch && '(En Sheets)'}</label>
+                                        <select
+                                          disabled={!!sheetsLoteMatch}
+                                          value={hs.estado || 'Disponible'}
+                                          onChange={(e) => {
+                                            const newEstado = e.target.value;
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].estado = newEstado;
+                                            if (newEstado === 'Disponible') newHotspots[index].color = '#22c55e';
+                                            else if (newEstado === 'Reservado con S/. 100') newHotspots[index].color = '#eab308';
+                                            else if (newEstado === 'Financiado') newHotspots[index].color = '#f97316';
+                                            else if (newEstado === 'Vendido') newHotspots[index].color = '#ef4444';
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated);
+                                          }}
+                                          className={`w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold cursor-pointer ${
+                                            sheetsLoteMatch ? 'opacity-60 cursor-not-allowed bg-slate-950/60' : ''
+                                          }`}
+                                        >
+                                          <option value="Disponible">Disponible (🟢 Verde)</option>
+                                          <option value="Reservado con S/. 100">Reservado con S/. 100 (🟡 Amarillo)</option>
+                                          <option value="Financiado">Financiado (🟠 Naranja)</option>
+                                          <option value="Vendido">Vendido (🔴 Rojo)</option>
+                                        </select>
+                                      </div>
+
+                                      <div className="grid grid-cols-2 gap-2">
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Precio {sheetsLoteMatch && '(Sheets)'}</label>
+                                          <input 
+                                            type="text" 
+                                            disabled={!!sheetsLoteMatch}
+                                            value={hs.precio || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'precio', e.target.value)}
+                                            className={`w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold ${
+                                              sheetsLoteMatch ? 'opacity-60 cursor-not-allowed bg-slate-950/60' : ''
+                                            }`}
+                                            placeholder="ej: S/. 45,000"
+                                          />
+                                        </div>
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Área m² {sheetsLoteMatch && '(Sheets)'}</label>
+                                          <input 
+                                            type="text" 
+                                            disabled={!!sheetsLoteMatch}
+                                            value={hs.area || ''} 
+                                            onChange={(e) => handleFieldChange(index, 'area', e.target.value)}
+                                            className={`w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold ${
+                                              sheetsLoteMatch ? 'opacity-60 cursor-not-allowed bg-slate-950/60' : ''
+                                            }`}
+                                            placeholder="ej: 120 m²"
+                                          />
+                                        </div>
+                                      </div>
+
+                                      {/* Color de Relleno del Polígono */}
+                                      <div className="space-y-1.5 pt-2 border-t border-white/5">
+                                        <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Color de Relleno (Lote)</label>
+                                        <div className="flex items-center gap-2">
+                                          <input
+                                            type="color"
+                                            value={hs.color || '#22c55e'}
+                                            onChange={(e) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              newHotspots[index].color = e.target.value;
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated);
+                                            }}
+                                            className="w-8 h-8 rounded-lg bg-transparent border-0 cursor-pointer"
+                                          />
+                                          <div className="flex items-center gap-1.5 flex-wrap flex-1">
+                                            {[
+                                              { name: 'Disp.', col: '#22c55e' },
+                                              { name: 'Res.', col: '#eab308' },
+                                              { name: 'Fin.', col: '#f97316' },
+                                              { name: 'Vend.', col: '#ef4444' },
+                                              { name: 'Sep.', col: '#3b82f6' },
+                                              { name: 'Mor.', col: '#8b5cf6' }
+                                            ].map(palette => (
+                                              <button
+                                                type="button"
+                                                key={palette.col}
+                                                onClick={() => {
+                                                  const newHotspots = [...activeScene.hotspots];
+                                                  newHotspots[index].color = palette.col;
+                                                  const updated = {
+                                                    ...scenes,
+                                                    [activeSceneKey]: {
+                                                      ...activeScene,
+                                                      hotspots: newHotspots
+                                                    }
+                                                  };
+                                                  saveToLocal(updated);
+                                                }}
+                                                className="w-5 h-5 rounded-full border border-white/20 transition-transform hover:scale-110 active:scale-95 shadow-sm"
+                                                style={{ backgroundColor: palette.col }}
+                                                title={palette.name}
+                                              />
+                                            ))}
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      {/* Transparencia / Opacidad del Relleno */}
+                                      <div className="space-y-1">
+                                        <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                          <span>Opacidad / Transparencia</span>
+                                          <span className="font-mono text-amber-400">{Math.round((hs.opacidad ?? 0.6) * 100)}%</span>
+                                        </div>
+                                        <input 
+                                          type="range"
+                                          min="0.05"
+                                          max="1.0"
+                                          step="0.05"
+                                          value={hs.opacidad ?? 0.6}
+                                          onChange={(e) => {
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].opacidad = parseFloat(e.target.value);
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated);
+                                          }}
+                                          className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                        />
+                                      </div>
+
+                                      {/* Color y Grosor del Borde */}
+                                      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/5">
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Color de Borde</label>
+                                          <div className="flex items-center gap-1.5">
+                                            <input
+                                              type="color"
+                                              value={hs.colorBorde || '#ffffff'}
+                                              onChange={(e) => {
+                                                const newHotspots = [...activeScene.hotspots];
+                                                newHotspots[index].colorBorde = e.target.value;
+                                                const updated = {
+                                                  ...scenes,
+                                                  [activeSceneKey]: {
+                                                    ...activeScene,
+                                                    hotspots: newHotspots
+                                                  }
+                                                };
+                                                saveToLocal(updated);
+                                              }}
+                                              className="w-7 h-7 rounded-lg bg-transparent border-0 cursor-pointer"
+                                            />
+                                            <span className="text-[9px] font-mono text-gray-400">{hs.colorBorde || '#ffffff'}</span>
+                                          </div>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                          <div className="flex justify-between items-center text-[9px] font-bold text-gray-500 uppercase tracking-wider">
+                                            <span>Grosor Borde</span>
+                                            <span className="font-mono text-white">{hs.grosorBorde || 2}px</span>
+                                          </div>
+                                          <input 
+                                            type="range"
+                                            min="1"
+                                            max="8"
+                                            step="1"
+                                            value={hs.grosorBorde || 2}
+                                            onChange={(e) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              newHotspots[index].grosorBorde = parseInt(e.target.value);
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated);
+                                            }}
+                                            className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                          />
+                                        </div>
+                                      </div>
+
+                                      {/* Toggles de visibilidad */}
+                                      <div className="space-y-1.5 pt-2 border-t border-white/5 select-none">
+                                        <label className="flex items-center gap-2 cursor-pointer text-[9px] font-bold uppercase tracking-wider text-gray-400">
+                                          <input
+                                            type="checkbox"
+                                            checked={hs.mostrarRelleno !== false}
+                                            onChange={(e) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              newHotspots[index].mostrarRelleno = e.target.checked;
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated);
+                                            }}
+                                            className="w-3.5 h-3.5 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                          />
+                                          <span>Mostrar Superficie de Color</span>
+                                        </label>
+
+                                        <label className="flex items-center gap-2 cursor-pointer text-[9px] font-bold uppercase tracking-wider text-gray-400">
+                                          <input
+                                            type="checkbox"
+                                            checked={hs.mostrarBorde !== false}
+                                            onChange={(e) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              newHotspots[index].mostrarBorde = e.target.checked;
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated);
+                                            }}
+                                            className="w-3.5 h-3.5 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                          />
+                                          <span>Mostrar Líneas Perimetrales</span>
+                                        </label>
+
+                                        <label className="flex items-center gap-2 cursor-pointer text-[9px] font-bold uppercase tracking-wider text-gray-400">
+                                          <input
+                                            type="checkbox"
+                                            checked={hs.mostrarEtiqueta !== false}
+                                            onChange={(e) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              newHotspots[index].mostrarEtiqueta = e.target.checked;
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated);
+                                            }}
+                                            className="w-3.5 h-3.5 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                          />
+                                          <span>Mostrar Etiqueta 3D Flotante</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  );
+                                })()}
+
+                                {itemTipo === 'linea' && (
+                                  <div className="space-y-3">
+                                    <div className="space-y-1">
+                                      <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Nombre / Descripción de la Línea</label>
+                                      <input 
+                                        type="text" 
+                                        value={hs.texto || ''} 
+                                        onChange={(e) => handleFieldChange(index, 'texto', e.target.value)}
+                                        className="w-full bg-slate-950 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white outline-none focus:border-amber-400 font-semibold"
+                                        placeholder="ej: Límite de Propiedad, Calle Principal..."
+                                      />
+                                    </div>
+
+                                    <div className="space-y-1.5 pt-2 border-t border-white/5">
+                                      <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Color de la Línea</label>
+                                      <div className="flex items-center gap-2">
+                                        <input
+                                          type="color"
+                                          value={hs.color || '#f59e0b'}
+                                          onChange={(e) => {
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].color = e.target.value;
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated);
+                                          }}
+                                          className="w-8 h-8 rounded-lg bg-transparent border-0 cursor-pointer"
+                                        />
+                                        <div className="flex items-center gap-1.5 flex-wrap flex-1">
+                                          {['#f59e0b', '#ef4444', '#22c55e', '#3b82f6', '#ffffff', '#a855f7'].map(col => (
+                                            <button
+                                              type="button"
+                                              key={col}
+                                              onClick={() => {
+                                                const newHotspots = [...activeScene.hotspots];
+                                                newHotspots[index].color = col;
+                                                const updated = {
+                                                  ...scenes,
+                                                  [activeSceneKey]: {
+                                                    ...activeScene,
+                                                    hotspots: newHotspots
+                                                  }
+                                                };
+                                                saveToLocal(updated);
+                                              }}
+                                              className="w-5 h-5 rounded-full border border-white/20 transition-transform hover:scale-110 active:scale-95 shadow-sm"
+                                              style={{ backgroundColor: col }}
+                                            />
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="space-y-1">
+                                      <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                        <span>Grosor de Trazo</span>
+                                        <span className="font-mono text-white">{hs.grosorBorde || 3}px</span>
+                                      </div>
+                                      <input 
+                                        type="range"
+                                        min="1"
+                                        max="10"
+                                        step="1"
+                                        value={hs.grosorBorde || 3}
+                                        onChange={(e) => {
+                                          const newHotspots = [...activeScene.hotspots];
+                                          newHotspots[index].grosorBorde = parseInt(e.target.value);
+                                          const updated = {
+                                            ...scenes,
+                                            [activeSceneKey]: {
+                                              ...activeScene,
+                                              hotspots: newHotspots
+                                            }
+                                          };
+                                          saveToLocal(updated);
+                                        }}
+                                        className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                      />
+                                    </div>
+
+                                    <div className="pt-2 border-t border-white/5 select-none">
+                                      <label className="flex items-center gap-2 cursor-pointer text-[9px] font-bold uppercase tracking-wider text-gray-400">
+                                        <input
+                                          type="checkbox"
+                                          checked={hs.mostrarEtiqueta ?? false}
+                                          onChange={(e) => {
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].mostrarEtiqueta = e.target.checked;
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated);
+                                          }}
+                                          className="w-3.5 h-3.5 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                        />
+                                        <span>Mostrar Etiqueta de Texto Flotante</span>
+                                      </label>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             )}
 
@@ -3564,6 +4464,70 @@ export default function TourEditorPage() {
                             {/* SUB-PESTAÑA 3: DIMENSIONES Y 3D */}
                             {activeHotspotTab === 'dimensiones' && (
                               <div className="space-y-2.5 animate-fade-in">
+                                {/* GESTOR DE VÉRTICES PARA POLÍGONOS Y LÍNEAS */}
+                                {(itemTipo === 'poligono' || itemTipo === 'linea') ? (
+                                  <div className="space-y-3">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wider">
+                                        {itemTipo === 'poligono' ? 'Esquinas del Lote' : 'Puntos de la Línea'}
+                                      </span>
+                                      <span className="text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/20">
+                                        {hs.vertices?.length || 0} vértices
+                                      </span>
+                                    </div>
+
+                                    <div className="flex gap-2">
+                                      <button
+                                        type="button"
+                                        onClick={() => handleAddVertex(index)}
+                                        className="flex-1 flex items-center justify-center gap-1 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider py-2 px-3 rounded-xl transition-all active:scale-95 cursor-pointer"
+                                      >
+                                        <Plus className="w-3.5 h-3.5" />
+                                        <span>+ Añadir Esquina</span>
+                                      </button>
+
+                                      <button
+                                        type="button"
+                                        disabled={(hs.vertices?.length || 0) <= (itemTipo === 'linea' ? 2 : 3)}
+                                        onClick={() => handleDeleteVertex(index)}
+                                        className="flex-1 flex items-center justify-center gap-1 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 text-[10px] font-bold uppercase tracking-wider py-2 px-3 rounded-xl transition-all active:scale-95 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                                      >
+                                        <Minus className="w-3.5 h-3.5" />
+                                        <span>- Quitar Última</span>
+                                      </button>
+                                    </div>
+
+                                    <p className="text-[9px] text-gray-400 italic bg-slate-950 p-2.5 rounded-xl border border-white/5 leading-relaxed">
+                                      💡 Arrastra los pines numéricos <strong className="text-amber-400 font-mono">(1, 2, 3...)</strong> directamente sobre el visor 3D para calzar las esquinas con el terreno o calles.
+                                    </p>
+
+                                    <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                                      {hs.vertices?.map((v, vIdx) => (
+                                        <div key={vIdx} className="flex items-center justify-between p-2 bg-slate-950/80 rounded-xl border border-white/5 text-[10px]">
+                                          <div className="flex items-center gap-2 font-mono">
+                                            <span className="w-5 h-5 rounded-full bg-amber-500 text-slate-950 font-bold flex items-center justify-center text-[9px]">
+                                              {vIdx + 1}
+                                            </span>
+                                            <span className="text-gray-400">
+                                              [{v[0]?.toFixed(1)}, {v[1]?.toFixed(1)}, {v[2]?.toFixed(1)}]
+                                            </span>
+                                          </div>
+                                          {(hs.vertices.length > (itemTipo === 'linea' ? 2 : 3)) && (
+                                            <button
+                                              type="button"
+                                              onClick={() => handleDeleteVertex(index, vIdx)}
+                                              className="text-gray-500 hover:text-red-400 transition-colors p-1"
+                                              title="Borrar este punto"
+                                            >
+                                              <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
+                                          )}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <>
                                 {/* Orientación (2D, Piso, Muro) */}
                                 <div className="space-y-1">
                                   <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Orientación Espacial</label>
@@ -3820,15 +4784,17 @@ export default function TourEditorPage() {
                                   </div>
                                 </div>
 
-                                {/* Coordenadas Físicas */}
-                                <div className="space-y-1 pt-3 border-t border-white/5">
-                                  <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Coordenadas X, Y, Z</label>
-                                  <div className="grid grid-cols-3 gap-1 font-mono text-[9px] text-center text-gray-400">
-                                    <div className="bg-slate-950 px-1.5 py-1 rounded">X: {hs.posicion[0]}</div>
-                                    <div className="bg-slate-950 px-1.5 py-1 rounded">Y: {hs.posicion[1]}</div>
-                                    <div className="bg-slate-950 px-1.5 py-1 rounded">Z: {hs.posicion[2]}</div>
+                                  {/* Coordenadas Físicas */}
+                                  <div className="space-y-1 pt-3 border-t border-white/5">
+                                    <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Coordenadas X, Y, Z</label>
+                                    <div className="grid grid-cols-3 gap-1 font-mono text-[9px] text-center text-gray-400">
+                                      <div className="bg-slate-950 px-1.5 py-1 rounded">X: {hs.posicion[0]}</div>
+                                      <div className="bg-slate-950 px-1.5 py-1 rounded">Y: {hs.posicion[1]}</div>
+                                      <div className="bg-slate-950 px-1.5 py-1 rounded">Z: {hs.posicion[2]}</div>
+                                    </div>
                                   </div>
-                                </div>
+                                </>
+                              )}
                               </div>
                             )}
 
@@ -3870,7 +4836,7 @@ export default function TourEditorPage() {
       {/* Modal Personalizado de Renombrado de Imagen */}
       {renameModalOpen && (
         <div 
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-fade-in"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-fade-in"
           onClick={() => {
             setRenameModalOpen(false);
             setRenameTargetKey(null);

@@ -203,6 +203,125 @@ const tourEditorApiPlugin = () => ({
         return;
       }
 
+      // Endpoint 5: Crear una nueva carpeta de tour y sus archivos JSON asociados
+      if (req.method === 'POST' && req.url?.startsWith('/api/create-tour-folder')) {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+          try {
+            const { folderName } = JSON.parse(body);
+            if (!folderName || typeof folderName !== 'string') {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: 'Falta el parámetro: folderName' }));
+              return;
+            }
+
+            // Sanitizar nombre de carpeta (slug seguro en minúsculas)
+            const cleanFolderName = folderName
+              .trim()
+              .toLowerCase()
+              .replace(/\s+/g, '_')
+              .replace(/[^a-z0-9_-]/g, '');
+
+            if (!cleanFolderName) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: 'Nombre de carpeta inválido' }));
+              return;
+            }
+
+            // 1. Crear directorio físico de imágenes en public/tour/<cleanFolderName>
+            const tourImgDir = path.resolve(__dirname, `public/tour/${cleanFolderName}`);
+            if (!fs.existsSync(tourImgDir)) {
+              fs.mkdirSync(tourImgDir, { recursive: true });
+            }
+
+            // 2. Inicializar archivos JSON de tour en public/tours/ y src/data/tours/
+            const initialTourContent = JSON.stringify({}, null, 2);
+
+            const publicToursDir = path.resolve(__dirname, 'public/tours');
+            if (!fs.existsSync(publicToursDir)) {
+              fs.mkdirSync(publicToursDir, { recursive: true });
+            }
+            const publicJsonPath = path.join(publicToursDir, `${cleanFolderName}.json`);
+            if (!fs.existsSync(publicJsonPath)) {
+              fs.writeFileSync(publicJsonPath, initialTourContent, 'utf-8');
+            }
+
+            const srcToursDir = path.resolve(__dirname, 'src/data/tours');
+            if (!fs.existsSync(srcToursDir)) {
+              fs.mkdirSync(srcToursDir, { recursive: true });
+            }
+            const srcJsonPath = path.join(srcToursDir, `${cleanFolderName}.json`);
+            if (!fs.existsSync(srcJsonPath)) {
+              fs.writeFileSync(srcJsonPath, initialTourContent, 'utf-8');
+            }
+
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ 
+              success: true, 
+              folderName: cleanFolderName,
+              message: `Carpeta '${cleanFolderName}' y configuración de tour creadas con éxito` 
+            }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
+      // Endpoint 6: Eliminar una carpeta de tour completa y sus archivos asociados
+      if (req.method === 'POST' && req.url?.startsWith('/api/delete-tour-folder')) {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+          try {
+            const { folderName } = JSON.parse(body);
+            if (!folderName || typeof folderName !== 'string') {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: 'Falta el parámetro: folderName' }));
+              return;
+            }
+
+            const cleanFolderName = path.basename(folderName.trim());
+            if (!cleanFolderName || cleanFolderName === 'Imágenes Generales' || cleanFolderName === '.' || cleanFolderName === '..') {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: 'Nombre de carpeta inválido o protegido' }));
+              return;
+            }
+
+            // 1. Eliminar carpeta física de imágenes
+            const tourImgDir = path.resolve(__dirname, `public/tour/${cleanFolderName}`);
+            if (fs.existsSync(tourImgDir)) {
+              fs.rmSync(tourImgDir, { recursive: true, force: true });
+            }
+
+            // 2. Eliminar JSONs asociados
+            const publicJsonPath = path.resolve(__dirname, `public/tours/${cleanFolderName}.json`);
+            if (fs.existsSync(publicJsonPath)) {
+              fs.unlinkSync(publicJsonPath);
+            }
+
+            const srcJsonPath = path.resolve(__dirname, `src/data/tours/${cleanFolderName}.json`);
+            if (fs.existsSync(srcJsonPath)) {
+              fs.unlinkSync(srcJsonPath);
+            }
+
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ 
+              success: true, 
+              message: `Carpeta '${cleanFolderName}' y archivos asociados eliminados con éxito` 
+            }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
       next();
     });
   }

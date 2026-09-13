@@ -712,9 +712,9 @@ p.text-lg, .text-lg p {
   animation: pulse-glow-shadow 2.8s infinite ease-in-out;
 }
 
-/* Forzar prioridad absoluta en el DOM de Three.js para el hotspot seleccionado */
+/* Forzar prioridad para el hotspot seleccionado sin invadir modales */
 .active-hotspot-priority {
-  z-index: 999999 !important;
+  z-index: 100 !important;
 }
 
 /* Ocultar barra de scroll en elementos deslizables */

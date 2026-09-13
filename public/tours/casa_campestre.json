@@ -1,45 +1,45 @@
 {
-  "1784086584925_dji_20260709022843_0019_d_3893": {
-    "nombre": "Entrada por la Micro 23",
-    "imagen": "/tour/collasuyo/1784086584925_DJI_20260709022843_0019_D.webp",
+  "1789267090308_dji_20260911125336_0017_d_1049": {
+    "nombre": "CEMENTERIO",
+    "imagen": "/tour/casa_campestre/1789267090308_DJI_20260911125336_0017_D.webp",
     "hotspots": [
       {
-        "tipo": "hotspot",
+        "tipo": "texto",
         "posicion": [
-          -19.62,
-          -2.84,
-          -2.61
+          -18.04,
+          -8.59,
+          1
         ],
-        "destino": "vistaaereacasa_1030",
-        "texto": "Ubicación \nde la Casa",
-        "opacidad": 1,
+        "texto": "CEMENTERIO      \"LA CAPILLA\"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
         "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#0af531",
         "inclinacion": 0,
-        "posicionTipo": "2d",
+        "posicionTipo": "muro",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": false,
+        "negrita": true,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 15
+        "rotacion": 0,
+        "fontSize": 18
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          -18.47,
-          -7.22,
-          2.59
+          -6.48,
+          -3.33,
+          18.62
         ],
-        "destino": "_self",
-        "texto": "Mercado \n\"Collasuyo\"",
+        "destino": "1789267108379_dji_20260911125056_0016_d_1051",
+        "texto": "CASA EN VENTA",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#74f50a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -49,154 +49,21 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 17,
         "rotacion": 0
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          -2.23,
-          0.51,
-          19.87
+          19.82,
+          -0.99,
+          2.47
         ],
         "destino": "_self",
-        "texto": "Praderas del Inka",
+        "texto": "UNAJ",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 16
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -7.75,
-          -1.75,
-          -18.35
-        ],
-        "destino": "_self",
-        "texto": "Cementerio \n\"La Capilla\"",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 18
-      }
-    ],
-    "heading": {
-      "x": -18,
-      "y": 44
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "northOffset": 101
-  },
-  "vistaaereacasa_1030": {
-    "nombre": "vistaaereacasa",
-    "imagen": "/tour/collasuyo/vistaaereacasa.webp",
-    "hotspots": [
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          9.83,
-          -17.33,
-          -1.77
-        ],
-        "destino": "patio_3892",
-        "texto": "Casa en \nVENTA",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#0af539",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 15
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          2.3,
-          0.87,
-          -19.85
-        ],
-        "destino": "1784086584925_dji_20260709022843_0019_d_3893",
-        "texto": "Micro 23",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#0af526",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -19.15,
-          -0.19,
-          -5.77
-        ],
-        "destino": "_self",
-        "texto": "Cementerio\n\"La  Capilla\"",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 18
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -9.16,
-          -3.32,
-          17.47
-        ],
-        "destino": "_self",
-        "texto": "Final de la \nMicro  10",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#f50a0a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -210,30 +77,223 @@
       }
     ],
     "heading": {
-      "x": -51,
-      "y": -114
+      "x": -18,
+      "y": 120
     },
     "norteMagnetico": 0,
     "filtro": "normal",
-    "northOffset": 198
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 141,
+      "contraste": 91,
+      "saturacion": 110,
+      "temperatura": 0
+    },
+    "northOffset": 0
   },
-  "patio_3892": {
-    "nombre": "patio",
-    "imagen": "/tour/collasuyo/patio.webp",
+  "1789267108379_dji_20260911125056_0016_d_1051": {
+    "nombre": "CASA",
+    "imagen": "/tour/casa_campestre/1789267108379_DJI_20260911125056_0016_D.webp",
     "hotspots": [
       {
         "tipo": "hotspot",
         "posicion": [
-          -11.38,
-          16.44,
-          0.61
+          1.53,
+          -0.68,
+          19.93
         ],
-        "destino": "vistaaereacasa_1030",
-        "texto": "Vista Aerea",
+        "destino": "_self",
+        "texto": "UNAJ",
         "opacidad": 1,
         "escala": 1,
-        "icono": "Camera",
-        "color": "#0a45f5",
+        "icono": "ArrowDown",
+        "color": "#f50a0a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 19
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          16.71,
+          -1.5,
+          10.88
+        ],
+        "destino": "1789267090308_dji_20260911125336_0017_d_1049",
+        "texto": "VISTA AEREA CEMENERIO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#68f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 15
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          19.61,
+          -3.93,
+          -0.44
+        ],
+        "texto": "CEMENTERIO  \"LA CAPILLA\"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "muro",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "rotacion": 0,
+        "fontSize": 23
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -12.39,
+          -2.59,
+          -15.49
+        ],
+        "texto": "EL PENAL",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -15.86,
+          -1.12,
+          -12.13
+        ],
+        "destino": "_self",
+        "texto": "ESSALUD   JULIACA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0ac6f5",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 17,
+        "colorFondo": "#ffffff",
+        "colorTexto": "#0e1ce1",
+        "fondoTransparente": false
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          0.65,
+          -19.79,
+          2.84
+        ],
+        "destino": "1789267686251_cam_20260911124324_0023_d_5070",
+        "texto": "PROPIEDAD\nEN VENTA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowUp",
+        "color": "#3df50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -2.25,
+          -16.61,
+          10.91
+        ],
+        "texto": "45 M\nX\n7.5 M",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1.3,
+        "inclinacion": 0,
+        "posicionTipo": "piso",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -64,
+      "y": 162
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 125,
+      "contraste": 103,
+      "saturacion": 108,
+      "temperatura": 0
+    },
+    "northOffset": 259
+  },
+  "1789267723656_cam_20260911123937_0019_d_5067": {
+    "nombre": "GRAS 1",
+    "imagen": "/tour/casa_campestre/1789267723656_CAM_20260911123937_0019_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          1.27,
+          -0.19,
+          19.96
+        ],
+        "destino": "1789267739289_cam_20260911124038_0020_d_5068",
+        "texto": "Siguiente estancia",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#51f50a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -246,11 +306,306 @@
       }
     ],
     "heading": {
-      "x": -2,
-      "y": 62
+      "x": -4,
+      "y": -32
     },
     "norteMagnetico": 0,
     "filtro": "normal",
-    "northOffset": 190
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 88,
+      "contraste": 104,
+      "saturacion": 117,
+      "temperatura": 0
+    },
+    "northOffset": 93
+  },
+  "1789267739289_cam_20260911124038_0020_d_5068": {
+    "nombre": "GRAS 2",
+    "imagen": "/tour/casa_campestre/1789267739289_CAM_20260911124038_0020_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -7.17,
+          -1.52,
+          -18.61
+        ],
+        "destino": "1789267745857_cam_20260911124123_0021_d_5069",
+        "texto": "PATIO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#3df50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          8.96,
+          -0.38,
+          17.88
+        ],
+        "destino": "1789267723656_cam_20260911123937_0019_d_5067",
+        "texto": "INTERIOR \nVISTA  DE LA CANCHA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#0af50e",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -5,
+      "y": -150
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 111,
+      "contraste": 76,
+      "saturacion": 117,
+      "temperatura": -15
+    },
+    "northOffset": 285
+  },
+  "1789267745857_cam_20260911124123_0021_d_5069": {
+    "nombre": "PATIO",
+    "imagen": "/tour/casa_campestre/1789267745857_CAM_20260911124123_0021_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -2.11,
+          -1.14,
+          -19.86
+        ],
+        "destino": "1789267686251_cam_20260911124324_0023_d_5070",
+        "texto": "VISTA  EXTERIO",
+        "opacidad": 0.8,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#5cf50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 12
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          3.19,
+          0.17,
+          19.74
+        ],
+        "destino": "1789267739289_cam_20260911124038_0020_d_5068",
+        "texto": "CANCHA  GRASS",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#49f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -10,
+      "y": 178
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 103,
+      "contraste": 78,
+      "saturacion": 151,
+      "temperatura": -17
+    },
+    "northOffset": 277
+  },
+  "1789267686251_cam_20260911124324_0023_d_5070": {
+    "nombre": "PUERTA",
+    "imagen": "/tour/casa_campestre/1789267686251_CAM_20260911124324_0023_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -3.76,
+          -2.05,
+          -19.54
+        ],
+        "destino": "1789267695621_cam_20260911124252_0022_d_5071",
+        "texto": "VISTA   DE LA CALLE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#49f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          7.37,
+          0.53,
+          18.59
+        ],
+        "destino": "1789267745857_cam_20260911124123_0021_d_5069",
+        "texto": "PATIO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#51f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          0.08,
+          17.16,
+          -10.28
+        ],
+        "destino": "1789267108379_dji_20260911125056_0016_d_1051",
+        "texto": "VISTA  AEREA DE \nLA PROPIEDAD",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#0ef50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": 0,
+      "y": -180
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 115,
+      "contraste": 91,
+      "saturacion": 99,
+      "temperatura": 0
+    },
+    "northOffset": 297
+  },
+  "1789267695621_cam_20260911124252_0022_d_5071": {
+    "nombre": "CALLE",
+    "imagen": "/tour/casa_campestre/1789267695621_CAM_20260911124252_0022_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.68,
+          -0.38,
+          3.56
+        ],
+        "destino": "1789267686251_cam_20260911124324_0023_d_5070",
+        "texto": "INGRESO A LA\nPROPIEDAD",
+        "opacidad": 0.7,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#26f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -7.18,
+          18.38,
+          3.24
+        ],
+        "destino": "1789267108379_dji_20260911125056_0016_d_1051",
+        "texto": "VISTA  AEREA \nDE LA PROPIEDAD",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#1af50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -3,
+      "y": 77
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 86,
+      "contraste": 88,
+      "saturacion": 135,
+      "temperatura": -15
+    },
+    "northOffset": 182
   }
 }

@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { tourData } from '../data/tourData';
 import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
+import Polygon3D from './Polygon3D';
 
 // Map of icons for hotspots
 const IconMap = {
@@ -789,7 +790,7 @@ export default function VirtualTour({
                 const scene = updatedScenes[sceneKey];
                 if (scene.hotspots && Array.isArray(scene.hotspots)) {
                   scene.hotspots = scene.hotspots.map(hs => {
-                    if (hs.tipo === 'lote' && hs.manzana && hs.lote) {
+                    if ((hs.tipo === 'lote' || hs.tipo === 'poligono') && hs.manzana && hs.lote) {
                       const match = projectLotes.find(l => 
                         l.manzana && l.manzana.toString().trim().toUpperCase() === hs.manzana.toString().trim().toUpperCase() &&
                         l.lote && l.lote.toString().trim() === hs.lote.toString().trim()
@@ -1052,42 +1053,68 @@ export default function VirtualTour({
         <Suspense fallback={null}>
           {imageLoaded && displayImage && <PanoramaSphere imagePath={displayImage} />}
 
-          {activeScene.hotspots?.map((hs, index) => (
-            <Hotspot
-              key={`${activeSceneKey}-hs-${index}`}
-              posicion={hs.posicion}
-              destino={hs.destino}
-              texto={hs.texto}
-              escala={hs.escala}
-              inclinacion={hs.inclinacion}
-              rotacion={hs.rotacion}
-              tipo={hs.tipo}
-              color={hs.color}
-              icono={hs.icono}
-              colorTexto={hs.colorTexto}
-              colorFondo={hs.colorFondo}
-              url={hs.url}
-              ancho={hs.ancho}
-              alto={hs.alto}
-              opacidad={hs.opacidad}
-              posicionTipo={hs.posicionTipo}
-              escalaZoom={hs.escalaZoom}
-              sombra={hs.sombra}
-              fondoTransparente={hs.fondoTransparente}
-              negrita={hs.negrita}
-              cursiva={hs.cursiva}
-              mostrarTextoSiempre={hs.mostrarTextoSiempre}
-              fontSize={hs.fontSize}
-              nombreDestino={scenes[hs.destino]?.nombre}
-              fuente={hs.fuente}
-              onNavigate={handleNavigate}
-              manzana={hs.manzana}
-              lote={hs.lote}
-              estado={hs.estado}
-              precio={hs.precio}
-              area={hs.area}
-            />
-          ))}
+          {activeScene.hotspots?.map((hs, index) => {
+            if (hs.tipo === 'poligono' || hs.tipo === 'linea') {
+              return (
+                <Polygon3D
+                  key={`${activeSceneKey}-poly-${index}`}
+                  vertices={hs.vertices}
+                  color={hs.color}
+                  opacidad={hs.opacidad}
+                  colorBorde={hs.colorBorde}
+                  grosorBorde={hs.grosorBorde}
+                  mostrarRelleno={hs.mostrarRelleno}
+                  mostrarBorde={hs.mostrarBorde}
+                  mostrarEtiqueta={hs.mostrarEtiqueta}
+                  texto={hs.texto}
+                  manzana={hs.manzana}
+                  lote={hs.lote}
+                  estado={hs.estado}
+                  precio={hs.precio}
+                  area={hs.area}
+                  isEditMode={false}
+                  isLinea={hs.tipo === 'linea'}
+                />
+              );
+            }
+
+            return (
+              <Hotspot
+                key={`${activeSceneKey}-hs-${index}`}
+                posicion={hs.posicion}
+                destino={hs.destino}
+                texto={hs.texto}
+                escala={hs.escala}
+                inclinacion={hs.inclinacion}
+                rotacion={hs.rotacion}
+                tipo={hs.tipo}
+                color={hs.color}
+                icono={hs.icono}
+                colorTexto={hs.colorTexto}
+                colorFondo={hs.colorFondo}
+                url={hs.url}
+                ancho={hs.ancho}
+                alto={hs.alto}
+                opacidad={hs.opacidad}
+                posicionTipo={hs.posicionTipo}
+                escalaZoom={hs.escalaZoom}
+                sombra={hs.sombra}
+                fondoTransparente={hs.fondoTransparente}
+                negrita={hs.negrita}
+                cursiva={hs.cursiva}
+                mostrarTextoSiempre={hs.mostrarTextoSiempre}
+                fontSize={hs.fontSize}
+                nombreDestino={scenes[hs.destino]?.nombre}
+                fuente={hs.fuente}
+                onNavigate={handleNavigate}
+                manzana={hs.manzana}
+                lote={hs.lote}
+                estado={hs.estado}
+                precio={hs.precio}
+                area={hs.area}
+              />
+            );
+          })}
         </Suspense>
 
         <OrbitControls

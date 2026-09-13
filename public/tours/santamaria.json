@@ -1,45 +1,21 @@
 {
-  "1784676002078_pistasalidacusco_5577": {
-    "nombre": "pistasalidacusco",
-    "imagen": "/tour/procedes/1784676002078_pistasalidacusco.webp",
+  "1789270692287_dji_20260911113912_0014_d_5416": {
+    "nombre": "VISTA AEREA 1",
+    "imagen": "/tour/capilla2/1789270692287_DJI_20260911113912_0014_D.webp",
     "hotspots": [
       {
         "tipo": "hotspot",
         "posicion": [
-          -4.31,
-          -5.65,
-          -18.7
+          1.08,
+          -19.96,
+          0.76
         ],
-        "destino": "1784675997119_frentera_5576",
-        "texto": "Ubicación\ndel LOTE",
+        "destino": "1789270685796_dji_20260911114136_0015_d_5415",
+        "texto": "TERRENO SOLAR",
         "opacidad": 1,
         "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#00ff33",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 12
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -17.62,
-          -2.15,
-          -9.21
-        ],
-        "destino": "_self",
-        "texto": "Cerrito Pojracasi\n",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
+        "icono": "Camera",
+        "color": "#51f50a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -53,143 +29,140 @@
       {
         "tipo": "texto",
         "posicion": [
-          7.68,
-          -0.28,
-          18.47
+          2.1,
+          -6.18,
+          -18.91
         ],
-        "texto": "AEROPUERTO  INTERNACIONAL INCA MANCO CAPAC",
-        "colorTexto": "#ffffff",
+        "texto": "CEMENTERIO\nLA CAPILLA",
+        "colorTexto": "#fff714",
         "colorFondo": "#0f172a",
         "opacidad": 0.9,
-        "escala": 1,
+        "escala": 1.3,
         "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": false,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -19.98,
-          0.26,
-          -0.78
-        ],
-        "destino": "_self",
-        "texto": "Salida a Cusco",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowUp",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "texto",
-        "posicion": [
-          19.65,
-          -0.14,
-          -3.7
-        ],
-        "texto": "Centro de la ciudad \nde JULIACA",
-        "colorTexto": "#ffffff",
-        "colorFondo": "#0f172a",
-        "opacidad": 0.9,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
+        "posicionTipo": "muro",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
         "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -4.26,
-          0.58,
-          -19.53
-        ],
-        "destino": "1784676010083_vistapanoramica_5579",
-        "texto": "VISTA AEREA\nDEL TERRENO",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#0af526",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 11
+        "rotacion": 0,
+        "fondoTransparente": true,
+        "fontSize": 18
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          4.14,
-          -1.41,
-          -19.52
+          2.63,
+          0.27,
+          -19.82
         ],
         "destino": "_self",
-        "texto": "COLEGIO \nHORACIO ZEVALLOS GÁMEZ ",
+        "texto": "UNAJ",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#f59e0b",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
-        "negrita": false,
+        "negrita": true,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
+        "fuente": "Unbounded",
+        "fondoTransparente": true,
+        "colorTexto": "#248df0",
+        "fontSize": 24
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.38,
+          -0.27,
+          -4.95
+        ],
+        "destino": "_self",
+        "texto": "ESSALUD",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Unbounded",
+        "fondoTransparente": false,
+        "colorTexto": "#23c6e7",
+        "fontSize": 24,
+        "colorFondo": "#475371"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          18.63,
+          -1.32,
+          -7.16
+        ],
+        "destino": "_self",
+        "texto": "PENAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Unbounded",
+        "fondoTransparente": true,
+        "colorTexto": "#ff0000",
+        "fontSize": 25
       }
     ],
     "heading": {
-      "x": -20,
-      "y": -35
+      "x": 0,
+      "y": 0
     },
     "norteMagnetico": 0,
     "filtro": "normal",
-    "northOffset": 67
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 86
   },
-  "1784675997119_frentera_5576": {
-    "nombre": "frentera",
-    "imagen": "/tour/procedes/1784675997119_frentera.webp",
+  "1789270685796_dji_20260911114136_0015_d_5415": {
+    "nombre": "VISTA AEREA 2",
+    "imagen": "/tour/capilla2/1789270685796_DJI_20260911114136_0015_D.webp",
     "hotspots": [
       {
         "tipo": "hotspot",
         "posicion": [
-          2.34,
-          6.79,
-          18.67
+          5.12,
+          0.44,
+          19.33
         ],
-        "destino": "1784676002078_pistasalidacusco_5577",
-        "texto": "VISTA AEREA\nSALIDA A CUSCO",
+        "destino": "1789272552976_dji_20260911125336_0017_d_5382",
+        "texto": "CEMENTERIO \nLA CAPILLA",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#00ff2a",
+        "color": "#3df50a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -199,33 +172,20 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
-      }
-    ],
-    "heading": {
-      "x": 12,
-      "y": 151
-    },
-    "norteMagnetico": 0,
-    "filtro": "hdr",
-    "northOffset": 116
-  },
-  "1784676010083_vistapanoramica_5579": {
-    "nombre": "vistapanoramica",
-    "imagen": "/tour/procedes/1784676010083_vistapanoramica.webp",
-    "hotspots": [
+      },
       {
         "tipo": "hotspot",
         "posicion": [
-          19.05,
-          -3.93,
-          -4.64
+          -0.4,
+          19.88,
+          2.18
         ],
-        "destino": "1784676002078_pistasalidacusco_5577",
-        "texto": "Vista de la  \nSALIDA CUSCO",
+        "destino": "1789270692287_dji_20260911113912_0014_d_5416",
+        "texto": "VISTA 1",
         "opacidad": 1,
-        "escala": 0.9,
-        "icono": "ArrowDown",
-        "color": "#0af526",
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#68f50a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -235,21 +195,41 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 16
-      },
+        "fontSize": 14
+      }
+    ],
+    "heading": {
+      "x": -55,
+      "y": -80
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 295
+  },
+  "1789272552976_dji_20260911125336_0017_d_5382": {
+    "nombre": "CEMENTERIO    LA CAPILLA",
+    "imagen": "/tour/capilla2/1789272552976_DJI_20260911125336_0017_D.webp",
+    "hotspots": [
       {
         "tipo": "hotspot",
         "posicion": [
-          1.86,
-          -4.5,
-          19.4
+          -19.69,
+          -2.06,
+          -2.85
         ],
-        "destino": "_self",
-        "texto": "Vista del\nCERRITO POJRACASI",
+        "destino": "1789270692287_dji_20260911113912_0014_d_5416",
+        "texto": "TERRENO SOLAR",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#ff0000",
+        "color": "#49f50a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -264,122 +244,42 @@
       {
         "tipo": "texto",
         "posicion": [
-          -12.33,
-          -15.36,
-          -3.45
+          -18.88,
+          -6.54,
+          -0.95
         ],
-        "texto": "Pasa la \"MICRO  9\"",
-        "colorTexto": "#ffffff",
-        "colorFondo": "#0f172a",
+        "texto": "CEMENTERIO \nLA CAPILLA",
+        "colorTexto": "#e0bc0b",
+        "colorFondo": "#f2f2f2",
         "opacidad": 0.9,
-        "escala": 1,
+        "escala": 1.1,
         "inclinacion": 0,
-        "posicionTipo": "2d",
+        "posicionTipo": "muro",
         "escalaZoom": false,
         "sombra": true,
         "fijo": false,
         "negrita": true,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "texto",
-        "posicion": [
-          -0.86,
-          0.43,
-          -19.98
-        ],
-        "texto": "Centro de la ciudad \nde JULIACA",
-        "colorTexto": "#ffffff",
-        "colorFondo": "#0f172a",
-        "opacidad": 0.9,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": false,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "texto",
-        "posicion": [
-          18.27,
-          -0.31,
-          -8.14
-        ],
-        "texto": "AEROPUERTO  INTERNACIONAL INCA MANCO CAPAC",
-        "colorTexto": "#ffffff",
-        "colorFondo": "#0f172a",
-        "opacidad": 0.9,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": false,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -2.3,
-          -19.8,
-          -1.59
-        ],
-        "destino": "1784675997119_frentera_5576",
-        "texto": "LOTE EN VETA",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "Info",
-        "color": "#49f50a",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -18.76,
-          -2.54,
-          -6.46
-        ],
-        "destino": "_self",
-        "texto": "COLEGIO \nHORACIO ZEVALLOS GÁMEZ ",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#ff0000",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
+        "fuente": "Montserrat",
+        "rotacion": 0,
+        "fondoTransparente": true,
+        "fontSize": 26
       }
     ],
     "heading": {
-      "x": -56,
-      "y": 71
+      "x": -26,
+      "y": 72
     },
     "norteMagnetico": 0,
-    "filtro": "normal",
-    "northOffset": 193
+    "filtro": "interior_luminoso",
+    "colorSettings": {
+      "preset": "interior_luminoso",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 4
   }
 }
