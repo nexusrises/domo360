@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import VirtualTour from '../components/VirtualTour';
 import { propiedades } from '../data/propiedadesData';
+import { openSocialApp } from '../utils/deepLink';
 
 const renderPrecio = (precio) => {
   if (!precio) return null;
@@ -268,6 +269,7 @@ export default function PropiedadDetalle() {
                 <div className="pt-2">
                   <a
                     href={`https://wa.me/51951300535?text=Hola%20Angel%2C%20estoy%20interesado%20en%20${getArticuloTipo(propiedad)}%20*${encodeURIComponent(propiedad.titulo)}*%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20propiedad.`}
+                    onClick={(e) => openSocialApp(e, 'whatsapp', `Hola Angel, estoy interesado en ${getArticuloTipo(propiedad)} *${propiedad.titulo}*, me gustaría recibir más información sobre esta propiedad.`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center gap-3.5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-left hover:bg-emerald-100 transition-all duration-300 shadow-sm cursor-pointer select-none group"

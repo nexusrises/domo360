@@ -9,6 +9,7 @@ import {
   ChevronRight,
   ShieldCheck
 } from 'lucide-react';
+import { openSocialApp, SOCIAL_URLS } from '../utils/deepLink';
 
 export default function Bio() {
   // Estado para el tema: por defecto oscuro (dark) para máximo impacto visual en móvil
@@ -178,7 +179,8 @@ export default function Bio() {
         <div className="flex items-center justify-center gap-3.5 py-1">
           {/* WhatsApp Directo */}
           <a
-            href="https://wa.me/51951300535?text=Hola%20Angel%20Domo%20360%C2%B0%2C%20vi%20tu%20perfil%20y%20deseo%20m%C3%A1s%20informaci%C3%B3n."
+            href={SOCIAL_URLS.whatsapp('Hola Angel Domo 360°, vi tu perfil y deseo más información.')}
+            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Domo 360°, vi tu perfil y deseo más información.')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#25D366] hover:border-[#25D366] hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] active:scale-95 group cursor-pointer ${
@@ -194,14 +196,15 @@ export default function Bio() {
 
           {/* Facebook */}
           <a
-            href="https://www.facebook.com/angel.domo360"
+            href={SOCIAL_URLS.facebook}
+            onClick={(e) => openSocialApp(e, 'facebook')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#1877f2] hover:border-[#1877f2] hover:shadow-[0_0_20px_rgba(24,119,242,0.5)] active:scale-95 group cursor-pointer ${
               isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200 bg-white text-slate-700 shadow-sm'
             }`}
             aria-label="Facebook"
-            title="Pagina de Facebook"
+            title="Página de Facebook"
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -210,7 +213,8 @@ export default function Bio() {
 
           {/* Instagram */}
           <a
-            href="https://www.instagram.com/angel.domo360/"
+            href={SOCIAL_URLS.instagram}
+            onClick={(e) => openSocialApp(e, 'instagram')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-[#ee2a7b] hover:shadow-[0_0_20px_rgba(238,42,123,0.5)] active:scale-95 group cursor-pointer ${
@@ -226,7 +230,8 @@ export default function Bio() {
 
           {/* YouTube */}
           <a
-            href="https://www.youtube.com/@angel.domo360"
+            href={SOCIAL_URLS.youtube}
+            onClick={(e) => openSocialApp(e, 'youtube')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#ff0000] hover:border-[#ff0000] hover:shadow-[0_0_20px_rgba(255,0,0,0.5)] active:scale-95 group cursor-pointer ${
@@ -242,7 +247,8 @@ export default function Bio() {
 
           {/* TikTok */}
           <a
-            href="https://www.tiktok.com/@angel.domo360"
+            href={SOCIAL_URLS.tiktok}
+            onClick={(e) => openSocialApp(e, 'tiktok')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#010101] hover:border-slate-700 hover:shadow-[0_0_20px_rgba(0,180,216,0.35)] active:scale-95 group cursor-pointer ${
@@ -262,7 +268,8 @@ export default function Bio() {
           
           {/* BOTÓN 1 (HERO CTA): WHATSAPP BUSINESS DIRECTO */}
           <a
-            href="https://wa.me/51951300535?text=Hola%20Angel%20Domo%20360%C2%B0%2C%20deseo%20coordinar%20una%20visita%20o%20hacer%20una%20consulta%20inmobiliaria."
+            href={SOCIAL_URLS.whatsapp('Hola Angel Domo 360°, deseo coordinar una visita o hacer una consulta inmobiliaria.')}
+            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Domo 360°, deseo coordinar una visita o hacer una consulta inmobiliaria.')}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full relative group overflow-hidden rounded-2xl p-4 flex items-center justify-between transition-all duration-300 active:scale-98 shadow-[0_10px_25px_rgba(16,185,129,0.25)] hover:shadow-[0_12px_35px_rgba(16,185,129,0.45)] bg-gradient-to-r from-[#0d9488] via-[#10b981] to-[#059669] hover:from-[#0f766e] hover:via-[#059669] hover:to-[#047857] text-white font-display text-left border border-emerald-300/30"
@@ -331,7 +338,8 @@ export default function Bio() {
 
           {/* BOTÓN 3: TIKTOK OFICIAL */}
           <a
-            href="https://www.tiktok.com/@angel.domo360"
+            href={SOCIAL_URLS.tiktok}
+            onClick={(e) => openSocialApp(e, 'tiktok')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
@@ -360,7 +368,8 @@ export default function Bio() {
 
           {/* BOTÓN 4: YOUTUBE OFICIAL */}
           <a
-            href="https://www.youtube.com/@angel.domo360"
+            href={SOCIAL_URLS.youtube}
+            onClick={(e) => openSocialApp(e, 'youtube')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
@@ -389,7 +398,8 @@ export default function Bio() {
 
           {/* BOTÓN 5: INSTAGRAM */}
           <a
-            href="https://www.instagram.com/angel.domo360/"
+            href={SOCIAL_URLS.instagram}
+            onClick={(e) => openSocialApp(e, 'instagram')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
@@ -418,7 +428,8 @@ export default function Bio() {
 
           {/* BOTÓN 6: FACEBOOK */}
           <a
-            href="https://www.facebook.com/angel.domo360"
+            href={SOCIAL_URLS.facebook}
+            onClick={(e) => openSocialApp(e, 'facebook')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${

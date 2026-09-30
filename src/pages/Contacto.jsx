@@ -13,6 +13,7 @@ import {
   Camera,
   Share2
 } from 'lucide-react';
+import { openSocialApp } from '../utils/deepLink';
 
 export default function Contacto() {
   const [nombre, setNombre] = useState('');
@@ -335,6 +336,7 @@ export default function Contacto() {
               
               <a 
                 href="https://wa.me/51951300535?text=Hola%20Angel%2C%20deseo%20hacer%20una%20consulta%20inmobiliaria."
+                onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel, deseo hacer una consulta inmobiliaria.')}
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200 transition duration-150 group cursor-pointer"

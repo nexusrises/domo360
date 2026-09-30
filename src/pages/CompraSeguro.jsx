@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
+import { openSocialApp } from '../utils/deepLink';
 
 export default function CompraSeguro() {
   const [openFaq, setOpenFaq] = useState(null);
@@ -602,6 +603,7 @@ export default function CompraSeguro() {
               
               <a
                 href="https://wa.me/51951300535?text=Hola%20Dr.%20Santiago%20Ramirez%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20sobre%20el%20estado%20legal%20de%20una%20propiedad%20para%20comprar%2Fvender%20de%20forma%20segura."
+                onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Dr. Santiago Ramirez, deseo agendar una asesoría gratuita sobre el estado legal de una propiedad para comprar/vender de forma segura.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-black py-3 px-4 rounded-xl font-bold uppercase tracking-wider text-[11px] transition-all duration-200 active:scale-95 shadow-[0_0_15px_rgba(37,211,102,0.2)] gap-2 font-display cursor-pointer"
@@ -752,6 +754,7 @@ export default function CompraSeguro() {
           </p>
           <a 
             href="https://wa.me/51951300535?text=Hola%20Angel%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20gratuita%20con%20el%20abogado%20inmobiliario%20para%20comprar%20de%20forma%20segura."
+            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel, deseo agendar una asesoría gratuita con el abogado inmobiliario para comprar de forma segura.')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center bg-slate-900 text-white hover:bg-[#00c4ee] hover:text-black px-8 py-3.5 rounded-full font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-xs md:text-sm font-sans w-full sm:w-auto shadow-md"

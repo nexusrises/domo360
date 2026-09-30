@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import LandingNavbar from '../components/LandingNavbar';
 import Footer from '../components/Footer';
 import VirtualTour from '../components/VirtualTour';
+import { openSocialApp } from '../utils/deepLink';
 import { propiedades } from '../data/propiedadesData';
 import { 
   Sparkles, 
@@ -625,6 +626,7 @@ export default function LandingPage() {
 
           <a
             href={getWhatsappUrl(finalWhatsappMsg)}
+            onClick={(e) => openSocialApp(e, 'whatsapp', finalWhatsappMsg)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-black text-base sm:text-lg uppercase tracking-wider shadow-[0_0_35px_rgba(16,185,129,0.5)] hover:shadow-[0_0_50px_rgba(16,185,129,0.8)] hover:scale-105 active:scale-95 transition-all duration-300"
@@ -643,7 +645,7 @@ export default function LandingPage() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 py-8 px-4 text-center text-xs text-gray-500 font-mono">
-        <p>© 2026 Nexus Rise - Juliaca, Perú. Todos los derechos reservados.</p>
+        <p>© 2026 Nexus Domo 360°. Todos los derechos reservados.</p>
         <p className="mt-1 text-gray-600">Desarrollo de Software & Experiencias Digitales 360°</p>
       </footer>
     </div>
