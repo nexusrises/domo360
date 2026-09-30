@@ -346,7 +346,7 @@ const copyIndexTo404Plugin = () => ({
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/domo360/' : '/',
+  base: '/',
   plugins: [react(), tourEditorApiPlugin(), copyIndexTo404Plugin()],
   resolve: {
     alias: {

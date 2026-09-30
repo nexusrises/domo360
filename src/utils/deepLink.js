@@ -1,7 +1,12 @@
 /**
- * Utilidad inteligente de Redirección / Deep Linking para Redes Sociales
- * Optimizado para abrir la aplicación nativa en dispositivos móviles (Android / iOS)
- * y redirigir a la versión web oficial en computadoras de escritorio o cuando la app no está instalada.
+ * Utilidad inteligente y universal para Redes Sociales y WhatsApp
+ * Nexus Domo 360°
+ * 
+ * Utiliza URLs oficiales HTTPS (estándar Universal Links / Android App Links):
+ * - En Android (Chrome, Brave, Samsung Internet): El sistema operativo abre la App oficial automáticamente si está instalada, o la versión web si no.
+ * - En iOS (Safari, Chrome): Universal Links abren la App nativa sin bloqueos.
+ * - En Desktop / PC: Abre la pestaña limpia en una nueva ventana.
+ * - Cero errores de protocolo 'ERR_UNKNOWN_URL_SCHEME'.
  */
 
 export const SOCIAL_URLS = {
@@ -13,114 +18,56 @@ export const SOCIAL_URLS = {
     `https://wa.me/51951300535?text=${encodeURIComponent(msg)}`
 };
 
+/**
+ * Obtiene la URL canónica segura de una red o canal
+ */
+export function getSocialUrl(platform, customParam) {
+  if (!platform) return '#';
+  if (typeof platform === 'object' && platform?.webUrl) {
+    return platform.webUrl;
+  }
+  switch (platform) {
+    case 'whatsapp':
+      return SOCIAL_URLS.whatsapp(customParam);
+    case 'youtube':
+      return SOCIAL_URLS.youtube;
+    case 'tiktok':
+      return SOCIAL_URLS.tiktok;
+    case 'instagram':
+      return SOCIAL_URLS.instagram;
+    case 'facebook':
+      return SOCIAL_URLS.facebook;
+    default:
+      return typeof platform === 'string' && platform.startsWith('http') ? platform : '#';
+  }
+}
+
+/**
+ * Manejador de clic universal para enlaces y botones sociales
+ * Si se invoca desde un enlace <a href="..."> deja que el navegador
+ * y el sistema operativo abran la aplicación de forma nativa sin romper el flujo.
+ */
 export function openSocialApp(e, platform, customParam) {
+  // Si el clic viene de una etiqueta <a> con un href válido,
+  // NO prevenimos la acción por defecto para permitir que Android App Links / iOS Universal Links actúen.
+  const anchor = e?.currentTarget?.closest 
+    ? e.currentTarget.closest('a') 
+    : (e?.currentTarget?.tagName === 'A' ? e.currentTarget : null);
+
+  if (anchor && anchor.getAttribute('href') && anchor.getAttribute('href') !== '#') {
+    return;
+  }
+
+  // Si proviene de un <button> o llamada sin href:
   if (e && e.preventDefault) {
     e.preventDefault();
   }
 
-  const ua = typeof navigator !== 'undefined' ? (navigator.userAgent || '') : '';
-  const isAndroid = /Android/i.test(ua);
-  const isIOS = /iPhone|iPad|iPod/i.test(ua);
-  const isMobile = isAndroid || isIOS;
-
-  let webUrl = '';
-  let appUri = '';
-
-  switch (platform) {
-    case 'whatsapp': {
-      const msg = customParam || 'Hola Angel Domo 360°, deseo más información.';
-      const enc = encodeURIComponent(msg);
-      webUrl = `https://wa.me/51951300535?text=${enc}`;
-      appUri = `whatsapp://send?phone=51951300535&text=${enc}`;
-      break;
+  const targetUrl = getSocialUrl(platform, customParam);
+  if (targetUrl && targetUrl !== '#') {
+    const newWindow = window.open(targetUrl, '_blank', 'noopener,noreferrer');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      window.location.assign(targetUrl);
     }
-    case 'youtube': {
-      webUrl = SOCIAL_URLS.youtube;
-      if (isAndroid) {
-        appUri = 'intent://www.youtube.com/@angel.domo360#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=https%3A%2F%2Fwww.youtube.com%2F%40angel.domo360;end';
-      } else if (isIOS) {
-        appUri = 'vnd.youtube://www.youtube.com/@angel.domo360';
-      } else {
-        appUri = 'vnd.youtube://www.youtube.com/@angel.domo360';
-      }
-      break;
-    }
-    case 'tiktok': {
-      webUrl = SOCIAL_URLS.tiktok;
-      if (isAndroid) {
-        appUri = 'intent://tiktok.com/@angel.domo360#Intent;package=com.zhiliaoapp.musically;scheme=https;S.browser_fallback_url=https%3A%2F%2Fwww.tiktok.com%2F%40angel.domo360;end';
-      } else if (isIOS) {
-        appUri = 'snssdk1233://user/profile?unique_id=angel.domo360';
-      } else {
-        appUri = 'snssdk1233://user/profile?unique_id=angel.domo360';
-      }
-      break;
-    }
-    case 'instagram': {
-      webUrl = SOCIAL_URLS.instagram;
-      if (isAndroid) {
-        appUri = 'intent://instagram.com/_u/angel.domo360/#Intent;package=com.instagram.android;scheme=https;S.browser_fallback_url=https%3A%2F%2Fwww.instagram.com%2Fangel.domo360%2F;end';
-      } else if (isIOS) {
-        appUri = 'instagram://user?username=angel.domo360';
-      } else {
-        appUri = 'instagram://user?username=angel.domo360';
-      }
-      break;
-    }
-    case 'facebook': {
-      webUrl = SOCIAL_URLS.facebook;
-      if (isAndroid) {
-        appUri = 'intent://facebook.com/angel.domo360#Intent;package=com.facebook.katana;scheme=https;S.browser_fallback_url=https%3A%2F%2Fwww.facebook.com%2Fangel.domo360;end';
-      } else if (isIOS) {
-        appUri = 'fb://facewebmodal/f?href=https://www.facebook.com/angel.domo360';
-      } else {
-        appUri = 'fb://facewebmodal/f?href=https://www.facebook.com/angel.domo360';
-      }
-      break;
-    }
-    default:
-      if (typeof platform === 'object' && platform?.webUrl) {
-        webUrl = platform.webUrl;
-        appUri = isAndroid ? (platform.androidUri || platform.appUri) : (platform.iosUri || platform.appUri);
-      }
-      break;
   }
-
-  // 1. En PC / Laptop / Desktop: Abrir pestaña web limpia
-  if (!isMobile) {
-    window.open(webUrl, '_blank', 'noopener,noreferrer');
-    return;
-  }
-
-  // 2. En Android con Intent de Google Chrome: Lanzar intent nativo
-  if (isAndroid && appUri && appUri.startsWith('intent://')) {
-    window.location.href = appUri;
-    return;
-  }
-
-  // 3. En iOS o WhatsApp: esquema directo con detección de fallback
-  let appOpened = false;
-  const onBlurOrHidden = () => {
-    appOpened = true;
-  };
-
-  window.addEventListener('blur', onBlurOrHidden, { once: true });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) appOpened = true;
-  }, { once: true });
-
-  if (appUri) {
-    window.location.href = appUri;
-  } else {
-    window.location.href = webUrl;
-    return;
-  }
-
-  // Si pasados 900ms la app no abrió la pantalla, ir a la web
-  setTimeout(() => {
-    window.removeEventListener('blur', onBlurOrHidden);
-    if (!appOpened && !document.hidden) {
-      window.location.href = webUrl;
-    }
-  }, 900);
 }
