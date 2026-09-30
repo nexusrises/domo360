@@ -1,12 +1,228 @@
 {
-  "tienda": {
-    "nombre": "Local Comercial / Tienda Boutique",
-    "imagen": "/tour/local_comercial.webp",
-    "descripcion": "Boutique comercial moderna con estantes iluminados frente al Mercado Túpac Amaru de Juliaca.",
-    "hotspots": [],
+  "1790122292802_terreno_sh_masallacasapintura_4983": {
+    "nombre": "Terreno SH MasAllaCasaPintura",
+    "imagen": "/tour/terreno_shuancane1/1790122292802_Terreno_SH_MasAllaCasaPintura.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          15.93,
+          -12.06,
+          0.73
+        ],
+        "destino": "1790122303633_terreno2_sh_masallacasapintura_4984",
+        "texto": "TERRENO\nEN VENTA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#68f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 17,
+        "colorTexto": "#d6ff0a"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -0.66,
+          0.86,
+          19.97
+        ],
+        "destino": "_self",
+        "texto": "ALMACEN DE\nPINTURA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#0a64f5",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "colorFondo": "#0b49ad",
+        "fontSize": 18
+      }
+    ],
     "heading": {
-      "x": 0,
-      "y": 0
-    }
+      "x": -27,
+      "y": 142
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 80
+  },
+  "1790122303633_terreno2_sh_masallacasapintura_4984": {
+    "nombre": "Terreno2 SH MasAllaCasaPintura",
+    "imagen": "/tour/terreno_shuancane1/1790122303633_Terreno2_SH_MasAllaCasaPintura.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          18.3,
+          1.33,
+          7.96
+        ],
+        "destino": "1790122292802_terreno_sh_masallacasapintura_4983",
+        "texto": "VISTA AEREA\nSALIDA HUANCANE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#68f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 13
+      },
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            1.61,
+            -15.83,
+            12.12
+          ],
+          [
+            -14.18,
+            -14.1,
+            0.53
+          ],
+          [
+            -10.99,
+            -15.51,
+            -6.21
+          ],
+          [
+            6.88,
+            -17.82,
+            5.93
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.45,
+        "colorBorde": "#e2ff05",
+        "grosorBorde": 8,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          11.53,
+          0.78,
+          -16.33
+        ],
+        "destino": "_self",
+        "texto": "ALMANCE DE\nPINTURA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#0a64f5",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "colorFondo": "#0147b7",
+        "fontSize": 17
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          0.27,
+          -3.61,
+          19.67
+        ],
+        "texto": "SALIDA A HUANCANE",
+        "colorTexto": "#e1ff00",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 18,
+        "posicionTipo": "muro",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 40,
+        "rotacion": 0,
+        "fondoTransparente": true
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          17.4,
+          -2.97,
+          -9.41
+        ],
+        "texto": "CIUDAD  DE  JULIACA",
+        "colorTexto": "#e1ff00",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": -17,
+        "posicionTipo": "muro",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "rotacion": 0,
+        "fontSize": 38
+      }
+    ],
+    "heading": {
+      "x": -36,
+      "y": 104
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 251
   }
 }

@@ -1,24 +1,43 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppBubble from './components/WhatsAppBubble';
 import ScrollToTop from './components/ScrollToTop';
 import TopographicBackground from './components/TopographicBackground';
-import LandingPage from './pages/LandingPage';
-import Home from './pages/Home';
-import CompraSeguro from './pages/CompraSeguro';
-import VendePropiedad from './pages/VendePropiedad';
-import Contacto from './pages/Contacto';
-import TourEditorPage from './pages/TourEditorPage';
-import PropiedadDetalle from './pages/PropiedadDetalle';
+import Bio from './pages/Bio';
+
+// Carga perezosa (Lazy loading) para que la Bio cargue en milisegundos sin arrastrar el peso de Three.js y visores
+const Home = lazy(() => import('./pages/Home'));
+const CompraSeguro = lazy(() => import('./pages/CompraSeguro'));
+const VendePropiedad = lazy(() => import('./pages/VendePropiedad'));
+const Contacto = lazy(() => import('./pages/Contacto'));
+const TourEditorPage = lazy(() => import('./pages/TourEditorPage'));
+const PropiedadDetalle = lazy(() => import('./pages/PropiedadDetalle'));
 
 function AppContent() {
   const location = useLocation();
   const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
-  const isLandingPage = location.pathname === '/' || location.pathname === '';
-  const hideFooter = location.pathname === '/contacto' || isLandingPage;
-  const isLightPage = !isLandingPage && !location.pathname.startsWith('/editor-360-privado');
+  const isBioPage = location.pathname === '/' || location.pathname === '' || location.pathname === '/bio';
+  const hideFooter = location.pathname === '/contacto' || isBioPage;
+  const hideNavbar = isBioPage;
+  const hideWhatsAppBubble = isBioPage; // La Bio ya tiene su propio botón principal de WhatsApp destacado
+
+  const [bioTheme, setBioTheme] = React.useState(() => {
+    return localStorage.getItem('domo360_bio_theme') || 'dark';
+  });
+
+  React.useEffect(() => {
+    const handleThemeChange = (e) => {
+      setBioTheme(e.detail);
+    };
+    window.addEventListener('bio-theme-change', handleThemeChange);
+    return () => window.removeEventListener('bio-theme-change', handleThemeChange);
+  }, []);
+
+  const isLightPage = isBioPage 
+    ? bioTheme === 'light'
+    : !location.pathname.startsWith('/editor-360-privado');
 
   // Configuración del IntersectionObserver para apariciones dinámicas al hacer scroll (optimizado para móviles)
   React.useEffect(() => {
@@ -67,33 +86,41 @@ function AppContent() {
       )}
 
       <div>
-        {/* Renderizado condicional del Navbar global (solo fuera de la Landing principal) */}
-        {!isLandingPage && <Navbar />}
+        {/* Renderizado condicional del Navbar global (se oculta en la página Bio para que sea limpia 100%) */}
+        {!hideNavbar && <Navbar />}
         
-        <Routes>
-          {/* Landing Page Principal */}
-          <Route path="/" element={<LandingPage />} />
+        <Suspense fallback={
+          <div className="w-full min-h-[60vh] flex flex-col items-center justify-center gap-3">
+            <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+            <span className="text-xs font-mono text-cyan-400/80">Cargando Nexus Domo 360°...</span>
+          </div>
+        }>
+          <Routes>
+            {/* Bio Oficial / Enlace Central para Redes Sociales */}
+            <Route path="/" element={<Bio />} />
+            <Route path="/bio" element={<Bio />} />
 
-          {/* Rutas de la Plataforma */}
-          <Route path="/proyectos" element={<Home />} />
-          <Route path="/catalogo" element={<Home />} />
-          <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
-          <Route path="/compra-seguro" element={<CompraSeguro />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/:slug" element={<PropiedadDetalle />} />
+            {/* Rutas de la Plataforma */}
+            <Route path="/proyectos" element={<Home />} />
+            <Route path="/catalogo" element={<Home />} />
+            <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
+            <Route path="/compra-seguro" element={<CompraSeguro />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/:slug" element={<PropiedadDetalle />} />
 
-          {/* Compatibilidad con rutas directas anteriores o escritas manualmente */}
-          <Route path="/domo360" element={<Home />} />
-          <Route path="/domo360/vende-tu-propiedad" element={<VendePropiedad />} />
-          <Route path="/domo360/compra-seguro" element={<CompraSeguro />} />
-          <Route path="/domo360/contacto" element={<Contacto />} />
-          <Route path="/domo360/:slug" element={<PropiedadDetalle />} />
-          {isDev && <Route path="/editor-360-privado/:paramTourId?" element={<TourEditorPage />} />}
-        </Routes>
+            {/* Compatibilidad con rutas directas anteriores o escritas manualmente */}
+            <Route path="/domo360" element={<Home />} />
+            <Route path="/domo360/vende-tu-propiedad" element={<VendePropiedad />} />
+            <Route path="/domo360/compra-seguro" element={<CompraSeguro />} />
+            <Route path="/domo360/contacto" element={<Contacto />} />
+            <Route path="/domo360/:slug" element={<PropiedadDetalle />} />
+            {isDev && <Route path="/editor-360-privado/:paramTourId?" element={<TourEditorPage />} />}
+          </Routes>
+        </Suspense>
       </div>
 
       {!hideFooter && <Footer />}
-      <WhatsAppBubble />
+      {!hideWhatsAppBubble && <WhatsAppBubble />}
     </div>
   );
 }

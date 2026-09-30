@@ -43,9 +43,27 @@ export default function TopographicBackground() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000, tx: -1000, ty: -1000, active: false });
   const location = useLocation();
-  const isLightPage = location.pathname !== '/' && location.pathname !== '' && !location.pathname.startsWith('/editor-360-privado');
-  const isLightRef = useRef(isLightPage);
-  isLightRef.current = isLightPage;
+  const isBioPage = location.pathname === '/' || location.pathname === '' || location.pathname === '/bio';
+  
+  const getIsLight = () => {
+    if (isBioPage) {
+      return (localStorage.getItem('domo360_bio_theme') || 'dark') === 'light';
+    }
+    return !location.pathname.startsWith('/editor-360-privado');
+  };
+
+  const isLightRef = useRef(getIsLight());
+
+  useEffect(() => {
+    isLightRef.current = getIsLight();
+    const handleBioTheme = (e) => {
+      if (isBioPage) {
+        isLightRef.current = e.detail === 'light';
+      }
+    };
+    window.addEventListener('bio-theme-change', handleBioTheme);
+    return () => window.removeEventListener('bio-theme-change', handleBioTheme);
+  }, [location.pathname, isBioPage]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

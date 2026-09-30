@@ -667,6 +667,14 @@ p {
 }
 
 /* Escalamiento dinámico y aumento del tamaño de letra */
+/* Escala global para pantallas de escritorio (Desktop / Laptops)
+   Hace que la visualización al 100% nativo del navegador se aprecie con el impacto y tamaño del 125% */
+@media (min-width: 1024px) {
+  :root {
+    zoom: 1.2;
+  }
+}
+
 p.text-xs, .text-xs p {
   font-size: 0.85rem !important; /* De ~12px a 13.6px */
 }
@@ -678,22 +686,6 @@ p.text-base, .text-base p {
 }
 p.text-lg, .text-lg p {
   font-size: 1.2rem !important; /* De ~18px a 19.2px */
-}
-
-/* Optimización para pantallas medianas/grandes (Desktop) */
-@media (min-width: 768px) {
-  p.md\:text-xs, .md\:text-xs p {
-    font-size: 0.9rem !important; /* ~14.4px */
-  }
-  p.md\:text-sm, .md\:text-sm p {
-    font-size: 1.025rem !important; /* ~16.4px */
-  }
-  p.md\:text-base, .md\:text-base p {
-    font-size: 1.125rem !important; /* ~18px */
-  }
-  p.md\:text-lg, .md\:text-lg p {
-    font-size: 1.25rem !important; /* ~20px */
-  }
 }
 
 /* Animación de pulso y resplandor continuo para el botón flotante de cerrar en móviles */

@@ -1,0 +1,197 @@
+{
+  "1790104350717_terreno_colegio_sc_4031": {
+    "nombre": "Terreno colegio SC",
+    "imagen": "/tour/sc_colegio/1790104350717_Terreno_colegio_SC.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.47,
+          -4.54,
+          0.38
+        ],
+        "destino": "1790104715935_sc_colegiorodolfodiesel_4032",
+        "texto": "COLEGIO\nRODOLFO DIESEL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#0a9bf5",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "colorFondo": "#0786d5",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          15.55,
+          -11.98,
+          3.81
+        ],
+        "destino": "1790104334680_terreno2_colegio_sc_4030",
+        "texto": "TERRENO \nEN VENTA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#26f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 16,
+        "colorTexto": "#f0ff24"
+      }
+    ],
+    "heading": {
+      "x": -25,
+      "y": -158
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 94
+  },
+  "1790104334680_terreno2_colegio_sc_4030": {
+    "nombre": "Terreno2 colegio SC",
+    "imagen": "/tour/sc_colegio/1790104334680_Terreno2_colegio_SC.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.61,
+          -3.78,
+          -0.99
+        ],
+        "destino": "1790104350717_terreno_colegio_sc_4031",
+        "texto": "VISTA AEREA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#3df50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 18
+      },
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            -7.57,
+            -11.8,
+            -14.26
+          ],
+          [
+            -2.88,
+            -12.38,
+            -15.44
+          ],
+          [
+            -3.19,
+            -18.53,
+            -6.81
+          ],
+          [
+            -9.59,
+            -16.71,
+            -5.36
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.55,
+        "colorBorde": "#c8ff00",
+        "grosorBorde": 8,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarEtiqueta": false
+      }
+    ],
+    "heading": {
+      "x": -32,
+      "y": 19
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 287
+  },
+  "1790104715935_sc_colegiorodolfodiesel_4032": {
+    "nombre": "SC ColegioRodolfoDiesel",
+    "imagen": "/tour/sc_colegio/1790104715935_SC_ColegioRodolfoDiesel.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -18.3,
+          -3.56,
+          7.24
+        ],
+        "destino": "1790104350717_terreno_colegio_sc_4031",
+        "texto": "VISTA AEREA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#51f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 18
+      }
+    ],
+    "heading": {
+      "x": -30,
+      "y": 72
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 293
+  }
+}

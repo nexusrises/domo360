@@ -116,10 +116,10 @@ export default function Footer() {
               onClick={handleLogoClick} 
               className="flex flex-row items-center gap-3 group select-none cursor-pointer w-fit"
             >
-              <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Angel Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
+              <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Nexus Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
 
               <div className="text-2xl sm:text-3xl md:text-4xl font-logo flex items-center whitespace-nowrap">
-                <span className={`transition-transform duration-300 group-hover:scale-105 ${isLightPage ? 'text-slate-900' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]'}`}>Angel</span>
+                <span className={`transition-transform duration-300 group-hover:scale-105 ${isLightPage ? 'text-slate-900' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]'}`}>Nexus</span>
                 <span className="text-gradient-rise drop-shadow-[0_2px_8px_rgba(0,242,254,0.25)] ml-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">Domo 360°</span>
               </div>
             </Link>
@@ -220,19 +220,9 @@ export default function Footer() {
           <div className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-slate-500" /> Juliaca, Perú</div>
         </div>
         <div className="flex flex-col items-center md:items-end text-center md:text-right gap-1">
-          <p className="font-medium">
-            &copy; {currentYear} Angel Domo 360°. Todos los derechos reservados.
+          <p className="font-medium text-xs">
+            &copy; {currentYear} Nexus Domo 360°. Todos los derechos reservados.
           </p>
-          <Link 
-            to="/" 
-            className={`text-[11px] font-mono transition-colors flex items-center justify-center md:justify-end gap-1.5 group mt-1 ${
-              isLightPage ? 'text-cyan-800 hover:text-slate-950' : 'text-cyan-400/80 hover:text-nexus-accent'
-            }`}
-            title="Ir a la Landing Page corporativa de Nexus Rise"
-          >
-            <span>⚡ Desarrollado por Nexus Rise - Software & 360° Studio</span>
-            <span className="group-hover:translate-x-0.5 transition-transform">↗</span>
-          </Link>
         </div>
       </div>
     </footer>

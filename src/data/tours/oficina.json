@@ -1,12 +1,227 @@
 {
-  "oficina": {
-    "nombre": "Oficina Corporativa Premium",
-    "imagen": "/tour/oficina_premium.webp",
-    "descripcion": "Ambiente de trabajo moderno con iluminación LED y ventanales panorámicos en el centro de Juliaca.",
-    "hotspots": [],
+  "1790123554670_terreno_sh_frentecasapintura_8919": {
+    "nombre": "Terreno SH FrenteCasapintura",
+    "imagen": "/tour/terreno_shuancane2/1790123554670_Terreno_SH_FrenteCasapintura.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          0.28,
+          -20,
+          -0.25
+        ],
+        "destino": "1790123567156_terreno2_sh_frentecasapintura_8920",
+        "texto": "TERRENO \nEN VENTA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Map",
+        "color": "#26f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          3.81,
+          0.34,
+          -19.63
+        ],
+        "destino": "_self",
+        "texto": "ALMACEN DE\nPINTURA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#1f57ff",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "colorFondo": "#1446db",
+        "fontSize": 17
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          18.2,
+          -2.23,
+          8
+        ],
+        "destino": "_self",
+        "texto": "COLEGIO    O   POSTA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#1f57ff",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "colorFondo": "#2150de",
+        "fontSize": 17
+      }
+    ],
     "heading": {
       "x": 0,
       "y": 0
-    }
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 187
+  },
+  "1790123567156_terreno2_sh_frentecasapintura_8920": {
+    "nombre": "Terreno2 SH FrenteCasapintura",
+    "imagen": "/tour/terreno_shuancane2/1790123567156_Terreno2_SH_FrenteCasapintura.webp",
+    "hotspots": [
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            -4.56,
+            -17.11,
+            9.3
+          ],
+          [
+            -2.54,
+            -17.1,
+            -10.05
+          ],
+          [
+            6.32,
+            -16.62,
+            -9.15
+          ],
+          [
+            5.03,
+            -16.63,
+            9.9
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.25,
+        "colorBorde": "#ebfb0e",
+        "grosorBorde": 8,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          18.22,
+          -0.18,
+          8.25
+        ],
+        "destino": "_self",
+        "texto": "POSTA O COLEGIO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#104cfe",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 16,
+        "colorFondo": "#0a38c2"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          4.35,
+          1,
+          -19.49
+        ],
+        "destino": "_self",
+        "texto": "ALMACEN PINTURA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#104cfe",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "colorFondo": "#0939c8",
+        "fontSize": 16
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          3.24,
+          16.67,
+          -10.57
+        ],
+        "destino": "1790123554670_terreno_sh_frentecasapintura_8919",
+        "texto": "VISTA AEREA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#26f50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 20
+      }
+    ],
+    "heading": {
+      "x": -32,
+      "y": -73
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 175
   }
 }

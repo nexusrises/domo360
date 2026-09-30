@@ -9,7 +9,8 @@ import {
   ChevronLeft, 
   ChevronRight,
   HelpCircle,
-  ArrowRight
+  ArrowRight,
+  Users
 } from 'lucide-react';
 
 export default function VendePropiedad() {
@@ -369,6 +370,147 @@ export default function VendePropiedad() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN: SOBRE EL EQUIPO Y SOCIOS (El Talento Detrás de Cada Línea de Código) */}
+      <section className="container mx-auto px-6 py-12 relative z-10">
+        <div className="max-w-5xl mx-auto text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[#008b99] text-xs font-bold uppercase tracking-widest mb-4 font-display">
+            <Users className="w-4 h-4 text-[#008b99]" />
+            <span>EL EQUIPO</span>
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight font-display mb-4">
+            El Talento Detrás de Cada Línea de Código
+          </h2>
+
+          <p className="text-slate-600 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed font-sans">
+            Un equipo multidisciplinario altamente calificado que combina metodologías avanzadas de desarrollo y pasión por la excelencia visual.
+          </p>
+        </div>
+
+        {/* Grid de 4 Tarjetas de Socios */}
+        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+          {/* SOCIO 1: J. Enmanuel */}
+          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
+            <div className="w-full">
+              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
+                <img 
+                  src={`${import.meta.env.BASE_URL}miembros/enmanuel.webp`} 
+                  alt="J. Enmanuel - CEO & Fundador" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
+              </div>
+
+              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
+                CEO & FUNDADOR
+              </div>
+
+              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                J. Enmanuel
+              </h3>
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
+                DIRECTOR GENERAL
+              </p>
+
+              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
+                Líder ejecutivo con más de 5 años de trayectoria estructurando arquitecturas de negocio digitales de alta gama y consolidando alianzas comerciales estratégicas.
+              </p>
+            </div>
+          </div>
+
+          {/* SOCIO 2: Miguel Ortega */}
+          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
+            <div className="w-full">
+              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
+                <img 
+                  src={`${import.meta.env.BASE_URL}miembros/miguel.webp`} 
+                  alt="Miguel Ortega - CTO & Co-Fundador" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
+              </div>
+
+              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
+                CTO & CO-FUNDADOR
+              </div>
+
+              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                Miguel Ortega
+              </h3>
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
+                DIRECTOR DE SISTEMAS & DEVOPS
+              </p>
+
+              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
+                Arquitecto de infraestructura y sistemas cloud de alta disponibilidad, especializado en la escalabilidad de bases de datos de alto rendimiento y optimización de latencias globales.
+              </p>
+            </div>
+          </div>
+
+          {/* SOCIO 3: Gabriel Choque */}
+          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
+            <div className="w-full">
+              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
+                <img 
+                  src={`${import.meta.env.BASE_URL}miembros/gabriel.webp`} 
+                  alt="Gabriel Choque - Director Creativo & UX/UI" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
+              </div>
+
+              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
+                DIRECTOR CREATIVO & UX/UI
+              </div>
+
+              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                Gabriel Choque
+              </h3>
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
+                DISEÑADOR VISUAL PRINCIPAL
+              </p>
+
+              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
+                Especialista en diseño de interfaces premium centrado en la psicología de la conversión y en la creación de flujos de interacción de fricción cero.
+              </p>
+            </div>
+          </div>
+
+          {/* SOCIO 4: Angel Apaza */}
+          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
+            <div className="w-full">
+              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
+                <img 
+                  src={`${import.meta.env.BASE_URL}miembros/angel.webp`} 
+                  alt="Angel Apaza - Jefe de Desarrollo & Tecnología 360°" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
+              </div>
+
+              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
+                JEFE DE DESARROLLO & TECNOLOGÍA 360°
+              </div>
+
+              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                Angel Apaza
+              </h3>
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
+                LEAD WEB DEVELOPER & 360° SPECIALIST
+              </p>
+
+              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
+                Ingeniero experto en computación gráfica (WebGL, Three.js), experiencias web inmersivas y dirección de levantamiento multimedia tridimensional.
+              </p>
+            </div>
           </div>
         </div>
       </section>
