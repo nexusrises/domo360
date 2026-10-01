@@ -55,7 +55,7 @@ export default function Home() {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    document.title = "Nexus Domo 360° | Venta de Casas y Propiedades en el Sur del Perú";
+    document.title = "Nexus Domo 360° | Venta de Casas y Terrenos en Juliaca y Puno | Recorridos 360°";
     
     // Precargar la caché de Google Sheets en segundo plano al montar la página de inicio
     fetchLotesFromSheets().catch((err) => {

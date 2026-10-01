@@ -18,7 +18,7 @@ const PropiedadDetalle = lazy(() => import('./pages/PropiedadDetalle'));
 function AppContent() {
   const location = useLocation();
   const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
-  const isBioPage = location.pathname === '/' || location.pathname === '' || location.pathname === '/bio';
+  const isBioPage = location.pathname === '/bio';
   const hideFooter = location.pathname === '/contacto' || isBioPage;
   const hideNavbar = isBioPage;
   const hideWhatsAppBubble = isBioPage; // La Bio ya tiene su propio botón principal de WhatsApp destacado
@@ -96,13 +96,13 @@ function AppContent() {
           </div>
         }>
           <Routes>
-            {/* Bio Oficial / Enlace Central para Redes Sociales */}
-            <Route path="/" element={<Bio />} />
-            <Route path="/bio" element={<Bio />} />
-
-            {/* Rutas de la Plataforma */}
+            {/* Página Principal: Catálogo Inmobiliario Interactivo con Tours 360 y Dron */}
+            <Route path="/" element={<Home />} />
             <Route path="/proyectos" element={<Home />} />
             <Route path="/catalogo" element={<Home />} />
+
+            {/* Bio Oficial / Enlace Central para Redes Sociales */}
+            <Route path="/bio" element={<Bio />} />
             <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
             <Route path="/compra-seguro" element={<CompraSeguro />} />
             <Route path="/contacto" element={<Contacto />} />
