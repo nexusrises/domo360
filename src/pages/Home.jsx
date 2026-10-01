@@ -10,7 +10,10 @@ import {
   Map,
   Home as HomeIcon,
   Briefcase,
-  Store
+  Store,
+  ShieldCheck,
+  Camera,
+  Compass
 } from 'lucide-react';
 import { propiedades } from '../data/propiedadesData';
 import { fetchLotesFromSheets } from '../services/googleSheets';
@@ -55,7 +58,7 @@ export default function Home() {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    document.title = "Nexus Domo 360° | Venta de Casas y Terrenos en Juliaca y Puno | Recorridos 360°";
+    document.title = "Nexus Domo 360° | Venta de Casas y Terrenos en Juliaca, Arequipa y Puno | Recorridos 360°";
     
     // Precargar la caché de Google Sheets en segundo plano al montar la página de inicio
     fetchLotesFromSheets().catch((err) => {
@@ -126,7 +129,7 @@ export default function Home() {
             style={{ textWrap: 'pretty' }}
             className="text-slate-600 text-base md:text-lg max-w-2xl leading-relaxed mb-8 font-medium"
           >
-            Visita y recorre de forma interactiva tu próxima propiedad sin moverte de casa. Explora lotes, terrenos y viviendas verificadas en Juliaca y el sur de Perú con vuelos de dron y visores 360° en alta definición.
+            Visita y recorre de forma interactiva tu próxima propiedad sin moverte de casa. Explora lotes, terrenos y viviendas verificadas en Juliaca, Arequipa, Puno y el sur de Perú con vuelos de dron y visores 360° en alta definición.
           </p>
         </div>
       </header>
@@ -314,7 +317,7 @@ export default function Home() {
                   >
                     <img
                       src={propiedad.portada.startsWith('http') || propiedad.portada.startsWith('data:') ? propiedad.portada : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${propiedad.portada}`}
-                      alt={propiedad.titulo}
+                      alt={`${propiedad.titulo} - ${propiedad.tipo} en ${propiedad.ubicacion} con Recorrido Virtual 360°`}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
                       loading="lazy"
                       onError={(e) => {
@@ -418,6 +421,77 @@ export default function Home() {
             })}
           </div>
         )}
+      </section>
+
+      {/* 4. SECCIÓN ESTRATÉGICA DE POSICIONAMIENTO Y COBERTURA REGIONAL */}
+      <section className="w-full max-w-6xl mx-auto px-6 pt-6 pb-16">
+        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/90 rounded-3xl p-8 md:p-10 shadow-[0_15px_40px_rgba(15,23,42,0.05)]">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-[#008b99] text-xs font-black tracking-widest uppercase block mb-2 font-display">
+              TECNOLOGÍA INMOBILIARIA EN EL SUR DE PERÚ
+            </span>
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-display mb-3">
+              ¿Por qué buscar o vender propiedades con Nexus Domo 360°?
+            </h2>
+            <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+              Transformamos la compra y venta de bienes raíces en Juliaca, Arequipa, Puno y el sur del Perú combinando verificación legal exhaustiva con recorridos virtuales inmersivos en 360° y vuelos de dron.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {/* Tarjeta 1 */}
+            <div className="p-6 rounded-2xl bg-slate-50/80 border border-slate-200/80 flex flex-col">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-700 flex items-center justify-center mb-4">
+                <Camera className="w-5 h-5" />
+              </div>
+              <h3 className="text-slate-900 font-black text-base mb-2 font-display">Recorridos Virtuales 360°</h3>
+              <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
+                Recorre cada rincón de casas comerciales, terrenos solar y departamentos con planos interactivos y tomas aéreas sin tener que viajar ni perder tiempo.
+              </p>
+            </div>
+
+            {/* Tarjeta 2 */}
+            <div className="p-6 rounded-2xl bg-slate-50/80 border border-slate-200/80 flex flex-col">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center mb-4">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h3 className="text-slate-900 font-black text-base mb-2 font-display">Seguridad Jurídica y Título</h3>
+              <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
+                Asesoría legal inmobiliaria previa: revisamos partidas registrales en Sunarp, gravámenes, minutas y planos antes de cualquier acuerdo o seña.
+              </p>
+            </div>
+
+            {/* Tarjeta 3 */}
+            <div className="p-6 rounded-2xl bg-slate-50/80 border border-slate-200/80 flex flex-col">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-700 flex items-center justify-center mb-4">
+                <Compass className="w-5 h-5" />
+              </div>
+              <h3 className="text-slate-900 font-black text-base mb-2 font-display">Cobertura en todo el Sur</h3>
+              <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
+                Gestionamos proyectos y atendemos a propietarios e inversionistas en Juliaca, Puno, Arequipa, Tacna y principales ciudades del sur del Perú.
+              </p>
+            </div>
+          </div>
+
+          {/* Enlaces de Búsqueda Rápida y Palabras Clave */}
+          <div className="pt-6 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider py-1">Búsquedas populares:</span>
+              <button onClick={() => { setSearchTerm('salida puno'); setActiveCategory('todos'); }} className="text-xs bg-slate-100 hover:bg-cyan-50 hover:text-cyan-800 text-slate-700 px-3 py-1 rounded-full transition cursor-pointer font-medium">Casas en Salida a Puno</button>
+              <button onClick={() => { setSearchTerm('la capilla'); setActiveCategory('todos'); }} className="text-xs bg-slate-100 hover:bg-cyan-50 hover:text-cyan-800 text-slate-700 px-3 py-1 rounded-full transition cursor-pointer font-medium">Terrenos en La Capilla</button>
+              <button onClick={() => { setSearchTerm(''); setActiveCategory('terrenos'); }} className="text-xs bg-slate-100 hover:bg-cyan-50 hover:text-cyan-800 text-slate-700 px-3 py-1 rounded-full transition cursor-pointer font-medium">Lotes y Terrenos</button>
+              <button onClick={() => { setSearchTerm(''); setActiveCategory('casas'); }} className="text-xs bg-slate-100 hover:bg-cyan-50 hover:text-cyan-800 text-slate-700 px-3 py-1 rounded-full transition cursor-pointer font-medium">Casas y Departamentos</button>
+            </div>
+            
+            <Link 
+              to="/vende-tu-propiedad"
+              className="text-xs font-black uppercase tracking-wider text-[#008b99] hover:text-[#006e7a] flex items-center gap-1.5 transition select-none flex-shrink-0"
+            >
+              ¿Quieres vender tu propiedad? Publica aquí
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
       </section>
 
     </div>

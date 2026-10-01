@@ -91,7 +91,7 @@ export default function Footer() {
     }
   };
 
-  const isLightPage = location.pathname !== '/' && location.pathname !== '' && !location.pathname.startsWith('/editor-360-privado');
+  const isLightPage = !location.pathname.startsWith('/editor-360-privado');
 
   return (
     <footer ref={footerRef} className={`w-full relative z-10 pb-8 overflow-hidden ${isContacto ? 'pt-8' : 'pt-5'} ${
