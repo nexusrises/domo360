@@ -24,8 +24,13 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
-  const isActive = (path) => location.pathname === path;
-  const isLightPage = location.pathname !== '/' && location.pathname !== '' && !location.pathname.startsWith('/editor-360-privado');
+  const isActive = (path) => {
+    if (path === '/' || path === '/proyectos') {
+      return location.pathname === '/' || location.pathname === '' || location.pathname === '/proyectos' || location.pathname === '/catalogo';
+    }
+    return location.pathname === path;
+  };
+  const isLightPage = !location.pathname.startsWith('/editor-360-privado') && location.pathname !== '/bio';
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-display ${
@@ -47,11 +52,11 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wider">
           <Link 
-            to="/proyectos" 
+            to="/" 
             className={`transition-colors duration-200 py-2 uppercase ${
               isLightPage
-                ? isActive('/proyectos') || isActive('/catalogo') ? 'text-[#008b99] font-black' : 'text-slate-700 hover:text-[#008b99]'
-                : isActive('/proyectos') || isActive('/catalogo') ? 'text-nexus-accent' : 'text-white hover:text-nexus-accent'
+                ? isActive('/') ? 'text-[#008b99] font-black' : 'text-slate-700 hover:text-[#008b99]'
+                : isActive('/') ? 'text-nexus-accent' : 'text-white hover:text-nexus-accent'
             }`}
           >
             Proyectos
@@ -115,12 +120,12 @@ export default function Navbar() {
       }`}>
         <div className="flex flex-col gap-4 text-base font-semibold">
           <Link 
-            to="/proyectos" 
+            to="/" 
             onClick={handleLinkClick}
             className={`p-2 rounded-xl ${
               isLightPage
-                ? isActive('/proyectos') || isActive('/catalogo') ? 'text-[#008b99] font-bold bg-slate-200/40' : 'text-slate-800 hover:bg-slate-200/40'
-                : isActive('/proyectos') || isActive('/catalogo') ? 'text-nexus-accent' : 'text-white hover:bg-white/5'
+                ? isActive('/') ? 'text-[#008b99] font-bold bg-slate-200/40' : 'text-slate-800 hover:bg-slate-200/40'
+                : isActive('/') ? 'text-nexus-accent' : 'text-white hover:bg-white/5'
             }`}
           >
             Proyectos

@@ -202,7 +202,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-3 md:col-start-6">
             <h3 className={`font-semibold mb-4 text-sm uppercase tracking-wider ${isLightPage ? 'text-slate-900' : 'text-white'}`}>Mapa del Sitio</h3>
             <ul className="flex flex-col gap-2.5 text-sm font-medium">
-              <li><Link to="/proyectos" className={`transition duration-150 ${location.pathname === '/proyectos' || location.pathname === '/catalogo' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
+              <li><Link to="/" className={`transition duration-150 ${location.pathname === '/' || location.pathname === '/proyectos' || location.pathname === '/catalogo' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
               <li><Link to="/compra-seguro" className={`transition duration-150 ${location.pathname === '/compra-seguro' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Compra con Seguridad</Link></li>
               <li><Link to="/vende-tu-propiedad" className={`transition duration-150 ${location.pathname === '/vende-tu-propiedad' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Vende tu Propiedad</Link></li>
               <li><Link to="/contacto" className={`transition duration-150 ${location.pathname === '/contacto' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Contactar</Link></li>

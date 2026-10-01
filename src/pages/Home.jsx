@@ -98,7 +98,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen text-slate-900 flex flex-col items-center overflow-x-hidden bg-transparent">
 
-      <header className="relative w-full pt-24 pb-2 md:pt-28 md:pb-4 px-6 overflow-hidden flex flex-col justify-center items-center">
+      <header className="relative w-full pt-32 pb-4 md:pt-36 md:pb-6 px-6 overflow-hidden flex flex-col justify-center items-center">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-sky-400/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
