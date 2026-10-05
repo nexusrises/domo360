@@ -9,7 +9,7 @@ export default function LandingNavbar() {
   const location = useLocation();
 
   const whatsappUrl = `https://wa.me/51951300535?text=${encodeURIComponent(
-    'Hola Nexus Rise, me interesa desarrollar un proyecto web / recorrido 360° para mi negocio en la región. Deseo solicitar una cotización.'
+    'Hola Angel, me interesa desarrollar un proyecto web / recorrido 360° para mi empresa o proyecto inmobiliario. Deseo solicitar una cotización.'
   )}`;
 
   useEffect(() => {

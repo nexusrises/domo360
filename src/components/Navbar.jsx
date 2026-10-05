@@ -116,7 +116,7 @@ export default function Navbar() {
             to="/contacto" 
             className={`inline-flex px-6 py-2 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-200 active:scale-95 ${
               isLightPage
-                ? 'bg-slate-900 text-white hover:bg-[#00c4ee] hover:text-black shadow-sm'
+                ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-900/10'
                 : 'btn-neon-cian'
             }`}
           >
@@ -197,7 +197,7 @@ export default function Navbar() {
           onClick={handleLinkClick}
           className={`w-full inline-flex items-center justify-center py-3.5 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-200 active:scale-95 text-center ${
             isLightPage
-              ? 'bg-slate-900 text-white hover:bg-[#00c4ee] hover:text-black'
+              ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-900/10'
               : 'btn-neon-cian'
           }`}
         >

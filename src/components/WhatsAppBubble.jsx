@@ -86,7 +86,7 @@ export default function WhatsAppBubble() {
       };
     }
 
-    // 5. Landing Page Principal de Nexus Rise (Ruta '/')
+    // 5. Landing Page Principal (Ruta '/')
     return {
       messages: [
         "¿Buscas una página web moderna e interactiva para tu empresa en la región Puno? Cotiza tu web a medida aquí 💻✨",
@@ -95,10 +95,10 @@ export default function WhatsAppBubble() {
         "Digitalizamos tu negocio con diseño web de nivel internacional y alta conversión. ¡Solicita tu cotización gratis! 🌐📲"
       ],
       whatsappTexts: [
-        "Hola Nexus Rise, me interesa cotizar el desarrollo de una página web profesional e interactiva para mi empresa.",
-        "Hola Nexus Rise, deseo información sobre la implementación de tours 360° y páginas webs corporativas a medida.",
-        "Hola Nexus Rise, busco desarrollar un sistema web / tienda digital para mi negocio y me gustaría solicitar una propuesta.",
-        "Hola Nexus Rise, vi sus proyectos interactivos y deseo asesoría gratuita para digitalizar mi empresa en la región."
+        "Hola Angel, me interesa cotizar el desarrollo de una página web profesional e interactiva para mi empresa.",
+        "Hola Angel, deseo información sobre la implementación de tours 360° y páginas webs corporativas a medida.",
+        "Hola Angel, busco digitalizar mi proyecto inmobiliario o empresa con recorridos 360° y me gustaría una propuesta.",
+        "Hola Angel, vi sus proyectos interactivos en Domo 360° y deseo asesoría para mi negocio o lotización."
       ]
     };
   };
