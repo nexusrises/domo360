@@ -25,12 +25,29 @@ export default function Navbar() {
   };
 
   const isActive = (path) => {
-    if (path === '/' || path === '/proyectos') {
-      return location.pathname === '/' || location.pathname === '' || location.pathname === '/proyectos' || location.pathname === '/catalogo';
+    if (path === '/') {
+      return location.pathname === '/' || location.pathname === '';
+    }
+    if (path === '/propiedades') {
+      return location.pathname === '/propiedades' || location.pathname === '/proyectos' || location.pathname === '/catalogo';
     }
     return location.pathname === path;
   };
-  const isLightPage = !location.pathname.startsWith('/editor-360-privado') && location.pathname !== '/bio';
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    return localStorage.getItem('domo360_theme') || 'light';
+  });
+
+  useEffect(() => {
+    const handleThemeChange = (e) => {
+      setCurrentTheme(e.detail);
+    };
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => window.removeEventListener('theme-change', handleThemeChange);
+  }, []);
+
+  const isLightPage = location.pathname.startsWith('/editor-360-privado')
+    ? false
+    : currentTheme === 'light';
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-display ${
@@ -59,7 +76,17 @@ export default function Navbar() {
                 : isActive('/') ? 'text-nexus-accent' : 'text-white hover:text-nexus-accent'
             }`}
           >
-            Proyectos
+            Inicio
+          </Link>
+          <Link 
+            to="/propiedades" 
+            className={`transition-colors duration-200 py-2 uppercase ${
+              isLightPage
+                ? isActive('/propiedades') ? 'text-[#008b99] font-black' : 'text-slate-700 hover:text-[#008b99]'
+                : isActive('/propiedades') ? 'text-nexus-accent' : 'text-white hover:text-nexus-accent'
+            }`}
+          >
+            Propiedades
           </Link>
           <Link 
             to="/compra-seguro" 
@@ -128,7 +155,18 @@ export default function Navbar() {
                 : isActive('/') ? 'text-nexus-accent' : 'text-white hover:bg-white/5'
             }`}
           >
-            Proyectos
+            Inicio
+          </Link>
+          <Link 
+            to="/propiedades" 
+            onClick={handleLinkClick}
+            className={`p-2 rounded-xl ${
+              isLightPage
+                ? isActive('/propiedades') ? 'text-[#008b99] font-bold bg-slate-200/40' : 'text-slate-800 hover:bg-slate-200/40'
+                : isActive('/propiedades') ? 'text-nexus-accent' : 'text-white hover:bg-white/5'
+            }`}
+          >
+            Propiedades
           </Link>
           <Link 
             to="/compra-seguro" 

@@ -9,6 +9,7 @@ import Bio from './pages/Bio';
 
 // Carga perezosa (Lazy loading) para que la Bio cargue en milisegundos sin arrastrar el peso de Three.js y visores
 const Home = lazy(() => import('./pages/Home'));
+const Propiedades = lazy(() => import('./pages/Propiedades'));
 const CompraSeguro = lazy(() => import('./pages/CompraSeguro'));
 const VendePropiedad = lazy(() => import('./pages/VendePropiedad'));
 const Contacto = lazy(() => import('./pages/Contacto'));
@@ -23,21 +24,27 @@ function AppContent() {
   const hideNavbar = isBioPage;
   const hideWhatsAppBubble = isBioPage; // La Bio ya tiene su propio botón principal de WhatsApp destacado
 
-  const [bioTheme, setBioTheme] = React.useState(() => {
-    return localStorage.getItem('domo360_bio_theme') || 'dark';
+  const [currentTheme, setCurrentTheme] = React.useState(() => {
+    return localStorage.getItem('domo360_theme') || 'light';
   });
 
   React.useEffect(() => {
     const handleThemeChange = (e) => {
-      setBioTheme(e.detail);
+      setCurrentTheme(e.detail);
     };
+    window.addEventListener('theme-change', handleThemeChange);
     window.addEventListener('bio-theme-change', handleThemeChange);
-    return () => window.removeEventListener('bio-theme-change', handleThemeChange);
+    return () => {
+      window.removeEventListener('theme-change', handleThemeChange);
+      window.removeEventListener('bio-theme-change', handleThemeChange);
+    };
   }, []);
 
   const isLightPage = isBioPage 
-    ? bioTheme === 'light'
-    : !location.pathname.startsWith('/editor-360-privado');
+    ? currentTheme === 'light'
+    : location.pathname.startsWith('/editor-360-privado')
+      ? false
+      : currentTheme === 'light';
 
   // Configuración del IntersectionObserver para apariciones dinámicas al hacer scroll (optimizado para móviles)
   React.useEffect(() => {
@@ -96,10 +103,11 @@ function AppContent() {
           </div>
         }>
           <Routes>
-            {/* Página Principal: Catálogo Inmobiliario Interactivo con Tours 360 y Dron */}
+            {/* Página Principal: Portada Héroe, Beneficios, Carrusel Destacados */}
             <Route path="/" element={<Home />} />
-            <Route path="/proyectos" element={<Home />} />
-            <Route path="/catalogo" element={<Home />} />
+            <Route path="/propiedades" element={<Propiedades />} />
+            <Route path="/proyectos" element={<Propiedades />} />
+            <Route path="/catalogo" element={<Propiedades />} />
 
             {/* Bio Oficial / Enlace Central para Redes Sociales */}
             <Route path="/bio" element={<Bio />} />

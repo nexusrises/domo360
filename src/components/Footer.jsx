@@ -91,7 +91,21 @@ export default function Footer() {
     }
   };
 
-  const isLightPage = !location.pathname.startsWith('/editor-360-privado');
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    return localStorage.getItem('domo360_theme') || 'light';
+  });
+
+  useEffect(() => {
+    const handleThemeChange = (e) => {
+      setCurrentTheme(e.detail);
+    };
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => window.removeEventListener('theme-change', handleThemeChange);
+  }, []);
+
+  const isLightPage = location.pathname.startsWith('/editor-360-privado')
+    ? false
+    : currentTheme === 'light';
 
   return (
     <footer ref={footerRef} className={`w-full relative z-10 pb-8 overflow-hidden ${isContacto ? 'pt-8' : 'pt-5'} ${
@@ -202,7 +216,8 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-3 md:col-start-6">
             <h3 className={`font-semibold mb-4 text-sm uppercase tracking-wider ${isLightPage ? 'text-slate-900' : 'text-white'}`}>Mapa del Sitio</h3>
             <ul className="flex flex-col gap-2.5 text-sm font-medium">
-              <li><Link to="/" className={`transition duration-150 ${location.pathname === '/' || location.pathname === '/proyectos' || location.pathname === '/catalogo' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Proyectos</Link></li>
+              <li><Link to="/" className={`transition duration-150 ${location.pathname === '/' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Inicio</Link></li>
+              <li><Link to="/propiedades" className={`transition duration-150 ${location.pathname === '/propiedades' || location.pathname === '/proyectos' || location.pathname === '/catalogo' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Propiedades</Link></li>
               <li><Link to="/compra-seguro" className={`transition duration-150 ${location.pathname === '/compra-seguro' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Compra con Seguridad</Link></li>
               <li><Link to="/vende-tu-propiedad" className={`transition duration-150 ${location.pathname === '/vende-tu-propiedad' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Vende tu Propiedad</Link></li>
               <li><Link to="/contacto" className={`transition duration-150 ${location.pathname === '/contacto' ? 'text-[#008b99] font-black' : isLightPage ? 'text-slate-600 hover:text-slate-900' : 'text-gray-400 hover:text-white'}`}>Contactar</Link></li>

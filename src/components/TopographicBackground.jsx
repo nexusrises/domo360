@@ -43,27 +43,26 @@ export default function TopographicBackground() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000, tx: -1000, ty: -1000, active: false });
   const location = useLocation();
-  const isBioPage = location.pathname === '/' || location.pathname === '' || location.pathname === '/bio';
   
   const getIsLight = () => {
-    if (isBioPage) {
-      return (localStorage.getItem('domo360_bio_theme') || 'dark') === 'light';
-    }
-    return !location.pathname.startsWith('/editor-360-privado');
+    if (location.pathname.startsWith('/editor-360-privado')) return false;
+    return (localStorage.getItem('domo360_theme') || 'light') === 'light';
   };
 
   const isLightRef = useRef(getIsLight());
 
   useEffect(() => {
     isLightRef.current = getIsLight();
-    const handleBioTheme = (e) => {
-      if (isBioPage) {
-        isLightRef.current = e.detail === 'light';
-      }
+    const handleTheme = (e) => {
+      isLightRef.current = e.detail === 'light';
     };
-    window.addEventListener('bio-theme-change', handleBioTheme);
-    return () => window.removeEventListener('bio-theme-change', handleBioTheme);
-  }, [location.pathname, isBioPage]);
+    window.addEventListener('theme-change', handleTheme);
+    window.addEventListener('bio-theme-change', handleTheme);
+    return () => {
+      window.removeEventListener('theme-change', handleTheme);
+      window.removeEventListener('bio-theme-change', handleTheme);
+    };
+  }, [location.pathname]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
