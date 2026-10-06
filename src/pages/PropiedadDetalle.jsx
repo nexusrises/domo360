@@ -67,7 +67,7 @@ export default function PropiedadDetalle() {
   const { slug } = useParams();
   const propiedad = propiedades.find((p) => p.slug === slug);
 
-  const [isTourLoaded, setIsTourLoaded] = useState(false);
+  const [isTourLoaded, setIsTourLoaded] = useState(true);
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
@@ -107,14 +107,7 @@ export default function PropiedadDetalle() {
   };
 
   useEffect(() => {
-    setIsTourLoaded(false);
-    const timer = setTimeout(() => {
-      setIsTourLoaded(true);
-    }, 100);
-
     window.scrollTo(0, 0);
-
-    return () => clearTimeout(timer);
   }, [slug]);
 
   useEffect(() => {

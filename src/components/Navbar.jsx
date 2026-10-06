@@ -59,7 +59,7 @@ export default function Navbar() {
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" onClick={handleLinkClick} className="text-2xl md:text-3xl font-logo flex items-center gap-2 group select-none tracking-wide whitespace-nowrap" title="Nexus Domo 360° | Inicio">
+        <Link to="/propiedades" onClick={handleLinkClick} className="text-2xl md:text-3xl font-logo flex items-center gap-2 group select-none tracking-wide whitespace-nowrap" title="Nexus Domo 360° | Propiedades">
           <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Nexus Domo 360 Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-300 group-hover:scale-110" />
 
           <span className={`transition-transform duration-300 group-hover:scale-105 ${isLightPage ? 'text-slate-900' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]'}`}>Nexus</span>

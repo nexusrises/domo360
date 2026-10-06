@@ -34,6 +34,46 @@ import { tourData } from '../data/tourData';
 import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
 import Polygon3D from './Polygon3D';
 
+// Tours en memoria precargados para respuesta instantánea (0ms de latencia de red)
+import tourCapilla2 from '../../public/tours/capilla2.json';
+import tourCasaCampestre from '../../public/tours/casa_campestre.json';
+import tourCasasalidapuno from '../../public/tours/casasalidapuno.json';
+import tourDptoSmart from '../../public/tours/departamento_smart.json';
+import tourInmobiliaria7 from '../../public/tours/inmobiliaria7.json';
+import tourInmobiliaria from '../../public/tours/inmobiliaria.json';
+import tourTienda from '../../public/tours/tienda.json';
+import tourOficina from '../../public/tours/oficina.json';
+import tourLoteNuevo from '../../public/tours/lote_nuevo.json';
+import tourHome from '../../public/tours/home.json';
+import tourSantamaria from '../../public/tours/santamaria.json';
+
+const BUNDLED_TOURS = {
+  casasalidapuno: tourCasasalidapuno,
+  capilla2: tourCapilla2,
+  casa_campestre: tourCasaCampestre,
+  inmobiliaria7: tourInmobiliaria7,
+  inmobiliaria: tourInmobiliaria,
+  departamento_smart: tourDptoSmart,
+  tienda: tourTienda,
+  oficina: tourOficina,
+  lote_nuevo: tourLoteNuevo,
+  home: tourHome,
+  santamaria: tourSantamaria
+};
+
+const getInitialTour = (id) => {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem(`nexus_tour_data_${id}`);
+    if (saved && saved !== 'undefined') {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && Object.keys(parsed).length > 0) return parsed;
+      } catch (e) {}
+    }
+  }
+  return BUNDLED_TOURS[id] || (id === 'home' ? tourData : null);
+};
+
 // Map of icons for hotspots
 const IconMap = {
   ArrowRight,
@@ -634,8 +674,14 @@ export default function VirtualTour({
   const isExpanded = propIsExpanded !== undefined ? propIsExpanded : localIsExpanded;
   const setIsExpanded = propSetIsExpanded !== undefined ? propSetIsExpanded : localSetIsExpanded;
 
-  const [activeSceneKey, setActiveSceneKey] = useState('__loading__');
-  const [scenes, setScenes] = useState({});
+  const [scenes, setScenes] = useState(() => {
+    const init = getInitialTour(tourId);
+    return init || tourData;
+  });
+  const [activeSceneKey, setActiveSceneKey] = useState(() => {
+    const init = getInitialTour(tourId);
+    return init ? Object.keys(init)[0] : 'sala';
+  });
 
   const activeScene = scenes[activeSceneKey] || { nombre: '', imagen: '', hotspots: [], heading: { x: 0, y: 0 }, filtro: 'normal' };
   const displayImage = activeScene.imagen ? (activeScene.imagen.startsWith('http') || activeScene.imagen.startsWith('data:') ? activeScene.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${activeScene.imagen}`) : '';
@@ -768,81 +814,77 @@ export default function VirtualTour({
         // 1. Cargar las escenas locales de inmediato para iniciar la descarga de texturas e interactividad sin demoras
         setScenes(parsed);
         setActiveSceneKey(firstScene);
-        // Dar tiempo al HeadingController de orientar la cámara antes de mostrar los hotspots
-        setTimeout(() => setIsTransitioning(false), 350);
+        // Breve espera para que HeadingController oriente la cámara sin saltos
+        setTimeout(() => setIsTransitioning(false), 120);
 
-        // 2. Cargar datos de Google Sheets en segundo plano de manera no bloqueante
-        try {
-          const sheetsLotes = await fetchLotesFromSheets();
-          if (sheetsLotes && sheetsLotes.length > 0) {
-            // Filtrar lotes correspondientes al tour/proyecto actual (soportando alias como inmobiliaria7)
-            const targetProject = tourId.toLowerCase().startsWith('inmobiliaria') ? 'inmobiliaria' : tourId.toLowerCase();
-            const projectLotes = sheetsLotes.filter(l => 
-              l.proyecto && l.proyecto.toString().trim().toLowerCase() === targetProject
-            );
+        // 2. Solo sincronizar con Google Sheets si el tour realmente contiene lotes o polígonos
+        const hasLotes = Object.values(parsed).some(scene => 
+          scene.hotspots && Array.isArray(scene.hotspots) && scene.hotspots.some(hs => hs.tipo === 'lote' || hs.tipo === 'poligono')
+        );
 
-            if (projectLotes.length > 0) {
-              // Clonar el objeto parsed para no mutar el estado directamente
-              const updatedScenes = JSON.parse(JSON.stringify(parsed));
-              
-              // Recorrer escenas y actualizar sus hotspots de tipo 'lote'
-              Object.keys(updatedScenes).forEach(sceneKey => {
-                const scene = updatedScenes[sceneKey];
-                if (scene.hotspots && Array.isArray(scene.hotspots)) {
-                  scene.hotspots = scene.hotspots.map(hs => {
-                    if ((hs.tipo === 'lote' || hs.tipo === 'poligono') && hs.manzana && hs.lote) {
-                      const match = projectLotes.find(l => 
-                        l.manzana && l.manzana.toString().trim().toUpperCase() === hs.manzana.toString().trim().toUpperCase() &&
-                        l.lote && l.lote.toString().trim() === hs.lote.toString().trim()
-                      );
+        if (hasLotes) {
+          try {
+            const sheetsLotes = await fetchLotesFromSheets();
+            if (sheetsLotes && sheetsLotes.length > 0) {
+              const targetProject = tourId.toLowerCase().startsWith('inmobiliaria') ? 'inmobiliaria' : tourId.toLowerCase();
+              const projectLotes = sheetsLotes.filter(l => 
+                l.proyecto && l.proyecto.toString().trim().toLowerCase() === targetProject
+              );
 
-                      if (match) {
-                        return {
-                          ...hs,
-                          estado: match.estado || hs.estado,
-                          precio: match.precio || hs.precio,
-                          area: match.area || hs.area,
-                          color: getColorForEstado(match.estado)
-                        };
+              if (projectLotes.length > 0) {
+                const updatedScenes = JSON.parse(JSON.stringify(parsed));
+                Object.keys(updatedScenes).forEach(sceneKey => {
+                  const scene = updatedScenes[sceneKey];
+                  if (scene.hotspots && Array.isArray(scene.hotspots)) {
+                    scene.hotspots = scene.hotspots.map(hs => {
+                      if ((hs.tipo === 'lote' || hs.tipo === 'poligono') && hs.manzana && hs.lote) {
+                        const match = projectLotes.find(l => 
+                          l.manzana && l.manzana.toString().trim().toUpperCase() === hs.manzana.toString().trim().toUpperCase() &&
+                          l.lote && l.lote.toString().trim() === hs.lote.toString().trim()
+                        );
+
+                        if (match) {
+                          return {
+                            ...hs,
+                            estado: match.estado || hs.estado,
+                            precio: match.precio || hs.precio,
+                            area: match.area || hs.area,
+                            color: getColorForEstado(match.estado)
+                          };
+                        }
                       }
-                    }
-                    return hs;
-                  });
-                }
-              });
+                      return hs;
+                    });
+                  }
+                });
 
-              // Actualizar el estado con los lotes actualizados de Google Sheets
-              setScenes(updatedScenes);
+                setScenes(updatedScenes);
+              }
             }
+          } catch (error) {
+            console.error("Error al sincronizar con Google Sheets en el visor:", error);
           }
-        } catch (error) {
-          console.error("Error al sincronizar con Google Sheets en el visor:", error);
         }
       };
 
-      // 1. LocalStorage
+      // 1. LocalStorage (si fue editado localmente)
       const localSaved = localStorage.getItem(`nexus_tour_data_${tourId}`);
       if (localSaved && localSaved !== 'undefined') {
         try {
-          // Reemplazar en caliente rutas obsoletas a /descargas_kuula/ por /tour/ y extensiones viejas a .webp
           const cleanedSaved = localSaved
             .replace(/\/descargas_kuula\//g, '/tour/')
             .replace(/\.(jpg|jpeg|png)(["'?])/gi, '.webp$2');
           const parsed = JSON.parse(cleanedSaved);
           
-          // Validación de consistencia para evitar datos cruzados del editor en local
           let isConsistent = true;
           if (tourId === 'inmobiliaria') {
             const hasCasaImages = Object.values(parsed).some(scene => 
               scene.imagen && scene.imagen.includes('casasalidapuno')
             );
-            if (hasCasaImages) {
-              isConsistent = false;
-            }
+            if (hasCasaImages) isConsistent = false;
           }
 
           if (!isConsistent) {
-            console.warn(`Detectados datos inconsistentes en localStorage para el tour ${tourId}. Limpiando...`);
             localStorage.removeItem(`nexus_tour_data_${tourId}`);
           } else {
             const firstScene = Object.keys(parsed)[0];
@@ -859,7 +901,17 @@ export default function VirtualTour({
         }
       }
 
-      // 2. Archivo físico
+      // 2. Bundled en memoria para carga ultrarrápida (0ms de latencia)
+      if (BUNDLED_TOURS[tourId]) {
+        const bundled = BUNDLED_TOURS[tourId];
+        const firstScene = Object.keys(bundled)[0];
+        if (firstScene) {
+          finishLoad(bundled, firstScene);
+          return;
+        }
+      }
+
+      // 3. Archivo físico (por si es un tour nuevo no empaquetado)
       try {
         const res = await fetch(`${import.meta.env.BASE_URL.replace(/\/$/, "")}/tours/${tourId}.json`);
         if (res.ok) {
@@ -874,7 +926,7 @@ export default function VirtualTour({
         console.warn(`No se pudo cargar el archivo físico para tourId: ${tourId}`);
       }
 
-      // 3. Fallback
+      // 4. Fallback
       finishLoad(tourData, 'sala');
     };
 
@@ -1050,8 +1102,8 @@ export default function VirtualTour({
           setShowDragHint(false);
         }}
       >
-        <Suspense fallback={null}>
-          {imageLoaded && displayImage && <PanoramaSphere imagePath={displayImage} />}
+        <Suspense fallback={<LoaderFallback />}>
+          {displayImage && <PanoramaSphere imagePath={displayImage} />}
 
           {activeScene.hotspots?.map((hs, index) => {
             if (hs.tipo === 'poligono' || hs.tipo === 'linea') {

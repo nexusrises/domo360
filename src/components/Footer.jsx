@@ -78,14 +78,9 @@ export default function Footer() {
   // --- fin bouncing glow ---
 
   const handleLogoClick = (e) => {
-    if (window.location.pathname === '/') {
+    if (window.location.pathname === '/propiedades') {
       e.preventDefault();
-      const heroElement = document.getElementById('hero');
-      if (heroElement) {
-        heroElement.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       window.scrollTo(0, 0);
     }
@@ -127,9 +122,10 @@ export default function Footer() {
           {/* Columna 1: Brand Info */}
           <div className="flex flex-col gap-4 col-span-2 md:col-span-4 items-center text-center md:items-start md:text-left">
             <Link 
-              to="/" 
+              to="/propiedades" 
               onClick={handleLogoClick} 
               className="flex flex-row items-center gap-3 group select-none cursor-pointer w-fit"
+              title="Nexus Domo 360° | Propiedades"
             >
               <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Nexus Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
 

@@ -15,7 +15,6 @@ import {
   Building2,
   Sparkles,
   Calculator,
-  Send,
   Layers,
   Video,
   Globe,
@@ -65,7 +64,7 @@ export default function Contacto() {
     let rango = { min: 0, max: 0, tiempo: '', entrega: '' };
 
     if (cotizServicio === 'landing') {
-      rango = { min: 1200, max: 1500, tiempo: '2 a 3 semanas', descripcion: 'Landing Page de Alta Conversión (Incluye 1 Tour 360° + Fotos Dron)' };
+      rango = { min: 1200, max: 1500, tiempo: '1 a 2 semanas', descripcion: 'Landing Page / Perfil Profesional (Marca Personal)' };
     } else if (cotizServicio === 'corporativa') {
       rango = { min: 2500, max: 3500, tiempo: '3 a 5 semanas', descripcion: 'Página Web Corporativa Multi-pestaña' };
     } else if (cotizServicio === 'catalogo') {
@@ -95,7 +94,7 @@ export default function Contacto() {
     const cotiz = calcularPresupuesto();
     
     const serviciosNombres = {
-      landing: 'Landing Page para Lote/Proyecto (S/ 1,200 - S/ 1,500)',
+      landing: 'Landing Page / Perfil Profesional (S/ 1,200 - S/ 1,500)',
       corporativa: 'Página Web Corporativa (S/ 2,500 - S/ 3,500)',
       catalogo: 'Sistema Catálogo Domo 360° (Desde S/ 4,500 a más)',
       escaneo: cotizEscaneoModalidad === 'combo' 
@@ -316,10 +315,10 @@ export default function Contacto() {
                       {[
                         { 
                           id: 'landing', 
-                          label: 'Landing Page (Lote / Proyecto)', 
+                          label: 'Landing Page / Perfil Profesional', 
                           tarifa: 'S/. 1,200 – S/. 1,500',
-                          tiempo: 'Entrega: 2 a 3 semanas',
-                          desc: 'Página única de alta conversión. Incluye 1 recorrido 360°, fotos con Dron DJI Mini 5 y botón directo a WhatsApp.',
+                          tiempo: 'Entrega: 1 a 2 semanas',
+                          desc: 'Página web única de presentación digital y marca personal para agentes inmobiliarios y profesionales. Tu tarjeta de presentación virtual con foto, trayectoria, servicios, redes sociales y botón directo a tu WhatsApp.',
                           icon: Sparkles 
                         },
                         { 
@@ -527,7 +526,9 @@ export default function Contacto() {
                               </>
                             ) : (
                               <>
-                                <span className="text-[10px] text-slate-400 block font-mono">✓ Dron DJI Mini 5 + Osmo 360</span>
+                                <span className="text-[10px] text-slate-400 block font-mono">
+                                  {cotizServicio === 'landing' ? '✓ Enlaces a Redes + WhatsApp Directo' : '✓ Dron DJI Mini 5 + Osmo 360'}
+                                </span>
                                 <span className="text-[10px] text-emerald-400 font-bold font-mono">✓ Garantía y soporte técnico</span>
                               </>
                             )}
@@ -546,10 +547,18 @@ export default function Contacto() {
                   {/* BOTÓN ENVIAR COTIZACIÓN A WHATSAPP */}
                   <button 
                     type="submit"
-                    className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-black py-4 rounded-xl font-bold transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg uppercase tracking-wider text-xs md:text-sm font-display"
+                    className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 px-4 py-3.5 sm:py-4 rounded-xl font-bold transition-all duration-200 active:scale-95 flex items-center justify-center gap-3 cursor-pointer shadow-lg uppercase tracking-wider text-xs md:text-sm font-display text-center"
                   >
-                    <Send className="w-4 h-4 text-black" />
-                    <span>ENVIAR COTIZACIÓN A WHATSAPP DE ÁNGEL DOMO 360 ➔</span>
+                    <svg 
+                      className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 fill-slate-950" 
+                      viewBox="0 0 448 512" 
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                    </svg>
+                    <span className="text-center leading-snug">
+                      ENVIAR COTIZACIÓN A WHATSAPP DE ÁNGEL DOMO 360 ➔
+                    </span>
                   </button>
                 </form>
               </div>
@@ -740,9 +749,9 @@ export default function Contacto() {
                 rel="noopener noreferrer" 
                 className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200 transition duration-150 group cursor-pointer"
               >
-                <div className="p-2.5 rounded-xl bg-[#25D366] text-black">
-                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.573 1.453 5.361 1.454h.005c5.548 0 10.067-4.515 10.07-10.066.002-2.687-1.043-5.216-2.946-7.12C17.228 1.517 14.7 .472 12.013.472c-5.55 0-10.069 4.515-10.073 10.066-.001 2.036.53 4.02 1.536 5.761l-.183-.284-1.01 3.687 3.774-.99-.262-.156zM15.968 13.09c-.258-.129-1.528-.755-1.765-.84-.237-.086-.41-.129-.582.129t-.667.84c-.161.183-.323.205-.582.076-1.018-.51-1.838-.909-2.548-1.517-.547-.468-.847-1.01-.98-1.242-.132-.233-.014-.359.104-.475.106-.104.237-.276.355-.414.119-.138.158-.233.237-.388.08-.155.04-.293-.02-.422-.06-.129-.582-1.402-.797-1.919-.21-.504-.44-.435-.582-.442l-.497-.008c-.172 0-.452.065-.688.323-.237.258-.905.884-.905 2.155s.927 2.496 1.056 2.668c.13.172 1.824 2.785 4.42 3.904.618.266 1.1.424 1.477.544.62.197 1.185.169 1.631.102.497-.075 1.528-.625 1.744-1.23.215-.603.215-1.12.15-1.23-.064-.11-.236-.174-.495-.304z"/>
+                <div className="p-2.5 rounded-xl bg-[#25D366] text-white shadow-sm flex items-center justify-center">
+                  <svg className="w-5 h-5 fill-white" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
                   </svg>
                 </div>
                 <div>
@@ -790,12 +799,12 @@ export default function Contacto() {
               {/* Contenedor de Google Maps Responsivo */}
               <div className="w-full h-44 bg-slate-100 border border-slate-200 rounded-2xl relative overflow-hidden shadow-inner group/map">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5968.414272319901!2d-70.13478994714418!3d-15.497418550135656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9167f3e5361625b9%3A0x2a1629113760cbfc!2sJuliaca!5e1!3m2!1ses!2spe!4v1780340457115!5m2!1ses!2spe" 
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5697.505940433812!2d-70.13363217418762!3d-15.49384603421494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2spe!4v1791312729866!5m2!1ses!2spe" 
                   className="w-full h-full border-0 rounded-2xl opacity-90 group-hover/map:opacity-100 transition-opacity duration-300" 
                   allowFullScreen 
                   loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Ubicación Nexus Domo 360° en Juliaca, Perú"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Ubicación Nexus Domo 360° en el Centro de Juliaca, Perú"
                 />
               </div>
             </div>

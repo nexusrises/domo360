@@ -297,7 +297,7 @@ export default function Bio() {
 
           {/* BOTÓN 2: VER PROPIEDADES Y TERRENOS 360° (PROYECTOS) */}
           <Link
-            to="/"
+            to="/propiedades"
             className={`w-full group rounded-2xl p-4 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
               isDark
                 ? 'bg-white/[0.04] border-cyan-500/30 hover:border-cyan-400 hover:bg-white/[0.08] hover:shadow-[0_0_25px_rgba(0,242,254,0.15)] text-white'
