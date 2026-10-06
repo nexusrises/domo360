@@ -34,32 +34,18 @@ import { tourData } from '../data/tourData';
 import { fetchLotesFromSheets, getColorForEstado } from '../services/googleSheets';
 import Polygon3D from './Polygon3D';
 
-// Tours en memoria precargados para respuesta instantánea (0ms de latencia de red)
-import tourCapilla2 from '../../public/tours/capilla2.json';
-import tourCasaCampestre from '../../public/tours/casa_campestre.json';
-import tourCasasalidapuno from '../../public/tours/casasalidapuno.json';
-import tourDptoSmart from '../../public/tours/departamento_smart.json';
-import tourInmobiliaria7 from '../../public/tours/inmobiliaria7.json';
-import tourInmobiliaria from '../../public/tours/inmobiliaria.json';
-import tourTienda from '../../public/tours/tienda.json';
-import tourOficina from '../../public/tours/oficina.json';
-import tourLoteNuevo from '../../public/tours/lote_nuevo.json';
-import tourHome from '../../public/tours/home.json';
-import tourSantamaria from '../../public/tours/santamaria.json';
+// Detección y precarga 100% automática de cualquier tour .json en public/tours/
+// Cualquier archivo .json nuevo que agregues a la carpeta se precargará solo en memoria (0ms de latencia).
+const tourFiles = import.meta.glob('../../public/tours/*.json', { eager: true });
+const BUNDLED_TOURS = {};
 
-const BUNDLED_TOURS = {
-  casasalidapuno: tourCasasalidapuno,
-  capilla2: tourCapilla2,
-  casa_campestre: tourCasaCampestre,
-  inmobiliaria7: tourInmobiliaria7,
-  inmobiliaria: tourInmobiliaria,
-  departamento_smart: tourDptoSmart,
-  tienda: tourTienda,
-  oficina: tourOficina,
-  lote_nuevo: tourLoteNuevo,
-  home: tourHome,
-  santamaria: tourSantamaria
-};
+Object.entries(tourFiles).forEach(([filePath, content]) => {
+  const match = filePath.match(/\/([^/]+)\.json$/);
+  if (match && match[1]) {
+    const tourKey = match[1];
+    BUNDLED_TOURS[tourKey] = content?.default || content;
+  }
+});
 
 const getInitialTour = (id) => {
   if (typeof window !== 'undefined') {
