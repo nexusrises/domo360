@@ -123,7 +123,7 @@ export default function PropiedadDetalle() {
         <p className="text-xl text-slate-600 max-w-2xl mb-8">El proyecto solicitado no existe o ha sido retirado.</p>
         <Link 
           to="/proyectos" 
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold uppercase tracking-wider text-xs text-white bg-slate-900 border border-slate-900 hover:bg-[#00c4ee] hover:text-black transition-all duration-300 shadow-md"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold uppercase tracking-wider text-xs text-white bg-[#ea580c] hover:bg-[#c2410c] transition-all duration-300 shadow-md shadow-orange-950/20"
         >
           <ArrowLeft className="w-4 h-4" />
           Volver al Catálogo
@@ -284,9 +284,9 @@ export default function PropiedadDetalle() {
                       </span>
                     </div>
                   )}
-                  <div className="p-4 rounded-2xl bg-slate-900 border border-slate-900 flex flex-col text-left text-white shadow-md">
-                    <span className="text-[9px] text-cyan-400 font-bold uppercase tracking-widest leading-none mb-1.5">Precio Especial</span>
-                    <span className="text-xl md:text-2xl font-black text-emerald-400 font-display flex items-baseline gap-1">
+                  <div className="p-4 rounded-2xl bg-[#ea580c] border border-orange-600 flex flex-col text-left text-white shadow-md shadow-orange-950/20">
+                    <span className="text-[9px] text-amber-100 font-bold uppercase tracking-widest leading-none mb-1.5">Precio Especial</span>
+                    <span className="text-xl md:text-2xl font-black text-white font-display flex items-baseline gap-1">
                       {renderPrecio(propiedad.precio)}
                     </span>
                   </div>

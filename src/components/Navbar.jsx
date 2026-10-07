@@ -31,6 +31,9 @@ export default function Navbar() {
     if (path === '/propiedades') {
       return location.pathname === '/propiedades' || location.pathname === '/proyectos' || location.pathname === '/catalogo';
     }
+    if (path === '/servicios-360') {
+      return location.pathname === '/servicios-360' || location.pathname === '/servicios';
+    }
     return location.pathname === path;
   };
   const [currentTheme, setCurrentTheme] = useState(() => {
@@ -53,7 +56,7 @@ export default function Navbar() {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-display ${
       isScrolled 
         ? isLightPage
-          ? 'bg-[#f5f4ef]/95 backdrop-blur-md border-b border-slate-200/90 py-4 shadow-sm'
+          ? 'bg-white/95 backdrop-blur-md border-b border-slate-200 py-4 shadow-sm'
           : 'bg-[#070a13]/92 backdrop-blur-md border-b border-[#00f2fe]/10 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
         : 'bg-transparent border-b border-transparent py-6'
     }`}>
@@ -89,14 +92,14 @@ export default function Navbar() {
             Propiedades
           </Link>
           <Link 
-            to="/compra-seguro" 
+            to="/servicios-360" 
             className={`transition-colors duration-200 py-2 uppercase ${
               isLightPage
-                ? isActive('/compra-seguro') ? 'text-[#008b99] font-black' : 'text-slate-700 hover:text-[#008b99]'
-                : isActive('/compra-seguro') ? 'text-nexus-accent' : 'text-white hover:text-nexus-accent'
+                ? isActive('/servicios-360') ? 'text-[#008b99] font-black' : 'text-slate-700 hover:text-[#008b99]'
+                : isActive('/servicios-360') ? 'text-nexus-accent' : 'text-white hover:text-nexus-accent'
             }`}
           >
-            Compra con Seguridad
+            Servicios 360°
           </Link>
           <Link 
             to="/vende-tu-propiedad" 
@@ -116,7 +119,7 @@ export default function Navbar() {
             to="/contacto" 
             className={`inline-flex px-6 py-2 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-200 active:scale-95 ${
               isLightPage
-                ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-900/10'
+                ? 'bg-[#ea580c] hover:bg-[#c2410c] text-white shadow-md shadow-orange-950/20'
                 : 'btn-neon-cian'
             }`}
           >
@@ -140,7 +143,7 @@ export default function Navbar() {
 
       <div className={`md:hidden absolute top-full left-0 w-full p-6 pb-7 flex flex-col gap-5 transition-all duration-300 origin-top z-40 ${
         isLightPage
-          ? 'bg-[#f5f4ef]/98 backdrop-blur-xl border-b border-slate-200/90 shadow-xl'
+          ? 'bg-white/98 backdrop-blur-xl border-b border-slate-200 shadow-xl'
           : 'bg-[#070a13]/95 backdrop-blur-xl border-b border-white/10 shadow-[0_15px_30px_rgba(0,0,0,0.8)]'
       } ${
         isOpen ? 'opacity-100 scale-y-100 visible' : 'opacity-0 scale-y-0 invisible pointer-events-none'
@@ -169,15 +172,15 @@ export default function Navbar() {
             Propiedades
           </Link>
           <Link 
-            to="/compra-seguro" 
+            to="/servicios-360" 
             onClick={handleLinkClick}
             className={`p-2 rounded-xl ${
               isLightPage
-                ? isActive('/compra-seguro') ? 'text-[#008b99] font-bold bg-slate-200/40' : 'text-slate-800 hover:bg-slate-200/40'
-                : isActive('/compra-seguro') ? 'text-nexus-accent' : 'text-white hover:bg-white/5'
+                ? isActive('/servicios-360') ? 'text-[#008b99] font-bold bg-slate-200/40' : 'text-slate-800 hover:bg-slate-200/40'
+                : isActive('/servicios-360') ? 'text-nexus-accent' : 'text-white hover:bg-white/5'
             }`}
           >
-            Compra con Seguridad
+            Servicios 360°
           </Link>
           <Link 
             to="/vende-tu-propiedad" 
@@ -197,7 +200,7 @@ export default function Navbar() {
           onClick={handleLinkClick}
           className={`w-full inline-flex items-center justify-center py-3.5 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-200 active:scale-95 text-center ${
             isLightPage
-              ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-900/10'
+              ? 'bg-[#ea580c] text-white hover:bg-[#c2410c] shadow-md shadow-orange-950/20'
               : 'btn-neon-cian'
           }`}
         >

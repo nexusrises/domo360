@@ -2,46 +2,71 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Check, 
-  Gavel, 
+  FileCheck2, 
+  Ruler,
   Camera, 
-  Share2, 
+  Landmark,
   ChevronDown, 
   ChevronLeft, 
   ChevronRight,
   HelpCircle,
   ArrowRight,
-  Users
+  ShieldCheck,
+  Building2,
+  Home,
+  MapPin,
+  TrendingUp,
+  Send,
+  Lock,
+  PhoneCall
 } from 'lucide-react';
-import { openSocialApp } from '../utils/deepLink';
+import { openSocialApp, getSocialUrl } from '../utils/deepLink';
 
 export default function VendePropiedad() {
   const [openFaq, setOpenFaq] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Formulario Híbrido Rápido
+  const [tipoInmueble, setTipoInmueble] = useState('Terreno / Lote');
+  const [whatsappNumber, setWhatsappNumber] = useState('');
+  const [formError, setFormError] = useState('');
+
   const soluciones = [
     {
-      title: "1. Filtro y Saneamiento Legal",
-      description: "Revisamos detalladamente los títulos, partidas registrales de la SUNARP y el autovalúo del predio. Saneamos preventivamente de la mano de nuestro Abogado Inmobiliario cualquier observación legal para evitar trabas y asegurar firmas rápidas en la notaría.",
-      image: "/filtro_sunarp_juliaca.webp",
-      tag: "Fase 1: Seguridad jurídica",
-      icon: <Gavel className="w-5 h-5" />,
-      color: "text-[#00f2fe] bg-[#00f2fe]/10 border-[#00f2fe]/20"
+      step: "Fase 1",
+      title: "1. Acuerdo de Promoción y Exclusividad",
+      badge: "Cero Riesgo Financiero",
+      description: "Firmamos un contrato interno de promoción exclusiva y corretaje claro y transparente. Sin trámites burocráticos iniciales ni pagos anticipados. Asumimos el 100% de la inversión en marketing 360°, dron y tiempo para defender el verdadero valor comercial de tu predio.",
+      image: "/casa_cartel_juliaca.jpg",
+      highlight: "Inversión 100% asumida por Nexus Domo. Si no vendemos, no pagas nada.",
+      icon: <FileCheck2 className="w-5 h-5" />
     },
     {
-      title: "2. Sesión Multimedia con Dron",
-      description: "Nos trasladamos a tu predio para realizar vuelos de alta resolución con dron y capturar fotografías 360° panorámicas. Creamos un recorrido interactivo profesional que publicamos en nuestro catálogo y mostramos de forma digital.",
-      image: "/vuelos_dron_preview.webp",
-      tag: "Fase 2: Producción visual premium",
-      icon: <Camera className="w-5 h-5" />,
-      color: "text-nexus-purple bg-nexus-purple/10 border-nexus-purple/20"
+      step: "Fase 2",
+      title: "2. Estudio Registral SUNARP y Medición Técnica",
+      badge: "Verificación de Títulos",
+      description: "Como tu socio legal y técnico, auditamos la Partida Registral en SUNARP (CRI, gravámenes, hipotecas y sociedad conyugal/herederos). Al mismo tiempo, nuestro equipo de campo mide con wincha y distanciómetro en el terreno para que los linderos reales cuadren con el plano.",
+      image: "/medicion_peritaje_juliaca.jpg",
+      highlight: "Evita que un comprador bancario te rechace el trato por discrepancias de metraje.",
+      icon: <Ruler className="w-5 h-5" />
     },
     {
-      title: "3. Campaña en Redes Sociales",
-      description: "No publicamos anuncios aburridos. Diseñamos campañas pagadas de alto impacto y de forma cruzada en Facebook, Instagram y portales inmobiliarios clave, apuntando directo a inversionistas interesados con presupuesto en el altiplano.",
-      image: "/ficha_web_preview.webp",
-      tag: "Fase 3: Marketing de alta conversión",
-      icon: <Share2 className="w-5 h-5" />,
-      color: "text-indigo-400 bg-indigo-400/10 border-indigo-400/20"
+      step: "Fase 3",
+      title: "3. Producción 360° y Venta a Capitales Estratégicos",
+      badge: "Alcance Macrorregional",
+      description: "Digitalizamos tu propiedad con tours virtuales 360° interactivos y tomas panorámicas con dron 4K. Conectamos directamente con empresarios del comercio, contratistas y trabajadores de campamentos mineros de todo el sur (Puno, Tacna, Moquegua, Arequipa, Bolivia) que buscan invertir en el polo del Puerto Seco de Juliaca.",
+      image: "/lotes_dron_juliaca.jpg",
+      highlight: "Compradores con capital listo exploran tu propiedad a distancia y deciden rápido.",
+      icon: <Camera className="w-5 h-5" />
+    },
+    {
+      step: "Fase 4",
+      title: "4. Cierre Notarial con Pago 100% Garantizado",
+      badge: "Seguridad y Dinero en Mano",
+      description: "Te acompañamos y asesoramos hasta el último minuto en la Notaría Pública. La firma de la Escritura Pública se realiza con Cheque de Gerencia bancarizado o abono verificado. No se entrega la posesión ni las llaves del inmueble hasta que tengas la totalidad de tu dinero en tu cuenta bancaria.",
+      image: "/notaria_firma_juliaca.jpg",
+      highlight: "Cierre transparente, asesoría personalizada y pago asegurado ante Notario.",
+      icon: <Landmark className="w-5 h-5" />
     }
   ];
 
@@ -54,7 +79,7 @@ export default function VendePropiedad() {
   };
 
   useEffect(() => {
-    document.title = "Vende tu Propiedad más Rápido | Angel Domo 360°";
+    document.title = "Vende tu Terreno o Casa en Juliaca y Puno | Nexus Domo 360";
     window.scrollTo(0, 0);
   }, []);
 
@@ -62,129 +87,267 @@ export default function VendePropiedad() {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const cleanNumber = whatsappNumber.replace(/\D/g, '');
+    if (!cleanNumber || cleanNumber.length < 8) {
+      setFormError('Por favor ingresa un número de WhatsApp válido.');
+      return;
+    }
+    setFormError('');
+    const mensaje = `Hola Nexus Domo, deseo solicitar una evaluación gratuita para vender mi propiedad.\n\n*Tipo de Inmueble:* ${tipoInmueble}\n*Mi WhatsApp:* ${cleanNumber}\n\nPor favor contáctenme para coordinar la visita técnica y asesoría registral.`;
+    openSocialApp(e, 'whatsapp', mensaje);
+  };
+
   const faqs = [
     {
-      question: "¿Es verdad que la fotografía 360°, videos con dron y ficha web de mi propiedad son a costo cero?",
-      answer: "Sí, es totalmente real. En Nexus Domo 360 asumimos el costo completo de la producción multimedia (videos con dron 4K, recorrido virtual interactivo 360° y su ficha web en el portal). No pagas nada por adelantado. Nosotros recuperamos esta inversión de marketing a través de la comisión estándar de corretaje únicamente si logramos vender tu propiedad con éxito. Si no se vende, no nos debes absolutamente nada."
+      question: "¿Cómo me ayuda Nexus Domo si mis papeles en SUNARP tienen observaciones o están incompletos?",
+      answer: "No te dejamos solo ante la burocracia. Como tu socio inmobiliario, realizamos una revisión registral inicial sin costo: analizamos la Partida Electrónica, identificamos si faltan actualizar datos de estado civil, levantar gravámenes antiguos o regularizar declaratorias de fábrica. Te guiamos paso a paso sobre el trámite exacto a realizar para que tu propiedad quede 100% apta y ningún banco o comprador formal rechace la compra."
     },
     {
-      question: "¿Qué documentos necesito para comenzar a vender mi propiedad?",
-      answer: "Requerimos principalmente la Copia Literal de la partida registral (SUNARP) actualizada, los formularios HR/PU del autovalúo municipal al día y copia del DNI de los propietarios. Si te falta algún documento o necesitas sanear herencias o independizaciones, nuestro Abogado Inmobiliario te asesora gratuitamente para poner los papeles en regla antes de firmar."
+      question: "¿Qué pasa si las medidas reales en mi terreno no coinciden con lo que dice el documento de SUNARP?",
+      answer: "Es una situación muy común en Juliaca y Puno debido al rápido crecimiento urbano. En Nexus Domo no esperamos a que un comprador descubra el error y cancele el trato. Nuestro equipo técnico va al terreno con wincha y distanciómetro para verificar linderos y colindancias reales. Si hay discrepancias, te orientamos en la rectificación técnica antes de negociar, protegiéndote de conflictos futuros."
     },
     {
-      question: "¿Cuánto tiempo dura el contrato de intermediación exclusiva?",
-      answer: "El acuerdo de corretaje exclusivo se firma usualmente por un periodo de 3 a 6 meses. Este tiempo nos permite invertir nuestro presupuesto de publicidad en redes sociales, hacer la producción audiovisual y filtrar a los interesados calificados para coordinar sus visitas y créditos bancarios de forma eficiente."
+      question: "¿Por qué firmamos un contrato interno de promoción exclusiva y cómo me beneficia como dueño?",
+      answer: "El contrato interno de exclusividad es un acuerdo de confianza mutua. Al contar con exclusividad, nosotros asumimos el 100% de la inversión y el riesgo: producción de tomas aéreas con dron, escaneo 360°, planos comerciales y pauta publicitaria dirigida a compradores calificados. Si no vendemos tu propiedad en el plazo pactado, tú no pagas absolutamente nada. Tienes a un equipo profesional trabajando para ti sin gastar de tu bolsillo por adelantado."
     },
     {
-      question: "¿Cómo calculan el precio sugerido de venta para mi inmueble?",
-      answer: "Realizamos un Análisis Comparativo de Mercado (ACM) totalmente gratuito, comparando transacciones reales de inmuebles similares en tu zona de Juliaca o Puno. Esto nos permite establecer un precio competitivo de alta plusvalía para captar ofertas rápidas sin castigar tu patrimonio."
+      question: "¿Ustedes también acompañan y protegen al comprador de mi propiedad?",
+      answer: "Totalmente. La única forma de concretar ventas rápidas y sin trabas es que ambas partes tengan absoluta tranquilidad. Al comprador le demostramos con el estudio de títulos SUNARP y los recorridos 360° que está adquiriendo un predio seguro, sin problemas de herederos ni litigios. Cuando el comprador siente transparencia total, paga el precio justo de mercado sin regatear por desconfianza."
     },
     {
-      question: "¿Cómo ayuda la tecnología 360° y los videos con dron a vender mi casa o terreno más rápido en Juliaca?",
-      answer: "En el mercado inmobiliario de Juliaca y Puno, la mayoría de compradores busca desde otras regiones o tiene poco tiempo. Los recorridos virtuales 360° y los videos aéreos con dron permiten que los inversionistas exploren tu propiedad en detalle desde su celular, filtrando a los curiosos y atrayendo únicamente a compradores con intenciones serias de compra y presupuesto listo."
+      question: "¿Por qué la tecnología 360° y dron atrae a empresarios y trabajadores del sector minero y comercial?",
+      answer: "Muchos de los compradores con mayor liquidez trabajan en campamentos mineros (Puno, Cusco, Arequipa, Moquegua) o dirigen negocios comerciales en Tacna, Desaguadero y Bolivia. Estas personas no tienen días libres para viajar a 'curiosear' terrenos. Con nuestros tours virtuales 360° y tomas panorámicas, recorren el lote, el ancho de calle y el entorno urbano desde su celular. Llegan a Juliaca con la decisión tomada y los fondos listos para firmar."
+    },
+    {
+      question: "¿Cómo y cuándo recibo mi dinero al momento de vender ante Notaría?",
+      answer: "Tu seguridad patrimonial es prioridad. Nosotros coordinamos y supervisamos la firma en la Notaría Pública. La firma de la Escritura Pública definitiva se realiza únicamente con Cheque de Gerencia bancarizado o abono verificado en presencia notarial. No se entrega la posesión ni las llaves del predio hasta que el 100% de tu dinero esté en tu cuenta."
+    },
+    {
+      question: "¿Cobran algún monto por adelantado para empezar a trabajar mi propiedad?",
+      answer: "Ninguno. La visita técnica, la evaluación registral inicial, las tomas con dron y el recorrido virtual 360° son asumidos íntegramente por Nexus Domo. Cobramos una comisión pactada únicamente el día en que tu venta se concreta con éxito ante Notaría. Si tú no ganas, nosotros tampoco."
     }
   ];
 
   return (
     <div className="animate-fade-in font-sans pb-16">
+      
       {/* 1. HERO SECTION */}
-      <section className="container mx-auto px-6 pt-28 pb-16 relative z-10 text-center">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-gradient-to-r from-sky-400/15 to-purple-400/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
+      <section className="container mx-auto px-4 sm:px-6 pt-28 pb-14 relative z-10 text-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[280px] bg-gradient-to-r from-amber-500/10 via-orange-500/15 to-sky-500/10 rounded-full blur-[90px] pointer-events-none z-0"></div>
         
-        <span className="text-xs uppercase text-[#008b99] font-black tracking-widest bg-[#008b99]/10 px-3.5 py-1.5 rounded-full border border-[#008b99]/30 relative z-10 inline-block shadow-sm font-display">
-          TECNOLOGÍA PREMIUM A COSTO CERO PARA TI
-        </span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black tracking-widest uppercase mb-4 bg-orange-500/10 text-[#ea580c] border border-orange-500/25 relative z-10 shadow-sm font-display">
+          <ShieldCheck className="w-4 h-4 text-[#ea580c]" />
+          <span>Socio Inmobiliario & Legal en Juliaca y Puno</span>
+        </div>
         
-        <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mt-5 mb-6 leading-[1.15] max-w-4xl mx-auto relative z-10 font-display">
-          Vendemos tu propiedad más rápido con <span className="text-gradient-rise">Tecnología y <br /> Respaldo Legal</span>
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 mt-2 mb-6 leading-[1.15] max-w-4xl mx-auto relative z-10 font-display">
+          Vendemos tu Inmueble con <span className="text-gradient-rise">Respaldo Registral SUNARP</span> y Tecnología 360°
         </h1>
         
-        <p className="text-slate-600 max-w-3xl mx-auto text-base md:text-lg mb-10 leading-relaxed relative z-10 font-sans font-medium">
-          Unimos el marketing digital inmersivo de última generación con el saneamiento documental preventivo de nuestro Abogado Inmobiliario. Captamos compradores reales y firmamos sin trabas notariales. Todo financiado por nosotros.
+        <p className="text-slate-600 max-w-3xl mx-auto text-sm sm:text-base md:text-lg mb-8 leading-relaxed relative z-10 font-sans font-medium">
+          Cero curiosos y cero trabas legales. Firmamos un <strong>acuerdo interno de exclusividad sin costo adelantado</strong>: auditamos tu partida en SUNARP, comprobamos medidas con wincha en el terreno y promocionamos con Dron y 360° ante inversionistas con capital en mano.
         </p>
 
-        <div className="flex justify-center items-center gap-4 relative z-10">
-          <Link
-            to="/contacto"
-            className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-black px-8 py-4 rounded-full font-bold uppercase tracking-wider text-xs md:text-sm transition-all duration-200 active:scale-95 shadow-[0_4px_15px_rgba(37,211,102,0.25)] gap-2.5 font-display"
-          >
-            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.156 5.158 0 11.516 0c3.08.001 5.976 1.2 8.154 3.379 2.179 2.18 3.377 5.078 3.377 8.16-.003 6.36-5.159 11.516-11.516 11.516-1.996-.001-3.957-.521-5.69-1.513L0 24zm6.59-4.846c1.6.95 3.197 1.45 4.917 1.451 5.438 0 9.864-4.426 9.867-9.864.001-2.63-1.023-5.105-2.883-6.967C16.689 1.912 14.213.887 11.59.887c-5.44 0-9.866 4.426-9.869 9.866-.001 1.782.47 3.522 1.365 5.066l-.993 3.626 3.71-.973zm12.355-6.726c-.346-.173-2.046-1.01-2.362-1.124-.316-.115-.547-.173-.778.173-.23.346-.893 1.124-1.094 1.355-.2.23-.4.26-.746.086-1.393-.696-2.302-1.218-3.123-2.624-.22-.376.22-.35.63-1.162.068-.136.034-.256-.017-.359-.05-.103-.43-1.036-.59-1.422-.155-.373-.325-.32-.475-.328-.123-.007-.264-.009-.406-.009-.142 0-.373.053-.568.267-.194.214-.742.726-.742 1.77 0 1.044.759 2.052.864 2.193.106.14 1.494 2.28 3.618 3.196.505.218.9.348 1.21.446.508.162.97.139 1.336.085.407-.06 1.246-.51 1.421-.998.175-.488.175-.905.123-.998-.052-.093-.19-.14-.537-.313z"/>
-            </svg>
-            Comenzar a Vender Ahora
-          </Link>
-        </div>
-        
-        <p className="text-[10px] sm:text-xs text-slate-500 mt-4 leading-relaxed font-sans italic font-medium">
-          ¡Inicia tu registro online y agenda la producción con dron y fotos 360° gratis!
-        </p>
-      </section>
-
-      {/* 2. EXPLICACIÓN DEL COMBO LEGAL-TECNOLÓGICO */}
-      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Pilar Tecnológico */}
-          <div className="border border-slate-200/90 rounded-3xl p-5 sm:p-8 bg-white backdrop-blur-md text-left space-y-4 flex flex-col justify-between shadow-md">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99]">
-                <Camera className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 font-display">Pilar Tecnológico Premium</h3>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans font-medium">
-                Llevamos tu propiedad al siguiente nivel visual. Realizamos tomas y videos aéreos con Dron en calidad 4K para ubicar accesos y entorno, capturamos panoramas 360° equirrectangulares para recorridos interactivos y diseñamos una ficha web dedicada de alta velocidad.
-              </p>
-            </div>
-            <ul className="space-y-2.5 pt-4 border-t border-slate-200">
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                <Check className="w-4 h-4 text-[#008b99] shrink-0" />
-                <span>Recorridos interactivos 360° móviles</span>
-              </li>
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                <Check className="w-4 h-4 text-[#008b99] shrink-0" />
-                <span>Tomas y videos profesionales con Dron 4K</span>
-              </li>
-            </ul>
+        {/* Formulario Rápido Híbrido de 2 Pasos (Lead Magnet) */}
+        <div className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-xl relative z-10 text-left">
+          <div className="mb-4">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#ea580c] block mb-1">
+              Evaluación Gratuita de tu Predio
+            </span>
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 font-display">
+              ¿Quieres saber cuánto vale tu propiedad y cómo venderla rápido?
+            </h3>
           </div>
 
-          {/* Pilar Legal */}
-          <div className="border border-slate-200/90 rounded-3xl p-5 sm:p-8 bg-white backdrop-blur-md text-left space-y-4 flex flex-col justify-between shadow-md">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-700">
-                <Gavel className="w-6 h-6" />
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            {/* Paso 1: Tipo de Inmueble (Chips) */}
+            <div>
+              <label className="text-xs font-bold text-slate-700 block mb-2">
+                1. Selecciona el tipo de inmueble:
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { label: 'Terreno / Lote', icon: <MapPin className="w-3.5 h-3.5" /> },
+                  { label: 'Casa Residencial', icon: <Home className="w-3.5 h-3.5" /> },
+                  { label: 'Local Comercial', icon: <Building2 className="w-3.5 h-3.5" /> }
+                ].map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => setTipoInmueble(item.label)}
+                    className={`flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all cursor-pointer border ${
+                      tipoInmueble === item.label
+                        ? 'bg-[#ea580c] text-white border-orange-600 shadow-md shadow-orange-950/20'
+                        : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
+                    }`}
+                  >
+                    {item.icon}
+                    <span className="truncate">{item.label}</span>
+                  </button>
+                ))}
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 font-display">Pilar de Respaldo Legal</h3>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans font-medium">
-                El marketing no sirve si la venta se traba al firmar. Nuestro Abogado Inmobiliario audita de forma preventiva tu Copia Literal (SUNARP) y formularios municipales (PU/HR) para solucionar cualquier observación técnica o legal de manera rápida e impecable.
-              </p>
             </div>
-            <ul className="space-y-2.5 pt-4 border-t border-slate-200">
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                <Check className="w-4 h-4 text-purple-600 shrink-0" />
-                <span>Saneamiento preventivo de títulos SUNARP</span>
-              </li>
-              <li className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
-                <Check className="w-4 h-4 text-purple-600 shrink-0" />
-                <span>Redacción de contratos de compraventa seguros</span>
-              </li>
-            </ul>
-          </div>
+
+            {/* Paso 2: Teléfono / WhatsApp */}
+            <div>
+              <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                2. Tu número de WhatsApp:
+              </label>
+              <div className="flex flex-col sm:flex-row gap-2.5">
+                <div className="relative flex-1">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                    +51
+                  </span>
+                  <input
+                    type="tel"
+                    value={whatsappNumber}
+                    onChange={(e) => setWhatsappNumber(e.target.value)}
+                    placeholder="987 654 321"
+                    maxLength={11}
+                    className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#ea580c] focus:border-transparent"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-black uppercase tracking-wider text-xs sm:text-sm text-white bg-[#ea580c] hover:bg-[#c2410c] shadow-md shadow-orange-950/20 transition-all duration-200 cursor-pointer active:scale-95 shrink-0"
+                >
+                  <Send className="w-4 h-4" />
+                  Solicitar Evaluación Gratuita
+                </button>
+              </div>
+              {formError && (
+                <p className="text-red-500 text-xs font-semibold mt-1.5">{formError}</p>
+              )}
+            </div>
+
+            <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+              <span className="flex items-center gap-1">
+                <Lock className="w-3 h-3 text-slate-400" /> Cero spam. 100% confidencial.
+              </span>
+              <span className="text-emerald-600 font-bold">
+                ✓ Visita técnica y peritaje a costo cero
+              </span>
+            </div>
+          </form>
         </div>
       </section>
 
-      {/* 3. PROCESO EN 3 PASOS ("Saneamos, Grabamos y Vendemos") */}
-      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <span className="text-xs uppercase text-purple-700 font-bold tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">¿CÓMO TRABAJAMOS?</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mt-4 font-display">
-            Saneamos, Grabamos y Vendemos
+      {/* 2. EL CONTRASTE: LA REALIDAD DEL MERCADO LOCAL */}
+      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+        <div className="max-w-4xl mx-auto text-center mb-10">
+          <span className="text-xs uppercase text-[#ea580c] font-black tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+            EL PROBLEMA EN JULIACA Y PUNO
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight mt-3 font-display">
+            ¿Por qué un cartel de "SE VENDE" pasa meses sin resultados?
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base mt-4 leading-relaxed font-sans font-medium">
-            Un proceso ágil y transparente diseñado para maximizar el valor comercial de tu propiedad y acelerar la firma del contrato.
+          <p className="text-slate-600 max-w-2xl mx-auto text-xs sm:text-sm mt-3 leading-relaxed font-sans font-medium">
+            El mercado cambió. El comprador con dinero real no está caminando por la calle mirando letreros empolvados; está trabajando en mina o comercio y busca predios seguros con títulos limpios.
+          </p>
+        </div>
+
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+          
+          {/* Tarjeta 1: La Venta Informal Tradicional */}
+          <div className="bg-white border border-red-200 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-sm text-left">
+            <div>
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-5 border border-slate-200">
+                <img 
+                  src="/casa_cartel_juliaca.jpg" 
+                  alt="Casa con letrero se vende en Juliaca" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  El Método Tradicional
+                </div>
+              </div>
+
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 font-display mb-3">
+                Letrero expuesto, pérdida de tiempo y riesgo legal
+              </h3>
+              
+              <ul className="space-y-2.5 text-xs text-slate-600 font-medium">
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold shrink-0">✕</span>
+                  <span>Meses recibiendo llamadas de curiosos que solo regatean o no tienen presupuesto.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold shrink-0">✕</span>
+                  <span>El trato se cae al final porque la partida en SUNARP tenía gravámenes o herederos no declarados.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold shrink-0">✕</span>
+                  <span>Discrepancias en linderos: las medidas físicas no coinciden con los papeles y el banco rechaza al comprador.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-slate-100 text-[11px] text-red-600 font-bold">
+              Resultado: Desgaste de meses y propiedad malbaratada.
+            </div>
+          </div>
+
+          {/* Tarjeta 2: El Método Nexus Domo 360 */}
+          <div className="bg-white border border-emerald-300 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-md text-left">
+            <div>
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-5 border border-slate-200">
+                <img 
+                  src="/medicion_peritaje_juliaca.jpg" 
+                  alt="Peritaje y medición técnica en Juliaca" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  El Método Nexus Domo
+                </div>
+              </div>
+
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 font-display mb-3">
+                Auditoría registral previa, medición real y tour 360°
+              </h3>
+              
+              <ul className="space-y-2.5 text-xs text-slate-700 font-medium">
+                <li className="flex items-start gap-2">
+                  <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                  <span>Auditoría registral en SUNARP antes de publicar para que la venta sea limpia e inobjetable.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                  <span>Verificación física con wincha en terreno para garantizar metrajes reales y exactos.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                  <span>Producción 360° y tomas de dron dirigidas a inversionistas mineros y comerciales de todo el sur.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-slate-100 text-[11px] text-emerald-700 font-black">
+              Resultado: Venta más rápida, sin conflictos y a precio justo.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 3. PROCESO DE 4 FASES */}
+      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <span className="text-xs uppercase text-[#ea580c] font-black tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+            TRANSPARENCIA TOTAL
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight mt-3 font-display">
+            El Proceso de 4 Fases para Vender Seguro
+          </h2>
+          <p className="text-slate-600 max-w-2xl mx-auto text-xs sm:text-sm mt-3 leading-relaxed font-sans font-medium">
+            Paso a paso, desde el acuerdo inicial sin burocracia hasta el cobro de tu cheque de gerencia en Notaría.
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto relative px-0 md:px-6">
-          <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white relative group shadow-[0_15px_45px_rgba(15,23,42,0.06)]">
+          <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white relative group shadow-xl">
             <div 
               className="flex transition-transform duration-500 ease-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -193,45 +356,44 @@ export default function VendePropiedad() {
                 <div key={idx} className="w-full shrink-0 flex flex-col md:flex-row items-stretch min-h-[440px] md:min-h-[480px]">
                   
                   {/* Foto de la etapa */}
-                  <div className="w-full md:w-1/2 relative h-48 sm:h-64 md:h-auto overflow-hidden bg-slate-100 border-b md:border-b-0 md:border-r border-slate-200">
+                  <div className="w-full md:w-1/2 relative h-56 sm:h-72 md:h-auto overflow-hidden bg-slate-100 border-b md:border-b-0 md:border-r border-slate-200">
                     <img 
-                      src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}${solucion.image}`} 
+                      src={solucion.image} 
                       alt={solucion.title} 
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.src = "https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80";
-                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-900/60 via-transparent to-transparent"></div>
-                    <span className="absolute top-6 left-6 text-[10px] uppercase font-black tracking-widest bg-slate-900 text-white backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-800 font-display">
-                      {solucion.tag}
+                    <span className="absolute top-6 left-6 text-[10px] uppercase font-black tracking-widest bg-[#ea580c] text-white backdrop-blur-md px-3.5 py-2 rounded-full border border-orange-600 font-display shadow-md">
+                      {solucion.badge}
                     </span>
                   </div>
 
                   {/* Cuerpo */}
-                  <div className="w-full md:w-1/2 p-5 sm:p-10 bg-white flex flex-col justify-between text-left">
-                    <div className="space-y-4 md:space-y-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center border bg-slate-100 border-slate-200 text-[#008b99] shrink-0">
+                  <div className="w-full md:w-1/2 p-6 sm:p-10 bg-white flex flex-col justify-between text-left">
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center border bg-orange-50 border-orange-200 text-[#ea580c] shrink-0">
                           {solucion.icon}
                         </div>
-                        <h3 className="font-bold text-xl md:text-2xl text-slate-900 font-display">
+                        <h3 className="font-bold text-lg sm:text-2xl text-slate-900 font-display">
                           {solucion.title}
                         </h3>
                       </div>
                       
-                      <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans font-medium">
+                      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium">
                         {solucion.description}
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-5 border-t border-slate-200 flex items-start gap-2.5 text-[#008b99] text-xs leading-relaxed font-bold font-sans">
-                      <div className="p-0.5 rounded-full bg-[#008b99]/10 border border-[#008b99]/20 text-[#008b99] shrink-0 mt-0.5">
+                    <div className="mt-6 pt-4 border-t border-slate-200 flex items-start gap-2.5 text-xs text-slate-800 font-bold font-sans">
+                      <div className="p-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 shrink-0 mt-0.5">
                         <Check className="w-3.5 h-3.5 stroke-[3]" />
                       </div>
                       <div>
-                        <span className="text-[#008b99] font-black uppercase tracking-wider text-[9px] block mb-1 font-display">Compromiso Exclusivo</span>
-                        Asumimos el 100% de la inversión de esta etapa sin cobros anticipados.
+                        <span className="text-[#ea580c] font-black uppercase tracking-wider text-[9px] block mb-0.5 font-display">
+                          Beneficio Directo para Ti
+                        </span>
+                        {solucion.highlight}
                       </div>
                     </div>
                   </div>
@@ -242,9 +404,10 @@ export default function VendePropiedad() {
           </div>
 
           {/* Controles de Slide */}
-          <div className="flex items-center justify-center gap-6 mt-8">
+          <div className="flex items-center justify-center gap-6 mt-6">
             <button
               onClick={prevSlide}
+              aria-label="Fase anterior"
               className="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-all duration-200 active:scale-95 cursor-pointer shadow-sm"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -254,14 +417,16 @@ export default function VendePropiedad() {
                 <button
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
+                  aria-label={`Ver ${soluciones[idx].step}`}
                   className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    currentSlide === idx ? 'w-8 bg-[#008b99]' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                    currentSlide === idx ? 'w-8 bg-[#ea580c]' : 'w-2 bg-slate-300 hover:bg-slate-400'
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={nextSlide}
+              aria-label="Fase siguiente"
               className="w-10 h-10 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-all duration-200 active:scale-95 cursor-pointer shadow-sm"
             >
               <ChevronRight className="w-5 h-5" />
@@ -270,287 +435,100 @@ export default function VendePropiedad() {
         </div>
       </section>
 
-      {/* SECCIÓN DEL ENCARGADO (ANGEL APAZA) */}
-      <section className="container mx-auto px-3 sm:px-6 pb-20 relative z-10 border-t border-slate-200/80 pt-12">
-        <div className="max-w-5xl mx-auto border border-slate-200/90 rounded-3xl p-4 sm:p-8 relative overflow-hidden bg-white shadow-xl group transition-all duration-300">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-sky-400/10 rounded-full blur-[90px] pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-400/10 rounded-full blur-[90px] pointer-events-none"></div>
+      {/* 4. ENFOQUE REGIONAL: EL CORREDOR ECONÓMICO Y PUERTO SECO */}
+      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+        <div className="max-w-5xl mx-auto bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden text-left">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
-            
-            {/* Tarjeta Física de Contacto de Angel Apaza */}
-            <div className="w-full lg:w-[320px] shrink-0 bg-slate-50 border border-slate-200 rounded-3xl p-6 flex flex-col items-center text-center shadow-md">
-              <div className="relative group mb-5">
-                <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-purple-500 rounded-2xl blur-[12px] opacity-35 transition-opacity duration-300"></div>
-                <img
-                  src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/miembros/angel.webp`}
-                  alt="Angel Apaza - Asesoría Comercial & Tecnología"
-                  className="w-36 h-36 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-slate-200 relative z-10 bg-slate-100 shadow-md"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80";
-                  }}
-                />
+          <div className="relative z-10 space-y-6">
+            <span className="text-[10px] uppercase font-black tracking-widest text-[#ea580c] bg-orange-50 px-3 py-1.5 rounded-full border border-orange-200 inline-block font-display">
+              CONEXIÓN REGIONAL & MEGAPROYECTOS
+            </span>
+
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black font-display text-slate-900 leading-tight">
+              ¿Quiénes son los compradores con dinero real que buscan propiedades en Juliaca?
+            </h3>
+
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-3xl font-medium">
+              Juliaca no depende únicamente del comprador vecino. Es el corazón logístico y comercial del sur del Perú. Con la proyección del <strong>Puerto Seco de Juliaca</strong>, la articulación con los corredores interoceánicos (Brasil, Bolivia, Chile) y la conexión hacia el <strong>Megapuerto de Chancay</strong> y el futuro <strong>Megapuerto de Corío</strong>, el interés por terrenos y propiedades con documentos saneados se ha multiplicado:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <span className="text-[#ea580c] font-black text-xs block mb-1">⛏️ Sector Minero</span>
+                <p className="text-slate-600 text-[11px] leading-relaxed font-medium">
+                  Ingenieros, contratistas y empresarios de campamentos mineros de Puno, Cusco, Moquegua y Arequipa que buscan invertir sus utilidades en terrenos de alta plusvalía.
+                </p>
               </div>
-              
-              <h4 className="text-slate-900 font-bold text-lg font-display">Angel Apaza</h4>
-              <p className="text-[#008b99] text-[10px] font-bold uppercase tracking-widest mt-1">
-                Asesoría Comercial & Tecnología
-              </p>
-              
-              <div className="w-full border-t border-slate-200 my-3.5"></div>
-              
+
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <span className="text-[#ea580c] font-black text-xs block mb-1">🚛 Comercio & Transporte</span>
+                <p className="text-slate-600 text-[11px] leading-relaxed font-medium">
+                  Empresarios de Tacna, Ilo, Desaguadero y Bolivia que necesitan almacenes, locales comerciales y lotes para expansión logística en avenidas clave de Juliaca.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <span className="text-[#ea580c] font-black text-xs block mb-1">🌐 Inversionistas a Distancia</span>
+                <p className="text-slate-600 text-[11px] leading-relaxed font-medium">
+                  Compradores que residen fuera de la región y que, gracias al recorrido 360° y tomas aéreas con dron, verifican accesos y compran con total confianza.
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100">
+              <span className="text-xs text-slate-500 font-medium">
+                ¿Tienes un terreno o casa bien ubicado en Juliaca o Puno?
+              </span>
               <a
-                href="https://wa.me/51951300535?text=Hola%20Angel%20Apaza%2C%20deseo%20agendar%20una%20asesor%C3%ADa%20sobre%20la%20venta%20de%20mi%20propiedad%20con%20tecnolog%C3%ADa%20360%20o%20sobre%20servicios%20para%20mi%20inmobiliaria."
-                onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Apaza, deseo agendar una asesoría sobre la venta de mi propiedad con tecnología 360 o sobre servicios para mi inmobiliaria.')}
+                href={getSocialUrl('whatsapp', 'Hola Nexus Domo, tengo un inmueble bien ubicado y deseo una evaluación para venta.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-black py-3 px-4 rounded-xl font-bold uppercase tracking-wider text-[11px] transition-all duration-200 active:scale-95 shadow-[0_0_15px_rgba(37,211,102,0.2)] gap-2 font-display cursor-pointer"
+                onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Nexus Domo, tengo un inmueble bien ubicado y deseo una evaluación para venta.')}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-black font-black uppercase tracking-wider text-xs transition-all cursor-pointer shadow-md active:scale-95 shrink-0"
               >
-                <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.156 5.158 0 11.516 0c3.08.001 5.976 1.2 8.154 3.379 2.179 2.18 3.377 5.078 3.377 8.16-.003 6.36-5.159 11.516-11.516 11.516-1.996-.001-3.957-.521-5.69-1.513L0 24zm6.59-4.846c1.6.95 3.197 1.45 4.917 1.451 5.438 0 9.864-4.426 9.867-9.864.001-2.63-1.023-5.105-2.883-6.967C16.689 1.912 14.213.887 11.59.887c-5.44 0-9.866 4.426-9.869 9.866-.001 1.782.47 3.522 1.365 5.066l-.993 3.626 3.71-.973zm12.355-6.726c-.346-.173-2.046-1.01-2.362-1.124-.316-.115-.547-.173-.778.173-.23.346-.893 1.124-1.094 1.355-.2.23-.4.26-.746.086-1.393-.696-2.302-1.218-3.123-2.624-.22-.376.22-.35.63-1.162.068-.136.034-.256-.017-.359-.05-.103-.43-1.036-.59-1.422-.155-.373-.325-.32-.475-.328-.123-.007-.264-.009-.406-.009-.142 0-.373.053-.568.267-.194.214-.742.726-.742 1.77 0 1.044.759 2.052.864 2.193.106.14 1.494 2.28 3.618 3.196.505.218.9.348 1.21.446.508.162.97.139 1.336.085.407-.06 1.246-.51 1.421-.998.175-.488.175-.905.123-.998-.052-.093-.19-.14-.537-.313z"/>
-                </svg>
-                Agendar Asesoría WhatsApp
+                <PhoneCall className="w-4 h-4" />
+                Consultar por WhatsApp
               </a>
             </div>
-
-            {/* Información Simplificada de Tecnología y Beneficios */}
-            <div className="flex-1 space-y-5 flex flex-col justify-between text-left">
-              <div className="space-y-3.5">
-                <span className="text-[9px] uppercase font-black tracking-widest text-[#008b99] bg-cyan-500/10 px-3 py-1.5 rounded-full border border-cyan-500/20 inline-block font-display">
-                  TECNOLOGÍA 360° E INNOVACIÓN INMOBILIARIA
-                </span>
-                
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 font-display leading-tight">
-                  Visualización 3D e Innovación para Vender tu Inmueble
-                </h3>
-                
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium">
-                  Aceleramos la venta de tu propiedad (terreno, casa o departamento) en el sur de Perú usando <strong>recorridos virtuales 360° y tomas aéreas con dron</strong>. Estas herramientas estratégicas de marketing están <strong>completamente incluidas dentro de nuestra comisión estándar por venta exitosa</strong> (sin ningún tipo de cobro anticipado ni inversiones de tu parte).
-                </p>
-
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium">
-                  ¿Eres una <strong>empresa constructora o inmobiliaria</strong>? Te ayudo a digitalizar tus proyectos mediante mapas interactivos 3D y recorridos virtuales de última generación diseñados a tu medida.
-                </p>
-              </div>
-
-              {/* Listado de Beneficios Clave */}
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[11px] text-slate-700 pt-3 border-t border-slate-200 font-sans font-medium">
-                <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
-                    <Check className="w-3 h-3 text-[#008b99]" />
-                  </div>
-                  <span>Recorridos virtuales 360° interactivos</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
-                    <Check className="w-3 h-3 text-[#008b99]" />
-                  </div>
-                  <span>Tomas y videos aéreos con Dron 4K</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
-                    <Check className="w-3 h-3 text-[#008b99]" />
-                  </div>
-                  <span>Gestión comercial de visitas y clientes</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-4.5 h-4.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#008b99] shrink-0">
-                    <Check className="w-3 h-3 text-[#008b99]" />
-                  </div>
-                  <span>Portales interactivos 3D a medida</span>
-                </li>
-              </ul>
-
-              <div className="pt-3 border-t border-slate-200">
-                <a 
-                  href="mailto:nexus.agencia360@gmail.com?subject=Consulta%20Inmobiliaria%20/%20Tecnol%C3%B3gica%20-%20Angel%20Apaza"
-                  className="inline-flex items-center justify-center bg-slate-900 hover:bg-[#00c4ee] hover:text-black text-white px-6 py-2.5 rounded-xl font-bold transition-all duration-200 active:scale-95 group uppercase tracking-wider text-[10px] font-sans w-full sm:w-auto text-center shadow-sm"
-                >
-                  nexus.agencia360@gmail.com
-                  <ArrowRight className="w-4.5 h-4.5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN: SOBRE EL EQUIPO Y SOCIOS (El Talento Detrás de Cada Línea de Código) */}
-      <section className="container mx-auto px-6 py-12 relative z-10">
-        <div className="max-w-5xl mx-auto text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[#008b99] text-xs font-bold uppercase tracking-widest mb-4 font-display">
-            <Users className="w-4 h-4 text-[#008b99]" />
-            <span>EL EQUIPO</span>
-          </div>
-
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight font-display mb-4">
-            El Talento Detrás de Cada Línea de Código
+      {/* 5. PREGUNTAS FRECUENTES (FAQs) */}
+      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <HelpCircle className="w-8 h-8 text-[#ea580c] mx-auto mb-3" />
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight font-display">
+            Tu Socio Estratégico en Cada Paso: Preguntas Frecuentes
           </h2>
-
-          <p className="text-slate-600 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed font-sans">
-            Un equipo multidisciplinario altamente calificado que combina metodologías avanzadas de desarrollo y pasión por la excelencia visual.
+          <p className="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed font-sans font-medium">
+            Despejamos tus dudas sobre documentos SUNARP, rectificación de áreas, contrato de exclusividad y el pago seguro en Notaría.
           </p>
         </div>
 
-        {/* Grid de 4 Tarjetas de Socios */}
-        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-          {/* SOCIO 1: J. Enmanuel */}
-          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
-            <div className="w-full">
-              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
-                <img 
-                  src={`${import.meta.env.BASE_URL}miembros/enmanuel.webp`} 
-                  alt="J. Enmanuel - CEO & Fundador" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
-              </div>
-
-              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
-                CEO & FUNDADOR
-              </div>
-
-              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
-                J. Enmanuel
-              </h3>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
-                DIRECTOR GENERAL
-              </p>
-
-              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
-                Líder ejecutivo con más de 5 años de trayectoria estructurando arquitecturas de negocio digitales de alta gama y consolidando alianzas comerciales estratégicas.
-              </p>
-            </div>
-          </div>
-
-          {/* SOCIO 2: Miguel Ortega */}
-          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
-            <div className="w-full">
-              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
-                <img 
-                  src={`${import.meta.env.BASE_URL}miembros/miguel.webp`} 
-                  alt="Miguel Ortega - CTO & Co-Fundador" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
-              </div>
-
-              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
-                CTO & CO-FUNDADOR
-              </div>
-
-              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
-                Miguel Ortega
-              </h3>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
-                DIRECTOR DE SISTEMAS & DEVOPS
-              </p>
-
-              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
-                Arquitecto de infraestructura y sistemas cloud de alta disponibilidad, especializado en la escalabilidad de bases de datos de alto rendimiento y optimización de latencias globales.
-              </p>
-            </div>
-          </div>
-
-          {/* SOCIO 3: Gabriel Choque */}
-          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
-            <div className="w-full">
-              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
-                <img 
-                  src={`${import.meta.env.BASE_URL}miembros/gabriel.webp`} 
-                  alt="Gabriel Choque - Director Creativo & UX/UI" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
-              </div>
-
-              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
-                DIRECTOR CREATIVO & UX/UI
-              </div>
-
-              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
-                Gabriel Choque
-              </h3>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
-                DISEÑADOR VISUAL PRINCIPAL
-              </p>
-
-              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
-                Especialista en diseño de interfaces premium centrado en la psicología de la conversión y en la creación de flujos de interacción de fricción cero.
-              </p>
-            </div>
-          </div>
-
-          {/* SOCIO 4: Angel Apaza */}
-          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/90 hover:border-cyan-400 hover:shadow-[0_10px_30px_rgba(0,180,216,0.15)] rounded-3xl p-5 transition-all duration-300 flex flex-col justify-between items-center text-center group">
-            <div className="w-full">
-              <div className="w-full aspect-[4/3] rounded-2xl border-2 border-cyan-400/70 overflow-hidden relative shadow-md mb-4">
-                <img 
-                  src={`${import.meta.env.BASE_URL}miembros/angel.webp`} 
-                  alt="Angel Apaza - Jefe de Desarrollo & Tecnología 360°" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(52,211,153,0.9)]"></div>
-              </div>
-
-              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#008b99] text-[10px] font-extrabold uppercase tracking-wider mb-2">
-                JEFE DE DESARROLLO & TECNOLOGÍA 360°
-              </div>
-
-              <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
-                Angel Apaza
-              </h3>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-purple-600 mb-3">
-                LEAD WEB DEVELOPER & 360° SPECIALIST
-              </p>
-
-              <p className="text-xs text-slate-600 font-sans font-medium leading-relaxed">
-                Ingeniero experto en computación gráfica (WebGL, Three.js), experiencias web inmersivas y dirección de levantamiento multimedia tridimensional.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. PREGUNTAS FRECUENTES (FAQs) */}
-      <section className="container mx-auto px-6 py-12 relative z-10">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <HelpCircle className="w-8 h-8 text-[#008b99] mx-auto mb-4" />
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight font-display">
-            Preguntas Frecuentes de Propietarios
-          </h2>
-          <p className="text-slate-600 text-sm md:text-base mt-4 leading-relaxed font-sans font-medium">
-            Despejamos las inquietudes más comunes sobre nuestro servicio premium de corretaje exclusivo y despliegue tecnológico.
-          </p>
-        </div>
-
-        <div className="max-w-3xl mx-auto space-y-4 text-left">
+        <div className="max-w-3xl mx-auto space-y-3.5 text-left">
           {faqs.map((faq, idx) => (
             <div 
               key={idx} 
-              className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-sm backdrop-blur-md transition-all duration-300"
+              className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
             >
               <h3>
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full flex items-center justify-between p-6 text-slate-900 text-sm sm:text-base font-bold text-left hover:bg-slate-50 transition cursor-pointer select-none font-display focus:outline-none"
+                  className="w-full flex items-center justify-between p-5 text-slate-900 text-xs sm:text-sm font-bold text-left hover:bg-slate-50 transition cursor-pointer select-none font-display focus:outline-none"
                 >
-                  <span>{faq.question}</span>
-                  <ChevronDown className={`w-5 h-5 text-[#008b99] transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                  <span className="pr-4">{faq.question}</span>
+                  <ChevronDown className={`w-5 h-5 text-[#ea580c] shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
               </h3>
               
               <div 
                 className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  openFaq === idx ? 'max-h-[300px] border-t border-slate-200 opacity-100' : 'max-h-0 opacity-0'
+                  openFaq === idx ? 'max-h-[400px] border-t border-slate-100 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <p className="p-6 text-slate-600 text-xs sm:text-sm leading-relaxed font-sans font-medium tracking-wide">
+                <p className="p-5 text-slate-600 text-xs leading-relaxed font-sans font-medium">
                   {faq.answer}
                 </p>
               </div>
@@ -574,6 +552,29 @@ export default function VendePropiedad() {
           })}
         </script>
       </section>
+
+      {/* 6. BANNER FINAL DE ACCIÓN */}
+      <section className="container mx-auto px-4 sm:px-6 pt-6 pb-12 relative z-10">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-orange-600 to-[#ea580c] rounded-3xl p-7 sm:p-10 text-white text-center shadow-xl">
+          <h3 className="text-2xl sm:text-3xl font-black font-display mb-3">
+            ¿Listo para vender tu terreno o casa con respaldo profesional?
+          </h3>
+          <p className="text-amber-100 text-xs sm:text-sm max-w-2xl mx-auto mb-6">
+            Coordinemos una visita técnica sin costo a tu predio. Revisamos tu partida en SUNARP y preparamos el plan de venta con dron y tecnología 360°.
+          </p>
+          <a
+            href={getSocialUrl('whatsapp', 'Hola Nexus Domo, deseo agendar una evaluación gratuita para vender mi propiedad en Juliaca/Puno.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Nexus Domo, deseo agendar una evaluación gratuita para vender mi propiedad en Juliaca/Puno.')}
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-slate-900 hover:bg-slate-100 font-black uppercase tracking-wider text-xs sm:text-sm transition-all cursor-pointer shadow-lg active:scale-95"
+          >
+            <PhoneCall className="w-4.5 h-4.5 text-[#ea580c]" />
+            Solicitar Evaluación Gratuita por WhatsApp
+          </a>
+        </div>
+      </section>
+
     </div>
   );
 }

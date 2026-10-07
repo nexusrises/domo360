@@ -11,6 +11,7 @@ import Bio from './pages/Bio';
 const Home = lazy(() => import('./pages/Home'));
 const Propiedades = lazy(() => import('./pages/Propiedades'));
 const CompraSeguro = lazy(() => import('./pages/CompraSeguro'));
+const Servicios360 = lazy(() => import('./pages/Servicios360'));
 const VendePropiedad = lazy(() => import('./pages/VendePropiedad'));
 const Contacto = lazy(() => import('./pages/Contacto'));
 const TourEditorPage = lazy(() => import('./pages/TourEditorPage'));
@@ -79,7 +80,7 @@ function AppContent() {
 
   return (
     <div className={`min-h-screen overflow-x-hidden relative flex flex-col justify-between transition-colors duration-300 ${
-      isLightPage ? 'bg-[#f5f4ef] text-slate-900' : 'bg-nexus-dark text-white'
+      isLightPage ? 'bg-[#f8fafc] text-slate-900' : 'bg-nexus-dark text-white'
     }`}>
       {/* Fondo Topográfico Interactivo Fijo (TerrainLines) Global */}
       <TopographicBackground />
@@ -111,6 +112,8 @@ function AppContent() {
 
             {/* Bio Oficial / Enlace Central para Redes Sociales */}
             <Route path="/bio" element={<Bio />} />
+            <Route path="/servicios-360" element={<Servicios360 />} />
+            <Route path="/servicios" element={<Servicios360 />} />
             <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
             <Route path="/compra-seguro" element={<CompraSeguro />} />
             <Route path="/contacto" element={<Contacto />} />
@@ -118,6 +121,7 @@ function AppContent() {
 
             {/* Compatibilidad con rutas directas anteriores o escritas manualmente */}
             <Route path="/domo360" element={<Home />} />
+            <Route path="/domo360/servicios-360" element={<Servicios360 />} />
             <Route path="/domo360/vende-tu-propiedad" element={<VendePropiedad />} />
             <Route path="/domo360/compra-seguro" element={<CompraSeguro />} />
             <Route path="/domo360/contacto" element={<Contacto />} />

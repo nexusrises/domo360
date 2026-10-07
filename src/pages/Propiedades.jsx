@@ -208,7 +208,7 @@ export default function Propiedades() {
               className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 cursor-pointer ${
                 searchTerm || activeCategory !== 'todos'
                   ? 'bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500/25 hover:text-red-700 shadow-[0_0_15px_rgba(239,68,68,0.15)]'
-                  : 'bg-slate-900 text-white shadow-[0_4px_15px_rgba(15,23,42,0.25)] hover:bg-[#00c4ee] hover:text-black hover:shadow-[0_0_20px_rgba(0,196,238,0.4)]'
+                  : 'bg-[#ea580c] text-white shadow-md shadow-orange-950/20 hover:bg-[#c2410c]'
               }`}
               title={searchTerm || activeCategory !== 'todos' ? "Limpiar filtros" : "Búsqueda activa"}
             >
@@ -398,7 +398,7 @@ export default function Propiedades() {
                       <div className="w-full flex items-center justify-between pt-1">
                         <Link
                           to={`/${propiedad.slug}`}
-                          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-slate-900 border border-slate-900 hover:bg-[#00c4ee] hover:text-black hover:border-[#00c4ee] hover:shadow-[0_0_15px_rgba(0,196,238,0.3)] transition-all duration-300 cursor-pointer select-none"
+                          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-[#ea580c] hover:bg-[#c2410c] shadow-md shadow-orange-950/20 transition-all duration-300 cursor-pointer select-none active:scale-95"
                         >
                           Ver Propiedad
                           <ArrowRight className="w-4 h-4" />

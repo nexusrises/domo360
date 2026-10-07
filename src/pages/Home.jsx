@@ -158,13 +158,13 @@ export default function Home() {
       {/* 1. SECCIÓN HÉROE PRINCIPAL DE IMPACTO */}
       <header className="relative w-full pt-32 pb-12 md:pt-40 md:pb-16 px-6 overflow-hidden flex flex-col justify-center items-center">
         {/* Glows ambientales sutiles */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-400/15 rounded-full blur-[130px] pointer-events-none z-0"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[420px] h-[420px] bg-purple-400/10 rounded-full blur-[110px] pointer-events-none z-0"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-400/10 rounded-full blur-[130px] pointer-events-none z-0"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[420px] h-[420px] bg-sky-400/10 rounded-full blur-[110px] pointer-events-none z-0"></div>
 
         <div className="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black tracking-widest uppercase mb-4 shadow-sm backdrop-blur-md bg-cyan-500/10 border border-cyan-500/25 text-[#008b99]">
-            <Sparkles className="w-3.5 h-3.5 animate-pulse text-[#008b99]" />
-            <span>PORTAL INMOBILIARIO INMERSIVO LÍDER EN JULIACA Y EL SUR DEL PERÚ</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black tracking-widest uppercase mb-4 shadow-sm backdrop-blur-md bg-amber-50 border border-amber-300 text-amber-800">
+            <span className="w-2 h-2 rounded-full bg-amber-600 animate-pulse inline-block"></span>
+            <span>PORTAL INMOBILIARIO & TECNOLOGÍA 360° · JULIACA Y PUNO</span>
           </div>
 
           <h1
@@ -187,20 +187,20 @@ export default function Home() {
             className="text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed mb-8 font-medium text-slate-600 space-y-2"
           >
             <p className="font-semibold text-slate-800">
-              Una foto muestra. Un video llama la atención. Un <strong className="text-[#008b99]">Tour 360°</strong> hace que tu cliente camine, entienda y compre antes de viajar.
+              Una foto muestra. Un video llama la atención. Un <strong className="text-amber-700">Tour 360°</strong> hace que tu cliente camine, entienda y compre antes de viajar.
             </p>
             <p className="text-xs sm:text-sm text-slate-500 font-normal">
               La primera plataforma inmobiliaria en <strong className="text-slate-900 font-bold">Juliaca, Puno y el Sur del Perú</strong> que te permite recorrer casas, departamentos y proyectos de terrenos desde tu celular con títulos verificados en SUNARP.
             </p>
           </div>
 
-          {/* BUSCADOR QUE REDIRIGE A /PROPIEDADES */}
+          {/* BUSCADOR QUE REDIRIGE A /PROPIEDADES ESTILO OPCIÓN A */}
           <form 
             onSubmit={handleSearchSubmit}
-            className="w-full max-w-2xl rounded-full p-2 border shadow-xl flex items-center gap-2 backdrop-blur-xl transition-all duration-300 bg-white/95 border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.08)]"
+            className="w-full max-w-2xl rounded-2xl md:rounded-full p-2.5 border shadow-xl flex flex-col sm:flex-row items-center gap-2 backdrop-blur-xl transition-all duration-300 bg-white border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.08)]"
           >
-            <div className="flex-grow flex items-center gap-3 pl-4 md:pl-6 pr-2">
-              <Search className="w-5 h-5 flex-shrink-0 text-[#008b99]" />
+            <div className="w-full flex-grow flex items-center gap-3 pl-3 md:pl-5 pr-2">
+              <Search className="w-5 h-5 flex-shrink-0 text-amber-600" />
               <input
                 type="text"
                 value={searchQuery}
@@ -226,10 +226,10 @@ export default function Home() {
 
             <button
               type="submit"
-              className="px-5 py-3 rounded-full text-xs font-black uppercase tracking-wider text-white bg-emerald-600 hover:bg-emerald-700 transition-all duration-300 flex items-center gap-2 cursor-pointer shadow-md shadow-emerald-900/10 flex-shrink-0"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl sm:rounded-full text-xs font-black uppercase tracking-wider text-white bg-slate-900 hover:bg-[#ea580c] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-slate-900/20 flex-shrink-0"
             >
-              <span>Buscar</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Buscar Terreno</span>
+              <ArrowRight className="w-4 h-4 text-amber-400" />
             </button>
           </form>
 
@@ -397,7 +397,7 @@ export default function Home() {
                 <div className="w-full flex items-center justify-between gap-2">
                   <Link
                     to={`/${propiedadActual.slug}`}
-                    className="flex-grow inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-emerald-600 border border-emerald-600 hover:bg-emerald-700 hover:border-emerald-700 transition-all duration-300 shadow-md shadow-emerald-900/10"
+                    className="flex-grow inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-[#ea580c] hover:bg-[#c2410c] transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95"
                   >
                     Ver Tour 360° y Detalles
                     <ArrowRight className="w-4 h-4" />
@@ -513,16 +513,16 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-slate-200">
               <Link
                 to="/contacto"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-emerald-600 hover:bg-emerald-700 transition-all duration-300 shadow-md shadow-emerald-900/15 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-[#ea580c] hover:bg-[#c2410c] transition-all duration-300 shadow-md shadow-orange-950/20 cursor-pointer active:scale-95"
               >
                 <span>Cotizar Tour 360° para mi Proyecto de Lotes</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/propiedades?cat=terrenos"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50/70 border border-emerald-200 hover:bg-emerald-100/70 transition-all duration-300 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-800 bg-white border border-slate-200 hover:bg-slate-50 transition-all duration-300 cursor-pointer shadow-sm active:scale-95"
               >
-                <Eye className="w-4 h-4 text-emerald-600" />
+                <Eye className="w-4 h-4 text-[#ea580c]" />
                 <span>Explorar Lotes Disponibles</span>
               </Link>
             </div>
@@ -533,14 +533,14 @@ export default function Home() {
       {/* 4. SOLUCIONES INMERSIVAS POR INDUSTRIA (SEGMENTACIÓN POR 4 INDUSTRIAS) */}
       <section id="soluciones-industrias" className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black tracking-widest uppercase mb-2 bg-slate-900/5 text-[#008b99] border border-cyan-500/20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black tracking-widest uppercase mb-2 bg-orange-50 text-[#ea580c] border border-orange-200">
             <Building2 className="w-3.5 h-3.5" />
             <span>SOLUCIONES DE ALTO IMPACTO COMERCIAL</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-display tracking-tight text-slate-900 mb-3">
             Tecnología <span className="text-gradient-rise">Domo 360°</span> Adaptada a tu Sector
           </h2>
-          <p className="text-xs sm:text-sm md:text-base leading-relaxed text-slate-600">
+          <p className="text-xs sm:text-sm md:text-base leading-relaxed text-slate-600 font-medium">
             No importa si comercializas terrenos por hectáreas, departamentos de estreno o gestionas un hotel. Diseñamos la experiencia inmersiva que multiplica tus conversiones y ahorra tiempo.
           </p>
         </div>
@@ -550,17 +550,17 @@ export default function Home() {
           <div className="rounded-3xl p-7 border bg-white border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left group">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 text-[#008b99] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-[#ea580c] border border-orange-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                   <Building2 className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200">
+                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-orange-50 text-orange-800 border border-orange-200 font-display">
                   LOTIZACIONES & PROYECTOS
                 </span>
               </div>
               <h3 className="text-lg md:text-xl font-black font-display text-slate-900 mb-2">
                 Lotizadoras & Desarrolladores
               </h3>
-              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4">
+              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4 font-medium">
                 Recorridos aéreos con dron y planos interactivos con delimitación exacta de linderos, metrajes y disponibilidad lote por lote en tiempo real.
               </p>
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-5">
@@ -572,7 +572,7 @@ export default function Home() {
             </div>
             <Link
               to="/contacto"
-              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-600 text-white hover:bg-emerald-700 transition-all duration-300 shadow-sm"
+              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-[#ea580c] hover:bg-[#c2410c] text-white transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95"
             >
               <span>Cotizar Proyecto de Lotes</span>
               <ArrowRight className="w-4 h-4" />
@@ -583,17 +583,17 @@ export default function Home() {
           <div className="rounded-3xl p-7 border bg-white border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left group">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-[#ea580c] border border-orange-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                   <Compass className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-orange-50 text-orange-800 border border-orange-200 font-display">
                   CASAS & DEPARTAMENTOS
                 </span>
               </div>
               <h3 className="text-lg md:text-xl font-black font-display text-slate-900 mb-2">
                 Inmobiliarias & Propietarios
               </h3>
-              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4">
+              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4 font-medium">
                 Tours virtuales 360° habitación por habitación. El comprador inspecciona acabados, iluminación y distribución arquitectónica antes de pedir cita.
               </p>
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-5">
@@ -605,7 +605,7 @@ export default function Home() {
             </div>
             <Link
               to="/vende-tu-propiedad"
-              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-600 text-white hover:bg-emerald-700 transition-all duration-300 shadow-sm"
+              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-[#ea580c] hover:bg-[#c2410c] text-white transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95"
             >
               <span>Publicar Inmueble con Tour 360°</span>
               <ArrowRight className="w-4 h-4" />
@@ -616,17 +616,17 @@ export default function Home() {
           <div className="rounded-3xl p-7 border bg-white border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left group">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-[#ea580c] border border-orange-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                   <Video className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-orange-50 text-orange-800 border border-orange-200 font-display">
                   AVANCES DE OBRA
                 </span>
               </div>
               <h3 className="text-lg md:text-xl font-black font-display text-slate-900 mb-2">
                 Constructoras & Ingenieros
               </h3>
-              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4">
+              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4 font-medium">
                 Control y reporte visual mensual en 360° con vuelos de dron programados para registrar el vaciado, estructura y acabados de tu edificación.
               </p>
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-5">
@@ -638,7 +638,7 @@ export default function Home() {
             </div>
             <Link
               to="/contacto"
-              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-600 text-white hover:bg-emerald-700 transition-all duration-300 shadow-sm"
+              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-[#ea580c] hover:bg-[#c2410c] text-white transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95"
             >
               <span>Solicitar Bitácora de Obra con Dron</span>
               <ArrowRight className="w-4 h-4" />
@@ -649,17 +649,17 @@ export default function Home() {
           <div className="rounded-3xl p-7 border bg-white border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left group">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-[#ea580c] border border-orange-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                   <Hotel className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+                <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-orange-50 text-orange-800 border border-orange-200 font-display">
                   HOSPEDAJE & EVENTOS
                 </span>
               </div>
               <h3 className="text-lg md:text-xl font-black font-display text-slate-900 mb-2">
                 Negocios, Hoteles & Salones
               </h3>
-              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4">
+              <p className="text-xs md:text-sm text-slate-600 leading-relaxed mb-4 font-medium">
                 Digitalización de instalaciones para Google Maps, Street View y fichas comerciales interactivas para salones de recepciones y hospedajes turísticos.
               </p>
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-5">
@@ -671,7 +671,7 @@ export default function Home() {
             </div>
             <Link
               to="/contacto"
-              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-600 text-white hover:bg-emerald-700 transition-all duration-300 shadow-sm"
+              className="inline-flex items-center justify-between w-full px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider bg-[#ea580c] hover:bg-[#c2410c] text-white transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95"
             >
               <span>Digitalizar mi Local en 360°</span>
               <ArrowRight className="w-4 h-4" />
@@ -771,7 +771,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0 w-full lg:w-auto">
             <Link
               to="/contacto"
-              className="text-center px-6 py-3.5 rounded-xl font-black uppercase tracking-wider text-xs bg-emerald-600 text-white hover:bg-emerald-700 transition-all duration-300 shadow-md shadow-emerald-900/15 active:scale-95"
+              className="text-center px-6 py-3.5 rounded-xl font-black uppercase tracking-wider text-xs bg-[#ea580c] hover:bg-[#c2410c] text-white transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95"
             >
               Cotizar Tours 360° / Web
             </Link>
