@@ -12,9 +12,9 @@ import {
 import { openSocialApp, SOCIAL_URLS } from '../utils/deepLink';
 
 export default function Bio() {
-  // Estado para el tema: por defecto oscuro (dark) para máximo impacto visual en móvil
+  // Estado para el tema: 'light' por defecto o el guardado en localStorage
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('domo360_bio_theme') || 'dark';
+    return localStorage.getItem('domo360_bio_theme') || 'light';
   });
 
   const [copied, setCopied] = useState(false);
@@ -55,7 +55,7 @@ export default function Bio() {
 
   return (
     <div
-      className={`min-h-screen w-full transition-colors duration-500 relative flex flex-col items-center justify-between px-4 py-8 sm:py-12 ${
+      className={`min-h-screen w-full transition-colors duration-500 relative flex flex-col items-center justify-between px-4 py-8 sm:py-12 bg-transparent ${
         isDark
           ? 'text-white selection:bg-cyan-500 selection:text-black'
           : 'text-slate-900 selection:bg-cyan-500 selection:text-white'
@@ -121,62 +121,73 @@ export default function Bio() {
       </div>
 
       {/* Contenedor Principal (Tarjeta Vertical centrada) */}
-      <main className="w-full max-w-md mx-auto flex flex-col items-center text-center z-10 space-y-6">
+      <main className="w-full max-w-md mx-auto flex flex-col items-center text-center z-10 space-y-4">
         
-        {/* FOTO DE PERFIL / AVATAR CON ARO PREMIUM */}
-        <div className="relative group">
-          {/* Aro exterior con gradiente animado */}
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-80 blur-sm group-hover:opacity-100 transition duration-500 group-hover:scale-105" />
-          
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-white/80 p-0.5 shadow-2xl bg-black">
-            <img
-              src={`${import.meta.env.BASE_URL}miembros/angel.webp`}
-              alt="Angel Domo 360°"
-              className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
-            />
+        {/* TARJETA VIP DE PERFIL (Glassmorphism con 65% de transparencia uniforme) */}
+        <div
+          style={{
+            backgroundColor: isDark ? 'rgba(8, 13, 26, 0.35)' : 'rgba(255, 255, 255, 0.35)'
+          }}
+          className={`w-full rounded-3xl p-6 sm:p-7 backdrop-blur-sm border transition-all duration-500 shadow-md flex flex-col items-center text-center space-y-5 ${
+            isDark
+              ? 'border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.3)]'
+              : 'border-white/80 shadow-[0_10px_30px_rgba(15,23,42,0.04)]'
+          }`}
+        >
+          {/* FOTO DE PERFIL / AVATAR CON ARO PREMIUM */}
+          <div className="relative group">
+            {/* Aro exterior con gradiente animado */}
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-80 blur-sm group-hover:opacity-100 transition duration-500 group-hover:scale-105" />
+            
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-white/80 p-0.5 shadow-2xl bg-black">
+              <img
+                src={`${import.meta.env.BASE_URL}miembros/angel.webp`}
+                alt="Angel Domo 360°"
+                className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Insignia de Verificado / Estado Activo */}
+            <div 
+              className="absolute bottom-1 right-2 bg-emerald-500 text-white p-1 rounded-full border-2 border-white shadow-md flex items-center justify-center"
+              title="Asesor Inmobiliario Activo"
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+            </div>
           </div>
 
-          {/* Insignia de Verificado / Estado Activo */}
-          <div 
-            className="absolute bottom-1 right-2 bg-emerald-500 text-white p-1 rounded-full border-2 border-white shadow-md flex items-center justify-center"
-            title="Asesor Inmobiliario Activo"
-          >
-            <ShieldCheck className="w-3.5 h-3.5" />
+          {/* NOMBRE Y DESCRIPCIÓN CON ENFOQUE HÍBRIDO (INMOBILIARIO + DESARROLLO WEB 360°) */}
+          <div className="space-y-3 px-1">
+            <h1 className="text-2xl sm:text-3xl font-black font-display tracking-tight flex items-center justify-center gap-2">
+              <span className={isDark ? 'text-white' : 'text-slate-950 font-black'}>Angel</span>
+              <span className="text-gradient-rise drop-shadow-sm">Domo 360°</span>
+            </h1>
+
+            <div
+              className={`text-xs sm:text-sm font-sans leading-relaxed max-w-md mx-auto space-y-1.5 ${
+                isDark ? 'text-slate-200' : 'text-slate-800'
+              }`}
+            >
+              <p className="font-extrabold tracking-wide uppercase text-[11px] sm:text-xs">
+                <span className={isDark ? 'text-white' : 'text-slate-900 font-black'}>Asesor Inmobiliario</span>
+                <span className="mx-1.5 text-[#ea580c] font-black">&</span>
+                <span className="text-[#ea580c] font-black">Desarrollador Web 360°</span>
+              </p>
+
+              <p className={isDark ? 'text-slate-300' : 'text-slate-800 font-medium'}>
+                Impulso la <strong className={`font-black ${isDark ? 'text-white' : 'text-slate-950'}`}>venta de inmuebles e inversiones seguras</strong> en{' '}
+                <strong className={`font-black ${isDark ? 'text-white' : 'text-slate-950'}`}>Juliaca y el sur del Perú</strong> con tecnología interactiva.{' '}
+                ¿Buscas tu próxima propiedad o deseas{' '}
+                <strong className={`font-black ${isDark ? 'text-amber-400' : 'text-amber-700'}`}>digitalizar tus proyectos con recorridos 360° y desarrollo a medida</strong>?{' '}
+                <span className={`font-black block sm:inline mt-1 sm:mt-0 ${isDark ? 'text-emerald-400' : 'text-emerald-800'}`}>
+                  Estás en el lugar correcto.
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* NOMBRE Y DESCRIPCIÓN CON ENFOQUE HÍBRIDO (INMOBILIARIO + DESARROLLO WEB 360°) */}
-        <div className="space-y-3 px-2">
-          <h1 className="text-2xl sm:text-3xl font-black font-display tracking-tight flex items-center justify-center gap-2">
-            <span>Angel</span>
-            <span className="text-gradient-rise">Domo 360°</span>
-          </h1>
-
-          <div
-            className={`text-xs sm:text-sm font-sans leading-relaxed max-w-md mx-auto space-y-1.5 ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}
-          >
-            <p className="font-extrabold tracking-wide uppercase text-[11px] sm:text-xs">
-              <span className={isDark ? 'text-white' : 'text-slate-900'}>Asesor Inmobiliario</span>
-              <span className="mx-1.5 text-cyan-400 font-black">&</span>
-              <span className="text-gradient-rise font-black">Desarrollador Web 360°</span>
-            </p>
-
-            <p>
-              Impulso la <strong className={`font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>venta de inmuebles e inversiones seguras</strong> en{' '}
-              <strong className={`font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Juliaca y el sur del Perú</strong> con tecnología interactiva.{' '}
-              ¿Buscas tu próxima propiedad o deseas{' '}
-              <strong className={`font-black ${isDark ? 'text-[#00f2fe]' : 'text-[#008b99]'}`}>digitalizar tus proyectos con recorridos 360° y desarrollo a medida</strong>?{' '}
-              <span className={`font-extrabold block sm:inline mt-1 sm:mt-0 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
-                Estás en el lugar correcto.
-              </span>
-            </p>
-          </div>
-        </div>
-
-        {/* FILA DE REDES SOCIALES (ICONOS OFICIALES ULTRA NÍTIDOS) */}
-        <div className="flex items-center justify-center gap-3.5 py-1">
+          {/* FILA DE REDES SOCIALES (ICONOS OFICIALES ULTRA NÍTIDOS) */}
+          <div className="flex items-center justify-center gap-3.5 pt-1">
           {/* WhatsApp Directo */}
           <a
             href={SOCIAL_URLS.whatsapp('Hola Angel Domo 360°, vi tu perfil y deseo más información.')}
@@ -184,7 +195,7 @@ export default function Bio() {
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#25D366] hover:border-[#25D366] hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] active:scale-95 group cursor-pointer ${
-              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200 bg-white text-slate-700 shadow-sm'
+              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200/80 bg-white/70 text-slate-700 shadow-sm'
             }`}
             aria-label="WhatsApp"
             title="Escribir a WhatsApp"
@@ -201,7 +212,7 @@ export default function Bio() {
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#1877f2] hover:border-[#1877f2] hover:shadow-[0_0_20px_rgba(24,119,242,0.5)] active:scale-95 group cursor-pointer ${
-              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200 bg-white text-slate-700 shadow-sm'
+              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200/80 bg-white/70 text-slate-700 shadow-sm'
             }`}
             aria-label="Facebook"
             title="Página de Facebook"
@@ -218,7 +229,7 @@ export default function Bio() {
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-[#ee2a7b] hover:shadow-[0_0_20px_rgba(238,42,123,0.5)] active:scale-95 group cursor-pointer ${
-              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200 bg-white text-slate-700 shadow-sm'
+              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200/80 bg-white/70 text-slate-700 shadow-sm'
             }`}
             aria-label="Instagram"
             title="Perfil de Instagram"
@@ -235,7 +246,7 @@ export default function Bio() {
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#ff0000] hover:border-[#ff0000] hover:shadow-[0_0_20px_rgba(255,0,0,0.5)] active:scale-95 group cursor-pointer ${
-              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200 bg-white text-slate-700 shadow-sm'
+              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200/80 bg-white/70 text-slate-700 shadow-sm'
             }`}
             aria-label="YouTube"
             title="Canal de YouTube"
@@ -252,7 +263,7 @@ export default function Bio() {
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#010101] hover:border-slate-700 hover:shadow-[0_0_20px_rgba(0,180,216,0.35)] active:scale-95 group cursor-pointer ${
-              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200 bg-white text-slate-700 shadow-sm'
+              isDark ? 'border-white/10 bg-white/[0.05] text-gray-300' : 'border-slate-200/80 bg-white/70 text-slate-700 shadow-sm'
             }`}
             aria-label="TikTok"
             title="Cuenta de TikTok"
@@ -261,6 +272,7 @@ export default function Bio() {
               <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.56 4.2 1.12 1.35 2.7 2.29 4.38 2.68v3.83c-1.89-.01-3.76-.58-5.33-1.66v7.4c.03 2.13-.57 4.29-1.9 5.96-1.76 2.24-4.56 3.58-7.39 3.58-2.6 0-5.17-1.12-6.84-3.13C-.17 20.35-1.01 16.86-.41 13.88c.6-2.92 2.61-5.46 5.4-6.67 1.24-.55 2.58-.82 3.93-.82.38 0 .76.02 1.14.07v3.91c-.48-.07-.98-.1-1.47-.08-1.57.06-3.11.75-4.11 1.96-1.17 1.4-1.53 3.42-1.04 5.14.49 1.76 1.88 3.19 3.63 3.69 1.88.54 4.02-.03 5.31-1.46.99-1.11 1.43-2.61 1.41-4.09l.01-15.52z"/>
             </svg>
           </a>
+        </div>
         </div>
 
         {/* LISTADO DE BOTONES / ENLACES DE ACCIÓN (ESTILO LINK IN BIO MEJORADO) */}
@@ -272,7 +284,7 @@ export default function Bio() {
             onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Domo 360°, deseo coordinar una visita o hacer una consulta inmobiliaria.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full relative group overflow-hidden rounded-2xl p-4 flex items-center justify-between transition-all duration-300 active:scale-98 shadow-[0_10px_25px_rgba(16,185,129,0.25)] hover:shadow-[0_12px_35px_rgba(16,185,129,0.45)] bg-gradient-to-r from-[#0d9488] via-[#10b981] to-[#059669] hover:from-[#0f766e] hover:via-[#059669] hover:to-[#047857] text-white font-display text-left border border-emerald-300/30"
+            className="w-full relative group overflow-hidden rounded-2xl p-4 flex items-center justify-between transition-all duration-300 active:scale-98 shadow-[0_10px_25px_rgba(16,185,129,0.25)] hover:shadow-[0_12px_35px_rgba(16,185,129,0.45)] bg-gradient-to-r from-[#0d9488]/95 via-[#10b981]/95 to-[#059669]/95 hover:from-[#0f766e] hover:via-[#059669] hover:to-[#047857] text-white font-display text-left border border-emerald-300/30 backdrop-blur-md"
           >
             {/* Destello de luz interna superior */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
@@ -298,16 +310,19 @@ export default function Bio() {
           {/* BOTÓN 2: VER PROPIEDADES Y TERRENOS 360° (PROYECTOS) */}
           <Link
             to="/propiedades"
-            className={`w-full group rounded-2xl p-4 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
+            style={{
+              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.35)'
+            }}
+            className={`w-full group rounded-2xl p-4 flex items-center justify-between border backdrop-blur-sm transition-all duration-300 active:scale-98 text-left ${
               isDark
-                ? 'bg-white/[0.04] border-cyan-500/30 hover:border-cyan-400 hover:bg-white/[0.08] hover:shadow-[0_0_25px_rgba(0,242,254,0.15)] text-white'
-                : 'bg-white border-slate-200/90 hover:border-cyan-500 hover:bg-slate-50 hover:shadow-md text-slate-900'
+                ? 'border-cyan-500/30 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(0,242,254,0.15)] text-white'
+                : 'border-white/80 hover:border-cyan-500/50 hover:bg-white/60 hover:shadow-md text-slate-900 shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
             }`}
           >
             <div className="flex items-center gap-3.5 min-w-0">
               <div
                 className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 p-1.5 transition-transform duration-300 group-hover:scale-105 ${
-                  isDark ? 'bg-cyan-500/10 border border-cyan-500/20' : 'bg-cyan-50 border border-cyan-500/20 shadow-sm'
+                  isDark ? 'bg-cyan-500/10 border border-cyan-500/20' : 'bg-cyan-50/70 border border-cyan-500/20 shadow-sm'
                 }`}
               >
                 <img
@@ -319,12 +334,14 @@ export default function Bio() {
               <div className="truncate">
                 <span
                   className={`text-[10px] font-mono uppercase tracking-wider block font-bold ${
-                    isDark ? 'text-cyan-400' : 'text-[#008b99]'
+                    isDark ? 'text-cyan-400' : 'text-[#ea580c]'
                   }`}
                 >
                   Tours Virtuales 3D & Dron
                 </span>
-                <span className="text-sm sm:text-base font-bold font-display block truncate">
+                <span className={`text-sm sm:text-base font-bold font-display block truncate ${
+                  isDark ? 'text-white' : 'text-slate-900'
+                }`}>
                   Ver Propiedades y Terrenos 360°
                 </span>
               </div>
@@ -342,28 +359,31 @@ export default function Bio() {
             onClick={(e) => openSocialApp(e, 'tiktok')}
             target="_blank"
             rel="noopener noreferrer"
-            className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
+            style={{
+              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.35)'
+            }}
+            className={`w-full group rounded-2xl p-4 flex items-center justify-between border backdrop-blur-sm transition-all duration-300 active:scale-98 text-left ${
               isDark
-                ? 'bg-white/[0.03] border-white/10 hover:border-white/30 hover:bg-white/[0.06] text-white'
-                : 'bg-white border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 text-slate-800'
+                ? 'border-white/10 hover:border-white/30 text-white'
+                : 'border-white/80 hover:border-slate-300 hover:bg-white/60 text-slate-900 shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
             }`}
           >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white shrink-0 shadow-sm">
-                <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-black flex items-center justify-center text-white shrink-0 shadow-sm">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                   <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.56 4.2 1.12 1.35 2.7 2.29 4.38 2.68v3.83c-1.89-.01-3.76-.58-5.33-1.66v7.4c.03 2.13-.57 4.29-1.9 5.96-1.76 2.24-4.56 3.58-7.39 3.58-2.6 0-5.17-1.12-6.84-3.13C-.17 20.35-1.01 16.86-.41 13.88c.6-2.92 2.61-5.46 5.4-6.67 1.24-.55 2.58-.82 3.93-.82.38 0 .76.02 1.14.07v3.91c-.48-.07-.98-.1-1.47-.08-1.57.06-3.11.75-4.11 1.96-1.17 1.4-1.53 3.42-1.04 5.14.49 1.76 1.88 3.19 3.63 3.69 1.88.54 4.02-.03 5.31-1.46.99-1.11 1.43-2.61 1.41-4.09l.01-15.52z"/>
                 </svg>
               </div>
               <div className="truncate">
-                <span className="text-xs sm:text-sm font-bold block truncate">
+                <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Sígueme en TikTok (@angel.domo360)
                 </span>
-                <span className={`text-[11px] block truncate ${isDark ? 'text-gray-400' : 'text-slate-500'}`}>
+                <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Videos cortos y novedades inmobiliarias
                 </span>
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-cyan-400 transition-colors shrink-0" />
+            <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors shrink-0" />
           </a>
 
           {/* BOTÓN 4: YOUTUBE OFICIAL */}
@@ -372,28 +392,31 @@ export default function Bio() {
             onClick={(e) => openSocialApp(e, 'youtube')}
             target="_blank"
             rel="noopener noreferrer"
-            className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
+            style={{
+              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.35)'
+            }}
+            className={`w-full group rounded-2xl p-4 flex items-center justify-between border backdrop-blur-sm transition-all duration-300 active:scale-98 text-left ${
               isDark
-                ? 'bg-white/[0.03] border-white/10 hover:border-red-500/40 hover:bg-white/[0.06] text-white'
-                : 'bg-white border-slate-200/80 hover:border-red-500/40 hover:bg-slate-50 text-slate-800'
+                ? 'border-white/10 hover:border-red-500/40 text-white'
+                : 'border-white/80 hover:border-red-500/40 hover:bg-white/60 text-slate-900 shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
             }`}
           >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-[#ff0000] flex items-center justify-center text-white shrink-0 shadow-sm">
-                <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-[#ff0000] flex items-center justify-center text-white shrink-0 shadow-sm">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                   <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.53 3.53 12 3.53 12 3.53s-7.53 0-9.388.525a3.003 3.003 0 0 0-2.11 2.108C0 8.017 0 12 0 12s0 3.983.502 5.837a3.003 3.003 0 0 0 2.11 2.108C4.47 20.47 12 20.47 12 20.47s7.53 0 9.388-.525a3.003 3.003 0 0 0 2.11-2.108C24 15.983 24 12 24 12s0-3.983-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
               </div>
               <div className="truncate">
-                <span className="text-xs sm:text-sm font-bold block truncate">
+                <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Únete al Canal YouTube (@angel.domo360)
                 </span>
-                <span className={`text-[11px] block truncate ${isDark ? 'text-gray-400' : 'text-slate-500'}`}>
+                <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Recorridos completos y análisis de lotes
                 </span>
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-red-400 transition-colors shrink-0" />
+            <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors shrink-0" />
           </a>
 
           {/* BOTÓN 5: INSTAGRAM */}
@@ -402,28 +425,31 @@ export default function Bio() {
             onClick={(e) => openSocialApp(e, 'instagram')}
             target="_blank"
             rel="noopener noreferrer"
-            className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
+            style={{
+              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.35)'
+            }}
+            className={`w-full group rounded-2xl p-4 flex items-center justify-between border backdrop-blur-sm transition-all duration-300 active:scale-98 text-left ${
               isDark
-                ? 'bg-white/[0.03] border-white/10 hover:border-pink-500/40 hover:bg-white/[0.06] text-white'
-                : 'bg-white border-slate-200/80 hover:border-pink-500/40 hover:bg-slate-50 text-slate-800'
+                ? 'border-white/10 hover:border-pink-500/40 text-white'
+                : 'border-white/80 hover:border-pink-500/40 hover:bg-white/60 text-slate-900 shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
             }`}
           >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white shrink-0 shadow-sm">
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white shrink-0 shadow-sm">
                 <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
                 </svg>
               </div>
               <div className="truncate">
-                <span className="text-xs sm:text-sm font-bold block truncate">
+                <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Sígueme en Instagram (@angel.domo360)
                 </span>
-                <span className={`text-[11px] block truncate ${isDark ? 'text-gray-400' : 'text-slate-500'}`}>
+                <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Historias y publicaciones diarias
                 </span>
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-pink-400 transition-colors shrink-0" />
+            <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-pink-400 transition-colors shrink-0" />
           </a>
 
           {/* BOTÓN 6: FACEBOOK */}
@@ -432,28 +458,31 @@ export default function Bio() {
             onClick={(e) => openSocialApp(e, 'facebook')}
             target="_blank"
             rel="noopener noreferrer"
-            className={`w-full group rounded-2xl p-3.5 flex items-center justify-between border transition-all duration-300 active:scale-98 text-left ${
+            style={{
+              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.35)'
+            }}
+            className={`w-full group rounded-2xl p-4 flex items-center justify-between border backdrop-blur-sm transition-all duration-300 active:scale-98 text-left ${
               isDark
-                ? 'bg-white/[0.03] border-white/10 hover:border-blue-500/40 hover:bg-white/[0.06] text-white'
-                : 'bg-white border-slate-200/80 hover:border-blue-500/40 hover:bg-slate-50 text-slate-800'
+                ? 'border-white/10 hover:border-blue-500/40 text-white'
+                : 'border-white/80 hover:border-blue-500/40 hover:bg-white/60 text-slate-900 shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
             }`}
           >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-[#1877f2] flex items-center justify-center text-white shrink-0 shadow-sm">
-                <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-[#1877f2] flex items-center justify-center text-white shrink-0 shadow-sm">
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </div>
               <div className="truncate">
-                <span className="text-xs sm:text-sm font-bold block truncate">
+                <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Mi Página de Facebook (@angel.domo360)
                 </span>
-                <span className={`text-[11px] block truncate ${isDark ? 'text-gray-400' : 'text-slate-500'}`}>
+                <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Comunidad y transmisiones en vivo
                 </span>
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-400 transition-colors shrink-0" />
+            <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors shrink-0" />
           </a>
 
         </div>

@@ -20,7 +20,7 @@ const PropiedadDetalle = lazy(() => import('./pages/PropiedadDetalle'));
 function AppContent() {
   const location = useLocation();
   const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
-  const isBioPage = location.pathname === '/bio';
+  const isBioPage = location.pathname === '/bio' || location.pathname.endsWith('/bio');
   const hideFooter = location.pathname === '/contacto' || isBioPage;
   const hideNavbar = isBioPage;
   const hideWhatsAppBubble = isBioPage; // La Bio ya tiene su propio botón principal de WhatsApp destacado
@@ -29,23 +29,27 @@ function AppContent() {
     return localStorage.getItem('domo360_theme') || 'light';
   });
 
+  const isLightPage = location.pathname.startsWith('/editor-360-privado') ? false : true;
+
+  // Estado del tema de BIO (aislado exclusivamente para /bio)
+  const [bioTheme, setBioTheme] = React.useState(() => {
+    return localStorage.getItem('domo360_bio_theme') || 'light';
+  });
+
   React.useEffect(() => {
-    const handleThemeChange = (e) => {
-      setCurrentTheme(e.detail);
+    const handleBioTheme = (e) => {
+      if (e.detail) {
+        setBioTheme(e.detail);
+      }
     };
-    window.addEventListener('theme-change', handleThemeChange);
-    window.addEventListener('bio-theme-change', handleThemeChange);
-    return () => {
-      window.removeEventListener('theme-change', handleThemeChange);
-      window.removeEventListener('bio-theme-change', handleThemeChange);
-    };
+    window.addEventListener('bio-theme-change', handleBioTheme);
+    return () => window.removeEventListener('bio-theme-change', handleBioTheme);
   }, []);
 
-  const isLightPage = isBioPage 
-    ? currentTheme === 'light'
-    : location.pathname.startsWith('/editor-360-privado')
-      ? false
-      : currentTheme === 'light';
+  // Clases de fondo: si es /bio, respeta bioTheme ('dark' o 'light'). Todas las demás páginas permanecen SIEMPRE claras.
+  const appBgClasses = isBioPage
+    ? (bioTheme === 'dark' ? 'bg-[#040712] text-white' : 'bg-[#f8fafc] text-slate-900')
+    : (isLightPage ? 'bg-[#f8fafc] text-slate-900' : 'bg-nexus-dark text-white');
 
   // Configuración del IntersectionObserver para apariciones dinámicas al hacer scroll (optimizado para móviles)
   React.useEffect(() => {
@@ -79,14 +83,12 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className={`min-h-screen overflow-x-hidden relative flex flex-col justify-between transition-colors duration-300 ${
-      isLightPage ? 'bg-[#f8fafc] text-slate-900' : 'bg-nexus-dark text-white'
-    }`}>
+    <div className={`min-h-screen overflow-x-hidden relative flex flex-col justify-between transition-colors duration-300 ${appBgClasses}`}>
       {/* Fondo Topográfico Interactivo Fijo (TerrainLines) Global */}
       <TopographicBackground />
 
-      {/* Luces de fondo (Efecto glow premium) */}
-      {!isLightPage && (
+      {/* Luces de fondo (Efecto glow premium en modo oscuro) */}
+      {(!isLightPage || (isBioPage && bioTheme === 'dark')) && (
         <>
           <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-nexus-purple opacity-10 rounded-full blur-[120px] pointer-events-none z-0"></div>
           <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-nexus-blue opacity-10 rounded-full blur-[140px] pointer-events-none z-0"></div>

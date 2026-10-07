@@ -21,11 +21,11 @@ const CONFIG = {
   
   // Configuración de los cometas luminosos neón (Pulses)
   pulses: {
-    count: 48,             // Cantidad de partículas activas en pantalla
-    speedMin: 0.75,        // Velocidad mínima individual
-    speedMax: 1.85,        // Velocidad máxima individual
-    glowRadius: 5.2,       // Radio del halo de brillo neón
-    headSizeFactor: 0.7,   // Tamaño relativo del núcleo brillante
+    count: 22,             // Cantidad equilibrada de partículas sutiles
+    speedMin: 0.65,        // Velocidad mínima individual
+    speedMax: 1.5,         // Velocidad máxima individual
+    glowRadius: 3.2,       // Radio de halo fino y elegante (sin borrones gigantes)
+    headSizeFactor: 0.8,   // Núcleo nítido definido
   },
   
   // Paleta de colores oficial de la marca Nexus Rise
@@ -46,22 +46,27 @@ export default function TopographicBackground() {
   
   const getIsLight = () => {
     if (location.pathname.startsWith('/editor-360-privado')) return false;
-    return (localStorage.getItem('domo360_theme') || 'light') === 'light';
+    if (location.pathname === '/bio' || location.pathname.endsWith('/bio')) {
+      const bioT = localStorage.getItem('domo360_bio_theme') || 'light';
+      return bioT === 'light';
+    }
+    return true;
   };
 
   const isLightRef = useRef(getIsLight());
 
   useEffect(() => {
     isLightRef.current = getIsLight();
-    const handleTheme = (e) => {
-      isLightRef.current = e.detail === 'light';
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleBioTheme = (e) => {
+      if (location.pathname === '/bio' || location.pathname.endsWith('/bio')) {
+        isLightRef.current = e.detail === 'light';
+      }
     };
-    window.addEventListener('theme-change', handleTheme);
-    window.addEventListener('bio-theme-change', handleTheme);
-    return () => {
-      window.removeEventListener('theme-change', handleTheme);
-      window.removeEventListener('bio-theme-change', handleTheme);
-    };
+    window.addEventListener('bio-theme-change', handleBioTheme);
+    return () => window.removeEventListener('bio-theme-change', handleBioTheme);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -306,16 +311,16 @@ export default function TopographicBackground() {
         if (pt) {
           p.pulsePhase += p.pulseSpeed;
           const pulseFactor = 1 + Math.sin(p.pulsePhase) * 0.35;
-          const size = p.size * pt.scale * pulseFactor;
+          const size = Math.max(1.2, p.size * pt.scale * pulseFactor);
 
-          // Halo difuso de brillo neón
+          // Halo difuso elegante (proporcional y fino)
           const glowSize = size * CONFIG.pulses.glowRadius;
           const glowGrad = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, glowSize);
           const particleColor = isLightRef.current
-            ? (p.color.includes('254') ? 'rgba(2, 132, 199, 0.95)' : 'rgba(124, 58, 237, 0.95)')
+            ? (p.color.includes('254') ? 'rgba(2, 132, 199, 0.75)' : 'rgba(124, 58, 237, 0.75)')
             : p.color;
           glowGrad.addColorStop(0, particleColor);
-          glowGrad.addColorStop(0.3, particleColor.replace('0.95', '0.45'));
+          glowGrad.addColorStop(0.4, isLightRef.current ? 'rgba(2, 132, 199, 0.25)' : particleColor.replace('0.95', '0.3'));
           glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
           ctx.fillStyle = glowGrad;
@@ -323,10 +328,10 @@ export default function TopographicBackground() {
           ctx.arc(pt.x, pt.y, glowSize, 0, Math.PI * 2);
           ctx.fill();
 
-          // Núcleo brillante
+          // Núcleo brillante sutil
           ctx.fillStyle = isLightRef.current ? '#0284c7' : '#ffffff';
           ctx.beginPath();
-          ctx.arc(pt.x, pt.y, size * CONFIG.pulses.headSizeFactor, 0, Math.PI * 2);
+          ctx.arc(pt.x, pt.y, Math.max(0.9, size * CONFIG.pulses.headSizeFactor), 0, Math.PI * 2);
           ctx.fill();
         }
       });
