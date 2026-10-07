@@ -20,8 +20,10 @@ const PropiedadDetalle = lazy(() => import('./pages/PropiedadDetalle'));
 function AppContent() {
   const location = useLocation();
   const isDev = import.meta.env.DEV && import.meta.env.VITE_ENABLE_360_EDITOR === 'true';
-  const isBioPage = location.pathname === '/bio' || location.pathname.endsWith('/bio');
-  const hideFooter = location.pathname === '/contacto' || isBioPage;
+  // Normalizar ruta quitando barras diagonales al final para soportar /bio y /bio/
+  const normalizedPath = location.pathname.replace(/\/+$/, '') || '/';
+  const isBioPage = normalizedPath === '/bio';
+  const hideFooter = normalizedPath === '/contacto' || isBioPage;
   const hideNavbar = isBioPage;
   const hideWhatsAppBubble = isBioPage; // La Bio ya tiene su propio botón principal de WhatsApp destacado
 
@@ -112,8 +114,9 @@ function AppContent() {
             <Route path="/proyectos" element={<Propiedades />} />
             <Route path="/catalogo" element={<Propiedades />} />
 
-            {/* Bio Oficial / Enlace Central para Redes Sociales */}
+            {/* Bio Oficial / Enlace Central para Redes Sociales (soporta /bio y /bio/) */}
             <Route path="/bio" element={<Bio />} />
+            <Route path="/bio/" element={<Bio />} />
             <Route path="/servicios-360" element={<Servicios360 />} />
             <Route path="/servicios" element={<Servicios360 />} />
             <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />

@@ -45,8 +45,9 @@ export default function TopographicBackground() {
   const location = useLocation();
   
   const getIsLight = () => {
-    if (location.pathname.startsWith('/editor-360-privado')) return false;
-    if (location.pathname === '/bio' || location.pathname.endsWith('/bio')) {
+    const cleanPath = location.pathname.replace(/\/+$/, '') || '/';
+    if (cleanPath.startsWith('/editor-360-privado')) return false;
+    if (cleanPath === '/bio') {
       const bioT = localStorage.getItem('domo360_bio_theme') || 'light';
       return bioT === 'light';
     }
@@ -61,7 +62,8 @@ export default function TopographicBackground() {
 
   useEffect(() => {
     const handleBioTheme = (e) => {
-      if (location.pathname === '/bio' || location.pathname.endsWith('/bio')) {
+      const cleanPath = location.pathname.replace(/\/+$/, '') || '/';
+      if (cleanPath === '/bio') {
         isLightRef.current = e.detail === 'light';
       }
     };
