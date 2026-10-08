@@ -70,8 +70,8 @@ routes.forEach((route) => {
   let customHtml = baseHtml
     .replace(/<title>.*?<\/title>/, `<title>${route.title}</title>`)
     .replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${route.description}" />`)
-    .replace(/<link rel="canonical" href=".*?" \/>/, `<link rel="canonical" href="https://nexusdomo360.com/${route.path}" />`)
-    .replace(/<meta property="og:url" content=".*?" \/>/, `<meta property="og:url" content="https://nexusdomo360.com/${route.path}" />`)
+    .replace(/<link rel="canonical" href=".*?" \/>/, `<link rel="canonical" href="https://nexusdomo360.com/${route.path}/" />`)
+    .replace(/<meta property="og:url" content=".*?" \/>/, `<meta property="og:url" content="https://nexusdomo360.com/${route.path}/" />`)
     .replace(/<meta property="og:title" content=".*?" \/>/, `<meta property="og:title" content="${route.title}" />`)
     .replace(/<meta property="og:description" content=".*?" \/>/, `<meta property="og:description" content="${route.description}" />`)
 
