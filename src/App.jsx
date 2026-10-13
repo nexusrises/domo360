@@ -23,9 +23,10 @@ function AppContent() {
   // Normalizar ruta quitando barras diagonales al final para soportar /bio y /bio/
   const normalizedPath = location.pathname.replace(/\/+$/, '') || '/';
   const isBioPage = normalizedPath === '/bio';
-  const hideFooter = normalizedPath === '/contacto' || isBioPage;
-  const hideNavbar = isBioPage;
-  const hideWhatsAppBubble = isBioPage; // La Bio ya tiene su propio botón principal de WhatsApp destacado
+  const isEditorPage = normalizedPath.startsWith('/editor-360-privado');
+  const hideFooter = normalizedPath === '/contacto' || isBioPage || isEditorPage;
+  const hideNavbar = isBioPage || isEditorPage;
+  const hideWhatsAppBubble = isBioPage || isEditorPage;
 
   const [currentTheme, setCurrentTheme] = React.useState(() => {
     return localStorage.getItem('domo360_theme') || 'light';

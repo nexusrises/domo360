@@ -78,36 +78,67 @@ export default function Polygon3D({
   colorBorde = '#ffffff',
   grosorBorde = 2,
   esLinea = false,
+  isLinea = false,
   isSelected = false,
   isEditor = false,
   onSelect,
   onVertexDragStart,
   datosLote = {},
+  texto,
+  manzana,
+  lote,
+  estado,
+  precio,
+  area,
   index
 }) {
   const [hovered, setHovered] = useState(false);
+  const lineaActiva = esLinea || isLinea;
+  const infoLote = {
+    texto,
+    manzana,
+    lote,
+    estado,
+    precio,
+    area,
+    ...datosLote
+  };
 
   // Geometría del polígono relleno
   const polygonGeometry = useMemo(() => {
-    if (esLinea || !vertices || vertices.length < 3) return null;
+    if (lineaActiva || !vertices || vertices.length < 3) return null;
     try {
       return createPolygonGeometry(vertices);
     } catch (e) {
       console.warn('Error triangulando polígono 3D:', e);
       return null;
     }
-  }, [vertices, esLinea]);
+  }, [vertices, lineaActiva]);
 
   // Geometría de las líneas de borde
   const lineGeometry = useMemo(() => {
     if (!vertices || vertices.length < 2) return null;
     const pts = vertices.map(v => new THREE.Vector3(v[0], v[1], v[2]));
-    if (!esLinea && pts.length >= 3) {
+    if (!lineaActiva && pts.length >= 3) {
       pts.push(pts[0].clone()); // Cerrar el polígono
     }
     const geom = new THREE.BufferGeometry().setFromPoints(pts);
     return geom;
-  }, [vertices, esLinea]);
+  }, [vertices, lineaActiva]);
+
+  // Geometría de tubo para líneas gruesas reales visibles en WebGL
+  const tubeGeometry = useMemo(() => {
+    if (!lineaActiva || !vertices || vertices.length < 2) return null;
+    try {
+      const pts = vertices.map(v => new THREE.Vector3(v[0], v[1], v[2]));
+      const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.0);
+      const radio = Math.max(0.04, ((grosorBorde || 3) * 0.025));
+      return new THREE.TubeGeometry(curve, Math.max(16, pts.length * 10), radio, 8, false);
+    } catch (e) {
+      console.warn("Error creando tubo de línea 3D:", e);
+      return null;
+    }
+  }, [vertices, lineaActiva, grosorBorde]);
 
   // Centroide para ubicar tooltip o etiqueta
   const centerPos = useMemo(() => {
@@ -119,14 +150,17 @@ export default function Polygon3D({
     return [c.x * 0.99, c.y * 0.99, c.z * 0.99];
   }, [vertices]);
 
-  const fillColor = datosLote?.color || color;
+  const activeLineColor = infoLote?.color || color || colorBorde || '#f59e0b';
+  const fillColor = infoLote?.color || color;
   const fillOpacity = isSelected ? Math.min(1.0, opacidad + 0.2) : (hovered ? Math.min(1.0, opacidad + 0.15) : opacidad);
-  const borderColor = isSelected ? '#fbbf24' : (hovered ? '#ffffff' : colorBorde);
+  const borderColor = lineaActiva 
+    ? activeLineColor 
+    : (isSelected ? '#fbbf24' : (hovered ? '#ffffff' : colorBorde));
 
   return (
     <group>
       {/* 1. Malla 3D del Polígono con Relleno Translúcido */}
-      {!esLinea && polygonGeometry && (
+      {!lineaActiva && polygonGeometry && (
         <mesh
           geometry={polygonGeometry}
           onClick={(e) => {
@@ -149,17 +183,34 @@ export default function Polygon3D({
         </mesh>
       )}
 
-      {/* 2. Línea perimétrica de borde */}
-      {lineGeometry && (
-        <line geometry={lineGeometry}>
-          <lineBasicMaterial
-            color={borderColor}
-            linewidth={isSelected ? (grosorBorde + 1) : grosorBorde}
+      {/* 2. Línea perimétrica o Tubo 3D de Trayectoria con Grosor y Color Real */}
+      {lineaActiva && tubeGeometry ? (
+        <mesh
+          geometry={tubeGeometry}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (onSelect) onSelect(index);
+          }}
+        >
+          <meshBasicMaterial
+            color={activeLineColor}
             transparent={true}
-            opacity={0.95}
+            opacity={0.98}
             depthTest={true}
           />
-        </line>
+        </mesh>
+      ) : (
+        lineGeometry && (
+          <line geometry={lineGeometry}>
+            <lineBasicMaterial
+              color={borderColor}
+              linewidth={isSelected ? (grosorBorde + 1) : grosorBorde}
+              transparent={true}
+              opacity={0.95}
+              depthTest={true}
+            />
+          </line>
+        )
       )}
 
       {/* 3. Vértices Editables / Tiradores en Modo Editor (cuando está seleccionado) */}
@@ -168,20 +219,21 @@ export default function Polygon3D({
           <Html center distanceFactor={18} zIndexRange={[60, 0]}>
             <div
               onPointerDown={(e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 if (onVertexDragStart) onVertexDragStart(index, vIdx);
               }}
-              className="w-4 h-4 rounded-full bg-amber-400 border-2 border-slate-950 shadow-xl cursor-grab active:cursor-grabbing hover:scale-125 transition-transform flex items-center justify-center select-none"
-              title={`Vértice #${vIdx + 1} (Arrastra para mover)`}
+              className="w-5 h-5 rounded-full bg-amber-400 hover:bg-amber-300 border-2 border-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.8)] cursor-grab active:cursor-grabbing flex items-center justify-center select-none group/pin pointer-events-auto"
+              title={`Vértice #${vIdx + 1} (Arrastra con el ratón para ubicar en la calle/terreno)`}
             >
-              <span className="text-[8px] font-mono font-bold text-slate-950">{vIdx + 1}</span>
+              <span className="text-[9px] font-mono font-black text-slate-950">{vIdx + 1}</span>
             </div>
           </Html>
         </group>
       ))}
 
       {/* 4. Etiqueta / Tooltip informativo en el Centroide */}
-      {(datosLote?.lote || datosLote?.manzana || datosLote?.texto) && (
+      {(infoLote?.lote || infoLote?.manzana || infoLote?.texto) && (
         <group position={centerPos}>
           <Html center distanceFactor={22} zIndexRange={[40, 0]}>
             <div
@@ -195,17 +247,17 @@ export default function Polygon3D({
                   : 'bg-slate-900/85 text-white border-white/20 hover:border-amber-400/50'
               }`}
             >
-              {datosLote?.manzana && datosLote?.lote ? (
+              {infoLote?.manzana && infoLote?.lote ? (
                 <div className="text-[10px] font-bold leading-tight">
-                  <span>Mz {datosLote.manzana} - Lte {datosLote.lote}</span>
-                  {datosLote.estado && (
-                    <span className="block text-[8px] font-medium mt-0.5" style={{ color: isSelected ? '#000000' : (datosLote.color || '#22c55e') }}>
-                      ● {datosLote.estado}
+                  <span>Mz {infoLote.manzana} - Lte {infoLote.lote}</span>
+                  {infoLote.estado && (
+                    <span className="block text-[8px] font-medium mt-0.5" style={{ color: isSelected ? '#000000' : (infoLote.color || '#22c55e') }}>
+                      ● {infoLote.estado}
                     </span>
                   )}
                 </div>
               ) : (
-                <span className="text-[10px] font-semibold">{datosLote?.texto || `Polígono #${index + 1}`}</span>
+                <span className="text-[10px] font-semibold">{infoLote?.texto || `Polígono #${index + 1}`}</span>
               )}
             </div>
           </Html>

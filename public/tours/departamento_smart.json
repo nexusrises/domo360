@@ -31,32 +31,6 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          18.89,
-          -1.26,
-          -6.45
-        ],
-        "destino": "1790102875141_upeu_terreno2_9482",
-        "texto": "2°   TERRENO \nEN VENTA",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#3df50a",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 17,
-        "fondoTransparente": false,
-        "colorTexto": "#e8ff3d"
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
           18.51,
           -7.38,
           -1.72
@@ -149,9 +123,9 @@
           ]
         ],
         "color": "#22c55e",
-        "opacidad": 0.2,
-        "colorBorde": "#ffffff",
-        "grosorBorde": 2,
+        "opacidad": 0.25,
+        "colorBorde": "#fbff00",
+        "grosorBorde": 4,
         "texto": "Lote 1",
         "manzana": "A",
         "lote": "1",
@@ -162,31 +136,6 @@
         "mostrarRelleno": true,
         "mostrarBorde": true,
         "mostrarEtiqueta": false
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          16.8,
-          -0.6,
-          -10.83
-        ],
-        "destino": "1790102875141_upeu_terreno2_9482",
-        "texto": "TERRENO  2\nEN VENTA",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#74f50a",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 16,
-        "colorFondo": "#263864"
       },
       {
         "tipo": "hotspot",
@@ -252,86 +201,5 @@
       "temperatura": 0
     },
     "northOffset": 266
-  },
-  "1790102875141_upeu_terreno2_9482": {
-    "nombre": "UPeU terreno2",
-    "imagen": "/tour/upeu_terre_1/1790102875141_UPeU_terreno2.webp",
-    "hotspots": [
-      {
-        "tipo": "poligono",
-        "vertices": [
-          [
-            4.94,
-            -18.87,
-            -4.4
-          ],
-          [
-            4.79,
-            -18.86,
-            4.64
-          ],
-          [
-            -5.46,
-            -18.73,
-            4.41
-          ],
-          [
-            -4.92,
-            -18.81,
-            -4.68
-          ]
-        ],
-        "color": "#22c55e",
-        "opacidad": 0.2,
-        "colorBorde": "#ffffff",
-        "grosorBorde": 3,
-        "texto": "Lote 1",
-        "manzana": "A",
-        "lote": "1",
-        "estado": "Disponible",
-        "precio": "",
-        "area": "",
-        "fijo": false,
-        "mostrarEtiqueta": false
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          3.95,
-          -0.29,
-          19.6
-        ],
-        "destino": "1790102317363_upeu_linea39_9817",
-        "texto": "CARRETERA\nMICRO  39",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "Map",
-        "color": "#abf50a",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 14
-      }
-    ],
-    "heading": {
-      "x": -22,
-      "y": 161
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 98,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    },
-    "northOffset": 12
   }
 }

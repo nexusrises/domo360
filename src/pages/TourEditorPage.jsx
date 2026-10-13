@@ -1235,6 +1235,8 @@ export default function TourEditorPage() {
   const cameraRef = useRef(null);
   // Referencia para la brújula en tiempo real
   const compassRef = useRef(null);
+  // Referencia para el contenedor exacto del Canvas 3D
+  const canvasContainerRef = useRef(null);
 
   // Referencias para diferenciar click de drag
   const isDraggingHotspot = useRef(false);
@@ -1262,8 +1264,14 @@ export default function TourEditorPage() {
     }
   };
 
-  // Manejador global de pointer up para evitar bloqueos
+  // Manejador global de eventos de puntero (move y up) para asegurar que el arrastre no se corte ni dé saltos
   useEffect(() => {
+    const handleGlobalPointerMove = (e) => {
+      if (dragVertexIndex.current.hotspotIndex !== null || isDraggingHotspot.current) {
+        handlePointerMoveContainer(e);
+      }
+    };
+
     const handleGlobalPointerUp = () => {
       if (dragVertexIndex.current.hotspotIndex !== null) {
         dragVertexIndex.current = { hotspotIndex: null, vertexIndex: null };
@@ -1277,9 +1285,14 @@ export default function TourEditorPage() {
         saveToLocal(scenes);
       }
     };
+
+    window.addEventListener('pointermove', handleGlobalPointerMove);
     window.addEventListener('pointerup', handleGlobalPointerUp);
-    return () => window.removeEventListener('pointerup', handleGlobalPointerUp);
-  }, [scenes]);
+    return () => {
+      window.removeEventListener('pointermove', handleGlobalPointerMove);
+      window.removeEventListener('pointerup', handleGlobalPointerUp);
+    };
+  }, [scenes, activeSceneKey]);
 
   // Obtener punto central del campo visual de la cámara para insertar elementos
   const getSpawnPosition = () => {
@@ -1504,21 +1517,48 @@ export default function TourEditorPage() {
     setActiveTab('elementos');
   };
 
-  // Añadir un vértice a un polígono o línea existente
+  // Añadir un vértice a un polígono o línea existente (extender ruta hacia adelante)
   const handleAddVertex = (hotspotIdx) => {
     const newHotspots = [...(activeScene.hotspots || [])];
     const item = newHotspots[hotspotIdx];
-    if (!item || !item.vertices || item.vertices.length < 2) return;
+    if (!item || !item.vertices || item.vertices.length < 1) return;
 
-    const last = item.vertices[item.vertices.length - 1];
-    const first = item.vertices[0];
-    const midPoint = [
-      parseFloat(((last[0] + first[0]) / 2).toFixed(2)),
-      parseFloat(((last[1] + first[1]) / 2).toFixed(2)),
-      parseFloat(((last[2] + first[2]) / 2).toFixed(2))
-    ];
+    let newPoint;
+    if (item.tipo === 'linea') {
+      // Para línea de recorrido: proyectar un paso adelante en la dirección del tramo
+      const len = item.vertices.length;
+      if (len >= 2) {
+        const pPenultimo = new THREE.Vector3(...item.vertices[len - 2]);
+        const pUltimo = new THREE.Vector3(...item.vertices[len - 1]);
+        const direccion = new THREE.Vector3().subVectors(pUltimo, pPenultimo).normalize();
+        // Avanzar 3 unidades hacia adelante y reproyectar a la esfera (radio 20)
+        const extendido = pUltimo.clone().add(direccion.multiplyScalar(3.5)).normalize().multiplyScalar(20);
+        newPoint = [
+          parseFloat(extendido.x.toFixed(2)),
+          parseFloat(extendido.y.toFixed(2)),
+          parseFloat(extendido.z.toFixed(2))
+        ];
+      } else {
+        const p0 = new THREE.Vector3(...item.vertices[0]);
+        const p1 = p0.clone().add(new THREE.Vector3(2, 0, 0)).normalize().multiplyScalar(20);
+        newPoint = [
+          parseFloat(p1.x.toFixed(2)),
+          parseFloat(p1.y.toFixed(2)),
+          parseFloat(p1.z.toFixed(2))
+        ];
+      }
+    } else {
+      // Para polígono: punto medio entre el último y el primer vértice
+      const last = item.vertices[item.vertices.length - 1];
+      const first = item.vertices[0];
+      newPoint = [
+        parseFloat(((last[0] + first[0]) / 2).toFixed(2)),
+        parseFloat(((last[1] + first[1]) / 2).toFixed(2)),
+        parseFloat(((last[2] + first[2]) / 2).toFixed(2))
+      ];
+    }
 
-    const newVertices = [...item.vertices, midPoint];
+    const newVertices = [...item.vertices, newPoint];
     newHotspots[hotspotIdx] = {
       ...item,
       vertices: newVertices
@@ -1568,7 +1608,10 @@ export default function TourEditorPage() {
   // Mover el punto interactivo seleccionado por drag
   const handlePointerMoveContainer = (e) => {
     if (cameraRef.current) {
-      const rect = e.currentTarget.getBoundingClientRect();
+      const containerElem = canvasContainerRef.current || e.currentTarget;
+      const rect = containerElem.getBoundingClientRect();
+      if (!rect || rect.width === 0 || rect.height === 0) return;
+
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
@@ -1580,13 +1623,17 @@ export default function TourEditorPage() {
       const intersectionPoint = new THREE.Vector3();
       raycaster.ray.intersectSphere(targetSphere, intersectionPoint);
 
-      if (intersectionPoint) {
+      if (intersectionPoint && !isNaN(intersectionPoint.x)) {
         // Caso 1: Arrastrar un vértice de polígono / línea
         if (dragVertexIndex.current.hotspotIndex !== null && dragVertexIndex.current.vertexIndex !== null) {
           const { hotspotIndex, vertexIndex } = dragVertexIndex.current;
-          const newHotspots = [...(activeScene.hotspots || [])];
-          const item = newHotspots[hotspotIndex];
-          if (item && item.vertices && item.vertices[vertexIndex] && !item.fijo) {
+          setScenes(prevScenes => {
+            const currentScene = prevScenes[activeSceneKey];
+            if (!currentScene || !currentScene.hotspots) return prevScenes;
+            const newHotspots = [...currentScene.hotspots];
+            const item = newHotspots[hotspotIndex];
+            if (!item || !item.vertices || !item.vertices[vertexIndex] || item.fijo) return prevScenes;
+
             const newVertices = [...item.vertices];
             newVertices[vertexIndex] = [
               parseFloat(intersectionPoint.x.toFixed(2)),
@@ -1597,36 +1644,42 @@ export default function TourEditorPage() {
               ...item,
               vertices: newVertices
             };
-            const updated = {
-              ...scenes,
+            return {
+              ...prevScenes,
               [activeSceneKey]: {
-                ...activeScene,
+                ...currentScene,
                 hotspots: newHotspots
               }
             };
-            setScenes(updated);
-          }
+          });
           return;
         }
 
         // Caso 2: Arrastrar un punto interactivo tradicional
         if (isDraggingHotspot.current && dragIndex.current !== null) {
-          const newHotspots = [...activeScene.hotspots];
-          if (newHotspots[dragIndex.current] && !newHotspots[dragIndex.current].fijo) {
-            newHotspots[dragIndex.current].posicion = [
-              parseFloat(intersectionPoint.x.toFixed(2)),
-              parseFloat(intersectionPoint.y.toFixed(2)),
-              parseFloat(intersectionPoint.z.toFixed(2))
-            ];
-            const updated = {
-              ...scenes,
+          setScenes(prevScenes => {
+            const currentScene = prevScenes[activeSceneKey];
+            if (!currentScene || !currentScene.hotspots) return prevScenes;
+            const newHotspots = [...currentScene.hotspots];
+            const item = newHotspots[dragIndex.current];
+            if (!item || item.fijo) return prevScenes;
+
+            newHotspots[dragIndex.current] = {
+              ...item,
+              posicion: [
+                parseFloat(intersectionPoint.x.toFixed(2)),
+                parseFloat(intersectionPoint.y.toFixed(2)),
+                parseFloat(intersectionPoint.z.toFixed(2))
+              ]
+            };
+            return {
+              ...prevScenes,
               [activeSceneKey]: {
-                ...activeScene,
+                ...currentScene,
                 hotspots: newHotspots
               }
             };
-            setScenes(updated);
-          }
+          });
         }
       }
     }
@@ -2202,7 +2255,7 @@ export default function TourEditorPage() {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-screen h-screen z-[999] bg-slate-950 flex flex-col font-sans select-none text-gray-300">
+    <div className="fixed inset-0 w-full h-full z-[9999] bg-slate-950 flex flex-col font-sans select-none text-gray-300 overflow-hidden">
       
       {/* 1. Header Superior */}
       <div className="bg-slate-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
@@ -2229,14 +2282,15 @@ export default function TourEditorPage() {
         </button>
       </div>
 
-      {/* 2. Cuerpo del Editor (Dividido en 80% Visor / 20% Panel) */}
+      {/* 2. Cuerpo del Editor (Visor Flexible + Panel Lateral Fijo Ergonómico) */}
       <div className="flex-1 flex flex-row overflow-hidden relative">
         
-        {/* 80% Visor de Edición (Izquierda) */}
-        <div className="w-[80%] h-full relative flex flex-col bg-black">
+        {/* Visor de Edición (Ocupa todo el espacio restante disponible) */}
+        <div className="flex-1 min-w-0 h-full relative flex flex-col bg-black">
           
           {/* Espacio del Canvas 3D */}
           <div 
+            ref={canvasContainerRef}
             className="flex-1 w-full relative overflow-hidden"
             onPointerMove={handlePointerMoveContainer}
             onPointerUp={handlePointerUpContainer}
@@ -2286,10 +2340,10 @@ export default function TourEditorPage() {
                         key={index}
                         index={index}
                         vertices={hs.vertices || []}
-                        color={colorFinal}
-                        opacidad={hs.opacidad ?? 0.45}
-                        colorBorde={hs.colorBorde || '#ffffff'}
-                        grosorBorde={hs.grosorBorde || 2}
+                        color={itemTipo === 'linea' ? (hs.color || '#f59e0b') : colorFinal}
+                        opacidad={hs.opacidad ?? 0.8}
+                        colorBorde={itemTipo === 'linea' ? (hs.color || '#f59e0b') : (hs.colorBorde || '#ffffff')}
+                        grosorBorde={hs.grosorBorde || 3}
                         esLinea={itemTipo === 'linea'}
                         isSelected={activeHotspotIndex === index}
                         isEditor={true}
@@ -2364,8 +2418,8 @@ export default function TourEditorPage() {
                               }
                             }
                           }}
-                          className={`group flex items-center justify-center transition-all duration-200 select-none ${
-                            hs.fijo ? 'cursor-not-allowed' : 'cursor-grab active:cursor-grabbing hover:scale-105'
+                          className={`group flex items-center justify-center select-none ${
+                            hs.fijo ? 'cursor-not-allowed' : 'cursor-grab active:cursor-grabbing'
                           }`}
                           style={wrapperStyle}
                         >
@@ -2463,7 +2517,7 @@ export default function TourEditorPage() {
                                 scale: hs.escala ?? 1.0,
                                 transform: isTransform ? `scale(${hs.escala ?? 1.0})` : undefined,
                               }}
-                              className="group relative flex items-center justify-center transition-all duration-300"
+                              className="group relative flex items-center justify-center"
                             >
                               {/* Anillo exterior premium con degrandado */}
                               <div
@@ -2511,7 +2565,7 @@ export default function TourEditorPage() {
                                 scale: hs.escala ?? 1.0,
                                 fontFamily: hs.fuente ? `'${hs.fuente}', sans-serif` : "'Montserrat', sans-serif"
                               }}
-                              className="px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-sm flex items-center justify-center font-bold tracking-wide uppercase w-max select-none pointer-events-auto transition-all duration-300"
+                              className="px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-sm flex items-center justify-center font-bold tracking-wide uppercase w-max select-none pointer-events-auto"
                             >
                               <span>{hs.texto || 'MZ'}</span>
                             </div>
@@ -2698,8 +2752,8 @@ export default function TourEditorPage() {
             </div>
           </div>
 
-          {/* Galería Inferior del Recorrido */}
-          <div className="bg-slate-900 border-t border-white/10 p-4 flex flex-col gap-2.5 z-20 select-none">
+          {/* Galería Inferior del Recorrido (Siempre visible en la parte inferior) */}
+          <div className="bg-slate-900 border-t border-white/10 px-4 py-2.5 flex flex-col gap-2 z-20 select-none shrink-0">
             <div className="flex items-center justify-between px-1">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Recorrido de Imágenes del Proyecto</span>
               <button 
@@ -2714,7 +2768,7 @@ export default function TourEditorPage() {
               </button>
             </div>
             
-            <div className="flex gap-4 overflow-x-auto pb-1 px-1 scrollbar-thin scrollbar-thumb-white/10">
+            <div className="flex gap-3 overflow-x-auto pb-1 px-1 scrollbar-thin scrollbar-thumb-white/10">
               {Object.keys(scenes).map((sceneKey) => {
                 const sc = scenes[sceneKey];
                 const isActive = activeSceneKey === sceneKey;
@@ -2738,7 +2792,20 @@ export default function TourEditorPage() {
                         : 'border-white/10 hover:border-white/30'
                     }`} style={{ backgroundImage: `url(${sc.imagen ? (sc.imagen.startsWith('http') || sc.imagen.startsWith('data:') ? sc.imagen : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sc.imagen}`) : ''})` }}>
 
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                      
+                      {/* Botón directo de eliminar escena en la esquina de la miniatura */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteScene(sceneKey);
+                        }}
+                        className="absolute top-1 right-1 p-1 rounded-md bg-black/70 hover:bg-red-500 text-gray-300 hover:text-white transition-all opacity-0 group-hover:opacity-100 z-10 cursor-pointer shadow-md"
+                        title="Eliminar esta fotografía 360"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
                     </div>
                     <span className={`text-[9px] font-bold truncate max-w-full text-center tracking-wide uppercase ${
                       isActive ? 'text-amber-400' : 'text-gray-400 group-hover:text-white'
@@ -2781,14 +2848,14 @@ export default function TourEditorPage() {
 
         </div>
 
-        {/* 20% Panel Lateral con Navegación por Pestañas (Derecha) */}
-        <div className="w-[20%] min-w-[300px] h-full bg-slate-950 border-l border-white/10 flex flex-col z-20">
+        {/* Panel Lateral con Navegación por Pestañas (Derecha, Ancho fijo y 100% visible) */}
+        <div className="w-[310px] xl:w-[340px] shrink-0 h-full max-h-full bg-slate-950 border-l border-white/10 flex flex-col z-20 shadow-2xl min-h-0">
           
           {/* Navegación por Pestañas */}
-          <div className="flex border-b border-white/10 text-[9.5px] uppercase font-bold tracking-wider select-none shrink-0">
+          <div className="flex border-b border-white/10 text-[9px] uppercase font-bold tracking-wider select-none shrink-0 bg-slate-900/60">
             <button
               onClick={() => setActiveTab('añadir')}
-              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
+              className={`flex-1 py-2.5 px-1 text-center transition-all border-b-2 font-mono ${
                 activeTab === 'añadir'
                   ? 'border-amber-400 text-amber-400 bg-white/5'
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
@@ -2798,17 +2865,17 @@ export default function TourEditorPage() {
             </button>
             <button
               onClick={() => setActiveTab('elementos')}
-              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
+              className={`flex-1 py-2.5 px-1 text-center transition-all border-b-2 font-mono ${
                 activeTab === 'elementos'
                   ? 'border-amber-400 text-amber-400 bg-white/5'
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              ✏️ Elementos
+              ✏️ Puntos
             </button>
             <button
               onClick={() => setActiveTab('filtros')}
-              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
+              className={`flex-1 py-2.5 px-1 text-center transition-all border-b-2 font-mono ${
                 activeTab === 'filtros'
                   ? 'border-amber-400 text-amber-400 bg-white/5'
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
@@ -2818,7 +2885,7 @@ export default function TourEditorPage() {
             </button>
             <button
               onClick={() => setActiveTab('ajustes')}
-              className={`flex-1 py-3 text-center transition-all border-b-2 font-mono ${
+              className={`flex-1 py-2.5 px-1 text-center transition-all border-b-2 font-mono ${
                 activeTab === 'ajustes'
                   ? 'border-amber-400 text-amber-400 bg-white/5'
                   : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'
@@ -2828,8 +2895,11 @@ export default function TourEditorPage() {
             </button>
           </div>
 
-          {/* Contenido de la Pestaña Activa */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-white/10">
+          {/* Contenido de la Pestaña Activa con scroll suave */}
+          <div 
+            className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3.5 space-y-4 scrollbar-thin scrollbar-thumb-amber-500/30 hover:scrollbar-thumb-amber-500/50"
+            onWheel={(e) => e.stopPropagation()}
+          >
             
             {/* Pestaña: FILTROS Y CALIBRACIÓN DE IMAGEN */}
             {activeTab === 'filtros' && (
@@ -3181,60 +3251,60 @@ export default function TourEditorPage() {
 
             {/* Pestaña: AÑADIR */}
             {activeTab === 'añadir' && (
-              <div className="space-y-4 animate-fade-in select-none">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Crear Elemento en Escena</span>
+              <div className="space-y-2.5 animate-fade-in select-none">
+                <span className="text-[9.5px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Crear Elemento en Escena</span>
                 
                 <button
                   onClick={handleAddHotspot}
-                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-amber-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                  className="w-full flex items-center justify-between p-2.5 bg-slate-900/90 hover:bg-slate-800 border border-white/5 hover:border-amber-500/30 rounded-xl transition-all text-left text-xs cursor-pointer group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 group-hover:scale-105 transition-transform">
-                      <Plus className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 group-hover:scale-105 transition-transform">
+                      <Plus className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white">Punto de Conexión</h4>
-                      <p className="text-[10px] text-gray-500 mt-0.5">Enlace a otra fotografía 360°</p>
+                      <h4 className="font-bold text-white text-[11px]">Punto de Conexión</h4>
+                      <p className="text-[9px] text-gray-500">Enlace a otra fotografía 360°</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
                 </button>
 
                 <button
                   onClick={handleAddTextComplement}
-                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-cyan-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                  className="w-full flex items-center justify-between p-2.5 bg-slate-900/90 hover:bg-slate-800 border border-white/5 hover:border-cyan-500/30 rounded-xl transition-all text-left text-xs cursor-pointer group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 group-hover:scale-105 transition-transform">
-                      <Type className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 group-hover:scale-105 transition-transform">
+                      <Type className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white">Nota de Texto</h4>
-                      <p className="text-[10px] text-gray-500 mt-0.5">Anotación o título flotante en 3D</p>
+                      <h4 className="font-bold text-white text-[11px]">Nota de Texto</h4>
+                      <p className="text-[9px] text-gray-500">Anotación o título flotante 3D</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
                 </button>
 
                 <button
                   onClick={handleAddImageComplement}
-                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-green-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                  className="w-full flex items-center justify-between p-2.5 bg-slate-900/90 hover:bg-slate-800 border border-white/5 hover:border-green-500/30 rounded-xl transition-all text-left text-xs cursor-pointer group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-green-500/10 text-green-400 group-hover:scale-105 transition-transform">
-                      <ImageIcon className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-green-500/10 text-green-400 group-hover:scale-105 transition-transform">
+                      <ImageIcon className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white">Tarjeta de Imagen</h4>
-                      <p className="text-[10px] text-gray-500 mt-0.5">Carga una imagen plana descriptiva</p>
+                      <h4 className="font-bold text-white text-[11px]">Tarjeta de Imagen</h4>
+                      <p className="text-[9px] text-gray-500">Carga una imagen plana descriptiva</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
                 </button>
 
                 <button
                   onClick={handleAddLote}
-                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-emerald-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                  className="w-full flex items-center justify-between p-2.5 bg-slate-900/90 hover:bg-slate-800 border border-white/5 hover:border-emerald-500/30 rounded-xl transition-all text-left text-xs cursor-pointer group"
                 >
                   <div className="flex items-center gap-3">
                     <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-105 transition-transform">
@@ -3250,54 +3320,54 @@ export default function TourEditorPage() {
 
                 <button
                   onClick={handleAddManzana}
-                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-cyan-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                  className="w-full flex items-center justify-between p-2.5 bg-slate-900/90 hover:bg-slate-850 border border-white/5 hover:border-cyan-500/30 rounded-xl transition-all text-left text-xs cursor-pointer group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 group-hover:scale-105 transition-transform">
-                      <Layers className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 group-hover:scale-105 transition-transform">
+                      <Layers className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white">Etiqueta de Manzana</h4>
-                      <p className="text-[10px] text-gray-500 mt-0.5">Identificador de manzana con color personalizado</p>
+                      <h4 className="font-bold text-white text-[11px]">Etiqueta Manzana</h4>
+                      <p className="text-[9px] text-gray-500">Color e identificador de manzana</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
                 </button>
 
                 <button
                   onClick={handleAddPolygon}
-                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-emerald-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                  className="w-full flex items-center justify-between p-2.5 bg-slate-900/90 hover:bg-slate-850 border border-white/5 hover:border-emerald-500/30 rounded-xl transition-all text-left text-xs cursor-pointer group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-105 transition-transform">
-                      <Square className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:scale-105 transition-transform">
+                      <Square className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white">Polígono / Lote 3D</h4>
-                      <p className="text-[10px] text-gray-500 mt-0.5">Área delimitada con color, transparencia y esquinas libres</p>
+                      <h4 className="font-bold text-white text-[11px]">Polígono / Lote 3D</h4>
+                      <p className="text-[9px] text-gray-500">Área delimitada y esquinas libres</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
                 </button>
 
                 <button
                   onClick={handleAddLine}
-                  className="w-full flex items-center justify-between p-4 bg-slate-900 hover:bg-slate-850 border border-white/5 hover:border-blue-500/30 rounded-2xl transition-all text-left text-xs cursor-pointer group"
+                  className="w-full flex items-center justify-between p-2.5 bg-slate-900/90 hover:bg-slate-850 border border-white/5 hover:border-blue-500/30 rounded-xl transition-all text-left text-xs cursor-pointer group"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover:scale-105 transition-transform">
-                      <Spline className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 group-hover:scale-105 transition-transform">
+                      <Spline className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white">Línea / Delimitación</h4>
-                      <p className="text-[10px] text-gray-500 mt-0.5">Línea de tramo para calles o límites perimétricos</p>
+                      <h4 className="font-bold text-white text-[11px]">Línea / Tramo</h4>
+                      <p className="text-[9px] text-gray-500">Línea de calles o perímetros</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
                 </button>
 
-                <p className="text-[9px] text-gray-500 italic mt-6 leading-relaxed bg-white/5 p-3 rounded-xl border border-white/5">
-                  💡 Los elementos nuevos se insertarán directamente en el centro de tu campo visual actual. Podrás arrastrarlos libremente por la pantalla para reubicarlos.
+                <p className="text-[8.5px] text-gray-500 italic mt-3 leading-relaxed bg-white/5 p-2 rounded-lg border border-white/5">
+                  💡 Los elementos nuevos se insertarán en el centro de tu vista. Arrástralos para reubicarlos.
                 </p>
               </div>
             )}
