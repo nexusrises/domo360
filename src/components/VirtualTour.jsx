@@ -654,7 +654,8 @@ export default function VirtualTour({
   setIsExpanded: propSetIsExpanded,
   tourId = 'home',
   autoRotate = true,
-  showThumbnails = true
+  showThumbnails = true,
+  conectarSheets = false
 }) {
   const [localIsExpanded, localSetIsExpanded] = useState(false);
   const isExpanded = propIsExpanded !== undefined ? propIsExpanded : localIsExpanded;
@@ -678,16 +679,22 @@ export default function VirtualTour({
   // Pre-cargar la imagen panorámica en segundo plano para evitar bloqueos/flicker de React Three Fiber y pantallas negras
   useEffect(() => {
     if (!displayImage) {
-      setImageLoaded(false);
+      setImageLoaded(true);
       return;
     }
-    setImageLoaded(false);
     const img = new Image();
-    img.src = displayImage;
     const handleLoad = () => setImageLoaded(true);
     const handleError = () => setImageLoaded(true); // Fallback de seguridad
+
     img.addEventListener('load', handleLoad);
     img.addEventListener('error', handleError);
+    img.src = displayImage;
+
+    // Si la imagen ya estaba en la memoria caché del navegador, desbloquear inmediatamente
+    if (img.complete) {
+      setImageLoaded(true);
+    }
+
     return () => {
       img.removeEventListener('load', handleLoad);
       img.removeEventListener('error', handleError);
@@ -796,21 +803,16 @@ export default function VirtualTour({
       // Activar overlay durante la carga para evitar que hotspots aparezcan sin orientar
       setIsTransitioning(true);
 
-      const finishLoad = async (parsed, firstScene) => {
+      const finishLoad = (parsed, firstScene) => {
         // 1. Cargar las escenas locales de inmediato para iniciar la descarga de texturas e interactividad sin demoras
         setScenes(parsed);
         setActiveSceneKey(firstScene);
         // Breve espera para que HeadingController oriente la cámara sin saltos
         setTimeout(() => setIsTransitioning(false), 120);
 
-        // 2. Solo sincronizar con Google Sheets si el tour realmente contiene lotes o polígonos
-        const hasLotes = Object.values(parsed).some(scene => 
-          scene.hotspots && Array.isArray(scene.hotspots) && scene.hotspots.some(hs => hs.tipo === 'lote' || hs.tipo === 'poligono')
-        );
-
-        if (hasLotes) {
-          try {
-            const sheetsLotes = await fetchLotesFromSheets();
+        // 2. Solo sincronizar con Google Sheets si esta propiedad explícitamente lo solicita (conectarSheets === true)
+        if (conectarSheets) {
+          fetchLotesFromSheets().then((sheetsLotes) => {
             if (sheetsLotes && sheetsLotes.length > 0) {
               const targetProject = tourId.toLowerCase().startsWith('inmobiliaria') ? 'inmobiliaria' : tourId.toLowerCase();
               const projectLotes = sheetsLotes.filter(l => 
@@ -818,38 +820,39 @@ export default function VirtualTour({
               );
 
               if (projectLotes.length > 0) {
-                const updatedScenes = JSON.parse(JSON.stringify(parsed));
-                Object.keys(updatedScenes).forEach(sceneKey => {
-                  const scene = updatedScenes[sceneKey];
-                  if (scene.hotspots && Array.isArray(scene.hotspots)) {
-                    scene.hotspots = scene.hotspots.map(hs => {
-                      if ((hs.tipo === 'lote' || hs.tipo === 'poligono') && hs.manzana && hs.lote) {
-                        const match = projectLotes.find(l => 
-                          l.manzana && l.manzana.toString().trim().toUpperCase() === hs.manzana.toString().trim().toUpperCase() &&
-                          l.lote && l.lote.toString().trim() === hs.lote.toString().trim()
-                        );
+                setScenes((prevScenes) => {
+                  const updatedScenes = JSON.parse(JSON.stringify(prevScenes));
+                  Object.keys(updatedScenes).forEach(sceneKey => {
+                    const scene = updatedScenes[sceneKey];
+                    if (scene.hotspots && Array.isArray(scene.hotspots)) {
+                      scene.hotspots = scene.hotspots.map(hs => {
+                        if ((hs.tipo === 'lote' || hs.tipo === 'poligono') && hs.manzana && hs.lote) {
+                          const match = projectLotes.find(l => 
+                            l.manzana && l.manzana.toString().trim().toUpperCase() === hs.manzana.toString().trim().toUpperCase() &&
+                            l.lote && l.lote.toString().trim() === hs.lote.toString().trim()
+                          );
 
-                        if (match) {
-                          return {
-                            ...hs,
-                            estado: match.estado || hs.estado,
-                            precio: match.precio || hs.precio,
-                            area: match.area || hs.area,
-                            color: getColorForEstado(match.estado)
-                          };
+                          if (match) {
+                            return {
+                              ...hs,
+                              estado: match.estado || hs.estado,
+                              precio: match.precio || hs.precio,
+                              area: match.area || hs.area,
+                              color: getColorForEstado(match.estado)
+                            };
+                          }
                         }
-                      }
-                      return hs;
-                    });
-                  }
+                        return hs;
+                      });
+                    }
+                  });
+                  return updatedScenes;
                 });
-
-                setScenes(updatedScenes);
               }
             }
-          } catch (error) {
+          }).catch((error) => {
             console.error("Error al sincronizar con Google Sheets en el visor:", error);
-          }
+          });
         }
       };
 
@@ -1110,6 +1113,20 @@ export default function VirtualTour({
                   estado={hs.estado}
                   precio={hs.precio}
                   area={hs.area}
+                  fontSize={hs.fontSize}
+                  colorTexto={hs.colorTexto}
+                  colorFondo={hs.colorFondo}
+                  fondoTransparente={hs.fondoTransparente}
+                  fuente={hs.fuente}
+                  mostrarTextoSiempre={hs.mostrarTextoSiempre}
+                  negrita={hs.negrita}
+                  cursiva={hs.cursiva}
+                  posicionTipo={hs.posicionTipo}
+                  escalaZoom={hs.escalaZoom}
+                  escala={hs.escala}
+                  sombra={hs.sombra}
+                  rotacion={hs.rotacion}
+                  inclinacion={hs.inclinacion}
                   isEditMode={false}
                   isLinea={hs.tipo === 'linea'}
                 />

@@ -208,6 +208,7 @@ export default function PropiedadDetalle() {
                 setIsExpanded={() => {}}
                 autoRotate={true}
                 showThumbnails={true}
+                conectarSheets={propiedad.conectarSheets}
               />
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900">

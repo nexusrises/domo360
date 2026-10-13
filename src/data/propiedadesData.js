@@ -113,7 +113,8 @@ export const propiedades = [
     area: '160 m²',
     precio: 'S/. 32,000',
     portada: '/tour/fotografiaaereamaravillas2.webp',
-    tourId: 'inmobiliaria7'
+    tourId: 'inmobiliaria7',
+    conectarSheets: true
   },
   {
     id: 5,

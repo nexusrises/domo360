@@ -1607,80 +1607,84 @@ export default function TourEditorPage() {
 
   // Mover el punto interactivo seleccionado por drag
   const handlePointerMoveContainer = (e) => {
-    if (cameraRef.current) {
-      const containerElem = canvasContainerRef.current || e.currentTarget;
-      const rect = containerElem.getBoundingClientRect();
-      if (!rect || rect.width === 0 || rect.height === 0) return;
+    if (!cameraRef.current) return;
+    if (!isDraggingHotspot.current && dragVertexIndex.current.hotspotIndex === null) return;
 
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    // Usar el elemento canvas real para dimensiones y bounding rect exactos
+    const containerElem = canvasContainerRef.current?.querySelector('canvas') || canvasContainerRef.current || e.currentTarget;
+    if (!containerElem) return;
+    const rect = containerElem.getBoundingClientRect();
+    if (!rect || rect.width === 0 || rect.height === 0) return;
 
-      const mouse = new THREE.Vector2(x, y);
-      const raycaster = new THREE.Raycaster();
-      raycaster.setFromCamera(mouse, cameraRef.current);
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
-      const targetSphere = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 20);
-      const intersectionPoint = new THREE.Vector3();
-      raycaster.ray.intersectSphere(targetSphere, intersectionPoint);
+    const mouse = new THREE.Vector2(x, y);
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, cameraRef.current);
 
-      if (intersectionPoint && !isNaN(intersectionPoint.x)) {
-        // Caso 1: Arrastrar un vértice de polígono / línea
-        if (dragVertexIndex.current.hotspotIndex !== null && dragVertexIndex.current.vertexIndex !== null) {
-          const { hotspotIndex, vertexIndex } = dragVertexIndex.current;
-          setScenes(prevScenes => {
-            const currentScene = prevScenes[activeSceneKey];
-            if (!currentScene || !currentScene.hotspots) return prevScenes;
-            const newHotspots = [...currentScene.hotspots];
-            const item = newHotspots[hotspotIndex];
-            if (!item || !item.vertices || !item.vertices[vertexIndex] || item.fijo) return prevScenes;
+    // En panoramas 360, el vector de dirección desde la cámara representa la dirección visual exacta.
+    // Proyectar multiplicando por el radio esférico (20) elimina cualquier distorsión de paralaje por desfase del origen.
+    const dir = raycaster.ray.direction.clone().normalize();
+    const intersectionPoint = dir.multiplyScalar(20);
 
-            const newVertices = [...item.vertices];
-            newVertices[vertexIndex] = [
+    if (intersectionPoint && !isNaN(intersectionPoint.x)) {
+      // Caso 1: Arrastrar un vértice de polígono / línea
+      if (dragVertexIndex.current.hotspotIndex !== null && dragVertexIndex.current.vertexIndex !== null) {
+        const { hotspotIndex, vertexIndex } = dragVertexIndex.current;
+        setScenes(prevScenes => {
+          const currentScene = prevScenes[activeSceneKey];
+          if (!currentScene || !currentScene.hotspots) return prevScenes;
+          const newHotspots = [...currentScene.hotspots];
+          const item = newHotspots[hotspotIndex];
+          if (!item || !item.vertices || !item.vertices[vertexIndex] || item.fijo) return prevScenes;
+
+          const newVertices = [...item.vertices];
+          newVertices[vertexIndex] = [
+            parseFloat(intersectionPoint.x.toFixed(2)),
+            parseFloat(intersectionPoint.y.toFixed(2)),
+            parseFloat(intersectionPoint.z.toFixed(2))
+          ];
+          newHotspots[hotspotIndex] = {
+            ...item,
+            vertices: newVertices
+          };
+          return {
+            ...prevScenes,
+            [activeSceneKey]: {
+              ...currentScene,
+              hotspots: newHotspots
+            }
+          };
+        });
+        return;
+      }
+
+      // Caso 2: Arrastrar un punto interactivo tradicional
+      if (isDraggingHotspot.current && dragIndex.current !== null) {
+        setScenes(prevScenes => {
+          const currentScene = prevScenes[activeSceneKey];
+          if (!currentScene || !currentScene.hotspots) return prevScenes;
+          const newHotspots = [...currentScene.hotspots];
+          const item = newHotspots[dragIndex.current];
+          if (!item || item.fijo) return prevScenes;
+
+          newHotspots[dragIndex.current] = {
+            ...item,
+            posicion: [
               parseFloat(intersectionPoint.x.toFixed(2)),
               parseFloat(intersectionPoint.y.toFixed(2)),
               parseFloat(intersectionPoint.z.toFixed(2))
-            ];
-            newHotspots[hotspotIndex] = {
-              ...item,
-              vertices: newVertices
-            };
-            return {
-              ...prevScenes,
-              [activeSceneKey]: {
-                ...currentScene,
-                hotspots: newHotspots
-              }
-            };
-          });
-          return;
-        }
-
-        // Caso 2: Arrastrar un punto interactivo tradicional
-        if (isDraggingHotspot.current && dragIndex.current !== null) {
-          setScenes(prevScenes => {
-            const currentScene = prevScenes[activeSceneKey];
-            if (!currentScene || !currentScene.hotspots) return prevScenes;
-            const newHotspots = [...currentScene.hotspots];
-            const item = newHotspots[dragIndex.current];
-            if (!item || item.fijo) return prevScenes;
-
-            newHotspots[dragIndex.current] = {
-              ...item,
-              posicion: [
-                parseFloat(intersectionPoint.x.toFixed(2)),
-                parseFloat(intersectionPoint.y.toFixed(2)),
-                parseFloat(intersectionPoint.z.toFixed(2))
-              ]
-            };
-            return {
-              ...prevScenes,
-              [activeSceneKey]: {
-                ...currentScene,
-                hotspots: newHotspots
-              }
-            };
-          });
-        }
+            ]
+          };
+          return {
+            ...prevScenes,
+            [activeSceneKey]: {
+              ...currentScene,
+              hotspots: newHotspots
+            }
+          };
+        });
       }
     }
   };
@@ -2345,6 +2349,21 @@ export default function TourEditorPage() {
                         colorBorde={itemTipo === 'linea' ? (hs.color || '#f59e0b') : (hs.colorBorde || '#ffffff')}
                         grosorBorde={hs.grosorBorde || 3}
                         esLinea={itemTipo === 'linea'}
+                        mostrarEtiqueta={hs.mostrarEtiqueta}
+                        fontSize={hs.fontSize}
+                        colorTexto={hs.colorTexto}
+                        colorFondo={hs.colorFondo}
+                        fondoTransparente={hs.fondoTransparente}
+                        fuente={hs.fuente}
+                        mostrarTextoSiempre={hs.mostrarTextoSiempre}
+                        negrita={hs.negrita}
+                        cursiva={hs.cursiva}
+                        posicionTipo={hs.posicionTipo}
+                        escalaZoom={hs.escalaZoom}
+                        escala={hs.escala}
+                        sombra={hs.sombra}
+                        rotacion={hs.rotacion}
+                        inclinacion={hs.inclinacion}
                         isSelected={activeHotspotIndex === index}
                         isEditor={true}
                         onSelect={(idx) => {
@@ -3523,7 +3542,7 @@ export default function TourEditorPage() {
                               >
                                 Contenido
                               </button>
-                              {(itemTipo === 'hotspot' || itemTipo === 'texto' || itemTipo === 'manzana') && (
+                              {(itemTipo === 'hotspot' || itemTipo === 'texto' || itemTipo === 'manzana' || itemTipo === 'linea') && (
                                 <button
                                   type="button"
                                   onClick={() => setActiveHotspotTab('estilo')}
@@ -4327,19 +4346,19 @@ export default function TourEditorPage() {
                             )}
 
                             {/* SUB-PESTAÑA 2: ESTILO */}
-                            {activeHotspotTab === 'estilo' && (itemTipo === 'hotspot' || itemTipo === 'texto' || itemTipo === 'manzana') && (
+                            {activeHotspotTab === 'estilo' && (itemTipo === 'hotspot' || itemTipo === 'texto' || itemTipo === 'manzana' || itemTipo === 'linea') && (
                               <div className="space-y-2.5 animate-fade-in">
                                 {/* Tamaño de Letra */}
                                 <div className="space-y-1">
                                   <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
                                     <span>Tamaño de Letra</span>
-                                    <span className="font-mono text-white">{hs.fontSize || (itemTipo === 'texto' ? 14 : (itemTipo === 'manzana' ? 13 : 10))}px</span>
+                                    <span className="font-mono text-white">{hs.fontSize || (itemTipo === 'texto' ? 14 : (itemTipo === 'manzana' ? 13 : (itemTipo === 'linea' ? 16 : 10)))}px</span>
                                   </div>
                                   <input 
                                     type="range"
                                     min="10"
-                                    max="40"
-                                    value={hs.fontSize || (itemTipo === 'texto' ? 14 : (itemTipo === 'manzana' ? 13 : 10))}
+                                    max="50"
+                                    value={hs.fontSize || (itemTipo === 'texto' ? 14 : (itemTipo === 'manzana' ? 13 : (itemTipo === 'linea' ? 16 : 10)))}
                                     onChange={(e) => {
                                       const newHotspots = [...activeScene.hotspots];
                                       newHotspots[index].fontSize = parseInt(e.target.value);
@@ -4595,6 +4614,244 @@ export default function TourEditorPage() {
                                         </div>
                                       ))}
                                     </div>
+
+                                    {/* Ajustes 3D de la Etiqueta de la Línea */}
+                                    {itemTipo === 'linea' && (
+                                      <div className="space-y-2.5 pt-3 border-t border-white/10">
+                                        <div className="flex items-center justify-between">
+                                          <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">
+                                            Orientación y Ajuste 3D del Texto
+                                          </span>
+                                        </div>
+
+                                        {/* Orientación (2D, Piso, Muro) */}
+                                        <div className="space-y-1">
+                                          <label className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Orientación Espacial</label>
+                                          <div className="flex gap-1 bg-slate-950 p-1 rounded-xl border border-white/5">
+                                            {['2d', 'piso', 'muro'].map((mode) => (
+                                              <button
+                                                type="button"
+                                                key={mode}
+                                                onClick={() => {
+                                                  const newHotspots = [...activeScene.hotspots];
+                                                  newHotspots[index].posicionTipo = mode;
+                                                  if (mode === 'piso') {
+                                                    newHotspots[index].inclinacion = 0;
+                                                  } else if (mode === 'muro') {
+                                                    newHotspots[index].rotacion = 0;
+                                                  }
+                                                  const updated = {
+                                                    ...scenes,
+                                                    [activeSceneKey]: {
+                                                      ...activeScene,
+                                                      hotspots: newHotspots
+                                                    }
+                                                  };
+                                                  saveToLocal(updated);
+                                                }}
+                                                className={`flex-1 py-1 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                                                  (hs.posicionTipo || '2d') === mode
+                                                    ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
+                                                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                                }`}
+                                              >
+                                                {mode === '2d' ? '2D' : mode === 'piso' ? 'PISO' : 'MURO'}
+                                              </button>
+                                            ))}
+                                          </div>
+                                        </div>
+
+                                        {/* Transparencia */}
+                                        <div className="space-y-1">
+                                          <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                            <span>Transparencia</span>
+                                            <span className="font-mono text-white">{hs.opacidad ?? 1.0}</span>
+                                          </div>
+                                          <input 
+                                            type="range"
+                                            min="0.1"
+                                            max="1.0"
+                                            step="0.1"
+                                            value={hs.opacidad ?? 1.0}
+                                            onChange={(e) => handleOpacityChange(index, e.target.value)}
+                                            className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                          />
+                                        </div>
+
+                                        {/* Escala */}
+                                        <div className="space-y-1">
+                                          <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                            <span>Escala ({Math.round((hs.escala ?? 1.0) * 100)}%)</span>
+                                            <span className="font-mono text-white">{hs.escala ?? 1.0}</span>
+                                          </div>
+                                          <input 
+                                            type="range"
+                                            min="0.2"
+                                            max="5.0"
+                                            step="0.1"
+                                            value={hs.escala ?? 1.0}
+                                            onChange={(e) => handleScaleChange(index, e.target.value)}
+                                            className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                          />
+                                        </div>
+
+                                        {/* Checkboxes Escala al Hacer Zoom y Sombra */}
+                                        <div className="grid grid-cols-2 gap-2 pt-1 select-none">
+                                          <label className="flex items-center gap-2 cursor-pointer text-[9px] font-bold uppercase tracking-wider text-gray-400">
+                                            <input
+                                              type="checkbox"
+                                              checked={hs.escalaZoom !== false}
+                                              onChange={(e) => {
+                                                const newHotspots = [...activeScene.hotspots];
+                                                newHotspots[index].escalaZoom = e.target.checked;
+                                                const updated = {
+                                                  ...scenes,
+                                                  [activeSceneKey]: {
+                                                    ...activeScene,
+                                                    hotspots: newHotspots
+                                                  }
+                                                };
+                                                saveToLocal(updated);
+                                              }}
+                                              className="w-3.5 h-3.5 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                            />
+                                            <span>Escala Zoom</span>
+                                          </label>
+
+                                          <label className="flex items-center gap-2 cursor-pointer text-[9px] font-bold uppercase tracking-wider text-gray-400">
+                                            <input
+                                              type="checkbox"
+                                              checked={hs.sombra ?? true}
+                                              onChange={(e) => {
+                                                const newHotspots = [...activeScene.hotspots];
+                                                newHotspots[index].sombra = e.target.checked;
+                                                const updated = {
+                                                  ...scenes,
+                                                  [activeSceneKey]: {
+                                                    ...activeScene,
+                                                    hotspots: newHotspots
+                                                  }
+                                                };
+                                                saveToLocal(updated);
+                                              }}
+                                              className="w-3.5 h-3.5 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                            />
+                                            <span>Sombra</span>
+                                          </label>
+                                        </div>
+
+                                        {/* Inclinación en el Espacio */}
+                                        <div className="space-y-2 pt-2 border-t border-white/5">
+                                          <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block">Inclinación en el Espacio</span>
+                                          
+                                          {/* Inclinación Eje X */}
+                                          <div className={`space-y-1 ${(hs.posicionTipo === 'muro') ? 'opacity-40 pointer-events-none' : ''}`}>
+                                            <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                              <span>Inclinación Eje X</span>
+                                              <div className="flex items-center gap-1.5">
+                                                <input 
+                                                  type="number"
+                                                  min="-180"
+                                                  max="180"
+                                                  disabled={hs.posicionTipo === 'muro'}
+                                                  value={hs.posicionTipo === 'muro' ? 0 : (hs.rotacion ?? 0)}
+                                                  onChange={(e) => {
+                                                    let val = parseInt(e.target.value);
+                                                    if (isNaN(val)) val = 0;
+                                                    val = Math.max(-180, Math.min(180, val));
+                                                    const newHotspots = [...activeScene.hotspots];
+                                                    newHotspots[index].rotacion = val;
+                                                    const updated = {
+                                                      ...scenes,
+                                                      [activeSceneKey]: {
+                                                        ...activeScene,
+                                                        hotspots: newHotspots
+                                                      }
+                                                    };
+                                                    saveToLocal(updated);
+                                                  }}
+                                                  className="w-14 bg-slate-950 border border-white/10 rounded px-1.5 py-0.5 text-center text-white font-mono text-[9px] outline-none focus:border-amber-400"
+                                                />
+                                                <span>°</span>
+                                              </div>
+                                            </div>
+                                            <input 
+                                              type="range"
+                                              min="-180"
+                                              max="180"
+                                              disabled={hs.posicionTipo === 'muro'}
+                                              value={hs.posicionTipo === 'muro' ? 0 : (hs.rotacion ?? 0)}
+                                              onChange={(e) => {
+                                                const newHotspots = [...activeScene.hotspots];
+                                                newHotspots[index].rotacion = parseInt(e.target.value);
+                                                const updated = {
+                                                  ...scenes,
+                                                  [activeSceneKey]: {
+                                                    ...activeScene,
+                                                    hotspots: newHotspots
+                                                  }
+                                                };
+                                                saveToLocal(updated);
+                                              }}
+                                              className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                            />
+                                          </div>
+
+                                          {/* Inclinación Eje Y (Giro) */}
+                                          <div className={`space-y-1 ${(hs.posicionTipo === 'piso') ? 'opacity-40 pointer-events-none' : ''}`}>
+                                            <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                              <span>Inclinación Eje Y</span>
+                                              <div className="flex items-center gap-1.5">
+                                                <input 
+                                                  type="number"
+                                                  min="-180"
+                                                  max="180"
+                                                  disabled={hs.posicionTipo === 'piso'}
+                                                  value={hs.posicionTipo === 'piso' ? 0 : (hs.inclinacion ?? 0)}
+                                                  onChange={(e) => {
+                                                    let val = parseInt(e.target.value);
+                                                    if (isNaN(val)) val = 0;
+                                                    val = Math.max(-180, Math.min(180, val));
+                                                    const newHotspots = [...activeScene.hotspots];
+                                                    newHotspots[index].inclinacion = val;
+                                                    const updated = {
+                                                      ...scenes,
+                                                      [activeSceneKey]: {
+                                                        ...activeScene,
+                                                        hotspots: newHotspots
+                                                      }
+                                                    };
+                                                    saveToLocal(updated);
+                                                  }}
+                                                  className="w-14 bg-slate-950 border border-white/10 rounded px-1.5 py-0.5 text-center text-white font-mono text-[9px] outline-none focus:border-amber-400"
+                                                />
+                                                <span>°</span>
+                                              </div>
+                                            </div>
+                                            <input 
+                                              type="range"
+                                              min="-180"
+                                              max="180"
+                                              disabled={hs.posicionTipo === 'piso'}
+                                              value={hs.posicionTipo === 'piso' ? 0 : (hs.inclinacion ?? 0)}
+                                              onChange={(e) => {
+                                                const newHotspots = [...activeScene.hotspots];
+                                                newHotspots[index].inclinacion = parseInt(e.target.value);
+                                                const updated = {
+                                                  ...scenes,
+                                                  [activeSceneKey]: {
+                                                    ...activeScene,
+                                                    hotspots: newHotspots
+                                                  }
+                                                };
+                                                saveToLocal(updated);
+                                              }}
+                                              className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                            />
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )}
                                   </div>
                                 ) : (
                                   <>

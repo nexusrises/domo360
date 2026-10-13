@@ -81,6 +81,21 @@ export default function Polygon3D({
   isLinea = false,
   isSelected = false,
   isEditor = false,
+  mostrarEtiqueta = true,
+  fontSize,
+  colorTexto,
+  colorFondo,
+  fondoTransparente,
+  fuente,
+  mostrarTextoSiempre = true,
+  negrita,
+  cursiva,
+  posicionTipo = '2d',
+  escalaZoom = false,
+  escala = 1.0,
+  sombra = true,
+  rotacion = 0,
+  inclinacion = 0,
   onSelect,
   onVertexDragStart,
   datosLote = {},
@@ -156,6 +171,86 @@ export default function Polygon3D({
   const borderColor = lineaActiva 
     ? activeLineColor 
     : (isSelected ? '#fbbf24' : (hovered ? '#ffffff' : colorBorde));
+
+  // Renderizar la etiqueta con orientación 3D y estilos cuando aplica
+  const renderLabel = () => {
+    const hasLabelText = infoLote?.lote || infoLote?.manzana || infoLote?.texto;
+    if (!hasLabelText || mostrarEtiqueta === false) return null;
+
+    if (lineaActiva) {
+      const isTransform = posicionTipo === 'piso' || posicionTipo === 'muro';
+      const labelText = infoLote?.texto || 'Tramo de calle';
+      
+      const labelStyle = {
+        color: colorTexto || '#ffffff',
+        backgroundColor: fondoTransparente ? 'transparent' : (colorFondo || '#f59e0b'),
+        boxShadow: sombra ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
+        fontSize: `${fontSize || 16}px`,
+        fontWeight: negrita !== false ? 'bold' : 'normal',
+        fontStyle: cursiva ? 'italic' : 'normal',
+        fontFamily: fuente ? `'${fuente}', sans-serif` : "'Montserrat', sans-serif",
+        opacity: opacidad ?? 1.0,
+        transform: isTransform ? undefined : `scale(${escala ?? 1.0}) rotateZ(${inclinacion ?? 0}deg) rotateX(${rotacion ?? 0}deg)`,
+        whiteSpace: 'pre-line'
+      };
+
+      return (
+        <group position={centerPos}>
+          <Html 
+            center 
+            distanceFactor={20} 
+            zIndexRange={[45, 0]}
+            transform={isTransform}
+          >
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onSelect) onSelect(index);
+              }}
+              style={labelStyle}
+              className={`px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-md text-center pointer-events-auto cursor-pointer select-none whitespace-nowrap shadow-xl leading-tight ${
+                isSelected ? 'ring-2 ring-amber-400' : ''
+              }`}
+            >
+              <span>{labelText}</span>
+            </div>
+          </Html>
+        </group>
+      );
+    }
+
+    // Polígono clásico (Lote)
+    return (
+      <group position={centerPos}>
+        <Html center distanceFactor={22} zIndexRange={[40, 0]}>
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onSelect) onSelect(index);
+            }}
+            className={`px-2 py-1 rounded-xl backdrop-blur-md border text-center transition-all duration-200 pointer-events-auto cursor-pointer select-none whitespace-nowrap shadow-xl ${
+              isSelected
+                ? 'bg-amber-500 text-slate-950 border-amber-300 scale-110 font-bold'
+                : 'bg-slate-900/85 text-white border-white/20 hover:border-amber-400/50'
+            }`}
+          >
+            {infoLote?.manzana && infoLote?.lote ? (
+              <div className="text-[10px] font-bold leading-tight">
+                <span>Mz {infoLote.manzana} - Lte {infoLote.lote}</span>
+                {infoLote.estado && (
+                  <span className="block text-[8px] font-medium mt-0.5" style={{ color: isSelected ? '#000000' : (infoLote.color || '#22c55e') }}>
+                    ● {infoLote.estado}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <span className="text-[10px] font-semibold">{infoLote?.texto || `Polígono #${index + 1}`}</span>
+            )}
+          </div>
+        </Html>
+      </group>
+    );
+  };
 
   return (
     <group>
@@ -233,36 +328,7 @@ export default function Polygon3D({
       ))}
 
       {/* 4. Etiqueta / Tooltip informativo en el Centroide */}
-      {(infoLote?.lote || infoLote?.manzana || infoLote?.texto) && (
-        <group position={centerPos}>
-          <Html center distanceFactor={22} zIndexRange={[40, 0]}>
-            <div
-              onClick={(e) => {
-                e.stopPropagation();
-                if (onSelect) onSelect(index);
-              }}
-              className={`px-2 py-1 rounded-xl backdrop-blur-md border text-center transition-all duration-200 pointer-events-auto cursor-pointer select-none whitespace-nowrap shadow-xl ${
-                isSelected
-                  ? 'bg-amber-500 text-slate-950 border-amber-300 scale-110 font-bold'
-                  : 'bg-slate-900/85 text-white border-white/20 hover:border-amber-400/50'
-              }`}
-            >
-              {infoLote?.manzana && infoLote?.lote ? (
-                <div className="text-[10px] font-bold leading-tight">
-                  <span>Mz {infoLote.manzana} - Lte {infoLote.lote}</span>
-                  {infoLote.estado && (
-                    <span className="block text-[8px] font-medium mt-0.5" style={{ color: isSelected ? '#000000' : (infoLote.color || '#22c55e') }}>
-                      ● {infoLote.estado}
-                    </span>
-                  )}
-                </div>
-              ) : (
-                <span className="text-[10px] font-semibold">{infoLote?.texto || `Polígono #${index + 1}`}</span>
-              )}
-            </div>
-          </Html>
-        </group>
-      )}
+      {renderLabel()}
     </group>
   );
 }
