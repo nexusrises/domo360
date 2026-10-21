@@ -30,28 +30,11 @@ export default function WhatsAppBubble() {
       };
     }
 
-    // 2. Sub-página: Compra con Seguridad
-    if (path.includes('compra-seguro')) {
-      return {
-        messages: [
-          "¿Tienes dudas legales sobre una propiedad que quieres comprar en Juliaca? Consulta gratis con nuestro abogado ⚖️🛡️",
-          "Evita estafas, dobles ventas o hipotecas ocultas. Auditamos el título de tu lote en SUNARP antes de que firmes 📑✅",
-          "¿Quieres verificar si un terreno tiene partida registrada y plano independizado? Te ayudamos en minutos por WhatsApp 📲",
-          "Protege el dinero de tu familia. Te asesoramos paso a paso en el saneamiento y compra legal de inmuebles en Puno 🏡🛡️"
-        ],
-        whatsappTexts: [
-          "Hola Angel, estoy en la sección Compra Seguro y me gustaría una consulta gratuita con su abogado sobre el estado legal de una propiedad.",
-          "Hola Angel, deseo auditar la partida registral y documentos de un terreno antes de realizar la compra.",
-          "Hola Angel, necesito asesoría legal para verificar si un lote cuenta con plano independizado y título limpio en SUNARP.",
-          "Hola Angel, me gustaría agendar una asesoría de compra segura para revisar la documentación de una vivienda."
-        ]
-      };
-    }
 
     // 3. Sub-página: Detalle de Propiedad Específica
     const pathParts = path.split('/').filter(Boolean);
-    const isDetail = (pathParts.length >= 2 && pathParts[0] === 'domo360' && !['vende-tu-propiedad', 'compra-seguro', 'contacto'].includes(pathParts[1])) || 
-                     (pathParts.length === 1 && !['domo360', 'vende-tu-propiedad', 'compra-seguro', 'contacto'].includes(pathParts[0]));
+    const isDetail = (pathParts.length >= 2 && pathParts[0] === 'domo360' && !['vende-tu-propiedad', 'contacto'].includes(pathParts[1])) || 
+                     (pathParts.length === 1 && !['domo360', 'vende-tu-propiedad', 'contacto'].includes(pathParts[0]));
     
     if (isDetail) {
       return {

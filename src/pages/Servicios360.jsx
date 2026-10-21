@@ -149,7 +149,7 @@ export default function Servicios360() {
     <div className="animate-fade-in text-slate-900 font-sans pb-20">
       
       {/* 1. HERO SECTION (ALTO IMPACTO Y SEO PRINCIPAL) */}
-      <section className="relative pt-32 pb-16 md:pt-36 md:pb-24 px-6 overflow-hidden flex flex-col items-center text-center">
+      <section className="relative pt-32 pb-16 md:pt-36 md:pb-24 px-3.5 sm:px-6 overflow-hidden flex flex-col items-center text-center">
         {/* Glow de fondo: azul marino y ámbar suave técnico */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-r from-sky-400/15 via-cyan-400/10 to-amber-400/10 rounded-full blur-[90px] pointer-events-none z-0"></div>
 
@@ -197,8 +197,8 @@ export default function Servicios360() {
       </section>
 
       {/* 2. MÉTRICAS COMERCIALES (POR QUÉ FUNCIONA) */}
-      <section className="max-w-6xl mx-auto px-6 mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm">
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-8 shadow-sm">
           <div className="flex flex-col text-left">
             <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-[#008b99] flex items-center justify-center mb-3">
               <TrendingUp className="w-5 h-5" />
@@ -235,7 +235,7 @@ export default function Servicios360() {
       </section>
 
       {/* 2.5 SECCIÓN RESULTADOS REALES (ESTILO JEBN HUNTER) */}
-      <section className="max-w-6xl mx-auto px-6 mb-20">
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6 mb-20">
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs uppercase font-bold tracking-widest text-[#008b99] bg-cyan-50 border border-cyan-200/80 px-3.5 py-1 rounded-full font-display inline-block mb-3">
             • RESULTADOS REALES & APLICACIÓN EN CAMPO
@@ -331,7 +331,7 @@ export default function Servicios360() {
       </section>
 
       {/* 3. LOS 3 PILARES DE SERVICIO PRINCIPALES */}
-      <section id="servicios" className="max-w-6xl mx-auto px-6 mb-20 scroll-mt-28">
+      <section id="servicios" className="max-w-6xl mx-auto px-3.5 sm:px-6 mb-20 scroll-mt-28">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-[#008b99] text-xs font-black uppercase tracking-widest block mb-2 font-display">
             NUESTRO CATÁLOGO DE SERVICIOS
@@ -457,8 +457,8 @@ export default function Servicios360() {
       </section>
 
       {/* 4. SECCIÓN ESPECIAL: EL SERVICIO ARQUITECTÓNICO (FONDO BLANCO ELEGANTE Y ARMONIOSO) */}
-      <section className="max-w-6xl mx-auto px-6 mb-20">
-        <div className="bg-white text-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-xl relative overflow-hidden text-left">
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6 mb-20">
+        <div className="bg-white text-slate-900 rounded-3xl p-5 sm:p-12 border border-slate-200/90 shadow-xl relative overflow-hidden text-left">
           {/* Sutil halo decorativo en tono cian/esmeralda */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-cyan-100/50 via-emerald-50/40 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
 
@@ -512,7 +512,7 @@ export default function Servicios360() {
       </section>
 
       {/* 5. ¿A QUIÉN AYUDAMOS? (SECTORES) */}
-      <section className="max-w-6xl mx-auto px-6 mb-20 text-center">
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6 mb-20 text-center">
         <span className="text-[#008b99] text-xs font-black uppercase tracking-widest block mb-2 font-display">
           SECTORES QUE IMPULSAMOS
         </span>
@@ -539,8 +539,8 @@ export default function Servicios360() {
       </section>
 
       {/* 6. PROCESO DE TRABAJO (PASO A PASO) */}
-      <section className="max-w-6xl mx-auto px-6 mb-20">
-        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-12 text-center">
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6 mb-20">
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-12 text-center">
           <span className="text-xs uppercase font-bold tracking-widest text-[#008b99] font-display block mb-2">
             PASO A PASO TRANSPARENTE
           </span>
@@ -561,7 +561,7 @@ export default function Servicios360() {
       </section>
 
       {/* 6.5 PREGUNTAS FRECUENTES CLAVE (PARA EMPRESAS, INMOBILIARIAS Y PROFESIONALES) */}
-      <section className="max-w-6xl mx-auto px-6 mb-20">
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6 mb-20">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-[#008b99] text-xs font-black uppercase tracking-widest block mb-2 font-display">
             RESOLVEMOS TUS DUDAS ANTES DE EMPEZAR
@@ -702,8 +702,8 @@ export default function Servicios360() {
       </section>
 
       {/* 7. BANNER FINAL DE ACCIÓN (ESTÉTICA BLANCA Y ARMONIOSA CON EL SITIO) */}
-      <section className="max-w-5xl mx-auto px-6 text-center">
-        <div className="p-10 md:p-14 rounded-3xl bg-white text-slate-900 border border-slate-200/90 shadow-xl relative overflow-hidden text-left">
+      <section className="max-w-5xl mx-auto px-3.5 sm:px-6 text-center">
+        <div className="p-5 sm:p-10 md:p-14 rounded-3xl bg-white text-slate-900 border border-slate-200/90 shadow-xl relative overflow-hidden text-left">
           {/* Halo sutil */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-100/40 rounded-full blur-[90px] pointer-events-none"></div>
 

@@ -1,4 +1,6 @@
 User-agent: *
+Disallow: /editor-360-privado/
+Disallow: /editor-360-privado
 Allow: /
 
 Sitemap: https://nexusdomo360.com/sitemap.xml

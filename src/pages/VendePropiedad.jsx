@@ -134,7 +134,7 @@ export default function VendePropiedad() {
     <div className="animate-fade-in font-sans pb-16">
       
       {/* 1. HERO SECTION */}
-      <section className="container mx-auto px-4 sm:px-6 pt-28 pb-14 relative z-10 text-center">
+      <section className="container mx-auto px-3 sm:px-6 pt-28 pb-14 relative z-10 text-center">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[280px] bg-gradient-to-r from-amber-500/10 via-orange-500/15 to-sky-500/10 rounded-full blur-[90px] pointer-events-none z-0"></div>
         
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black tracking-widest uppercase mb-4 bg-orange-500/10 text-[#ea580c] border border-orange-500/25 relative z-10 shadow-sm font-display">
@@ -151,7 +151,7 @@ export default function VendePropiedad() {
         </p>
 
         {/* Formulario Rápido Híbrido de 2 Pasos (Lead Magnet) */}
-        <div className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl p-5 sm:p-7 shadow-xl relative z-10 text-left">
+        <div className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl p-4 sm:p-7 shadow-xl relative z-10 text-left">
           <div className="mb-4">
             <span className="text-[10px] font-black uppercase tracking-widest text-[#ea580c] block mb-1">
               Evaluación Gratuita de tu Predio
@@ -236,7 +236,7 @@ export default function VendePropiedad() {
       </section>
 
       {/* 2. EL CONTRASTE: LA REALIDAD DEL MERCADO LOCAL */}
-      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
         <div className="max-w-4xl mx-auto text-center mb-10">
           <span className="text-xs uppercase text-[#ea580c] font-black tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
             EL PROBLEMA EN JULIACA Y PUNO
@@ -333,7 +333,7 @@ export default function VendePropiedad() {
       </section>
 
       {/* 3. PROCESO DE 4 FASES */}
-      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <span className="text-xs uppercase text-[#ea580c] font-black tracking-widest bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
             TRANSPARENCIA TOTAL
@@ -436,8 +436,8 @@ export default function VendePropiedad() {
       </section>
 
       {/* 4. ENFOQUE REGIONAL: EL CORREDOR ECONÓMICO Y PUERTO SECO */}
-      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
-        <div className="max-w-5xl mx-auto bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden text-left">
+      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+        <div className="max-w-5xl mx-auto bg-white border border-slate-200/90 rounded-3xl p-4 sm:p-10 shadow-xl relative overflow-hidden text-left">
           <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"></div>
 
           <div className="relative z-10 space-y-6">
@@ -496,7 +496,7 @@ export default function VendePropiedad() {
       </section>
 
       {/* 5. PREGUNTAS FRECUENTES (FAQs) */}
-      <section className="container mx-auto px-4 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
+      <section className="container mx-auto px-3 sm:px-6 py-12 relative z-10 border-t border-slate-200/80">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <HelpCircle className="w-8 h-8 text-[#ea580c] mx-auto mb-3" />
           <h2 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight font-display">
@@ -554,7 +554,7 @@ export default function VendePropiedad() {
       </section>
 
       {/* 6. BANNER FINAL DE ACCIÓN */}
-      <section className="container mx-auto px-4 sm:px-6 pt-6 pb-12 relative z-10">
+      <section className="container mx-auto px-3 sm:px-6 pt-6 pb-12 relative z-10">
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-orange-600 to-[#ea580c] rounded-3xl p-7 sm:p-10 text-white text-center shadow-xl">
           <h3 className="text-2xl sm:text-3xl font-black font-display mb-3">
             ¿Listo para vender tu terreno o casa con respaldo profesional?

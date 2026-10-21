@@ -133,7 +133,7 @@ export default function PropiedadDetalle() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-16 px-4 sm:px-6 relative z-10 animate-fade-in">
+    <div className="min-h-screen pt-24 pb-16 px-3 sm:px-6 relative z-10 animate-fade-in">
       <div className="max-w-7xl mx-auto flex flex-col gap-6">
         
         {/* Barra Superior con botón Volver, Compartir y Etiqueta en escalón */}

@@ -224,7 +224,7 @@ export default function Contacto() {
   return (
     <div className="animate-fade-in font-sans pb-16 pt-24 md:pt-28">
       {/* 1. HEADER INTEGRADO COMPACTO CON SELECTOR DE PESTAÑAS */}
-      <section className="container mx-auto px-6 mb-8 text-center relative z-10">
+      <section className="container mx-auto px-3 sm:px-6 mb-8 text-center relative z-10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[150px] bg-sky-400/10 rounded-full blur-[60px] pointer-events-none z-0"></div>
         
         {activeTab === 'cotizador' ? (
@@ -285,11 +285,11 @@ export default function Contacto() {
       </section>
 
       {/* 2. FORMULARIO Y CANALES DE CONTACTO */}
-      <section className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <section className="container mx-auto px-3 sm:px-6 relative z-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
           {/* COLUMNA IZQUIERDA: FORMULARIO SEGÚN PESTAÑA (lg:col-span-7) */}
-          <div className="lg:col-span-7 border border-slate-200/90 rounded-3xl p-6 sm:p-8 bg-white backdrop-blur-md relative shadow-xl">
+          <div className="lg:col-span-7 border border-slate-200/90 rounded-3xl p-4 sm:p-8 bg-white backdrop-blur-md relative shadow-xl">
             {activeTab === 'cotizador' ? (
               /* ============================================================== */
               /* PESTAÑA 1: COTIZADOR INTERACTIVO 360 & WEB                     */
@@ -739,7 +739,7 @@ export default function Contacto() {
           <div className="lg:col-span-5 flex flex-col gap-6 text-left">
             
             {/* Canales Directos */}
-            <div className="border border-slate-200/90 rounded-3xl p-6 flex flex-col gap-4 bg-white shadow-md">
+            <div className="border border-slate-200/90 rounded-3xl p-4 sm:p-6 flex flex-col gap-4 bg-white shadow-md">
               <h3 className="text-slate-900 font-bold text-base mb-2 uppercase tracking-wider font-display">Canales de Atención</h3>
               
               <a 
@@ -782,7 +782,7 @@ export default function Contacto() {
             </div>
 
             {/* Sede Central (SEO Local en Juliaca, Perú) */}
-            <div className="border border-slate-200/90 rounded-3xl p-6 bg-white shadow-md relative overflow-hidden flex flex-col justify-between">
+            <div className="border border-slate-200/90 rounded-3xl p-4 sm:p-6 bg-white shadow-md relative overflow-hidden flex flex-col justify-between">
               <div className="absolute top-[-50px] left-[-50px] w-64 h-64 bg-sky-400/10 rounded-full blur-[50px] pointer-events-none"></div>
               
               <div className="mb-4">

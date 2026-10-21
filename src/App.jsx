@@ -10,7 +10,6 @@ import Bio from './pages/Bio';
 // Carga perezosa (Lazy loading) para que la Bio cargue en milisegundos sin arrastrar el peso de Three.js y visores
 const Home = lazy(() => import('./pages/Home'));
 const Propiedades = lazy(() => import('./pages/Propiedades'));
-const CompraSeguro = lazy(() => import('./pages/CompraSeguro'));
 const Servicios360 = lazy(() => import('./pages/Servicios360'));
 const VendePropiedad = lazy(() => import('./pages/VendePropiedad'));
 const Contacto = lazy(() => import('./pages/Contacto'));
@@ -121,7 +120,6 @@ function AppContent() {
             <Route path="/servicios-360" element={<Servicios360 />} />
             <Route path="/servicios" element={<Servicios360 />} />
             <Route path="/vende-tu-propiedad" element={<VendePropiedad />} />
-            <Route path="/compra-seguro" element={<CompraSeguro />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/:slug" element={<PropiedadDetalle />} />
 
@@ -129,7 +127,6 @@ function AppContent() {
             <Route path="/domo360" element={<Home />} />
             <Route path="/domo360/servicios-360" element={<Servicios360 />} />
             <Route path="/domo360/vende-tu-propiedad" element={<VendePropiedad />} />
-            <Route path="/domo360/compra-seguro" element={<CompraSeguro />} />
             <Route path="/domo360/contacto" element={<Contacto />} />
             <Route path="/domo360/:slug" element={<PropiedadDetalle />} />
             {isDev && <Route path="/editor-360-privado/:paramTourId?" element={<TourEditorPage />} />}

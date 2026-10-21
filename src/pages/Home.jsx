@@ -156,7 +156,7 @@ export default function Home() {
     <div className="relative min-h-screen transition-colors duration-500 overflow-x-hidden bg-transparent text-slate-900">
       
       {/* 1. SECCIÓN HÉROE PRINCIPAL DE IMPACTO */}
-      <header className="relative w-full pt-32 pb-12 md:pt-40 md:pb-16 px-6 overflow-hidden flex flex-col justify-center items-center">
+      <header className="relative w-full pt-32 pb-12 md:pt-40 md:pb-16 px-3.5 sm:px-6 overflow-hidden flex flex-col justify-center items-center">
         {/* Glows ambientales sutiles */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-400/10 rounded-full blur-[130px] pointer-events-none z-0"></div>
         <div className="absolute bottom-1/4 right-1/4 w-[420px] h-[420px] bg-sky-400/10 rounded-full blur-[110px] pointer-events-none z-0"></div>
@@ -262,7 +262,7 @@ export default function Home() {
       </header>
 
       {/* 2. CARRUSEL DE PROPIEDADES DESTACADAS DE LA SEMANA */}
-      <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-8 relative z-10">
+      <section className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
             <span className="text-[#008b99] text-xs font-black tracking-widest uppercase block mb-1 font-display">
@@ -313,9 +313,10 @@ export default function Home() {
                   : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${prop.portada}`;
 
                 return (
-                  <div
+                  <Link
                     key={prop.id || idx}
-                    className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
+                    to="/propiedades"
+                    className={`absolute inset-0 w-full h-full block group cursor-pointer transition-opacity duration-500 ease-in-out ${
                       isActivo ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
                     }`}
                   >
@@ -324,7 +325,7 @@ export default function Home() {
                       alt={prop.titulo}
                       loading="eager"
                       decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none"></div>
 
@@ -349,13 +350,13 @@ export default function Home() {
                         {idx + 1} de {propiedadesDestacadas.length} destacadas
                       </span>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
 
             {/* Información Detallada de la Propiedad Destacada */}
-            <div className="p-6 md:p-8 lg:col-span-5 flex flex-col justify-between text-left transition-all duration-300">
+            <div className="p-4 sm:p-6 md:p-8 lg:col-span-5 flex flex-col justify-between text-left transition-all duration-300">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-widest mb-1 block text-[#008b99]">
                   OPORTUNIDAD EXCLUSIVA
@@ -396,8 +397,8 @@ export default function Home() {
 
                 <div className="w-full flex items-center justify-between gap-2">
                   <Link
-                    to={`/${propiedadActual.slug}`}
-                    className="flex-grow inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-[#ea580c] hover:bg-[#c2410c] transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95"
+                    to="/propiedades"
+                    className="flex-grow inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs font-black uppercase tracking-wider text-white bg-[#ea580c] hover:bg-[#c2410c] transition-all duration-300 shadow-md shadow-orange-950/20 active:scale-95 cursor-pointer"
                   >
                     Ver Tour 360° y Detalles
                     <ArrowRight className="w-4 h-4" />
@@ -439,8 +440,8 @@ export default function Home() {
       </section>
 
       {/* 3. SECCIÓN PROTAGONISTA: TOURS 360° PARA LOTES Y TERRENOS CON DOMO 360° */}
-      <section id="tours-360-lotes" className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 relative z-10">
-        <div className="rounded-3xl p-8 md:p-12 border shadow-xl relative overflow-hidden bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06)] text-slate-900">
+      <section id="tours-360-lotes" className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-12 relative z-10">
+        <div className="rounded-3xl p-4 sm:p-8 md:p-12 border shadow-xl relative overflow-hidden bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06)] text-slate-900">
           {/* Luces de ambientación sutiles */}
           <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-cyan-400/10 rounded-full blur-[120px] pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-emerald-400/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -531,7 +532,7 @@ export default function Home() {
       </section>
 
       {/* 4. SOLUCIONES INMERSIVAS POR INDUSTRIA (SEGMENTACIÓN POR 4 INDUSTRIAS) */}
-      <section id="soluciones-industrias" className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 relative z-10">
+      <section id="soluciones-industrias" className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-12 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black tracking-widest uppercase mb-2 bg-orange-50 text-[#ea580c] border border-orange-200">
             <Building2 className="w-3.5 h-3.5" />
@@ -681,8 +682,8 @@ export default function Home() {
       </section>
 
       {/* 5. LOS 3 GRANDES BENEFICIOS DE LA EMPRESA (Presentados con Orgullo) */}
-      <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 relative z-10">
-        <div className="rounded-3xl p-8 md:p-12 border shadow-xl backdrop-blur-xl bg-white/80 border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.05)]">
+      <section className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-12 relative z-10">
+        <div className="rounded-3xl p-4 sm:p-8 md:p-12 border shadow-xl backdrop-blur-xl bg-white/80 border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.05)]">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-[#008b99] text-xs font-black tracking-widest uppercase block mb-2 font-display">
               TECNOLOGÍA Y CONFIANZA INMOBILIARIA
@@ -754,8 +755,8 @@ export default function Home() {
       </section>
 
       {/* 6. BANNER DE CAPTACIÓN DUAL: PROPIETARIOS Y EMPRESAS */}
-      <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-20 relative z-10">
-        <div className="rounded-3xl p-8 md:p-10 border shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 text-left bg-gradient-to-br from-white via-cyan-50/30 to-white text-slate-900 border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.05)]">
+      <section className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-6 pb-20 relative z-10">
+        <div className="rounded-3xl p-4 sm:p-8 md:p-10 border shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 text-left bg-gradient-to-br from-white via-cyan-50/30 to-white text-slate-900 border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.05)]">
           <div className="max-w-xl">
             <span className="text-[#008b99] text-xs font-black tracking-widest uppercase block mb-1">
               ¿LISTO PARA DIGITALIZAR TUS PROPIEDADES O COMPRAR?

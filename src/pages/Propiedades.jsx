@@ -124,7 +124,7 @@ export default function Propiedades() {
     <div className="relative min-h-screen text-slate-900 flex flex-col items-center overflow-x-hidden bg-transparent">
       
       {/* Header Catálogo */}
-      <header className="relative w-full pt-32 pb-4 md:pt-36 md:pb-6 px-6 overflow-hidden flex flex-col justify-center items-center">
+      <header className="relative w-full pt-32 pb-4 md:pt-36 md:pb-6 px-3.5 sm:px-6 overflow-hidden flex flex-col justify-center items-center">
         <div className="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center text-center">
           <span className="text-[#008b99] text-xs md:text-sm font-black tracking-widest uppercase block mb-3 font-display drop-shadow-[0_2px_8px_rgba(0,180,216,0.15)]">
             CATÁLOGO OFICIAL DE PROPIEDADES
@@ -147,7 +147,7 @@ export default function Propiedades() {
       </header>
 
       {/* BARRA DE BÚSQUEDA Y FILTROS ESTILO AIRBNB INTEGRADA */}
-      <div className="w-full max-w-3xl mx-auto px-6 mb-8 relative z-20">
+      <div className="w-full max-w-3xl mx-auto px-3.5 sm:px-6 mb-8 relative z-20">
         <div className="hidden md:flex bg-white/80 backdrop-blur-xl border border-slate-200/90 rounded-full p-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.08)] items-center justify-between gap-1 w-full relative">
           
           <div className="flex-grow flex items-center gap-3.5 pl-6 pr-4 py-1">
