@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppBubble from './components/WhatsAppBubble';
 import ScrollToTop from './components/ScrollToTop';
+import AnalyticsTracker from './components/AnalyticsTracker';
 import TopographicBackground from './components/TopographicBackground';
 import Bio from './pages/Bio';
 
@@ -144,6 +145,7 @@ function App() {
   return (
     <Router basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
+      <AnalyticsTracker />
       <AppContent />
     </Router>
   );

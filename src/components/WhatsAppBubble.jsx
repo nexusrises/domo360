@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { openSocialApp } from '../utils/deepLink';
+import { propiedades } from '../data/propiedadesData';
 
 export default function WhatsAppBubble() {
   const location = useLocation();
@@ -33,20 +34,23 @@ export default function WhatsAppBubble() {
 
     // 3. Sub-página: Detalle de Propiedad Específica
     const pathParts = path.split('/').filter(Boolean);
-    const isDetail = (pathParts.length >= 2 && pathParts[0] === 'domo360' && !['vende-tu-propiedad', 'contacto'].includes(pathParts[1])) || 
-                     (pathParts.length === 1 && !['domo360', 'vende-tu-propiedad', 'contacto'].includes(pathParts[0]));
-    
-    if (isDetail) {
+    const slug = pathParts[0] === 'domo360' ? pathParts[1] : pathParts[0];
+    const matchedPropiedad = slug && !['vende-tu-propiedad', 'contacto', 'propiedades', 'proyectos', 'catalogo', 'bio', 'servicios-360', 'servicios', 'compra-seguro'].includes(slug)
+      ? propiedades.find(p => p.slug === slug)
+      : null;
+
+    if (matchedPropiedad) {
+      const mensajeReunion = `Hola Angel, vi el Tour 360° de *${matchedPropiedad.titulo}* (${matchedPropiedad.area} - ${matchedPropiedad.precio} USD). Para ahorrar tiempo, ¿podríamos tener una breve reunión de 10 min por Zoom o videollamada para revisar la ubicación exacta, avenidas de acceso y todos los detalles?`;
       return {
         messages: [
-          "¿Te interesa esta propiedad? Escríbeme y te envío la ficha técnica completa y el enlace de Google Maps 📍📲",
-          "¿Quieres agendar una visita presencial para ver esta casa o terreno? Reservamos tu cita de inmediato 🗓️🏡",
-          "¿Deseas saber las facilidades de pago o el estado legal de esta propiedad? Consúltanos directamente por WhatsApp 💬"
+          `¿Te interesa ${matchedPropiedad.titulo}? Agenda una reunión de 10 min y conoce cada detalle sin salir de casa 💻🏡`,
+          `Revisa planos, documentación SUNARP y avenidas de acceso en vivo por Zoom o videollamada 📍📲`,
+          `¿Deseas saber el precio final, facilidades de pago o ver otras opciones similares? Escríbenos directamente 💬`
         ],
         whatsappTexts: [
-          "Hola Angel, estoy interesado en recibir más información, ubicación en Google Maps y agendar una visita para esta propiedad.",
-          "Hola Angel, me interesa visitar esta propiedad y quisiera coordinar fecha y hora para la visita presencial.",
-          "Hola Angel, quisiera consultar el precio final y las facilidades de pago para esta propiedad."
+          mensajeReunion,
+          mensajeReunion,
+          mensajeReunion
         ]
       };
     }
