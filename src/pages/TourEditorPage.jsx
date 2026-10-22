@@ -2491,7 +2491,7 @@ export default function TourEditorPage() {
                               style={{ 
                                 color: hs.colorTexto || '#ffffff',
                                 backgroundColor: hs.fondoTransparente ? 'transparent' : (hs.colorFondo || 'rgba(15, 23, 42, 0.85)'),
-                                boxShadow: hs.sombra ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
+                                boxShadow: (!hs.fondoTransparente && hs.sombra) ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
                                 transform: isTransform ? `scale(${hs.escala ?? 1.0})` : undefined,
                                 fontSize: `${hs.fontSize || 14}px`,
                                 whiteSpace: 'pre-line',
@@ -2499,12 +2499,51 @@ export default function TourEditorPage() {
                                 width: 'max-content',
                                 fontWeight: hs.negrita !== false ? 'bold' : 'normal',
                                 fontStyle: hs.cursiva ? 'italic' : 'normal',
-                                fontFamily: hs.fuente ? `'${hs.fuente}', sans-serif` : "'Montserrat', sans-serif"
+                                fontFamily: hs.fuente ? `'${hs.fuente}', sans-serif` : "'Montserrat', sans-serif",
+                                textShadow: (() => {
+                                  const shadows = [];
+                                  const vol = Number(hs.volumen3D) || (isTransform ? 4 : 0);
+                                  const stroke = Number(hs.strokeGrosor) || (isTransform ? 1 : 0);
+                                  const sColor = hs.colorStroke || '#000000';
+                                  const cCanto = hs.colorCanto || '#020617';
+                                  const angleDeg = Number(hs.direccion3D ?? 45);
+                                  const angleRad = (angleDeg * Math.PI) / 180;
+                                  const cosA = Math.cos(angleRad);
+                                  const sinA = Math.sin(angleRad);
+
+                                  if (stroke > 0) {
+                                    for (let x = -stroke; x <= stroke; x++) {
+                                      for (let y = -stroke; y <= stroke; y++) {
+                                        if (x !== 0 || y !== 0) shadows.push(`${x}px ${y}px 0 ${sColor}`);
+                                      }
+                                    }
+                                  }
+                                  if (vol > 0) {
+                                    for (let i = 1; i <= vol; i++) {
+                                      const offsetX = (i * cosA).toFixed(2);
+                                      const offsetY = (i * sinA).toFixed(2);
+                                      shadows.push(`${offsetX}px ${offsetY}px 0 ${cCanto}`);
+                                    }
+                                  }
+                                  if (hs.sombra) {
+                                    const offset = vol > 0 ? vol + 3 : 4;
+                                    const shadowX = (offset * cosA).toFixed(2);
+                                    const shadowY = (offset * sinA).toFixed(2);
+                                    const blurRadius = (offset * 1.5).toFixed(1);
+                                    shadows.push(`${shadowX}px ${shadowY}px ${blurRadius}px rgba(0, 0, 0, 0.75)`);
+                                  }
+                                  return shadows.length > 0 ? shadows.join(', ') : 'none';
+                                })(),
+                                letterSpacing: (hs.volumen3D > 0 || isTransform) ? '0.05em' : 'normal'
                               }}
-                              className="px-4 py-2.5 rounded-2xl border border-white/10 backdrop-blur-md flex items-center justify-center gap-2"
+                              className={`flex items-center justify-center gap-2 select-none ${
+                                hs.fondoTransparente 
+                                  ? 'p-1' 
+                                  : 'px-4 py-2.5 rounded-2xl border border-white/10 backdrop-blur-md'
+                              }`}
                             >
                               {!hs.fondoTransparente && <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0"></span>}
-                              <span>{hs.texto}</span>
+                              <span className="inline-block">{hs.texto}</span>
                             </div>
                           )}
 
@@ -4118,7 +4157,7 @@ export default function TourEditorPage() {
                                             <input
                                               type="color"
                                               value={hs.colorBorde || '#ffffff'}
-                                              onChange={(e) => {
+                                              onInput={(e) => {
                                                 const newHotspots = [...activeScene.hotspots];
                                                 newHotspots[index].colorBorde = e.target.value;
                                                 const updated = {
@@ -4129,6 +4168,18 @@ export default function TourEditorPage() {
                                                   }
                                                 };
                                                 saveToLocal(updated);
+                                              }}
+                                              onChange={(e) => {
+                                                const newHotspots = [...activeScene.hotspots];
+                                                newHotspots[index].colorBorde = e.target.value;
+                                                const updated = {
+                                                  ...scenes,
+                                                  [activeSceneKey]: {
+                                                    ...activeScene,
+                                                    hotspots: newHotspots
+                                                  }
+                                                };
+                                                saveToLocal(updated, true);
                                               }}
                                               className="w-7 h-7 rounded-lg bg-transparent border-0 cursor-pointer"
                                             />
@@ -4547,6 +4598,224 @@ export default function TourEditorPage() {
                                     <span className="italic">Cursiva (I)</span>
                                   </label>
                                 </div>
+
+                                {/* SECCIÓN EXCLUSIVA: EFECTO 3D & VOLUMEN DE LETRAS */}
+                                {itemTipo === 'texto' && (
+                                  <div className="pt-3 border-t border-white/10 space-y-3">
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                                        <span>✨</span> Volumen y Relieve 3D
+                                      </span>
+                                      <span className="text-[8px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/20 font-bold uppercase">
+                                        Pro 3D
+                                      </span>
+                                    </div>
+
+                                    {/* Slider Volumen 3D (Extrusión de canto) */}
+                                    <div className="space-y-1">
+                                      <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                        <span>Profundidad / Volumen 3D</span>
+                                        <span className="font-mono text-white">{hs.volumen3D ?? (hs.posicionTipo === 'muro' || hs.posicionTipo === 'piso' ? 4 : 0)}px</span>
+                                      </div>
+                                      <input 
+                                        type="range"
+                                        min="0"
+                                        max="16"
+                                        step="1"
+                                        value={hs.volumen3D ?? (hs.posicionTipo === 'muro' || hs.posicionTipo === 'piso' ? 4 : 0)}
+                                        onInput={(e) => {
+                                          const newHotspots = [...activeScene.hotspots];
+                                          newHotspots[index].volumen3D = parseInt(e.target.value);
+                                          const updated = {
+                                            ...scenes,
+                                            [activeSceneKey]: {
+                                              ...activeScene,
+                                              hotspots: newHotspots
+                                            }
+                                          };
+                                          saveToLocal(updated);
+                                        }}
+                                        onChange={(e) => {
+                                          const newHotspots = [...activeScene.hotspots];
+                                          newHotspots[index].volumen3D = parseInt(e.target.value);
+                                          const updated = {
+                                            ...scenes,
+                                            [activeSceneKey]: {
+                                              ...activeScene,
+                                              hotspots: newHotspots
+                                            }
+                                          };
+                                          saveToLocal(updated, true);
+                                        }}
+                                        className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                      />
+                                    </div>
+
+                                    {/* Slider Dirección / Ángulo 3D continuo (0° a 360°) */}
+                                    <div className="space-y-1">
+                                      <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                        <span className="flex items-center gap-1.5">
+                                          <span>Dirección / Ángulo 3D</span>
+                                          <span 
+                                            className="inline-block transition-transform duration-150 font-bold text-amber-400"
+                                            style={{ transform: `rotate(${hs.direccion3D ?? 45}deg)` }}
+                                            title="Orientación del volumen"
+                                          >
+                                            ➔
+                                          </span>
+                                        </span>
+                                        <span className="font-mono text-amber-400 font-bold">{hs.direccion3D ?? 45}°</span>
+                                      </div>
+                                      <input 
+                                        type="range"
+                                        min="0"
+                                        max="360"
+                                        step="5"
+                                        value={hs.direccion3D ?? 45}
+                                        onInput={(e) => {
+                                          const newHotspots = [...activeScene.hotspots];
+                                          newHotspots[index].direccion3D = parseInt(e.target.value);
+                                          const updated = {
+                                            ...scenes,
+                                            [activeSceneKey]: {
+                                              ...activeScene,
+                                              hotspots: newHotspots
+                                            }
+                                          };
+                                          saveToLocal(updated);
+                                        }}
+                                        onChange={(e) => {
+                                          const newHotspots = [...activeScene.hotspots];
+                                          newHotspots[index].direccion3D = parseInt(e.target.value);
+                                          const updated = {
+                                            ...scenes,
+                                            [activeSceneKey]: {
+                                              ...activeScene,
+                                              hotspots: newHotspots
+                                            }
+                                          };
+                                          saveToLocal(updated, true);
+                                        }}
+                                        className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                      />
+                                    </div>
+
+                                    {/* Color del Canto 3D */}
+                                    <div className="space-y-1">
+                                      <label className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Color Canto / Relieve 3D</label>
+                                      <div className="flex items-center gap-2">
+                                        <input
+                                          type="color"
+                                          value={hs.colorCanto || '#020617'}
+                                          onInput={(e) => {
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].colorCanto = e.target.value;
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated);
+                                          }}
+                                          onChange={(e) => {
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].colorCanto = e.target.value;
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated, true);
+                                          }}
+                                          className="w-7 h-7 rounded-lg bg-transparent border-0 cursor-pointer"
+                                        />
+                                        <span className="text-[9px] font-mono text-gray-300">{hs.colorCanto || '#020617'}</span>
+                                      </div>
+                                    </div>
+
+                                    {/* Contorno y Color de Borde (Stroke) */}
+                                    <div className="grid grid-cols-2 gap-2 pt-1 border-t border-white/5">
+                                      <div className="space-y-1">
+                                        <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
+                                          <span>Borde (Stroke)</span>
+                                          <span className="font-mono text-white">{hs.strokeGrosor ?? (hs.posicionTipo === 'muro' || hs.posicionTipo === 'piso' ? 1 : 0)}px</span>
+                                        </div>
+                                        <input 
+                                          type="range"
+                                          min="0"
+                                          max="4"
+                                          step="1"
+                                          value={hs.strokeGrosor ?? (hs.posicionTipo === 'muro' || hs.posicionTipo === 'piso' ? 1 : 0)}
+                                          onInput={(e) => {
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].strokeGrosor = parseInt(e.target.value);
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated);
+                                          }}
+                                          onChange={(e) => {
+                                            const newHotspots = [...activeScene.hotspots];
+                                            newHotspots[index].strokeGrosor = parseInt(e.target.value);
+                                            const updated = {
+                                              ...scenes,
+                                              [activeSceneKey]: {
+                                                ...activeScene,
+                                                hotspots: newHotspots
+                                              }
+                                            };
+                                            saveToLocal(updated, true);
+                                          }}
+                                          className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                        />
+                                      </div>
+
+                                      <div className="space-y-1">
+                                        <label className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Color Borde</label>
+                                        <div className="flex items-center gap-2">
+                                          <input
+                                            type="color"
+                                            value={hs.colorStroke || '#000000'}
+                                            onInput={(e) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              newHotspots[index].colorStroke = e.target.value;
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated);
+                                            }}
+                                            onChange={(e) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              newHotspots[index].colorStroke = e.target.value;
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated, true);
+                                            }}
+                                            className="w-7 h-7 rounded-lg bg-transparent border-0 cursor-pointer"
+                                          />
+                                          <span className="text-[9px] font-mono text-gray-300">{hs.colorStroke || '#000000'}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             )}
 

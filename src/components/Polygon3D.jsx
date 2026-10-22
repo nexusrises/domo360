@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import * as THREE from 'three';
-import { Html } from '@react-three/drei';
+import { Html, Line } from '@react-three/drei';
 
 /**
  * Triangula un polígono 3D arbitrario proyectándolo sobre su plano óptimo
@@ -130,15 +130,15 @@ export default function Polygon3D({
     }
   }, [vertices, lineaActiva]);
 
-  // Geometría de las líneas de borde
-  const lineGeometry = useMemo(() => {
+  // Puntos 3D para la línea perimétrica con Line de Drei (soporta linewidth en px real y uniones limpias)
+  const linePoints = useMemo(() => {
     if (!vertices || vertices.length < 2) return null;
-    const pts = vertices.map(v => new THREE.Vector3(v[0], v[1], v[2]));
+    // Elevar 0.3% hacia el centro de la cámara (0,0,0) para garantizar que el trazo se dibuje limpio sobre el relleno
+    const pts = vertices.map(v => new THREE.Vector3(v[0] * 0.997, v[1] * 0.997, v[2] * 0.997));
     if (!lineaActiva && pts.length >= 3) {
-      pts.push(pts[0].clone()); // Cerrar el polígono
+      pts.push(pts[0].clone()); // Cerrar bucle continuo
     }
-    const geom = new THREE.BufferGeometry().setFromPoints(pts);
-    return geom;
+    return pts;
   }, [vertices, lineaActiva]);
 
   // Geometría de tubo para líneas gruesas reales visibles en WebGL
@@ -170,7 +170,7 @@ export default function Polygon3D({
   const fillOpacity = isSelected ? Math.min(1.0, opacidad + 0.2) : (hovered ? Math.min(1.0, opacidad + 0.15) : opacidad);
   const borderColor = lineaActiva 
     ? activeLineColor 
-    : (isSelected ? '#fbbf24' : (hovered ? '#ffffff' : colorBorde));
+    : (colorBorde || (isSelected ? '#fbbf24' : (hovered ? '#ffffff' : '#ffffff')));
 
   // Renderizar la etiqueta con orientación 3D y estilos cuando aplica
   const renderLabel = () => {
@@ -278,7 +278,7 @@ export default function Polygon3D({
         </mesh>
       )}
 
-      {/* 2. Línea perimétrica o Tubo 3D de Trayectoria con Grosor y Color Real */}
+      {/* 2. Línea perimétrica con grosor en px real y esquinas perfectamente unidas */}
       {lineaActiva && tubeGeometry ? (
         <mesh
           geometry={tubeGeometry}
@@ -295,16 +295,15 @@ export default function Polygon3D({
           />
         </mesh>
       ) : (
-        lineGeometry && (
-          <line geometry={lineGeometry}>
-            <lineBasicMaterial
-              color={borderColor}
-              linewidth={isSelected ? (grosorBorde + 1) : grosorBorde}
-              transparent={true}
-              opacity={0.95}
-              depthTest={true}
-            />
-          </line>
+        linePoints && (
+          <Line
+            points={linePoints}
+            color={borderColor}
+            lineWidth={Math.max(1, isSelected ? ((Number(grosorBorde) || 2) + 1.5) : (Number(grosorBorde) || 2))}
+            transparent={true}
+            opacity={0.95}
+            depthTest={true}
+          />
         )
       )}
 

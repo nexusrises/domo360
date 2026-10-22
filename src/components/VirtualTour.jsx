@@ -278,6 +278,50 @@ const formatArea = (val) => {
   return clean;
 };
 
+// Función para calcular la extrusión multicapa de volumen 3D, dirección angular y contorno nítido
+const build3DTextShadow = ({ volumen3D = 0, direccion3D = 45, colorCanto = '#020617', strokeGrosor = 0, colorStroke = '#000000', sombra = true }) => {
+  const shadows = [];
+  const vol = Number(volumen3D) || 0;
+  const stroke = Number(strokeGrosor) || 0;
+  const angleDeg = Number(direccion3D ?? 45);
+  const angleRad = (angleDeg * Math.PI) / 180;
+  const cosA = Math.cos(angleRad);
+  const sinA = Math.sin(angleRad);
+
+  // 1. Delineado / Contorno nítido (Stroke)
+  if (stroke > 0) {
+    const sColor = colorStroke || '#000000';
+    for (let x = -stroke; x <= stroke; x++) {
+      for (let y = -stroke; y <= stroke; y++) {
+        if (x !== 0 || y !== 0) {
+          shadows.push(`${x}px ${y}px 0 ${sColor}`);
+        }
+      }
+    }
+  }
+
+  // 2. Extrusión 3D por capas en profundidad según el ángulo elegido
+  if (vol > 0) {
+    const cCanto = colorCanto || '#020617';
+    for (let i = 1; i <= vol; i++) {
+      const offsetX = (i * cosA).toFixed(2);
+      const offsetY = (i * sinA).toFixed(2);
+      shadows.push(`${offsetX}px ${offsetY}px 0 ${cCanto}`);
+    }
+  }
+
+  // 3. Sombra difusa proyectada en la misma dirección
+  if (sombra) {
+    const offsetDist = vol > 0 ? vol + 3 : 4;
+    const shadowX = (offsetDist * cosA).toFixed(2);
+    const shadowY = (offsetDist * sinA).toFixed(2);
+    const blurRadius = (offsetDist * 1.5).toFixed(1);
+    shadows.push(`${shadowX}px ${shadowY}px ${blurRadius}px rgba(0, 0, 0, 0.75)`);
+  }
+
+  return shadows.length > 0 ? shadows.join(', ') : 'none';
+};
+
 // Visualizador de hotspots interactivos y complementos (texto/imagen)
 function Hotspot({
   posicion,
@@ -310,7 +354,12 @@ function Hotspot({
   lote,
   estado,
   precio,
-  area
+  area,
+  volumen3D = 0,
+  direccion3D = 45,
+  colorCanto = '#020617',
+  strokeGrosor = 0,
+  colorStroke = '#000000'
 }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const { camera } = useThree();
@@ -479,7 +528,7 @@ function Hotspot({
                 style={{
                   color: colorTexto || '#ffffff',
                   backgroundColor: fondoTransparente ? 'transparent' : (colorFondo || 'rgba(15, 23, 42, 0.85)'),
-                  boxShadow: sombra ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
+                  boxShadow: (!fondoTransparente && sombra) ? '0 12px 24px rgba(0,0,0,0.5)' : 'none',
                   transform: isTransform ? `scale(${escala ?? 1.0})` : undefined,
                   fontSize: `${fontSize || 14}px`,
                   fontWeight: negrita !== false ? 'bold' : 'normal',
@@ -487,12 +536,25 @@ function Hotspot({
                   whiteSpace: 'pre-line',
                   textAlign: 'center',
                   width: 'max-content',
-                  fontFamily: fuente ? `'${fuente}', sans-serif` : "'Montserrat', sans-serif"
+                  fontFamily: fuente ? `'${fuente}', sans-serif` : "'Montserrat', sans-serif",
+                  textShadow: build3DTextShadow({
+                    volumen3D: volumen3D || (isTransform ? 4 : 0),
+                    direccion3D: direccion3D ?? 45,
+                    colorCanto: colorCanto || '#020617',
+                    strokeGrosor: strokeGrosor ?? (isTransform ? 1 : 0),
+                    colorStroke: colorStroke || '#000000',
+                    sombra
+                  }),
+                  letterSpacing: (volumen3D > 0 || isTransform) ? '0.05em' : 'normal'
                 }}
-                className="px-4 py-2.5 rounded-2xl border border-white/10 backdrop-blur-md flex items-center justify-center gap-2"
+                className={`flex items-center justify-center gap-2 select-none ${
+                  fondoTransparente 
+                    ? 'p-1' 
+                    : 'px-4 py-2.5 rounded-2xl border border-white/10 backdrop-blur-md'
+                }`}
               >
                 {!fondoTransparente && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>}
-                <span>{texto}</span>
+                <span className="inline-block">{texto}</span>
               </div>
             </div>
           )}
@@ -1167,6 +1229,11 @@ export default function VirtualTour({
                 estado={hs.estado}
                 precio={hs.precio}
                 area={hs.area}
+                volumen3D={hs.volumen3D}
+                direccion3D={hs.direccion3D}
+                colorCanto={hs.colorCanto}
+                strokeGrosor={hs.strokeGrosor}
+                colorStroke={hs.colorStroke}
               />
             );
           })}
