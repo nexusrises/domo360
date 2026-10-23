@@ -717,7 +717,8 @@ export default function VirtualTour({
   tourId = 'home',
   autoRotate = true,
   showThumbnails = true,
-  conectarSheets = false
+  conectarSheets = false,
+  placeholderImage = ''
 }) {
   const [localIsExpanded, localSetIsExpanded] = useState(false);
   const isExpanded = propIsExpanded !== undefined ? propIsExpanded : localIsExpanded;
@@ -763,19 +764,30 @@ export default function VirtualTour({
     };
   }, [displayImage]);
 
-  // Pre-cargar todas las imágenes de las escenas del tour activo para respuesta ultrarrápida al navegar
+  // Precarga inteligente y diferida de las escenas secundarias (no saturar la red móvil al inicio)
   useEffect(() => {
     if (!scenes || Object.keys(scenes).length === 0) return;
-    Object.values(scenes).forEach(sc => {
-      if (sc && sc.imagen) {
-        const fullUrl = sc.imagen.startsWith('http') || sc.imagen.startsWith('data:')
-          ? sc.imagen
-          : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sc.imagen}`;
-        const img = new Image();
-        img.src = fullUrl;
-      }
-    });
-  }, [scenes]);
+
+    // Retrasar la precarga del resto de habitaciones para darle prioridad absoluta al 100% a la escena inicial
+    const timeoutId = setTimeout(() => {
+      const otherScenes = Object.entries(scenes).filter(([key]) => key !== activeSceneKey);
+      
+      // Cargar en cola escalonada una por una cada 300ms
+      otherScenes.forEach(([_, sc], index) => {
+        if (sc && sc.imagen) {
+          setTimeout(() => {
+            const fullUrl = sc.imagen.startsWith('http') || sc.imagen.startsWith('data:')
+              ? sc.imagen
+              : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sc.imagen}`;
+            const img = new Image();
+            img.src = fullUrl;
+          }, index * 300);
+        }
+      });
+    }, 1200);
+
+    return () => clearTimeout(timeoutId);
+  }, [scenes, activeSceneKey]);
 
 
   // Iniciar con overlay activo para cubrir el frame inicial de carga y orientación de cámara
@@ -1408,17 +1420,24 @@ export default function VirtualTour({
         </div>
       )}
 
-      {/* Indicador de Carga HTML Inteligente */}
+      {/* Indicador de Carga HTML Inteligente con Fondo Visual Inmediato */}
       {(!imageLoaded || activeSceneKey === '__loading__') && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070a13] z-40">
-          <div className="flex flex-col items-center justify-center bg-slate-950/90 border border-cyan-500/20 backdrop-blur-lg px-8 py-6 rounded-3xl text-center shadow-2xl min-w-[260px] animate-fade-in">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#070a13] z-40 overflow-hidden">
+          {placeholderImage && (
+            <img 
+              src={placeholderImage.startsWith('http') || placeholderImage.startsWith('data:') ? placeholderImage : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${placeholderImage}`} 
+              alt="Cargando entorno" 
+              className="absolute inset-0 w-full h-full object-cover opacity-25 filter blur-md scale-105 pointer-events-none" 
+            />
+          )}
+          <div className="relative z-10 flex flex-col items-center justify-center bg-slate-950/80 border border-cyan-500/20 backdrop-blur-xl px-8 py-6 rounded-3xl text-center shadow-2xl min-w-[260px] animate-fade-in">
             <div className="relative flex items-center justify-center w-16 h-16 mb-4">
               <div className="absolute w-full h-full border-4 border-cyan-500/20 rounded-full"></div>
               <div className="absolute w-full h-full border-4 border-t-cyan-400 rounded-full animate-spin"></div>
               <Compass className="w-6 h-6 text-cyan-400 animate-pulse" />
             </div>
             <h4 className="text-white font-bold text-sm tracking-wide uppercase font-display">Cargando Entorno 3D</h4>
-            <p className="text-gray-400 text-xs mt-1">Descargando texturas en alta definición...</p>
+            <p className="text-gray-400 text-xs mt-1">Iniciando escena interactiva...</p>
           </div>
         </div>
       )}

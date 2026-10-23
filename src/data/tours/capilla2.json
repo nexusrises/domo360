@@ -48,7 +48,7 @@
         "color": "#22c55e",
         "opacidad": 0.45,
         "colorBorde": "#fbff00",
-        "grosorBorde": 8,
+        "grosorBorde": 3,
         "texto": "Lote 1",
         "manzana": "SOLAR",
         "lote": "1",
@@ -59,6 +59,33 @@
         "mostrarEtiqueta": true,
         "mostrarBorde": true,
         "mostrarRelleno": true
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          6.55,
+          0.36,
+          18.89
+        ],
+        "destino": "vista_panoramica_terreno",
+        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#5cf50a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 23,
+        "fondoTransparente": true,
+        "colorTexto": "#59174b",
+        "colorFondo": "#1f3261"
       }
     ],
     "filtro": "drone_cielo_azul",
