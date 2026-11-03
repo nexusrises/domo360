@@ -25,7 +25,7 @@ export default function WhatsAppBubble() {
         whatsappTexts: [
           "Hola Angel, soy propietario y deseo vender mi propiedad. Me gustaría recibir asesoría legal y el servicio de fotos 360° y dron.",
           "Hola Angel, necesito ayuda para sanear los documentos de mi propiedad para ponerla en venta de forma rápida.",
-          "Hola Angel, me interesa publicar mi terreno/casa en el portal Domo 360° con recorridos virtuales y fotos de dron.",
+          "Hola Angel, me interesa publicar mi terreno/casa en el portal Tour 360° con recorridos virtuales y fotos de dron.",
           "Hola Angel, deseo coordinar una visita para la toma de fotos 360° y la publicación de mi propiedad."
         ]
       };
@@ -65,7 +65,7 @@ export default function WhatsAppBubble() {
           "¿Quieres agendar una visita guiada a los lotes o casas disponibles? Escríbenos para reservar tu horario 🗓️📲"
         ],
         whatsappTexts: [
-          "Hola Angel, estoy viendo los proyectos inmobiliarios en Domo 360° y me gustaría recibir información sobre terrenos y casas disponibles.",
+          "Hola Angel, estoy viendo los proyectos inmobiliarios en Tour 360° y me gustaría recibir información sobre terrenos y casas disponibles.",
           "Hola Angel, busco opciones de terrenos en Juliaca/Puno con documentación saneada e inscritos en SUNARP.",
           "Hola Angel, me gustaría coordinar una reunión/visita para ver opciones de lotes comerciales y residenciales.",
           "Hola Angel, quisiera que me envíen la lista de precios y planos de los proyectos disponibles."
@@ -85,7 +85,7 @@ export default function WhatsAppBubble() {
         "Hola Angel, me interesa cotizar el desarrollo de una página web profesional e interactiva para mi empresa.",
         "Hola Angel, deseo información sobre la implementación de tours 360° y páginas webs corporativas a medida.",
         "Hola Angel, busco digitalizar mi proyecto inmobiliario o empresa con recorridos 360° y me gustaría una propuesta.",
-        "Hola Angel, vi sus proyectos interactivos en Domo 360° y deseo asesoría para mi negocio o lotización."
+        "Hola Angel, vi sus proyectos interactivos en Tour 360° y deseo asesoría para mi negocio o lotización."
       ]
     };
   };

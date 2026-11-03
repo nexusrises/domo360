@@ -28,11 +28,11 @@ export default function Servicios360() {
   const [activeTab, setActiveTab] = useState('todos');
 
   useEffect(() => {
-    document.title = "Recorridos Virtuales 360°, Páginas Web y Renders 3D en Juliaca y Puno | Nexus Domo 360°";
+    document.title = "Recorridos Virtuales 360°, Páginas Web y Renders 3D en Juliaca y Puno | Nexus Tour 360°";
     window.scrollTo(0, 0);
   }, []);
 
-  const whatsappGeneralMsg = "Hola Angel, vi la página de Servicios 360° de Nexus Domo 360. Me gustaría cotizar un proyecto digital para mi empresa o lotización.";
+  const whatsappGeneralMsg = "Hola Angel, vi la página de Servicios 360° de Nexus Tour 360. Me gustaría cotizar un proyecto digital para mi empresa o lotización.";
   const whatsappPlanosMsg = "Hola Angel, tengo unos planos en 2D / PDF de un proyecto y deseo cotizar su modelado en Planos 3D y Renders fotorrealistas con tu equipo.";
 
   const serviciosPrincipales = [

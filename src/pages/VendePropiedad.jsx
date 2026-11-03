@@ -38,7 +38,7 @@ export default function VendePropiedad() {
       badge: "Cero Riesgo Financiero",
       description: "Firmamos un contrato interno de promoción exclusiva y corretaje claro y transparente. Sin trámites burocráticos iniciales ni pagos anticipados. Asumimos el 100% de la inversión en marketing 360°, dron y tiempo para defender el verdadero valor comercial de tu predio.",
       image: "/casa_cartel_juliaca.jpg",
-      highlight: "Inversión 100% asumida por Nexus Domo. Si no vendemos, no pagas nada.",
+      highlight: "Inversión 100% asumida por Nexus Tour. Si no vendemos, no pagas nada.",
       icon: <FileCheck2 className="w-5 h-5" />
     },
     {
@@ -79,7 +79,7 @@ export default function VendePropiedad() {
   };
 
   useEffect(() => {
-    document.title = "Vende tu Terreno o Casa en Juliaca y Puno | Nexus Domo 360";
+    document.title = "Vende tu Terreno o Casa en Juliaca y Puno | Nexus Tour 360";
     window.scrollTo(0, 0);
   }, []);
 
@@ -95,18 +95,18 @@ export default function VendePropiedad() {
       return;
     }
     setFormError('');
-    const mensaje = `Hola Nexus Domo, deseo solicitar una evaluación gratuita para vender mi propiedad.\n\n*Tipo de Inmueble:* ${tipoInmueble}\n*Mi WhatsApp:* ${cleanNumber}\n\nPor favor contáctenme para coordinar la visita técnica y asesoría registral.`;
+    const mensaje = `Hola Nexus Tour, deseo solicitar una evaluación gratuita para vender mi propiedad.\n\n*Tipo de Inmueble:* ${tipoInmueble}\n*Mi WhatsApp:* ${cleanNumber}\n\nPor favor contáctenme para coordinar la visita técnica y asesoría registral.`;
     openSocialApp(e, 'whatsapp', mensaje);
   };
 
   const faqs = [
     {
-      question: "¿Cómo me ayuda Nexus Domo si mis papeles en SUNARP tienen observaciones o están incompletos?",
+      question: "¿Cómo me ayuda Nexus Tour si mis papeles en SUNARP tienen observaciones o están incompletos?",
       answer: "No te dejamos solo ante la burocracia. Como tu socio inmobiliario, realizamos una revisión registral inicial sin costo: analizamos la Partida Electrónica, identificamos si faltan actualizar datos de estado civil, levantar gravámenes antiguos o regularizar declaratorias de fábrica. Te guiamos paso a paso sobre el trámite exacto a realizar para que tu propiedad quede 100% apta y ningún banco o comprador formal rechace la compra."
     },
     {
       question: "¿Qué pasa si las medidas reales en mi terreno no coinciden con lo que dice el documento de SUNARP?",
-      answer: "Es una situación muy común en Juliaca y Puno debido al rápido crecimiento urbano. En Nexus Domo no esperamos a que un comprador descubra el error y cancele el trato. Nuestro equipo técnico va al terreno con wincha y distanciómetro para verificar linderos y colindancias reales. Si hay discrepancias, te orientamos en la rectificación técnica antes de negociar, protegiéndote de conflictos futuros."
+      answer: "Es una situación muy común en Juliaca y Puno debido al rápido crecimiento urbano. En Nexus Tour no esperamos a que un comprador descubra el error y cancele el trato. Nuestro equipo técnico va al terreno con wincha y distanciómetro para verificar linderos y colindancias reales. Si hay discrepancias, te orientamos en la rectificación técnica antes de negociar, protegiéndote de conflictos futuros."
     },
     {
       question: "¿Por qué firmamos un contrato interno de promoción exclusiva y cómo me beneficia como dueño?",
@@ -126,7 +126,7 @@ export default function VendePropiedad() {
     },
     {
       question: "¿Cobran algún monto por adelantado para empezar a trabajar mi propiedad?",
-      answer: "Ninguno. La visita técnica, la evaluación registral inicial, las tomas con dron y el recorrido virtual 360° son asumidos íntegramente por Nexus Domo. Cobramos una comisión pactada únicamente el día en que tu venta se concreta con éxito ante Notaría. Si tú no ganas, nosotros tampoco."
+      answer: "Ninguno. La visita técnica, la evaluación registral inicial, las tomas con dron y el recorrido virtual 360° son asumidos íntegramente por Nexus Tour. Cobramos una comisión pactada únicamente el día en que tu venta se concreta con éxito ante Notaría. Si tú no ganas, nosotros tampoco."
     }
   ];
 
@@ -290,7 +290,7 @@ export default function VendePropiedad() {
             </div>
           </div>
 
-          {/* Tarjeta 2: El Método Nexus Domo 360 */}
+          {/* Tarjeta 2: El Método Nexus Tour 360 */}
           <div className="bg-white border border-emerald-300 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-md text-left">
             <div>
               <div className="relative aspect-video rounded-2xl overflow-hidden mb-5 border border-slate-200">
@@ -300,7 +300,7 @@ export default function VendePropiedad() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  El Método Nexus Domo
+                  El Método Nexus Tour
                 </div>
               </div>
 
@@ -481,10 +481,10 @@ export default function VendePropiedad() {
                 ¿Tienes un terreno o casa bien ubicado en Juliaca o Puno?
               </span>
               <a
-                href={getSocialUrl('whatsapp', 'Hola Nexus Domo, tengo un inmueble bien ubicado y deseo una evaluación para venta.')}
+                href={getSocialUrl('whatsapp', 'Hola Nexus Tour, tengo un inmueble bien ubicado y deseo una evaluación para venta.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Nexus Domo, tengo un inmueble bien ubicado y deseo una evaluación para venta.')}
+                onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Nexus Tour, tengo un inmueble bien ubicado y deseo una evaluación para venta.')}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-black font-black uppercase tracking-wider text-xs transition-all cursor-pointer shadow-md active:scale-95 shrink-0"
               >
                 <PhoneCall className="w-4 h-4" />
@@ -563,10 +563,10 @@ export default function VendePropiedad() {
             Coordinemos una visita técnica sin costo a tu predio. Revisamos tu partida en SUNARP y preparamos el plan de venta con dron y tecnología 360°.
           </p>
           <a
-            href={getSocialUrl('whatsapp', 'Hola Nexus Domo, deseo agendar una evaluación gratuita para vender mi propiedad en Juliaca/Puno.')}
+            href={getSocialUrl('whatsapp', 'Hola Nexus Tour, deseo agendar una evaluación gratuita para vender mi propiedad en Juliaca/Puno.')}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Nexus Domo, deseo agendar una evaluación gratuita para vender mi propiedad en Juliaca/Puno.')}
+            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Nexus Tour, deseo agendar una evaluación gratuita para vender mi propiedad en Juliaca/Puno.')}
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-slate-900 hover:bg-slate-100 font-black uppercase tracking-wider text-xs sm:text-sm transition-all cursor-pointer shadow-lg active:scale-95"
           >
             <PhoneCall className="w-4.5 h-4.5 text-[#ea580c]" />

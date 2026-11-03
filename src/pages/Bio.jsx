@@ -20,7 +20,7 @@ export default function Bio() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    document.title = "Angel Domo 360° | Enlaces y Redes Oficiales";
+    document.title = "Angel Tour 360° | Enlaces y Redes Oficiales";
     localStorage.setItem('domo360_bio_theme', theme);
   }, [theme]);
 
@@ -34,8 +34,8 @@ export default function Bio() {
 
   const handleShare = async () => {
     const shareData = {
-      title: 'Angel Domo 360°',
-      text: 'Conoce los proyectos y recorridos virtuales 360° con Angel Domo 360°',
+      title: 'Angel Tour 360°',
+      text: 'Conoce los proyectos y recorridos virtuales 360° con Angel Tour 360°',
       url: window.location.href,
     };
     if (navigator.share) {
@@ -142,7 +142,7 @@ export default function Bio() {
             <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-white/80 p-0.5 shadow-2xl bg-black">
               <img
                 src={`${import.meta.env.BASE_URL}miembros/angel.webp`}
-                alt="Angel Domo 360°"
+                alt="Angel Tour 360°"
                 className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -160,7 +160,7 @@ export default function Bio() {
           <div className="space-y-3 px-1">
             <h1 className="text-2xl sm:text-3xl font-black font-display tracking-tight flex items-center justify-center gap-2">
               <span className={isDark ? 'text-white' : 'text-slate-950 font-black'}>Angel</span>
-              <span className="text-gradient-rise drop-shadow-sm">Domo 360°</span>
+              <span className="text-gradient-rise drop-shadow-sm">Tour 360°</span>
             </h1>
 
             <div
@@ -190,8 +190,8 @@ export default function Bio() {
           <div className="flex items-center justify-center gap-3.5 pt-1">
           {/* WhatsApp Directo */}
           <a
-            href={SOCIAL_URLS.whatsapp('Hola Angel Domo 360°, vi tu perfil y deseo más información.')}
-            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Domo 360°, vi tu perfil y deseo más información.')}
+            href={SOCIAL_URLS.whatsapp('Hola Angel Tour 360°, vi tu perfil y deseo más información.')}
+            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Tour 360°, vi tu perfil y deseo más información.')}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-11 h-11 rounded-full border backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:text-white hover:bg-[#25D366] hover:border-[#25D366] hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] active:scale-95 group cursor-pointer ${
@@ -280,8 +280,8 @@ export default function Bio() {
           
           {/* BOTÓN 1 (HERO CTA): WHATSAPP BUSINESS DIRECTO */}
           <a
-            href={SOCIAL_URLS.whatsapp('Hola Angel Domo 360°, deseo coordinar una visita o hacer una consulta inmobiliaria.')}
-            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Domo 360°, deseo coordinar una visita o hacer una consulta inmobiliaria.')}
+            href={SOCIAL_URLS.whatsapp('Hola Angel Tour 360°, deseo coordinar una visita o hacer una consulta inmobiliaria.')}
+            onClick={(e) => openSocialApp(e, 'whatsapp', 'Hola Angel Tour 360°, deseo coordinar una visita o hacer una consulta inmobiliaria.')}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full relative group overflow-hidden rounded-2xl p-4 flex items-center justify-between transition-all duration-300 active:scale-98 shadow-[0_10px_25px_rgba(16,185,129,0.25)] hover:shadow-[0_12px_35px_rgba(16,185,129,0.45)] bg-gradient-to-r from-[#0d9488]/95 via-[#10b981]/95 to-[#059669]/95 hover:from-[#0f766e] hover:via-[#059669] hover:to-[#047857] text-white font-display text-left border border-emerald-300/30 backdrop-blur-md"
@@ -327,7 +327,7 @@ export default function Bio() {
               >
                 <img
                   src={`${import.meta.env.BASE_URL}logo3.2.webp`}
-                  alt="Nexus Domo 360 Logo"
+                  alt="Nexus Tour 360 Logo"
                   className="w-full h-full object-contain drop-shadow-[0_2px_4px_rgba(0,242,254,0.3)]"
                 />
               </div>
@@ -376,7 +376,7 @@ export default function Bio() {
               </div>
               <div className="truncate">
                 <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Sígueme en TikTok (@angel.domo360)
+                  Sígueme en TikTok (@angeltour360)
                 </span>
                 <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Videos cortos y novedades inmobiliarias
@@ -409,7 +409,7 @@ export default function Bio() {
               </div>
               <div className="truncate">
                 <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Únete al Canal YouTube (@angel.domo360)
+                  Únete al Canal YouTube (@angeltour360)
                 </span>
                 <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Recorridos completos y análisis de lotes
@@ -442,7 +442,7 @@ export default function Bio() {
               </div>
               <div className="truncate">
                 <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Sígueme en Instagram (@angel.domo360)
+                  Sígueme en Instagram (@angeltour360)
                 </span>
                 <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Historias y publicaciones diarias
@@ -475,7 +475,7 @@ export default function Bio() {
               </div>
               <div className="truncate">
                 <span className={`text-sm sm:text-base font-bold block truncate tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Mi Página de Facebook (@angel.domo360)
+                  Mi Página de Facebook (@angeltour360)
                 </span>
                 <span className={`text-xs sm:text-sm block truncate font-medium mt-0.5 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
                   Comunidad y transmisiones en vivo
@@ -492,7 +492,7 @@ export default function Bio() {
       {/* PIE DE PÁGINA (SUTIL Y ELEGANTE) */}
       <footer className="w-full max-w-md mx-auto pt-8 pb-4 text-center z-10">
         <p className={`text-[11px] font-sans font-medium tracking-wide ${isDark ? 'text-gray-500' : 'text-slate-500'}`}>
-          &copy; {new Date().getFullYear()} Nexus Domo 360°. Todos los derechos reservados.
+          &copy; {new Date().getFullYear()} Nexus Tour 360°. Todos los derechos reservados.
         </p>
       </footer>
     </div>

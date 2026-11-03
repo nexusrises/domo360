@@ -1,6 +1,6 @@
 /**
  * Utilidad inteligente y universal para Redes Sociales y WhatsApp
- * Nexus Domo 360°
+ * Nexus Tour 360°
  * 
  * Utiliza URLs oficiales HTTPS (estándar Universal Links / Android App Links):
  * - En Android (Chrome, Brave, Samsung Internet): El sistema operativo abre la App oficial automáticamente si está instalada, o la versión web si no.
@@ -10,11 +10,11 @@
  */
 
 export const SOCIAL_URLS = {
-  youtube: 'https://www.youtube.com/@angel.domo360',
-  tiktok: 'https://www.tiktok.com/@angel.domo360',
-  instagram: 'https://www.instagram.com/angel.domo360/',
-  facebook: 'https://www.facebook.com/angel.domo360',
-  whatsapp: (msg = 'Hola Angel Domo 360°, deseo más información.') => 
+  youtube: 'https://www.youtube.com/@angeltour360',
+  tiktok: 'https://www.tiktok.com/@angeltour360',
+  instagram: 'https://www.instagram.com/angeltour360/',
+  facebook: 'https://www.facebook.com/angeltour360',
+  whatsapp: (msg = 'Hola Angel Tour 360°, deseo más información.') => 
     `https://wa.me/51951300535?text=${encodeURIComponent(msg)}`
 };
 

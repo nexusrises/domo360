@@ -28,6 +28,38 @@ export const propiedades = [
     tourId: 'casasalidapuno'
   },
   {
+    id: 8,
+    slug: 'terreno-ilave-taparachi-juliaca',
+    titulo: 'Terreno Marañón - Taparachi: 1,120 m² Cercado con Muros Sólidos',
+    tipo: 'TERRENO / LOTE',
+    tipoColor: 'bg-[#080d1a]/95 text-[#59b2ff] border-blue-500/45 shadow-[0_2px_8px_rgba(59,130,246,0.15)]',
+    tiene360: true,
+    ubicacion: 'Urb. Taparachi, Juliaca - Puno',
+    direccion: 'Jr. Ilave (antes Calle Nueva), Mz. "1" Lotes 36 y 37',
+    urbanizacion: 'Urb. Taparachi (Entrada Cerrito Alegre y El Bosque)',
+    referencia: 'A 1 cdra. de Av. Marañón, a 3 cdras. del Colegio Saco Oliveros y Club Náutica (Piscina)',
+    mapsLink: 'https://maps.google.com/?q=-15.5203500,-70.1285594',
+    mapsIframe: 'https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d326.4978412376548!2d-70.12855941203108!3d-15.520350035109455!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDMxJzEzLjEiUyA3MMKwMDcnNDIuOCJX!5e1!3m2!1ses!2spe!4v1793674318277!5m2!1ses!2spe',
+    descripcionCorta: 'Extraordinario terreno encanchonado de 1,120 m² con muros sólidos y 21.65 m de frentera en Jr. Ilave, Urb. Taparachi. Ideal para quinta campestre, taller estructural o almacén logístico...',
+    descripcionCompleta: 'Excepcional oportunidad de inversión comercial o residencial en este GRAN TERRENO ENCANCHONADO con un área total de 1,120 m² (1,110.20 m² según plano perimétrico), ubicado estratégicamente en el Jr. Ilave (antes Calle Nueva), dentro de la consolidada Urb. Taparachi en Juliaca, justo a la entrada del sector Cerrito Alegre y El Bosque.\n\nEl predio se encuentra totalmente cercado y protegido con muros perimétricos sólidos. Destaca por su imponente frentera de 21.65 metros lineales hacia el Jr. Ilave y un fondo promedio de más de 34 metros, lo que brinda una versatilidad arquitectónica incomparable y facilita el acceso y maniobra de camiones o maquinaria pesada.\n\nPor sus generosas dimensiones y entorno, es el terreno perfecto para:\n• Taller de estructuras metálicas, maestranza o mecánica pesada.\n• Centro logístico, almacén mayorista o depósito comercial.\n• Proyecto residencial cerrado, condominio de viviendas o quinta campestre privada.\n• Complejo recreacional deportivo (canchas de césped sintético) o local de eventos.\n\nUbicación y Conectividad Privilegiada:\nSituado a tan solo 1 cuadra de la Av. Marañón, a 3 cuadras del reconocido Colegio Saco Oliveros y del Club Deportivo Náutica (con piscina recreacional), y a 2 cuadras de un centro educativo inicial, además de tener una quinta campestre a pocos minutos. La zona goza de transporte urbano continuo: la línea de micro "Naranja" transita a solo una cuadra y la línea "100" recorre la ruta aledaña.\n\nServicios Básicos con Factibilidad Inmediata:\nLa red eléctrica pasa directamente por el mismo terreno lista para solicitar medidor y bajada inmediata. De igual forma, la red matriz principal de agua y desagüe pasa por toda la frentera del Jr. Ilave frente al terreno, facilitando una rápida conexión domiciliaria o comercial.',
+    beneficios: [
+      'Área total de 1,120 m² (1,110.20 m² en plano) completamente encanchonado con muros perimétricos sólidos.',
+      'Amplísima frentera de 21.65 metros lineales al Jr. Ilave, ideal para doble portón o maniobra de camiones.',
+      'Ubicación estratégica en Urb. Taparachi, a la entrada del Cerrito Alegre y El Bosque, a 1 cuadra de Av. Marañón.',
+      'Entorno educativo y recreativo: a 3 cuadras de Saco Oliveros y Club Náutica (Piscina), y a 2 cdras. de colegio inicial.',
+      'Excelente conectividad y transporte: Micro Línea Naranja a 1 cuadra y Línea 100 por vía adyacente.',
+      'Factibilidad de servicios inmediata: cables de luz pasando por el predio y red matriz de agua y desagüe en la frentera.',
+      'Máxima versatilidad: ideal para taller estructural, almacén/depósito logístico, quinta campestre o condominio.',
+      'Precio de oportunidad: $240,000 USD.'
+    ],
+    area: '1,120 m²',
+    medidas: '21.65 m de frentera por Jr. Ilave x 34 m de fondo promedio',
+    medidasCortas: '21.65m x 34m',
+    precio: '$240,000',
+    portada: '/tour/maraon/portada_card.webp',
+    tourId: 'terreno_ilave'
+  },
+  {
     id: 2,
     slug: 'terreno-solar-la-capilla',
     titulo: 'Terreno Solar en La Capilla (Atrás del Cementerio)',
@@ -85,7 +117,7 @@ export const propiedades = [
     medidas: '7.50 m de frentera por 45.00 m de fondo',
     medidasCortas: '7.5m x 45m',
     precio: '$165,000',
-    portada: '/tour/casa_campestre/1789267695621_CAM_20260911124252_0022_D.webp',
+    portada: '/tour/casa_campestre/portada_card.webp',
     tourId: 'casa_campestre'
   },
   {
@@ -196,33 +228,6 @@ export const propiedades = [
     precio: '$120,000',
     portada: '/tour/local_comercial.webp',
     tourId: 'tienda'
-  },
-  {
-    id: 8,
-    slug: 'casa-nueva-juliaca',
-    titulo: 'Casa Estilo Moderna Lista Para Editar',
-    tipo: 'CASA',
-    tipoColor: 'bg-[#060e17]/95 text-[#22d3ee] border-cyan-500/45 shadow-[0_2px_8px_rgba(34,211,238,0.15)]',
-    tiene360: false,
-    ubicacion: 'Cercado de Juliaca, Puno',
-    direccion: 'Calle Las Begonias N° 302',
-    urbanizacion: 'Urb. El Sol',
-    referencia: 'Frente al parque recreacional de la Juventud',
-    mapsLink: 'https://maps.google.com/?q=-15.494612,-70.1334597',
-    mapsIframe: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3840.407519967262!2d-70.1334597!3d-15.494612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9167f3b89fa774e1%3A0xc3c9429e248b1bfb!2sPlaza%20de%20Armas%20de%20Juliaca!5e0!3m2!1ses!2spe!4v1782262972077!5m2!1ses!2spe',
-    descripcionCorta: 'Hermosa casa de estreno con acabados modernos en Juliaca. Cuenta con amplia cochera, 3 habitaciones y terraza...',
-    descripcionCompleta: 'Espectacular casa de estreno de arquitectura contemporánea en Juliaca, diseñada para el disfrute y comodidad de tu familia. Cuenta con una excelente distribución de espacios iluminados de forma natural, sala de estar amplia, cocina moderna y acabados de primera calidad en todos los dormitorios.',
-    beneficios: [
-      'Amplia cochera privada para un vehículo grande con portón levadizo.',
-      'Tres dormitorios espaciosos con roperos empotrados y excelente asoleamiento.',
-      'Cocina tipo americana equipada con reposteros altos y bajos de melamine.',
-      'Amplia terraza en la azotea con área de lavandería techada.',
-      'Propiedad inscrita en Registros Públicos SUNARP libre de gravámenes.'
-    ],
-    area: '140 m²',
-    precio: '$85,000',
-    portada: '/tour/casasalidapuno/portadacasa1.webp',
-    tourId: 'casa_nueva'
   },
   {
     id: 9,

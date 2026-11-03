@@ -58,7 +58,7 @@ export default function Propiedades() {
   ];
 
   useEffect(() => {
-    document.title = "Catálogo de Propiedades en Juliaca y Puno | Casas, Terrenos y Recorridos 360° | Nexus Domo 360°";
+    document.title = "Catálogo de Propiedades en Juliaca y Puno | Casas, Terrenos y Recorridos 360° | Nexus Tour 360°";
     fetchLotesFromSheets().catch((err) => {
       console.warn("Fallo al precargar lotes desde Google Sheets:", err);
     });
@@ -88,7 +88,7 @@ export default function Propiedades() {
     e.stopPropagation();
     const shareUrl = `${window.location.origin}/${propiedad.slug}`;
     const shareData = {
-      title: `${propiedad.titulo} | Nexus Domo 360°`,
+      title: `${propiedad.titulo} | Nexus Tour 360°`,
       text: `¡Mira esta propiedad con recorrido virtual 360° en ${propiedad.ubicacion}!`,
       url: shareUrl
     };

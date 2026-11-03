@@ -1,0 +1,771 @@
+{
+  "1793674636824_imagen2_7125": {
+    "nombre": "Vista panoramica",
+    "imagen": "/tour/maraon/1793674636824_imagen2.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          4.31,
+          -19.53,
+          0.07
+        ],
+        "destino": "1793674639200_imagen3_7126",
+        "texto": "AREA 1,110 m²",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Home",
+        "color": "#48c007",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 25,
+        "fondoTransparente": true,
+        "colorTexto": "#0e0f3f"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -8.42,
+          -18.14,
+          0.15
+        ],
+        "destino": "1793674639200_imagen3_7126",
+        "texto": "VISTA FRONTAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Eye",
+        "color": "#1aa607",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 26,
+        "fondoTransparente": true,
+        "colorTexto": "#0c1050"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -17.44,
+          -3.75,
+          -9.05
+        ],
+        "destino": "_self",
+        "texto": "1er  ACCESO   \nTRANSPORTE URBANO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#51bf08",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -5.43,
+          -5.59,
+          -18.42
+        ],
+        "destino": "_self",
+        "texto": "2do    ACCESO   \nTRANSPORTE URBANO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#1caf08",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 11
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.33,
+          0.72,
+          -5.07
+        ],
+        "destino": "_self",
+        "texto": "QUINTA CAMPESTRE\n\"CERRITO ALEGRE\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#1caf08",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 19,
+        "fondoTransparente": true,
+        "colorTexto": "#014c65"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -14.27,
+          1.76,
+          13.9
+        ],
+        "texto": "CENTRO DE LA \nCIUDAD DE JULIACA",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Archivo Black",
+        "fontSize": 16,
+        "fondoTransparente": true,
+        "volumen3D": 2
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -9.41,
+          0.81,
+          -17.63
+        ],
+        "texto": "AUTOPISTA A LA CIUDAD DE PUNO",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 23,
+        "volumen3D": 4,
+        "fondoTransparente": true,
+        "direccion3D": 45,
+        "strokeGrosor": 0
+      }
+    ],
+    "heading": {
+      "x": -18,
+      "y": -6
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 95,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 159
+  },
+  "1793674639200_imagen3_7126": {
+    "nombre": "vista frontal",
+    "imagen": "/tour/maraon/1793674639200_imagen3.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -16.51,
+          -10.14,
+          -4.97
+        ],
+        "destino": "_self",
+        "texto": "VISTA DE AREA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Home",
+        "color": "#38b80a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -18.95,
+          -0.19,
+          -6.38
+        ],
+        "destino": "1793674636824_imagen2_7125",
+        "texto": "VISTA PANORAMICA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#0ab508",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 20
+      }
+    ],
+    "heading": {
+      "x": -33,
+      "y": 12
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 92,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 307
+  },
+  "1793674634330_imagen1_3517": {
+    "nombre": "area del terreno",
+    "imagen": "/tour/maraon/1793674634330_imagen1.webp",
+    "hotspots": [
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            15.91,
+            -12.12,
+            -0.32
+          ],
+          [
+            12.76,
+            -11.94,
+            9.73
+          ],
+          [
+            -5.04,
+            -18.25,
+            6.43
+          ],
+          [
+            -9.38,
+            -15.93,
+            -7.62
+          ],
+          [
+            11.15,
+            -13.32,
+            -9.91
+          ],
+          [
+            16.17,
+            -11.7,
+            -1.22
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.1,
+        "colorBorde": "#edfe06",
+        "grosorBorde": 2,
+        "texto": "Lote 1",
+        "manzana": "11",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "240000",
+        "area": "1110",
+        "fijo": false,
+        "mostrarRelleno": true,
+        "mostrarEtiqueta": false,
+        "mostrarBorde": true
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -13.44,
+          -14.81,
+          -0.36
+        ],
+        "destino": "1793674639200_imagen3_7126",
+        "texto": "VISTA FRONTAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#4cb805",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Poppins",
+        "fontSize": 19
+      }
+    ],
+    "heading": {
+      "x": -74,
+      "y": -122
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 97,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 156
+  },
+  "1793674644099_imagen5_7128": {
+    "nombre": "1er PARADERO",
+    "imagen": "/tour/maraon/1793674644099_imagen5.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.38,
+          -3.27,
+          3.72
+        ],
+        "destino": "1793674636824_imagen2_7125",
+        "texto": "VISTA PANORAMICA\nDEL TERRENO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#1fa404",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Archivo Black",
+        "fontSize": 22,
+        "fondoTransparente": true,
+        "colorTexto": "#0a154d"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          13.86,
+          -4.82,
+          -13.59
+        ],
+        "destino": "1793674641673_imagen4_7127",
+        "texto": "2do ACCESO\nTRANSPORTE URBANO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#26ad01",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Archivo Black",
+        "colorTexto": "#0a154d",
+        "fontSize": 21,
+        "fondoTransparente": true
+      },
+      {
+        "tipo": "linea",
+        "vertices": [
+          [
+            18.79,
+            -5.03,
+            4.66
+          ],
+          [
+            18.92,
+            -6.47,
+            0.43
+          ],
+          [
+            0.48,
+            -19.99,
+            0.53
+          ]
+        ],
+        "colorBorde": "#ffffff",
+        "grosorBorde": 3,
+        "texto": "RUTA DE MICRO NARANJA",
+        "fijo": false,
+        "mostrarEtiqueta": true,
+        "color": "#ef4444",
+        "opacidad": 1,
+        "rotacion": 1
+      }
+    ],
+    "heading": {
+      "x": -17,
+      "y": -140
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 94,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 172
+  },
+  "1793674641673_imagen4_7127": {
+    "nombre": "2do  PARADERO ",
+    "imagen": "/tour/maraon/1793674641673_imagen4.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -16.43,
+          -4.44,
+          10.5
+        ],
+        "destino": "1793674636824_imagen2_7125",
+        "texto": "VISTA PANORAMICA\nDEL TERRENO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#2bc101",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 14
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -12.92,
+          -4.38,
+          -14.63
+        ],
+        "destino": "1793674644099_imagen5_7128",
+        "texto": "1er  ACCESO   \nTRANSPORTE URBANO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#28bd0a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 12
+      },
+      {
+        "tipo": "linea",
+        "vertices": [
+          [
+            -17.98,
+            -5.47,
+            6.83
+          ],
+          [
+            -17.83,
+            -8.61,
+            2.83
+          ],
+          [
+            -17.17,
+            -10.23,
+            0.74
+          ],
+          [
+            -4.14,
+            -19.46,
+            -2.02
+          ]
+        ],
+        "colorBorde": "#ffffff",
+        "grosorBorde": 3,
+        "texto": "Tramo de calle",
+        "fijo": false,
+        "fondoTransparente": false,
+        "fontSize": 20,
+        "mostrarTextoSiempre": false,
+        "mostrarEtiqueta": false,
+        "color": "#ef4444"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          4.82,
+          0.62,
+          19.4
+        ],
+        "destino": "_self",
+        "texto": "QUINTA CAMPESTRE\n\"CERRITO ALEGRE\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#20c20a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 19
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          14.53,
+          -6.52,
+          12.09
+        ],
+        "destino": "_self",
+        "texto": "CENTRO EDUCATIVO\nINICIAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#26ad01",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -33,
+      "y": 62
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 96,
+      "contraste": 88,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 69
+  },
+  "1793674670051_portada_7129": {
+    "nombre": "portada",
+    "imagen": "/tour/maraon/1793674670051_portada.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675184493_imagen6_4423": {
+    "nombre": "imagen6",
+    "imagen": "/tour/maraon/1793675184493_imagen6.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "interior_luminoso",
+    "colorSettings": {
+      "preset": "interior_luminoso",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675186363_imagen7_4424": {
+    "nombre": "imagen7",
+    "imagen": "/tour/maraon/1793675186363_imagen7.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675188153_imagen8_4425": {
+    "nombre": "imagen8",
+    "imagen": "/tour/maraon/1793675188153_imagen8.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675189914_imagen9_4427": {
+    "nombre": "imagen9",
+    "imagen": "/tour/maraon/1793675189914_imagen9.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675191730_imagen10_4428": {
+    "nombre": "imagen10",
+    "imagen": "/tour/maraon/1793675191730_imagen10.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675214681_imagen11_4429": {
+    "nombre": "imagen11",
+    "imagen": "/tour/maraon/1793675214681_imagen11.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675216314_imagen12_4430": {
+    "nombre": "imagen12",
+    "imagen": "/tour/maraon/1793675216314_imagen12.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  },
+  "1793675218016_imagen13_4431": {
+    "nombre": "imagen13",
+    "imagen": "/tour/maraon/1793675218016_imagen13.webp",
+    "hotspots": [],
+    "heading": {
+      "x": 0,
+      "y": 0
+    },
+    "norteMagnetico": 0,
+    "filtro": "normal",
+    "colorSettings": {
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    }
+  }
+}

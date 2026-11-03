@@ -74,7 +74,7 @@ export default function PropiedadDetalle() {
     if (!propiedad) return;
     const shareUrl = window.location.href;
     const shareData = {
-      title: `${propiedad.titulo} | Nexus Domo 360°`,
+      title: `${propiedad.titulo} | Nexus Tour 360°`,
       text: `¡Mira esta propiedad con recorrido virtual 360° en ${propiedad.ubicacion}!`,
       url: shareUrl
     };
@@ -112,7 +112,7 @@ export default function PropiedadDetalle() {
 
   useEffect(() => {
     if (propiedad) {
-      document.title = `${propiedad.titulo} | Angel Domo 360°`;
+      document.title = `${propiedad.titulo} | Angel Tour 360°`;
     }
   }, [propiedad]);
 

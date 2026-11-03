@@ -18,32 +18,32 @@ const baseHtml = fs.readFileSync(indexHtmlPath, 'utf-8')
 const routes = [
   {
     path: 'bio',
-    title: 'Angel Apaza | Domo 360° - Proyectos Inmobiliarios y Recorridos Virtuales',
-    description: 'Conoce los proyectos inmobiliarios, terrenos en venta y servicios de recorridos virtuales 360° en Juliaca y Puno con Angel Apaza Domo 360°.'
+    title: 'Angel Tour 360° - Proyectos Inmobiliarios y Recorridos Virtuales',
+    description: 'Conoce los proyectos inmobiliarios, terrenos en venta y servicios de recorridos virtuales 360° en Juliaca y Puno con Angel Tour 360°.'
   },
   {
     path: 'vende-tu-propiedad',
-    title: 'Vende tu Terreno o Casa en Juliaca y Puno | Nexus Domo 360°',
+    title: 'Vende tu Terreno o Casa en Juliaca y Puno | Nexus Tour 360°',
     description: 'Vendemos tu predio al mejor precio del mercado con tecnología 360°, vuelos de dron y saneamiento legal SUNARP sin costo anticipado.'
   },
   {
     path: 'servicios-360',
-    title: 'Servicios de Recorridos Virtuales 360° y Dron en Juliaca y Puno | Nexus Domo 360°',
+    title: 'Servicios de Recorridos Virtuales 360° y Dron en Juliaca y Puno | Nexus Tour 360°',
     description: 'Digitalización 360° interactiva para proyectos inmobiliarios, lotizaciones, comercios y constructoras en el sur del Perú.'
   },
   {
     path: 'propiedades',
-    title: 'Catálogo de Terrenos y Casas en Venta en Juliaca y Puno | Nexus Domo 360°',
+    title: 'Catálogo de Terrenos y Casas en Venta en Juliaca y Puno | Nexus Tour 360°',
     description: 'Explora lotes saneados, terrenos comerciales y casas residenciales en venta en Juliaca con tour virtual 360° y vistas aéreas.'
   },
   {
     path: 'compra-seguro',
-    title: 'Compra Seguro: Auditoría Legal y Verificación SUNARP | Nexus Domo 360°',
+    title: 'Compra Seguro: Auditoría Legal y Verificación SUNARP | Nexus Tour 360°',
     description: 'Garantizamos compras inmobiliarias seguras en Juliaca y Puno. Verificamos partidas SUNARP, gravámenes y medidas perimétricas reales.'
   },
   {
     path: 'contacto',
-    title: 'Contactar Asesoría Inmobiliaria y Producción 360° | Nexus Domo 360°',
+    title: 'Contactar Asesoría Inmobiliaria y Producción 360° | Nexus Tour 360°',
     description: 'Comunícate con nuestro equipo en Juliaca para consultas sobre venta de inmuebles, cotizaciones de tours 360° o asesoría legal.'
   }
 ]
@@ -52,7 +52,7 @@ const routes = [
 propiedades.forEach((prop) => {
   routes.push({
     path: prop.slug,
-    title: `${prop.titulo} | Nexus Domo 360°`,
+    title: `${prop.titulo} | Nexus Tour 360°`,
     description: `${prop.descripcionCorta || prop.descripcionCompleta?.slice(0, 150) || 'Propiedad en venta en Juliaca con recorrido virtual 360°.'}`,
     image: prop.portada
   })

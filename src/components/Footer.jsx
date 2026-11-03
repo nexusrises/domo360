@@ -125,13 +125,13 @@ export default function Footer() {
               to="/propiedades" 
               onClick={handleLogoClick} 
               className="flex flex-row items-center gap-3 group select-none cursor-pointer w-fit"
-              title="Nexus Domo 360° | Propiedades"
+              title="Nexus Tour 360° | Propiedades"
             >
-              <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Nexus Domo 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
+              <img src={`${import.meta.env.BASE_URL}logo3.2.webp`} alt="Nexus Tour 360 Logo" className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110" />
 
               <div className="text-2xl sm:text-3xl md:text-4xl font-logo flex items-center whitespace-nowrap">
                 <span className={`transition-transform duration-300 group-hover:scale-105 ${isLightPage ? 'text-slate-900' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]'}`}>Nexus</span>
-                <span className="text-gradient-rise drop-shadow-[0_2px_8px_rgba(0,242,254,0.25)] ml-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">Domo 360°</span>
+                <span className="text-gradient-rise drop-shadow-[0_2px_8px_rgba(0,242,254,0.25)] ml-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">Tour 360°</span>
               </div>
             </Link>
             <p className={`text-sm leading-relaxed ${isLightPage ? 'text-slate-600 font-medium' : 'text-gray-400'}`}>
@@ -254,7 +254,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col items-center md:items-end text-center md:text-right gap-1">
           <p className="font-medium text-xs">
-            &copy; {currentYear} Nexus Domo 360°. Todos los derechos reservados.
+            &copy; {currentYear} Nexus Tour 360°. Todos los derechos reservados.
           </p>
         </div>
       </div>

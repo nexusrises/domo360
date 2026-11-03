@@ -40,7 +40,7 @@ export default function Contacto() {
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success'
   const [whatsappLink, setWhatsappLink] = useState('');
 
-  // Estados Formulario 2: Cotizador Interactivo según Tarifario Oficial de Nexus Domo 360
+  // Estados Formulario 2: Cotizador Interactivo según Tarifario Oficial de Nexus Tour 360
   const [cotizServicio, setCotizServicio] = useState('landing'); // 'landing' | 'corporativa' | 'catalogo' | 'escaneo'
   const [cotizEscaneoModalidad, setCotizEscaneoModalidad] = useState('individual'); // 'individual' (1 lote S/1000) | 'combo' (3 lotes S/2500)
   const [cotizPlanMensual, setCotizPlanMensual] = useState('ninguno'); // 'ninguno' | 'plan_a' | 'plan_b' | 'plan_c'
@@ -52,9 +52,9 @@ export default function Contacto() {
   // Actualizar el título de la página según la pestaña
   useEffect(() => {
     if (activeTab === 'cotizador') {
-      document.title = "Cotizador Oficial de Servicios 360° & Web | Nexus Domo 360°";
+      document.title = "Cotizador Oficial de Servicios 360° & Web | Nexus Tour 360°";
     } else {
-      document.title = "Vender mi Propiedad con Tecnología 3D | Angel Domo 360°";
+      document.title = "Vender mi Propiedad con Tecnología 3D | Angel Tour 360°";
     }
     window.scrollTo(0, 0);
   }, [activeTab]);
@@ -68,7 +68,7 @@ export default function Contacto() {
     } else if (cotizServicio === 'corporativa') {
       rango = { min: 2500, max: 3500, tiempo: '3 a 5 semanas', descripcion: 'Página Web Corporativa Multi-pestaña' };
     } else if (cotizServicio === 'catalogo') {
-      rango = { min: 4500, max: 6000, tiempo: '4 a 6 semanas', descripcion: 'Sistema Catálogo Domo 360° Multi-propiedad' };
+      rango = { min: 4500, max: 6000, tiempo: '4 a 6 semanas', descripcion: 'Sistema Catálogo Tour 360° Multi-propiedad' };
     } else if (cotizServicio === 'escaneo') {
       if (cotizEscaneoModalidad === 'combo') {
         rango = { min: 2500, max: 2500, tiempo: '1 jornada de rodaje', descripcion: 'Paquete Combo: 3 Terrenos/Propiedades (Dron Mini 5 + Osmo 360)' };
@@ -96,13 +96,13 @@ export default function Contacto() {
     const serviciosNombres = {
       landing: 'Landing Page / Perfil Profesional (S/ 1,200 - S/ 1,500)',
       corporativa: 'Página Web Corporativa (S/ 2,500 - S/ 3,500)',
-      catalogo: 'Sistema Catálogo Domo 360° (Desde S/ 4,500 a más)',
+      catalogo: 'Sistema Catálogo Tour 360° (Desde S/ 4,500 a más)',
       escaneo: cotizEscaneoModalidad === 'combo' 
         ? 'Paquete Combo: 3 Terrenos en 1 jornada (S/ 2,500)' 
         : 'Escaneo 360° + Dron DJI Mini 5 para 1 Propiedad (S/ 1,000)'
     };
 
-    let baseText = `Hola Angel, estuve en el cotizador interactivo de Nexus Domo 360° y me interesa el siguiente servicio:\n\n` +
+    let baseText = `Hola Angel, estuve en el cotizador interactivo de Nexus Tour 360° y me interesa el siguiente servicio:\n\n` +
       `*Servicio Principal:* ${serviciosNombres[cotizServicio]}\n` +
       `*Tiempo Estimado de Entrega:* ${cotiz.tiempo}\n` +
       `*Rango de Inversión:* ${cotiz.min === cotiz.max ? `S/. ${cotiz.min}` : `S/. ${cotiz.min} - S/. ${cotiz.max}`}\n`;
@@ -236,7 +236,7 @@ export default function Contacto() {
               Calcula el presupuesto de tu <span className="text-gradient-rise">Tour 360° o Portal Web</span>
             </h1>
             <p className="text-slate-600 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed relative z-10 font-sans font-medium">
-              Obtén una estimación inmediata según el alcance de tu proyecto y recibe atención prioritaria en WhatsApp de Ángel Domo 360°.
+              Obtén una estimación inmediata según el alcance de tu proyecto y recibe atención prioritaria en WhatsApp de Ángel Tour 360°.
             </p>
           </>
         ) : (
@@ -331,7 +331,7 @@ export default function Contacto() {
                         },
                         { 
                           id: 'catalogo', 
-                          label: 'Sistema Catálogo Domo 360°', 
+                          label: 'Sistema Catálogo Tour 360°', 
                           tarifa: 'Desde S/. 4,500 a más',
                           tiempo: 'Entrega: 4 a 6 semanas',
                           desc: 'Plataforma completa tipo catálogo con tarjetas de propiedades, buscador, mapas, fotos de dron y recorridos 360°.',
@@ -557,7 +557,7 @@ export default function Contacto() {
                       <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
                     </svg>
                     <span className="text-center leading-snug">
-                      ENVIAR COTIZACIÓN A WHATSAPP DE ÁNGEL DOMO 360 ➔
+                      ENVIAR COTIZACIÓN A WHATSAPP DE ÁNGEL TOUR 360 ➔
                     </span>
                   </button>
                 </form>
@@ -804,7 +804,7 @@ export default function Contacto() {
                   allowFullScreen 
                   loading="lazy" 
                   referrerPolicy="strict-origin-when-cross-origin"
-                  title="Ubicación Nexus Domo 360° en el Centro de Juliaca, Perú"
+                  title="Ubicación Nexus Tour 360° en el Centro de Juliaca, Perú"
                 />
               </div>
             </div>

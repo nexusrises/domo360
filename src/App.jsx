@@ -105,7 +105,7 @@ function AppContent() {
         <Suspense fallback={
           <div className="w-full min-h-[60vh] flex flex-col items-center justify-center gap-3">
             <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
-            <span className="text-xs font-mono text-cyan-400/80">Cargando Nexus Domo 360°...</span>
+            <span className="text-xs font-mono text-cyan-400/80">Cargando Nexus Tour 360°...</span>
           </div>
         }>
           <Routes>

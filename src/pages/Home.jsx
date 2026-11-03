@@ -57,7 +57,7 @@ export default function Home() {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    document.title = "Nexus Domo 360° | Tours Virtuales 360°, Lotes y Propiedades en Juliaca y Sur del Perú";
+    document.title = "Nexus Tour 360° | Tours Virtuales 360°, Lotes y Propiedades en Juliaca y Sur del Perú";
     localStorage.setItem('domo360_theme', 'light');
     window.dispatchEvent(new CustomEvent('theme-change', { detail: 'light' }));
   }, []);
@@ -122,7 +122,7 @@ export default function Home() {
     e.stopPropagation();
     const shareUrl = `${window.location.origin}/${prop.slug}`;
     const shareData = {
-      title: `${prop.titulo} | Nexus Domo 360°`,
+      title: `${prop.titulo} | Nexus Tour 360°`,
       text: `¡Mira esta propiedad destacada con recorrido 360° en ${prop.ubicacion}!`,
       url: shareUrl
     };
@@ -439,7 +439,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. SECCIÓN PROTAGONISTA: TOURS 360° PARA LOTES Y TERRENOS CON DOMO 360° */}
+      {/* 3. SECCIÓN PROTAGONISTA: TOURS 360° PARA LOTES Y TERRENOS CON TOUR 360° */}
       <section id="tours-360-lotes" className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-12 relative z-10">
         <div className="rounded-3xl p-4 sm:p-8 md:p-12 border shadow-xl relative overflow-hidden bg-white/95 border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.06)] text-slate-900">
           {/* Luces de ambientación sutiles */}
@@ -454,7 +454,7 @@ export default function Home() {
                 <span>TOURS VIRTUALES 360° & VUELOS DE DRON</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-display tracking-tight text-slate-900 mb-4">
-                Tours 360° para Lotes y Terrenos con <span className="text-gradient-rise">Domo 360°</span>
+                Tours 360° para Lotes y Terrenos con <span className="text-gradient-rise">Tour 360°</span>
               </h2>
               <p className="text-sm md:text-base leading-relaxed text-slate-600">
                 ¿Inversionistas que están fuera de la ciudad o de viaje y no pueden viajar a ver la zona? ¿Clientes con dudas intentando descifrar un plano 2D en papel?
@@ -539,7 +539,7 @@ export default function Home() {
             <span>SOLUCIONES DE ALTO IMPACTO COMERCIAL</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-display tracking-tight text-slate-900 mb-3">
-            Tecnología <span className="text-gradient-rise">Domo 360°</span> Adaptada a tu Sector
+            Tecnología <span className="text-gradient-rise">Tour 360°</span> Adaptada a tu Sector
           </h2>
           <p className="text-xs sm:text-sm md:text-base leading-relaxed text-slate-600 font-medium">
             No importa si comercializas terrenos por hectáreas, departamentos de estreno o gestionas un hotel. Diseñamos la experiencia inmersiva que multiplica tus conversiones y ahorra tiempo.
@@ -689,7 +689,7 @@ export default function Home() {
               TECNOLOGÍA Y CONFIANZA INMOBILIARIA
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight font-display mb-4 text-slate-900">
-              ¿Por qué elegir Nexus <span className="text-gradient-rise">Domo 360°</span>?
+              ¿Por qué elegir Nexus <span className="text-gradient-rise">Tour 360°</span>?
             </h2>
             <p className="text-sm md:text-base leading-relaxed text-slate-600">
               Eliminamos la incertidumbre y las visitas a ciegas. Somos el primer ecosistema inmobiliario del sur del Perú que fusiona realidad virtual interactiva con rigor legal registral.
