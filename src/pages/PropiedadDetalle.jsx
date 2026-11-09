@@ -238,7 +238,7 @@ export default function PropiedadDetalle() {
                   <span className="w-1.5 h-3.5 bg-[#008b99] rounded-full"></span>
                   {propiedad.tipo.toUpperCase() === 'CASA' ? 'Descripción de la Casa' : 'Descripción del Proyecto'}
                 </h3>
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed font-sans text-left tracking-wide font-normal">
+                <p className="text-slate-600 text-sm md:text-base leading-relaxed font-sans text-left tracking-wide font-normal whitespace-pre-line">
                   {propiedad.descripcionCompleta}
                 </p>
               </div>

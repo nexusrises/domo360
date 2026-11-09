@@ -49,12 +49,14 @@ export default function Propiedades() {
     return params.get('cat') || 'todos';
   });
 
+  const propiedadesActivas = propiedades.filter((p) => !p.ocultar);
+
   const categorias = [
-    { id: 'todos', label: 'Todos', labelShort: 'Todos', icon: Grid, count: propiedades.length },
-    { id: 'terrenos', label: 'Terrenos / Lotizaciones', labelShort: 'Terrenos', icon: Map, count: propiedades.filter(p => p.tipo === 'TERRENO / LOTE').length },
-    { id: 'casas', label: 'Casas y Departamentos', labelShort: 'Casas/Dptos', icon: HomeIcon, count: propiedades.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length },
-    { id: 'oficinas', label: 'Oficinas Corporativas', labelShort: 'Oficinas', icon: Briefcase, count: propiedades.filter(p => p.tipo === 'OFICINA').length },
-    { id: 'tiendas', label: 'Tiendas / Locales', labelShort: 'Tiendas/Locales', icon: Store, count: propiedades.filter(p => p.tipo === 'TIENDA / LOCAL').length }
+    { id: 'todos', label: 'Todos', labelShort: 'Todos', icon: Grid, count: propiedadesActivas.length },
+    { id: 'terrenos', label: 'Terrenos / Lotizaciones', labelShort: 'Terrenos', icon: Map, count: propiedadesActivas.filter(p => p.tipo === 'TERRENO / LOTE').length },
+    { id: 'casas', label: 'Casas y Departamentos', labelShort: 'Casas/Dptos', icon: HomeIcon, count: propiedadesActivas.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length },
+    { id: 'oficinas', label: 'Oficinas Corporativas', labelShort: 'Oficinas', icon: Briefcase, count: propiedadesActivas.filter(p => p.tipo === 'OFICINA').length },
+    { id: 'tiendas', label: 'Tiendas / Locales', labelShort: 'Tiendas/Locales', icon: Store, count: propiedadesActivas.filter(p => p.tipo === 'TIENDA / LOCAL').length }
   ];
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function Propiedades() {
   }, []);
 
   // Filtrado en tiempo real interactivo
-  const propiedadesFiltradas = propiedades.filter((p) => {
+  const propiedadesFiltradas = propiedadesActivas.filter((p) => {
     const matchCategory = activeCategory === 'todos' ||
       (activeCategory === 'terrenos' && p.tipo === 'TERRENO / LOTE') ||
       (activeCategory === 'casas' && (p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO')) ||
@@ -183,11 +185,11 @@ export default function Propiedades() {
                 onChange={(e) => setActiveCategory(e.target.value)}
                 className="bg-transparent border-0 p-0 text-xs md:text-sm font-semibold text-slate-900 focus:outline-none focus:ring-0 w-full cursor-pointer appearance-none pr-6 [&>option]:bg-white [&>option]:text-slate-900 font-display"
               >
-                <option value="todos">Todos ({propiedades.length})</option>
-                <option value="terrenos">Terrenos ({propiedades.filter(p => p.tipo === 'TERRENO / LOTE').length})</option>
-                <option value="casas">Casas y Dptos ({propiedades.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
-                <option value="oficinas">Oficinas ({propiedades.filter(p => p.tipo === 'OFICINA').length})</option>
-                <option value="tiendas">Tiendas ({propiedades.filter(p => p.tipo === 'TIENDA / LOCAL').length})</option>
+                <option value="todos">Todos ({propiedadesActivas.length})</option>
+                <option value="terrenos">Terrenos ({propiedadesActivas.filter(p => p.tipo === 'TERRENO / LOTE').length})</option>
+                <option value="casas">Casas y Dptos ({propiedadesActivas.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
+                <option value="oficinas">Oficinas ({propiedadesActivas.filter(p => p.tipo === 'OFICINA').length})</option>
+                <option value="tiendas">Tiendas ({propiedadesActivas.filter(p => p.tipo === 'TIENDA / LOCAL').length})</option>
               </select>
             </div>
             <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover/select:text-slate-800 transition-colors duration-200">
@@ -253,11 +255,11 @@ export default function Propiedades() {
                 onChange={(e) => setActiveCategory(e.target.value)}
                 className="bg-transparent border-0 p-0 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-0 w-full cursor-pointer appearance-none pr-6 [&>option]:bg-white [&>option]:text-slate-900 font-display"
               >
-                <option value="todos">Todos ({propiedades.length})</option>
-                <option value="terrenos">Terrenos ({propiedades.filter(p => p.tipo === 'TERRENO / LOTE').length})</option>
-                <option value="casas">Casas y Dptos ({propiedades.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
-                <option value="oficinas">Oficinas ({propiedades.filter(p => p.tipo === 'OFICINA').length})</option>
-                <option value="tiendas">Tiendas ({propiedades.filter(p => p.tipo === 'TIENDA / LOCAL').length})</option>
+                <option value="todos">Todos ({propiedadesActivas.length})</option>
+                <option value="terrenos">Terrenos ({propiedadesActivas.filter(p => p.tipo === 'TERRENO / LOTE').length})</option>
+                <option value="casas">Casas y Dptos ({propiedadesActivas.filter(p => p.tipo === 'CASA' || p.tipo === 'CASA RESIDENCIAL' || p.tipo === 'DEPARTAMENTO').length})</option>
+                <option value="oficinas">Oficinas ({propiedadesActivas.filter(p => p.tipo === 'OFICINA').length})</option>
+                <option value="tiendas">Tiendas ({propiedadesActivas.filter(p => p.tipo === 'TIENDA / LOCAL').length})</option>
               </select>
             </div>
             <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">

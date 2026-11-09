@@ -49,7 +49,7 @@ const routes = [
 ]
 
 // Agregar cada propiedad dinámica como ruta física
-propiedades.forEach((prop) => {
+propiedades.filter(p => !p.ocultar).forEach((prop) => {
   routes.push({
     path: prop.slug,
     title: `${prop.titulo} | Nexus Tour 360°`,

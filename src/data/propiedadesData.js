@@ -29,8 +29,8 @@ export const propiedades = [
   },
   {
     id: 8,
-    slug: 'terreno-ilave-taparachi-juliaca',
-    titulo: 'Terreno Marañón - Taparachi: 1,120 m² Cercado con Muros Sólidos',
+    slug: 'terreno-oliveros-taparachi-juliaca',
+    titulo: 'Terreno Oliveros - Taparachi: 1,120 m² Cercado con Muros Sólidos',
     tipo: 'TERRENO / LOTE',
     tipoColor: 'bg-[#080d1a]/95 text-[#59b2ff] border-blue-500/45 shadow-[0_2px_8px_rgba(59,130,246,0.15)]',
     tiene360: true,
@@ -40,8 +40,8 @@ export const propiedades = [
     referencia: 'A 1 cdra. de Av. Marañón, a 3 cdras. del Colegio Saco Oliveros y Club Náutica (Piscina)',
     mapsLink: 'https://maps.google.com/?q=-15.5203500,-70.1285594',
     mapsIframe: 'https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d326.4978412376548!2d-70.12855941203108!3d-15.520350035109455!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDMxJzEzLjEiUyA3MMKwMDcnNDIuOCJX!5e1!3m2!1ses!2spe!4v1793674318277!5m2!1ses!2spe',
-    descripcionCorta: 'Extraordinario terreno encanchonado de 1,120 m² con muros sólidos y 21.65 m de frentera en Jr. Ilave, Urb. Taparachi. Ideal para quinta campestre, taller estructural o almacén logístico...',
-    descripcionCompleta: 'Excepcional oportunidad de inversión comercial o residencial en este GRAN TERRENO ENCANCHONADO con un área total de 1,120 m² (1,110.20 m² según plano perimétrico), ubicado estratégicamente en el Jr. Ilave (antes Calle Nueva), dentro de la consolidada Urb. Taparachi en Juliaca, justo a la entrada del sector Cerrito Alegre y El Bosque.\n\nEl predio se encuentra totalmente cercado y protegido con muros perimétricos sólidos. Destaca por su imponente frentera de 21.65 metros lineales hacia el Jr. Ilave y un fondo promedio de más de 34 metros, lo que brinda una versatilidad arquitectónica incomparable y facilita el acceso y maniobra de camiones o maquinaria pesada.\n\nPor sus generosas dimensiones y entorno, es el terreno perfecto para:\n• Taller de estructuras metálicas, maestranza o mecánica pesada.\n• Centro logístico, almacén mayorista o depósito comercial.\n• Proyecto residencial cerrado, condominio de viviendas o quinta campestre privada.\n• Complejo recreacional deportivo (canchas de césped sintético) o local de eventos.\n\nUbicación y Conectividad Privilegiada:\nSituado a tan solo 1 cuadra de la Av. Marañón, a 3 cuadras del reconocido Colegio Saco Oliveros y del Club Deportivo Náutica (con piscina recreacional), y a 2 cuadras de un centro educativo inicial, además de tener una quinta campestre a pocos minutos. La zona goza de transporte urbano continuo: la línea de micro "Naranja" transita a solo una cuadra y la línea "100" recorre la ruta aledaña.\n\nServicios Básicos con Factibilidad Inmediata:\nLa red eléctrica pasa directamente por el mismo terreno lista para solicitar medidor y bajada inmediata. De igual forma, la red matriz principal de agua y desagüe pasa por toda la frentera del Jr. Ilave frente al terreno, facilitando una rápida conexión domiciliaria o comercial.',
+    descripcionCorta: 'Extraordinario terreno encanchonado de 1,120 m² con muros sólidos y 21.65 m de frentera en Jr. Ilave, Urb. Taparachi. Opción de compra flexible: lote completo o la mitad subdividida (~555 m²)...',
+    descripcionCompleta: 'Excepcional oportunidad de inversión comercial o residencial en este GRAN TERRENO ENCANCHONADO con un área total de 1,120 m² (1,110.20 m² según plano perimétrico), ubicado estratégicamente en el Jr. Ilave (antes Calle Nueva), dentro de la consolidada Urb. Taparachi en Juliaca, justo a la entrada del sector Cerrito Alegre y El Bosque.\n\n🔹 MODALIDAD DE COMPRA FLEXIBLE (COMPLETO O POR LA MITAD):\nSi buscas evaluar la compra del terreno completo o la opción de llevarte la mitad subdividida, el predio te ofrece ambas facilidades con total independencia jurídica y física:\n• Opción A (Terreno Completo - 1,120 m²): Extraordinaria frentera de 21.65 metros lineales sobre el Jr. Ilave. La escala perfecta para talleres de estructuras metálicas, maestranza, almacenes logísticos o complejos recreacionales ($220,000 USD).\n• Opción B (Mitad Subdividida - aprox. 555 m² a 560 m²): Con más de 10.5 metros de frontis propio y directo a la calle, ideal para construir una quinta campestre privada, vivienda familiar espaciosa o taller mediano con acceso vehicular holgado.\n\n🔹 SEGURIDAD Y CARACTERÍSTICAS DEL PREDIO:\nEl lote se encuentra totalmente delimitado y resguardado por muros perimétricos sólidos de gran altura y un fondo promedio de más de 34 metros, garantizando privacidad, seguridad inmediata y fácil maniobra de camiones o maquinaria pesada.\n\n🔹 CONECTIVIDAD Y ENTORNO PRIVILEGIADO:\nSituado a tan solo 1 cuadra de la Av. Marañón, a 3 cuadras del reconocido Colegio Saco Oliveros y del Club Deportivo Náutica (con piscina recreacional), y a 2 cuadras de un centro educativo inicial, además de tener una quinta campestre a pocos minutos. La zona goza de transporte urbano continuo: la línea de micro "Naranja" transita a solo una cuadra y la línea "100" recorre la ruta aledaña.\n\n🔹 FACTIBILIDAD DE SERVICIOS:\nLa red eléctrica pasa directamente por el mismo terreno lista para solicitar medidor y bajada inmediata. De igual forma, la red matriz principal de agua y desagüe pasa por toda la frentera del Jr. Ilave frente al terreno, facilitando una rápida conexión domiciliaria o comercial.',
     beneficios: [
       'Área total de 1,120 m² (1,110.20 m² en plano) completamente encanchonado con muros perimétricos sólidos.',
       'Amplísima frentera de 21.65 metros lineales al Jr. Ilave, ideal para doble portón o maniobra de camiones.',
@@ -50,12 +50,13 @@ export const propiedades = [
       'Excelente conectividad y transporte: Micro Línea Naranja a 1 cuadra y Línea 100 por vía adyacente.',
       'Factibilidad de servicios inmediata: cables de luz pasando por el predio y red matriz de agua y desagüe en la frentera.',
       'Máxima versatilidad: ideal para taller estructural, almacén/depósito logístico, quinta campestre o condominio.',
-      'Precio de oportunidad: $240,000 USD.'
+      'Opción de compra flexible: Adquiere el lote completo (1,120 m²) o la mitad subdividida (~555 m² a 560 m²) con más de 10.5 m de frontis propio a la calle.',
+      'Precio de oportunidad: $220,000 USD.'
     ],
     area: '1,120 m²',
     medidas: '21.65 m de frentera por Jr. Ilave x 34 m de fondo promedio',
     medidasCortas: '21.65m x 34m',
-    precio: '$240,000',
+    precio: '$220,000',
     portada: '/tour/maraon/portada_card.webp',
     tourId: 'terreno_ilave'
   },
@@ -92,6 +93,7 @@ export const propiedades = [
   },
   {
     id: 3,
+    ocultar: true,
     slug: 'casa-residencial-jr-pucara',
     titulo: 'Casa Residencial en Jr. Pucará (La Capilla)',
     tipo: 'CASA RESIDENCIAL',
@@ -177,6 +179,7 @@ export const propiedades = [
   },
   {
     id: 6,
+    ocultar: true,
     slug: 'lote-nuevo-juliaca',
     titulo: 'Lote Campestre Listo Para Editar',
     tipo: 'TERRENO / LOTE',
@@ -204,6 +207,7 @@ export const propiedades = [
   },
   {
     id: 7,
+    ocultar: true,
     slug: 'local-comercial-manco-capac',
     titulo: 'Local Comercial Galería San Román',
     tipo: 'TIENDA / LOCAL',
@@ -231,6 +235,7 @@ export const propiedades = [
   },
   {
     id: 9,
+    ocultar: true,
     slug: 'oficina-premium-torre-juliaca',
     titulo: 'Oficina Premium Centro de Negocios',
     tipo: 'OFICINA',

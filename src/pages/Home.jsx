@@ -83,7 +83,8 @@ export default function Home() {
   };
 
   // Seleccionar propiedades destacadas
-  const propiedadesDestacadas = propiedades.slice(0, 4);
+  const propiedadesActivas = propiedades.filter((p) => !p.ocultar);
+  const propiedadesDestacadas = propiedadesActivas.slice(0, 4);
   const [carruselIndex, setCarruselIndex] = useState(0);
 
   const siguienteSlide = () => {
@@ -278,7 +279,7 @@ export default function Home() {
               to="/propiedades"
               className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#008b99] hover:underline"
             >
-              Ver las {propiedades.length} propiedades
+              Ver las {propiedadesActivas.length} propiedades
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
 
