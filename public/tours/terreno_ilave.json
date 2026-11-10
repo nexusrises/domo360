@@ -179,6 +179,63 @@
         "fondoTransparente": true,
         "direccion3D": 45,
         "strokeGrosor": 0
+      },
+      {
+        "tipo": "linea",
+        "vertices": [
+          [
+            -8.38,
+            -18.16,
+            0.2
+          ],
+          [
+            -10.54,
+            -13.13,
+            -10.79
+          ],
+          [
+            -17,
+            -5.77,
+            -8.81
+          ]
+        ],
+        "colorBorde": "#ffffff",
+        "grosorBorde": 3,
+        "texto": "Tramo de calle",
+        "fijo": false,
+        "color": "#ef4444",
+        "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "linea",
+        "vertices": [
+          [
+            -8.02,
+            -18.32,
+            -0.33
+          ],
+          [
+            -9.93,
+            -12.36,
+            -12.2
+          ],
+          [
+            -9.6,
+            -9.96,
+            -14.45
+          ],
+          [
+            -5.87,
+            -7.28,
+            -17.68
+          ]
+        ],
+        "colorBorde": "#ffffff",
+        "grosorBorde": 3,
+        "texto": "Tramo de calle",
+        "fijo": false,
+        "color": "#ef4444",
+        "mostrarEtiqueta": false
       }
     ],
     "heading": {
@@ -589,6 +646,29 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -6.47,
+          -1.34,
+          -18.88
+        ],
+        "destino": "_self",
+        "texto": "COLEGIO\n\" SACO OLIVEROS \"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#2ba30a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
       }
     ],
     "heading": {
@@ -599,173 +679,11 @@
     "filtro": "drone_cielo_azul",
     "colorSettings": {
       "preset": "drone_cielo_azul",
-      "brillo": 96,
-      "contraste": 88,
+      "brillo": 101,
+      "contraste": 90,
       "saturacion": 100,
       "temperatura": 0
     },
     "northOffset": 69
-  },
-  "1793674670051_portada_7129": {
-    "nombre": "portada",
-    "imagen": "/tour/maraon/1793674670051_portada.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675184493_imagen6_4423": {
-    "nombre": "imagen6",
-    "imagen": "/tour/maraon/1793675184493_imagen6.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "interior_luminoso",
-    "colorSettings": {
-      "preset": "interior_luminoso",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675186363_imagen7_4424": {
-    "nombre": "imagen7",
-    "imagen": "/tour/maraon/1793675186363_imagen7.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675188153_imagen8_4425": {
-    "nombre": "imagen8",
-    "imagen": "/tour/maraon/1793675188153_imagen8.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675189914_imagen9_4427": {
-    "nombre": "imagen9",
-    "imagen": "/tour/maraon/1793675189914_imagen9.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675191730_imagen10_4428": {
-    "nombre": "imagen10",
-    "imagen": "/tour/maraon/1793675191730_imagen10.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675214681_imagen11_4429": {
-    "nombre": "imagen11",
-    "imagen": "/tour/maraon/1793675214681_imagen11.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675216314_imagen12_4430": {
-    "nombre": "imagen12",
-    "imagen": "/tour/maraon/1793675216314_imagen12.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
-  },
-  "1793675218016_imagen13_4431": {
-    "nombre": "imagen13",
-    "imagen": "/tour/maraon/1793675218016_imagen13.webp",
-    "hotspots": [],
-    "heading": {
-      "x": 0,
-      "y": 0
-    },
-    "norteMagnetico": 0,
-    "filtro": "normal",
-    "colorSettings": {
-      "preset": "normal",
-      "brillo": 100,
-      "contraste": 100,
-      "saturacion": 100,
-      "temperatura": 0
-    }
   }
 }
