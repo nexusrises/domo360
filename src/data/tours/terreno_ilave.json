@@ -10,7 +10,7 @@
           -19.53,
           0.07
         ],
-        "destino": "1793674639200_imagen3_7126",
+        "destino": "1793674634330_imagen1_3517",
         "texto": "AREA 1,110 m²",
         "opacidad": 1,
         "escala": 1,
@@ -62,7 +62,7 @@
           -3.75,
           -9.05
         ],
-        "destino": "_self",
+        "destino": "1793674644099_imagen5_7128",
         "texto": "1er  ACCESO   \nTRANSPORTE URBANO",
         "opacidad": 1,
         "escala": 1,
@@ -81,11 +81,11 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          -5.43,
-          -5.59,
-          -18.42
+          -5.46,
+          -5.73,
+          -18.37
         ],
-        "destino": "_self",
+        "destino": "1793674641673_imagen4_1389",
         "texto": "2do    ACCESO   \nTRANSPORTE URBANO",
         "opacidad": 1,
         "escala": 1,
@@ -239,8 +239,8 @@
       }
     ],
     "heading": {
-      "x": -18,
-      "y": -6
+      "x": -31,
+      "y": 34
     },
     "norteMagnetico": 0,
     "filtro": "drone_cielo_azul",
@@ -264,7 +264,7 @@
           -10.14,
           -4.97
         ],
-        "destino": "_self",
+        "destino": "1793674634330_imagen1_3517",
         "texto": "VISTA DE AREA",
         "opacidad": 1,
         "escala": 1,
@@ -360,7 +360,7 @@
           ]
         ],
         "color": "#22c55e",
-        "opacidad": 0.1,
+        "opacidad": 0.15,
         "colorBorde": "#edfe06",
         "grosorBorde": 2,
         "texto": "Lote 1",
@@ -377,9 +377,9 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          -13.44,
-          -14.81,
-          -0.36
+          -13.47,
+          -14.79,
+          -0.21
         ],
         "destino": "1793674639200_imagen3_7126",
         "texto": "VISTA FRONTAL",
@@ -421,9 +421,9 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          19.38,
-          -3.27,
-          3.72
+          19.35,
+          -3.69,
+          3.46
         ],
         "destino": "1793674636824_imagen2_7125",
         "texto": "VISTA PANORAMICA\nDEL TERRENO",
@@ -439,10 +439,10 @@
         "negrita": true,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Archivo Black",
-        "fontSize": 22,
-        "fondoTransparente": true,
-        "colorTexto": "#0a154d"
+        "fuente": "Syne",
+        "fontSize": 14,
+        "fondoTransparente": false,
+        "colorTexto": "#ebebeb"
       },
       {
         "tipo": "hotspot",
@@ -451,7 +451,7 @@
           -4.82,
           -13.59
         ],
-        "destino": "1793674641673_imagen4_7127",
+        "destino": "1793674641673_imagen4_1389",
         "texto": "2do ACCESO\nTRANSPORTE URBANO",
         "opacidad": 1,
         "escala": 1,
@@ -465,10 +465,10 @@
         "negrita": true,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Archivo Black",
-        "colorTexto": "#0a154d",
-        "fontSize": 21,
-        "fondoTransparente": true
+        "fuente": "Syne",
+        "colorTexto": "#ecedf4",
+        "fontSize": 16,
+        "fondoTransparente": false
       },
       {
         "tipo": "linea",
@@ -493,68 +493,24 @@
         "grosorBorde": 3,
         "texto": "RUTA DE MICRO NARANJA",
         "fijo": false,
-        "mostrarEtiqueta": true,
+        "mostrarEtiqueta": false,
         "color": "#ef4444",
         "opacidad": 1,
         "rotacion": 1
-      }
-    ],
-    "heading": {
-      "x": -17,
-      "y": -140
-    },
-    "norteMagnetico": 0,
-    "filtro": "drone_cielo_azul",
-    "colorSettings": {
-      "preset": "drone_cielo_azul",
-      "brillo": 100,
-      "contraste": 94,
-      "saturacion": 100,
-      "temperatura": 0
-    },
-    "northOffset": 172
-  },
-  "1793674641673_imagen4_7127": {
-    "nombre": "2do  PARADERO ",
-    "imagen": "/tour/maraon/1793674641673_imagen4.webp",
-    "hotspots": [
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -16.43,
-          -4.44,
-          10.5
-        ],
-        "destino": "1793674636824_imagen2_7125",
-        "texto": "VISTA PANORAMICA\nDEL TERRENO",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "Camera",
-        "color": "#2bc101",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 14
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          -12.92,
-          -4.38,
-          -14.63
+          -17.82,
+          -4.85,
+          -7.68
         ],
-        "destino": "1793674644099_imagen5_7128",
-        "texto": "1er  ACCESO   \nTRANSPORTE URBANO",
+        "destino": "_self",
+        "texto": "COLEGIO\n\" SACO OLIVEROS \"",
         "opacidad": 1,
         "escala": 1,
-        "icono": "Camera",
-        "color": "#28bd0a",
+        "icono": "ArrowDown",
+        "color": "#f55c0a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -567,76 +523,18 @@
         "fontSize": 12
       },
       {
-        "tipo": "linea",
-        "vertices": [
-          [
-            -17.98,
-            -5.47,
-            6.83
-          ],
-          [
-            -17.83,
-            -8.61,
-            2.83
-          ],
-          [
-            -17.17,
-            -10.23,
-            0.74
-          ],
-          [
-            -4.14,
-            -19.46,
-            -2.02
-          ]
-        ],
-        "colorBorde": "#ffffff",
-        "grosorBorde": 3,
-        "texto": "Tramo de calle",
-        "fijo": false,
-        "fondoTransparente": false,
-        "fontSize": 20,
-        "mostrarTextoSiempre": false,
-        "mostrarEtiqueta": false,
-        "color": "#ef4444"
-      },
-      {
         "tipo": "hotspot",
         "posicion": [
-          4.82,
-          0.62,
-          19.4
+          -17.94,
+          -4.65,
+          7.52
         ],
         "destino": "_self",
-        "texto": "QUINTA CAMPESTRE\n\"CERRITO ALEGRE\"",
+        "texto": "CLUB DEPORTIVO\nNÁUTICA  \"PISCINA\"",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#20c20a",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 19
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          14.53,
-          -6.52,
-          12.09
-        ],
-        "destino": "_self",
-        "texto": "CENTRO EDUCATIVO\nINICIAL",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#26ad01",
+        "color": "#f55c0a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -648,18 +546,191 @@
         "fuente": "Montserrat"
       },
       {
+        "tipo": "texto",
+        "posicion": [
+          0.56,
+          -19.99,
+          0
+        ],
+        "texto": "PASA MICRO NARANJA",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1.5,
+        "inclinacion": 0,
+        "posicionTipo": "piso",
+        "escalaZoom": true,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 31,
+        "fondoTransparente": true,
+        "volumen3D": 5
+      }
+    ],
+    "heading": {
+      "x": -20,
+      "y": -118
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 94,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 172
+  },
+  "1793674641673_imagen4_1389": {
+    "nombre": "2do  PARADERO",
+    "imagen": "/tour/maraon/1793674641673_imagen4.webp",
+    "hotspots": [
+      {
         "tipo": "hotspot",
         "posicion": [
-          -6.47,
-          -1.34,
-          -18.88
+          -12.37,
+          -4.93,
+          -14.92
+        ],
+        "destino": "1793674644099_imagen5_7128",
+        "texto": "1er PARADERO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#5ac106",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Outfit",
+        "fontSize": 14
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -16.97,
+          -3.34,
+          10.05
+        ],
+        "destino": "1793674636824_imagen2_7125",
+        "texto": "VISTA PANORAMICA\nDEL TERRENO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#3ac408",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -3.83,
+          -19.63,
+          -0.11
+        ],
+        "texto": "AVENIDA  MARAÑÓN",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1.6,
+        "inclinacion": 0,
+        "posicionTipo": "piso",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "fontSize": 40,
+        "volumen3D": 3
+      },
+      {
+        "tipo": "linea",
+        "vertices": [
+          [
+            -18.05,
+            -5.39,
+            6.73
+          ],
+          [
+            -17.91,
+            -8.18,
+            3.5
+          ],
+          [
+            -17.31,
+            -9.99,
+            0.71
+          ],
+          [
+            -4.65,
+            -19.36,
+            -1.93
+          ]
+        ],
+        "colorBorde": "#ffffff",
+        "grosorBorde": 3,
+        "texto": "Tramo de calle",
+        "fijo": false,
+        "mostrarEtiqueta": false,
+        "color": "#ef4444"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          4.68,
+          0.13,
+          19.44
+        ],
+        "destino": "_self",
+        "texto": "QUINTA CAMPESTRE\n\" CERRITO ALEGRE \"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f5740a",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -3.47,
+          -2.89,
+          -19.48
         ],
         "destino": "_self",
         "texto": "COLEGIO\n\" SACO OLIVEROS \"",
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#2ba30a",
+        "color": "#f57c0a",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -672,18 +743,18 @@
       }
     ],
     "heading": {
-      "x": -33,
-      "y": 62
+      "x": -21,
+      "y": 53
     },
     "norteMagnetico": 0,
-    "filtro": "drone_cielo_azul",
+    "filtro": "normal",
     "colorSettings": {
-      "preset": "drone_cielo_azul",
-      "brillo": 101,
-      "contraste": 90,
+      "preset": "normal",
+      "brillo": 100,
+      "contraste": 100,
       "saturacion": 100,
       "temperatura": 0
     },
-    "northOffset": 69
+    "northOffset": 75
   }
 }

@@ -88,7 +88,7 @@ export const propiedades = [
     medidas: '9.00 m de frentera por 16.40 m de fondo',
     medidasCortas: '9m x 16.4m',
     precio: '$44,000',
-    portada: '/tour/capilla2/portada_terreno.jpg',
+    portada: '/tour/capilla2/1794370725701_20261105_104624.webp',
     tourId: 'capilla2'
   },
   {

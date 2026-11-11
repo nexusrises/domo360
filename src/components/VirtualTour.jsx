@@ -764,34 +764,44 @@ export default function VirtualTour({
     };
   }, [displayImage]);
 
-  // Precarga inteligente y diferida de las escenas secundarias (no saturar la red móvil al inicio)
+  // Precarga ULTRA RÁPIDA y automática de todas las escenas del tour 360 (Three.js TextureLoader + Memoria del Navegador)
+  // Funciona automáticamente para todas las propiedades actuales y las que se agreguen en el futuro
   useEffect(() => {
-    if (!scenes || Object.keys(scenes).length === 0) return;
+    if (!scenes || typeof window === 'undefined') return;
 
-    // Retrasar la precarga del resto de habitaciones para darle prioridad absoluta al 100% a la escena inicial
-    const timeoutId = setTimeout(() => {
-      const otherScenes = Object.entries(scenes).filter(([key]) => key !== activeSceneKey);
-      
-      // Cargar en cola escalonada una por una cada 300ms
-      otherScenes.forEach(([_, sc], index) => {
-        if (sc && sc.imagen) {
-          setTimeout(() => {
-            const fullUrl = sc.imagen.startsWith('http') || sc.imagen.startsWith('data:')
-              ? sc.imagen
-              : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sc.imagen}`;
+    const sceneEntries = Object.entries(scenes);
+    if (sceneEntries.length === 0) return;
+
+    // Precargar todas las escenas en memoria y en el motor 3D de Three.js
+    sceneEntries.forEach(([_, sc], index) => {
+      if (sc && sc.imagen) {
+        const fullUrl = sc.imagen.startsWith('http') || sc.imagen.startsWith('data:')
+          ? sc.imagen
+          : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${sc.imagen}`;
+
+        // Prioridad inmediata a las primeras escenas, escalonando brevemente las siguientes para no saturar
+        const delay = index === 0 ? 0 : Math.min(index * 150, 800);
+        setTimeout(() => {
+          try {
+            // 1. Precarga en el motor 3D de Three.js para evitar bloqueos de Canvas al navegar
+            useLoader.preload(THREE.TextureLoader, fullUrl);
+
+            // 2. Precarga en la memoria caché del navegador (RAM)
             const img = new Image();
             img.src = fullUrl;
-          }, index * 300);
-        }
-      });
-    }, 1200);
-
-    return () => clearTimeout(timeoutId);
-  }, [scenes, activeSceneKey]);
+          } catch (e) {
+            // Fallback silencioso
+          }
+        }, delay);
+      }
+    });
+  }, [scenes]);
 
 
   // Iniciar con overlay activo para cubrir el frame inicial de carga y orientación de cámara
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const [navigatingToScene, setNavigatingToScene] = useState(null);
+  const [fadeState, setFadeState] = useState('idle'); // 'idle' | 'fading' | 'clearing' (Disolvencia Cruzada Suave Cinematográfica)
   const [showHelp, setShowHelp] = useState(false);
   const [showDragHint, setShowDragHint] = useState(true);
   const [autoRotateState, setAutoRotateState] = useState(autoRotate);
@@ -1029,20 +1039,48 @@ export default function VirtualTour({
     }
   }, [activeSceneKey, scenes, activeScene]);
 
-  // Lógica para manejar la navegación con fundido de transición suave
+  // Lógica de navegación: Opción 2 - Disolvencia Cruzada Suave (Estilo Cinematográfico / Soft Fade)
   const handleNavigate = (targetDestiny) => {
-    if (isTransitioning) return;
+    if (fadeState !== 'idle' || !targetDestiny || targetDestiny === activeSceneKey) return;
+    const targetScene = scenes[targetDestiny];
+    if (!targetScene) return;
 
-    setIsTransitioning(true);
+    const fullUrl = targetScene.imagen?.startsWith('http') || targetScene.imagen?.startsWith('data:')
+      ? targetScene.imagen
+      : `${import.meta.env.BASE_URL.replace(/\/$/, "")}${targetScene.imagen}`;
 
-    setTimeout(() => {
-      setActiveSceneKey(targetDestiny);
-      // Esperar 350ms para que HeadingController oriente la cámara al heading correcto
-      // ANTES de que el overlay desaparezca y los hotspots sean visibles
+    // Ejecuta la disolvencia suave y sedosa sin cortes secos ni pantallazos oscuros
+    const executeSoftFade = () => {
+      setNavigatingToScene(null);
+
+      // 1. Fase de Suavizado: La imagen actual se difumina con un blur suave y transparente (280ms)
+      setFadeState('fading');
+
+      // 2. En el punto de máxima suavidad, cambiamos la escena y heading
       setTimeout(() => {
-        setIsTransitioning(false);
-      }, 350);
-    }, 450);
+        setActiveSceneKey(targetDestiny);
+        setFadeState('clearing');
+
+        // 3. Fase de Enfoque: La nueva escena emerge cristalina y nítida (320ms)
+        setTimeout(() => {
+          setFadeState('idle');
+        }, 320);
+      }, 280);
+    };
+
+    // Verificar si la imagen ya está en memoria caché del navegador
+    const checkImg = new Image();
+    checkImg.src = fullUrl;
+
+    if (checkImg.complete) {
+      // Imagen ya disponible: disolvencia inmediata
+      executeSoftFade();
+    } else {
+      // Si la red aún está descargando, MANTENEMOS la escena actual visible sin oscurecer
+      setNavigatingToScene(targetDestiny);
+      checkImg.onload = () => executeSoftFade();
+      checkImg.onerror = () => executeSoftFade(); // Fallback de seguridad
+    }
   };
 
 
@@ -1158,7 +1196,13 @@ export default function VirtualTour({
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.05
         }}
-        className="w-full h-[calc(100%-50px)] md:h-full cursor-grab active:cursor-grabbing"
+        className={`w-full h-[calc(100%-50px)] md:h-full cursor-grab active:cursor-grabbing transition-all ${
+          fadeState === 'fading'
+            ? 'blur-[5px] opacity-75 duration-280 ease-in-out pointer-events-none'
+            : fadeState === 'clearing'
+            ? 'blur-0 opacity-100 duration-320 ease-out'
+            : 'blur-0 opacity-100 duration-200'
+        }`}
         style={{ filter: getFilterCss(activeScene?.filtro || filtro, activeScene?.colorSettings) }}
         onPointerDown={() => {
           setAutoRotateState(false);
@@ -1267,12 +1311,30 @@ export default function VirtualTour({
         <CompassController controlsRef={orbitRef} compassRef={compassRef} northOffset={activeScene.northOffset || 0} />
       </Canvas>
 
-      {/* Capa de Fundido a Negro para Transición Suave */}
+      {/* Velo Cinematográfico Suave de Disolvencia Cruzada (Sin pantallazo negro ni cortes) */}
       <div
-        className={`absolute inset-0 bg-slate-950 transition-opacity duration-500 pointer-events-none z-30 ${isTransitioning ? 'opacity-100' : 'opacity-0'
-          }`}
-        style={{ display: isTransitioning ? 'block' : 'none' }}
+        className={`absolute inset-0 pointer-events-none z-30 transition-opacity duration-300 ${
+          fadeState === 'fading' ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          background: 'rgba(15, 23, 42, 0.18)',
+          backdropFilter: fadeState === 'fading' ? 'blur(2px)' : 'none',
+          display: fadeState !== 'idle' ? 'block' : 'none'
+        }}
       />
+
+      {/* Capa de Fundido inicial para primer arranque */}
+      {isTransitioning && fadeState === 'idle' && (
+        <div className="absolute inset-0 bg-slate-950/80 transition-opacity duration-150 pointer-events-none z-30 opacity-100" />
+      )}
+
+      {/* Indicador Flotante Sutil mientras se Descarga la Siguiente Escena (La vista actual NO se oscurece) */}
+      {navigatingToScene && (
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-30 bg-slate-950/85 border border-cyan-400/40 text-cyan-200 text-[11px] md:text-xs font-bold px-4 py-2 rounded-full backdrop-blur-md shadow-2xl flex items-center gap-2.5 pointer-events-none animate-fade-in">
+          <div className="w-3.5 h-3.5 border-2 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
+          <span>Cargando {scenes[navigatingToScene]?.nombre || 'vista'}...</span>
+        </div>
+      )}
 
       {/* Panel Superior de Control de Escena */}
       <div className="absolute top-3 left-3 right-3 md:top-6 md:left-6 md:right-6 flex items-start justify-between pointer-events-none z-20">
@@ -1395,6 +1457,8 @@ export default function VirtualTour({
                 onClick={() => handleNavigate(sceneKey)}
                 className={`flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 rounded-lg md:rounded-xl transition-all duration-300 border cursor-pointer whitespace-nowrap ${activeSceneKey === sceneKey
                     ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 font-bold scale-102 shadow-[0_0_12px_rgba(6,182,212,0.25)]'
+                    : navigatingToScene === sceneKey
+                    ? 'bg-cyan-950/60 border-cyan-400/60 text-cyan-200 animate-pulse shadow-[0_0_10px_rgba(6,182,212,0.2)]'
                     : 'bg-white/5 border-white/5 text-gray-400 hover:text-white hover:bg-white/10'
                   }`}
               >

@@ -1,143 +1,21 @@
 {
-  "vista_aerea_terreno": {
-    "nombre": "VISTA  TERRENO",
-    "imagen": "/tour/capilla2/1789270685796_DJI_20260911114136_0015_D.webp",
-    "hotspots": [
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          1.52,
-          19.26,
-          5.16
-        ],
-        "destino": "entorno_capilla",
-        "texto": "Ver Entorno La Capilla",
-        "icono": "Camera",
-        "color": "#f59e0b",
-        "escala": 1.7,
-        "opacidad": 1,
-        "posicionTipo": "2d",
-        "escalaZoom": true,
-        "sombra": true,
-        "fontSize": 15
-      },
-      {
-        "tipo": "poligono",
-        "vertices": [
-          [
-            12.19,
-            -11.13,
-            -11.29
-          ],
-          [
-            16.13,
-            -10.55,
-            5.34
-          ],
-          [
-            11.49,
-            -13.64,
-            9.05
-          ],
-          [
-            6.18,
-            -15.31,
-            -11.28
-          ]
-        ],
-        "color": "#22c55e",
-        "opacidad": 0.45,
-        "colorBorde": "#fbff00",
-        "grosorBorde": 3,
-        "texto": "Lote 1",
-        "manzana": "SOLAR",
-        "lote": "1",
-        "estado": "Disponible",
-        "precio": "44000",
-        "area": "147.70",
-        "fijo": false,
-        "mostrarEtiqueta": true,
-        "mostrarBorde": true,
-        "mostrarRelleno": true
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          6.55,
-          0.36,
-          18.89
-        ],
-        "destino": "vista_panoramica_terreno",
-        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "Camera",
-        "color": "#5cf50a",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 23,
-        "fondoTransparente": true,
-        "colorTexto": "#59174b",
-        "colorFondo": "#1f3261"
-      }
-    ],
-    "filtro": "drone_cielo_azul",
-    "heading": {
-      "x": -46,
-      "y": -66
-    },
-    "northOffset": 289
-  },
-  "entorno_capilla": {
-    "nombre": "VISTA AEREA SUPERIO",
-    "imagen": "/tour/capilla2/1789270692287_DJI_20260911113912_0014_D.webp",
+  "1794369742288_dji_20261105104357_0023_d_5842": {
+    "nombre": "VISTA PANORAMICA",
+    "imagen": "/tour/capilla2/1794369742288_DJI_20261105104357_0023_D.webp",
     "hotspots": [
       {
         "tipo": "texto",
         "posicion": [
-          3.69,
-          -4.15,
-          -19.21
+          -18.96,
+          -5.03,
+          -3.9
         ],
-        "texto": "CEMENTERIO \nLA CAPILLA",
-        "colorTexto": "#f9f21a",
+        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
+        "colorTexto": "#ffffff",
         "colorFondo": "#0f172a",
         "opacidad": 0.9,
         "escala": 1,
         "inclinacion": 0,
-        "posicionTipo": "muro",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Unbounded",
-        "rotacion": 0,
-        "fontSize": 26,
-        "fondoTransparente": true
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          2.68,
-          0.54,
-          -19.81
-        ],
-        "destino": "_self",
-        "texto": "UNAJ",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#f59e0b",
-        "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
         "sombra": true,
@@ -146,70 +24,24 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 14
+        "fondoTransparente": true,
+        "volumen3D": 6,
+        "fontSize": 25,
+        "direccion3D": 135
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          19.73,
-          -0.72,
-          -3.21
+          1.79,
+          -19.29,
+          4.98
         ],
         "destino": "_self",
-        "texto": "ESSALUD",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#f59e0b",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fontSize": 15
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          19.09,
-          -1.51,
-          -5.78
-        ],
-        "destino": "_self",
-        "texto": "EL PENAL",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#f59e0b",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fondoTransparente": false,
-        "fontSize": 15
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          0.61,
-          -19.98,
-          0.63
-        ],
-        "destino": "vista_aerea_terreno",
-        "texto": "TERRENO",
+        "texto": "VISTA DEL LOTE",
         "opacidad": 1,
         "escala": 1,
         "icono": "Camera",
-        "color": "#5cf50a",
+        "color": "#66da07",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -218,25 +50,265 @@
         "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.98,
+          0.57,
+          -0.65
+        ],
+        "destino": "_self",
+        "texto": "UNAJ",
+        "opacidad": 1,
+        "escala": 0.8,
+        "icono": "ArrowDown",
+        "color": "#db8829",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Outfit",
+        "fontSize": 31,
+        "fondoTransparente": true,
+        "rotacion": 0,
+        "colorTexto": "#1132d4"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -6.75,
+          -1.52,
+          -18.76
+        ],
+        "destino": "_self",
+        "texto": "EL PENAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#d88e0e",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Outfit",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.58,
+          -0.89,
+          -19.45
+        ],
+        "destino": "_self",
+        "texto": "HOSPITAL\n\" EsSALUD \" ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 14
+      }
+    ],
+    "heading": {
+      "x": -82,
+      "y": 93
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 172
+  },
+  "1794369739998_dji_20261105104241_0022_d_5841": {
+    "nombre": "VISTA DEL LOTE",
+    "imagen": "/tour/capilla2/1794369739998_DJI_20261105104241_0022_D.webp",
+    "hotspots": [
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            8.31,
+            -12.06,
+            13.62
+          ],
+          [
+            -4.72,
+            -13.54,
+            13.94
+          ],
+          [
+            -5.09,
+            -16.96,
+            9.29
+          ],
+          [
+            10.16,
+            -14.54,
+            9.24
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.35,
+        "colorBorde": "#edfe06",
+        "grosorBorde": 2,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarRelleno": true,
+        "mostrarBorde": true,
+        "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -9.07,
+          -16.45,
+          6.86
+        ],
+        "destino": "1794369742288_dji_20261105104357_0023_d_5842",
+        "texto": "REGRESAR VISTA\nPANORAMICA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#2fc705",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -57,
+      "y": 180
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 172
+  },
+  "vista_panoramica_terreno": {
+    "nombre": "VISTA DEL CEMENTERIO FRONTAL",
+    "imagen": "/tour/capilla2/1789272552976_DJI_20260911125336_0017_D.webp",
+    "hotspots": [
+      {
+        "tipo": "texto",
+        "posicion": [
+          -19.06,
+          -6.06,
+          0.3
+        ],
+        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 12
+        "fondoTransparente": true,
+        "fontSize": 20,
+        "volumen3D": 6
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.83,
+          -8.63,
+          17.38
+        ],
+        "destino": "_self",
+        "texto": "CENTRO EDUCATIVO\nINICIAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#c98208",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.87,
+          -2.16,
+          -0.57
+        ],
+        "destino": "1794369742288_dji_20261105104357_0023_d_5842",
+        "texto": "UBICACIÓN \nDEL LOTE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#68dc09",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
       }
     ],
     "filtro": "drone_cielo_azul",
     "heading": {
-      "x": -10,
-      "y": -47
+      "x": -28,
+      "y": 86
     },
-    "northOffset": 75
-  },
-  "vista_panoramica_terreno": {
-    "nombre": "VISTA PANORÁMICA",
-    "imagen": "/tour/capilla2/1789272552976_DJI_20260911125336_0017_D.webp",
-    "hotspots": [],
-    "filtro": "drone_cielo_azul",
-    "heading": {
-      "x": 0,
-      "y": 0
+    "northOffset": 349,
+    "colorSettings": {
+      "preset": "drone_cielo_azul"
     }
   }
 }
