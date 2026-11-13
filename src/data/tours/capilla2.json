@@ -36,7 +36,7 @@
           -19.29,
           4.98
         ],
-        "destino": "_self",
+        "destino": "1794369739998_dji_20261105104241_0022_d_5841",
         "texto": "VISTA DEL LOTE",
         "opacidad": 1,
         "escala": 1,
@@ -126,6 +126,32 @@
         "mostrarTextoSiempre": true,
         "fuente": "Syne",
         "fontSize": 14
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.55,
+          -2.69,
+          -3.24
+        ],
+        "destino": "vista_panoramica_terreno",
+        "texto": "  ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#65dd03",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Outfit",
+        "fondoTransparente": true,
+        "fontSize": 18,
+        "colorTexto": "#07453b"
       }
     ],
     "heading": {
@@ -161,9 +187,9 @@
             13.94
           ],
           [
-            -5.09,
-            -16.96,
-            9.29
+            -5.31,
+            -17.04,
+            9.03
           ],
           [
             10.16,
@@ -275,14 +301,15 @@
         "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
+        "fuente": "Syne",
+        "fontSize": 15
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          -19.87,
-          -2.16,
-          -0.57
+          -19.67,
+          -1.86,
+          -3.13
         ],
         "destino": "1794369742288_dji_20261105104357_0023_d_5842",
         "texto": "UBICACIÓN \nDEL LOTE",
@@ -298,7 +325,80 @@
         "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.95,
+          -0.95,
+          1.06
+        ],
+        "destino": "_self",
+        "texto": "UNAJ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#c98208",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 17
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -9.59,
+          -1.39,
+          17.5
+        ],
+        "destino": "_self",
+        "texto": "EL PENAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#c5810d",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -5.48,
+          -0.92,
+          19.21
+        ],
+        "destino": "_self",
+        "texto": "HOSPITAL\nEsSALUD",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#cf8607",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
       }
     ],
     "filtro": "drone_cielo_azul",

@@ -15,7 +15,7 @@
         "opacidad": 1,
         "escala": 1,
         "icono": "ArrowDown",
-        "color": "#51f50a",
+        "color": "#40cd04",
         "inclinacion": 0,
         "posicionTipo": "2d",
         "escalaZoom": false,
@@ -26,14 +26,14 @@
         "mostrarTextoSiempre": true,
         "fuente": "Syne",
         "fontSize": 17,
-        "colorTexto": "#fcff38"
+        "colorTexto": "#fafafa"
       },
       {
         "tipo": "hotspot",
         "posicion": [
-          -6.94,
-          0.39,
-          -18.75
+          -7.1,
+          0.58,
+          -18.69
         ],
         "destino": "_self",
         "texto": "UPeU - CHULLUNQUIANI",
@@ -49,7 +49,7 @@
         "negrita": true,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Syne",
+        "fuente": "Outfit",
         "colorFondo": "#0d7dd3",
         "fontSize": 28,
         "fondoTransparente": true
@@ -95,7 +95,7 @@
           0.03
         ],
         "texto": "Recorrido de la Micro  39",
-        "colorTexto": "#e9fa00",
+        "colorTexto": "#fafafa",
         "colorFondo": "#0f172a",
         "opacidad": 0.9,
         "escala": 1.6,
@@ -110,7 +110,84 @@
         "fuente": "Montserrat",
         "rotacion": 0,
         "fontSize": 33,
+        "fondoTransparente": true,
+        "volumen3D": 7
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          1.53,
+          0.98,
+          19.92
+        ],
+        "texto": "CIUDAD DE \n\" JULIACA \"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "volumen3D": 6,
+        "fontSize": 31
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          8.75,
+          -0.17,
+          -17.98
+        ],
+        "texto": "CANTERA",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 21,
+        "volumen3D": 6,
         "fondoTransparente": true
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -19.97,
+          0.21,
+          1.05
+        ],
+        "texto": "PISTA A LA \" SALIDA AREQUIPA \"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 29,
+        "fondoTransparente": true,
+        "volumen3D": 7,
+        "direccion3D": 125
       }
     ],
     "heading": {
@@ -118,9 +195,9 @@
       "y": -114
     },
     "norteMagnetico": 0,
-    "filtro": "drone_cielo_azul",
+    "filtro": "hdr_arquitectura",
     "colorSettings": {
-      "preset": "drone_cielo_azul",
+      "preset": "hdr_arquitectura",
       "brillo": 100,
       "contraste": 100,
       "saturacion": 100,
@@ -258,9 +335,9 @@
       "y": 52
     },
     "norteMagnetico": 0,
-    "filtro": "drone_cielo_azul",
+    "filtro": "hdr_arquitectura",
     "colorSettings": {
-      "preset": "drone_cielo_azul",
+      "preset": "hdr_arquitectura",
       "brillo": 94,
       "contraste": 112,
       "saturacion": 110,

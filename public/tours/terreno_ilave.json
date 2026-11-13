@@ -58,9 +58,9 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          -17.44,
-          -3.75,
-          -9.05
+          -17.42,
+          -3.71,
+          -9.1
         ],
         "destino": "1793674644099_imagen5_7128",
         "texto": "1er  ACCESO   \nTRANSPORTE URBANO",
@@ -131,9 +131,9 @@
       {
         "tipo": "texto",
         "posicion": [
-          -14.27,
-          1.76,
-          13.9
+          -14.32,
+          0.73,
+          13.94
         ],
         "texto": "CENTRO DE LA \nCIUDAD DE JULIACA",
         "colorTexto": "#ffffff",
@@ -149,16 +149,16 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Archivo Black",
-        "fontSize": 16,
+        "fontSize": 25,
         "fondoTransparente": true,
-        "volumen3D": 2
+        "volumen3D": 5
       },
       {
         "tipo": "texto",
         "posicion": [
-          -9.41,
-          0.81,
-          -17.63
+          -7.6,
+          0.15,
+          -18.5
         ],
         "texto": "AUTOPISTA A LA CIUDAD DE PUNO",
         "colorTexto": "#ffffff",
@@ -236,11 +236,106 @@
         "fijo": false,
         "color": "#ef4444",
         "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            11.71,
+            -16.16,
+            -1.31
+          ],
+          [
+            11.48,
+            -16.37,
+            -0.59
+          ],
+          [
+            9.41,
+            -16.3,
+            6.77
+          ],
+          [
+            -3.04,
+            -19.4,
+            3.81
+          ],
+          [
+            -6.21,
+            -18.43,
+            -4.67
+          ],
+          [
+            7.42,
+            -17.15,
+            -7.13
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.15,
+        "colorBorde": "#fbff00",
+        "grosorBorde": 2,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarRelleno": true,
+        "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.33,
+          -2.04,
+          -4.7
+        ],
+        "destino": "_self",
+        "texto": "CLUB DEPORTIVO\nNÁUTICA  \"PISCINA\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#d48b0c",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          4.33,
+          -4.26,
+          -19.05
+        ],
+        "destino": "_self",
+        "texto": "CENTRO EDUCATIVO\nINICIAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#dc8d04",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 12
       }
     ],
     "heading": {
-      "x": -31,
-      "y": 34
+      "x": -52,
+      "y": 43
     },
     "norteMagnetico": 0,
     "filtro": "drone_cielo_azul",
@@ -304,11 +399,31 @@
         "mostrarTextoSiempre": true,
         "fuente": "Syne",
         "fontSize": 20
+      },
+      {
+        "tipo": "linea",
+        "vertices": [
+          [
+            -9.22,
+            -16.58,
+            6.34
+          ],
+          [
+            -8.6,
+            -14.92,
+            -10.16
+          ]
+        ],
+        "colorBorde": "#ffffff",
+        "grosorBorde": 3,
+        "texto": "21.75 METROS LINEALES",
+        "fijo": false,
+        "mostrarEtiqueta": true
       }
     ],
     "heading": {
-      "x": -33,
-      "y": 12
+      "x": -37,
+      "y": 86
     },
     "norteMagnetico": 0,
     "filtro": "drone_cielo_azul",
@@ -397,11 +512,34 @@
         "mostrarTextoSiempre": true,
         "fuente": "Poppins",
         "fontSize": 19
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          5.33,
+          -19.27,
+          0.59
+        ],
+        "destino": "1793674636824_imagen2_7125",
+        "texto": "VISTA \nPANORAMICA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#45d408",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne"
       }
     ],
     "heading": {
-      "x": -74,
-      "y": -122
+      "x": -90,
+      "y": -43
     },
     "norteMagnetico": 0,
     "filtro": "drone_cielo_azul",
@@ -447,9 +585,9 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          13.86,
-          -4.82,
-          -13.59
+          13.8,
+          -5.2,
+          -13.51
         ],
         "destino": "1793674641673_imagen4_1389",
         "texto": "2do ACCESO\nTRANSPORTE URBANO",
@@ -520,7 +658,7 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat",
-        "fontSize": 12
+        "fontSize": 15
       },
       {
         "tipo": "hotspot",
@@ -543,7 +681,8 @@
         "negrita": false,
         "cursiva": false,
         "mostrarTextoSiempre": true,
-        "fuente": "Montserrat"
+        "fuente": "Montserrat",
+        "fontSize": 15
       },
       {
         "tipo": "texto",
@@ -572,8 +711,8 @@
       }
     ],
     "heading": {
-      "x": -20,
-      "y": -118
+      "x": -69,
+      "y": -90
     },
     "norteMagnetico": 0,
     "filtro": "drone_cielo_azul",
@@ -697,9 +836,9 @@
       {
         "tipo": "hotspot",
         "posicion": [
-          4.68,
-          0.13,
-          19.44
+          5.11,
+          0.92,
+          19.32
         ],
         "destino": "_self",
         "texto": "QUINTA CAMPESTRE\n\" CERRITO ALEGRE \"",
@@ -740,21 +879,91 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -10.18,
+          -1.95,
+          -17.1
+        ],
+        "destino": "_self",
+        "texto": "CLUB DEPORTIVO\nNÁUTICA  \"PISCINA\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f08000",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          15.17,
+          -6.74,
+          11.16
+        ],
+        "destino": "_self",
+        "texto": "CENTRO EDUCATIVO\nINICIAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#e47207",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Outfit",
+        "fontSize": 11
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -7.37,
+          -13.84,
+          12.42
+        ],
+        "destino": "_self",
+        "texto": "QUINTA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#e28503",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne"
       }
     ],
     "heading": {
-      "x": -21,
-      "y": 53
+      "x": -42,
+      "y": 45
     },
     "norteMagnetico": 0,
-    "filtro": "normal",
+    "filtro": "drone_cielo_azul",
     "colorSettings": {
-      "preset": "normal",
+      "preset": "drone_cielo_azul",
       "brillo": 100,
       "contraste": 100,
       "saturacion": 100,
       "temperatura": 0
     },
-    "northOffset": 75
+    "northOffset": 86
   }
 }

@@ -320,7 +320,10 @@ export default function PropiedadDetalle() {
                 {/* Enlace WhatsApp Dinámico */}
                 <div className="pt-2">
                   {(() => {
-                    const mensajeWa = `Hola Angel, vi el Tour 360° de *${propiedad.titulo}* (${propiedad.area} - ${propiedad.precio} USD). Para ahorrar tiempo, ¿podríamos tener una breve reunión de 10 min por Zoom o videollamada para revisar la ubicación exacta, avenidas de acceso y todos los detalles?`;
+                    const precioDisplay = String(propiedad.precio || '').includes('S/.') || String(propiedad.precio || '').includes('USD') || String(propiedad.precio || '').includes('Dol')
+                      ? propiedad.precio
+                      : `${propiedad.precio} USD`;
+                    const mensajeWa = `Hola Angel, vi el Tour 360° de *${propiedad.titulo}* (${propiedad.area} - ${precioDisplay}). Para ahorrar tiempo, ¿podríamos tener una breve reunión de 10 min por Zoom o videollamada para revisar la ubicación exacta, avenidas de acceso y todos los detalles?`;
                     return (
                       <a
                         href={`https://wa.me/51951300535?text=${encodeURIComponent(mensajeWa)}`}

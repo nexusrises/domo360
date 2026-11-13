@@ -1,0 +1,299 @@
+{
+  "1794526723475_dji_20261104085135_0001_d_3833": {
+    "nombre": "DJI 20261104085135 0001 D",
+    "imagen": "/tour/final33/1794526723475_DJI_20261104085135_0001_D.webp",
+    "hotspots": [],
+    "heading": {
+      "x": -84,
+      "y": 13
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 154
+  },
+  "1794526725407_dji_20261104085249_0002_d_3834": {
+    "nombre": "DJI 20261104085249 0002 D",
+    "imagen": "/tour/final33/1794526725407_DJI_20261104085249_0002_D.webp",
+    "hotspots": [],
+    "heading": {
+      "x": -49,
+      "y": 104
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 146
+  },
+  "1794526727243_dji_20261104085830_0004_d_3835": {
+    "nombre": "VISTA PANORAMICA",
+    "imagen": "/tour/final33/1794526727243_DJI_20261104085830_0004_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.01,
+          -1.29,
+          6.09
+        ],
+        "destino": "1794526729158_dji_20261104105032_0007_d_3836",
+        "texto": "FINAL DE LA\n\"MICRO 33\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#70c804",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 20
+      }
+    ],
+    "heading": {
+      "x": -59,
+      "y": 95
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 168
+  },
+  "1794526729158_dji_20261104105032_0007_d_3836": {
+    "nombre": "FINALMICRO33",
+    "imagen": "/tour/final33/1794526729158_DJI_20261104105032_0007_D.webp",
+    "hotspots": [
+      {
+        "tipo": "texto",
+        "posicion": [
+          -2.7,
+          -19.82,
+          0.07
+        ],
+        "texto": "FINAL DE LA \n\"MICRO   33\"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "strokeGrosor": 2,
+        "fontSize": 34,
+        "volumen3D": 8,
+        "direccion3D": 35
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -18.12,
+          -0.16,
+          -8.47
+        ],
+        "texto": "PISTA - SALIDA A PUNO",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "volumen3D": 5,
+        "fontSize": 31
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -13.33,
+          -4.41,
+          -14.25
+        ],
+        "destino": "_self",
+        "texto": "RESIDENCIAL\n\"NUEVA ESPAÑA\"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 16
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          8.49,
+          -1.33,
+          18.06
+        ],
+        "destino": "_self",
+        "texto": "UBICACION DE\nLOS LOTES",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#34ba03",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 14
+      }
+    ],
+    "heading": {
+      "x": -34,
+      "y": 176
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 319
+  },
+  "1794526744863_cam_20261104091013_0001_d_3837": {
+    "nombre": "CENTRO",
+    "imagen": "/tour/final33/1794526744863_CAM_20261104091013_0001_D.webp",
+    "hotspots": [],
+    "heading": {
+      "x": -1,
+      "y": 138
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 93,
+      "contraste": 108,
+      "saturacion": 97,
+      "temperatura": 0
+    },
+    "northOffset": 179
+  },
+  "1794526746752_cam_20261104091102_0002_d_3838": {
+    "nombre": "POSICION 1",
+    "imagen": "/tour/final33/1794526746752_CAM_20261104091102_0002_D.webp",
+    "hotspots": [],
+    "heading": {
+      "x": -14,
+      "y": 34
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 17
+  },
+  "1794526748586_cam_20261104091144_0003_d_3839": {
+    "nombre": "POSICION 2",
+    "imagen": "/tour/final33/1794526748586_CAM_20261104091144_0003_D.webp",
+    "hotspots": [],
+    "heading": {
+      "x": -5,
+      "y": 49
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 48
+  },
+  "1794526752447_cam_20261104091341_0005_d_3841": {
+    "nombre": "POSICION 3",
+    "imagen": "/tour/final33/1794526752447_CAM_20261104091341_0005_D.webp",
+    "hotspots": [],
+    "heading": {
+      "x": -18,
+      "y": -177
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 225
+  },
+  "1794526750496_cam_20261104091243_0004_d_3840": {
+    "nombre": "POSICION 4",
+    "imagen": "/tour/final33/1794526750496_CAM_20261104091243_0004_D.webp",
+    "hotspots": [],
+    "heading": {
+      "x": -12,
+      "y": 37
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 100,
+      "saturacion": 100,
+      "temperatura": 0
+    },
+    "northOffset": 72
+  }
+}

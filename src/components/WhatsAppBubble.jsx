@@ -40,7 +40,10 @@ export default function WhatsAppBubble() {
       : null;
 
     if (matchedPropiedad) {
-      const mensajeReunion = `Hola Angel, vi el Tour 360° de *${matchedPropiedad.titulo}* (${matchedPropiedad.area} - ${matchedPropiedad.precio} USD). Para ahorrar tiempo, ¿podríamos tener una breve reunión de 10 min por Zoom o videollamada para revisar la ubicación exacta, avenidas de acceso y todos los detalles?`;
+      const precioDisplay = String(matchedPropiedad.precio || '').includes('S/.') || String(matchedPropiedad.precio || '').includes('USD') || String(matchedPropiedad.precio || '').includes('Dol')
+        ? matchedPropiedad.precio
+        : `${matchedPropiedad.precio} USD`;
+      const mensajeReunion = `Hola Angel, vi el Tour 360° de *${matchedPropiedad.titulo}* (${matchedPropiedad.area} - ${precioDisplay}). Para ahorrar tiempo, ¿podríamos tener una breve reunión de 10 min por Zoom o videollamada para revisar la ubicación exacta, avenidas de acceso y todos los detalles?`;
       return {
         messages: [
           `¿Te interesa ${matchedPropiedad.titulo}? Agenda una reunión de 10 min y conoce cada detalle sin salir de casa 💻🏡`,
