@@ -1,4 +1,164 @@
 {
+  "vista_panoramica_terreno": {
+    "nombre": "VISTA DEL CEMENTERIO FRONTAL",
+    "imagen": "/tour/capilla2/1789272552976_DJI_20260911125336_0017_D.webp",
+    "hotspots": [
+      {
+        "tipo": "texto",
+        "posicion": [
+          -19.06,
+          -6.06,
+          0.3
+        ],
+        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "fontSize": 20,
+        "volumen3D": 6
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -4.83,
+          -8.63,
+          17.38
+        ],
+        "destino": "_self",
+        "texto": "CENTRO EDUCATIVO\nINICIAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#c98208",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.67,
+          -1.86,
+          -3.13
+        ],
+        "destino": "1794369742288_dji_20261105104357_0023_d_5842",
+        "texto": "UBICACIÓN \nDEL LOTE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#68dc09",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.95,
+          -0.95,
+          1.06
+        ],
+        "destino": "_self",
+        "texto": "UNAJ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#c98208",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 17
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -9.59,
+          -1.39,
+          17.5
+        ],
+        "destino": "_self",
+        "texto": "EL PENAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#c5810d",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -5.48,
+          -0.92,
+          19.21
+        ],
+        "destino": "_self",
+        "texto": "HOSPITAL\nEsSALUD",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#cf8607",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 15
+      }
+    ],
+    "filtro": "drone_cielo_azul",
+    "heading": {
+      "x": -28,
+      "y": 86
+    },
+    "northOffset": 349,
+    "colorSettings": {
+      "preset": "drone_cielo_azul"
+    }
+  },
   "1794369742288_dji_20261105104357_0023_d_5842": {
     "nombre": "VISTA PANORAMICA",
     "imagen": "/tour/capilla2/1794369742288_DJI_20261105104357_0023_D.webp",
@@ -210,7 +370,36 @@
         "fijo": false,
         "mostrarRelleno": true,
         "mostrarBorde": true,
-        "mostrarEtiqueta": false
+        "mostrarEtiqueta": false,
+        "medidasLados": [
+          {
+            "texto": "",
+            "lado": "exterior",
+            "invertido": false
+          },
+          {
+            "texto": "FRENTE :  9 metros ",
+            "lado": "exterior",
+            "invertido": false
+          },
+          {
+            "texto": "LARGO: 16.40 metros",
+            "lado": "exterior",
+            "invertido": true
+          },
+          {
+            "texto": "FRENTE :  9 metros ",
+            "lado": "exterior",
+            "invertido": false
+          }
+        ],
+        "medidasEstilo": {
+          "fontSize": 10,
+          "offset": 0.5,
+          "sombra": false,
+          "volumen3D": 5,
+          "strokeGrosor": 1
+        }
       },
       {
         "tipo": "hotspot",
@@ -234,6 +423,31 @@
         "cursiva": false,
         "mostrarTextoSiempre": true,
         "fuente": "Montserrat"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          2.87,
+          -15.19,
+          12.69
+        ],
+        "texto": "ÁREA: 147  m²",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 21,
+        "fondoTransparente": true,
+        "volumen3D": 7
       }
     ],
     "heading": {
@@ -250,165 +464,5 @@
       "temperatura": 0
     },
     "northOffset": 172
-  },
-  "vista_panoramica_terreno": {
-    "nombre": "VISTA DEL CEMENTERIO FRONTAL",
-    "imagen": "/tour/capilla2/1789272552976_DJI_20260911125336_0017_D.webp",
-    "hotspots": [
-      {
-        "tipo": "texto",
-        "posicion": [
-          -19.06,
-          -6.06,
-          0.3
-        ],
-        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
-        "colorTexto": "#ffffff",
-        "colorFondo": "#0f172a",
-        "opacidad": 0.9,
-        "escala": 1,
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": true,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Montserrat",
-        "fondoTransparente": true,
-        "fontSize": 20,
-        "volumen3D": 6
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -4.83,
-          -8.63,
-          17.38
-        ],
-        "destino": "_self",
-        "texto": "CENTRO EDUCATIVO\nINICIAL",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#c98208",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 15
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -19.67,
-          -1.86,
-          -3.13
-        ],
-        "destino": "1794369742288_dji_20261105104357_0023_d_5842",
-        "texto": "UBICACIÓN \nDEL LOTE",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "Camera",
-        "color": "#68dc09",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 15
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          19.95,
-          -0.95,
-          1.06
-        ],
-        "destino": "_self",
-        "texto": "UNAJ",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#c98208",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 17
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -9.59,
-          -1.39,
-          17.5
-        ],
-        "destino": "_self",
-        "texto": "EL PENAL",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#c5810d",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 15
-      },
-      {
-        "tipo": "hotspot",
-        "posicion": [
-          -5.48,
-          -0.92,
-          19.21
-        ],
-        "destino": "_self",
-        "texto": "HOSPITAL\nEsSALUD",
-        "opacidad": 1,
-        "escala": 1,
-        "icono": "ArrowDown",
-        "color": "#cf8607",
-        "inclinacion": 0,
-        "posicionTipo": "2d",
-        "escalaZoom": false,
-        "sombra": true,
-        "fijo": false,
-        "negrita": false,
-        "cursiva": false,
-        "mostrarTextoSiempre": true,
-        "fuente": "Syne",
-        "fontSize": 15
-      }
-    ],
-    "filtro": "drone_cielo_azul",
-    "heading": {
-      "x": -28,
-      "y": 86
-    },
-    "northOffset": 349,
-    "colorSettings": {
-      "preset": "drone_cielo_azul"
-    }
   }
 }

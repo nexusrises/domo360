@@ -40,7 +40,9 @@ import {
   Minus,
   Spline,
   PenTool,
-  Maximize2
+  Maximize2,
+  Ruler,
+  RotateCw
 } from 'lucide-react';
 import Polygon3D from '../components/Polygon3D';
 import { tourData as initialTourData } from '../data/tourData';
@@ -233,6 +235,48 @@ function FovZoomController({ zoomFov, setZoomFov }) {
   });
 
   return null;
+}
+
+// Error Boundary para capturar excepciones de texturas o renderizado 3D y evitar pantallas negras
+class CanvasErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.warn("Advertencia en motor 3D (textura o escena):", error);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.resetKey !== this.props.resetKey && this.state.hasError) {
+      this.setState({ hasError: false, error: null });
+    }
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-slate-950/95 text-center p-6 select-none">
+          <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+            <Compass className="w-8 h-8 animate-pulse" />
+          </div>
+          <h3 className="text-white font-bold text-base mb-2">No se pudo cargar la imagen panorámica</h3>
+          <p className="text-gray-400 text-xs max-w-md mb-5 leading-relaxed">
+            La imagen asociada a esta escena no fue encontrada o fue removida del disco. Puedes cambiar a otra escena en la galería inferior o agregar imágenes con el botón <strong>+ AGREGAR IMAGEN 360</strong>.
+          </p>
+          <button
+            type="button"
+            onClick={() => this.setState({ hasError: false, error: null })}
+            className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg"
+          >
+            Reintentar
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
 }
 
 // Esfera 3D
@@ -1152,18 +1196,23 @@ export default function TourEditorPage() {
           const cleanedSaved = localSaved
             .replace(/\/descargas_kuula\//g, '/tour/')
             .replace(/\.(jpg|jpeg|png)(["'?])/gi, '.webp$2');
-          const parsed = JSON.parse(cleanedSaved);
-          if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
-            const injected = injectSheetsData(parsed, sheetsData);
-            const firstScene = Object.keys(injected)[0];
-            if (firstScene) {
-              setScenes(injected);
-              if (cleanedSaved !== localSaved) {
-                localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
+
+          if (cleanedSaved.includes('sc_colegio')) {
+            localStorage.removeItem(`nexus_tour_data_${tourId}`);
+          } else {
+            const parsed = JSON.parse(cleanedSaved);
+            if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+              const injected = injectSheetsData(parsed, sheetsData);
+              const firstScene = Object.keys(injected)[0];
+              if (firstScene) {
+                setScenes(injected);
+                if (cleanedSaved !== localSaved) {
+                  localStorage.setItem(`nexus_tour_data_${tourId}`, cleanedSaved);
+                }
+                setActiveSceneKey(firstScene);
+                setIsLoading(false);
+                return;
               }
-              setActiveSceneKey(firstScene);
-              setIsLoading(false);
-              return;
             }
           }
         } catch (e) {
@@ -2310,6 +2359,7 @@ export default function TourEditorPage() {
                 <p className="text-gray-400 text-xs mt-1 select-none">Sincronizando con Google Sheets...</p>
               </div>
             )}
+            <CanvasErrorBoundary resetKey={activeSceneKey + (displayImage || '')}>
             <Canvas 
               camera={{ position: [0, 0, 0.1] }}
               dpr={[1, 2]}
@@ -2364,6 +2414,8 @@ export default function TourEditorPage() {
                         sombra={hs.sombra}
                         rotacion={hs.rotacion}
                         inclinacion={hs.inclinacion}
+                        medidasLados={hs.medidasLados}
+                        medidasEstilo={hs.medidasEstilo}
                         isSelected={activeHotspotIndex === index}
                         isEditor={true}
                         onSelect={(idx) => {
@@ -2648,6 +2700,7 @@ export default function TourEditorPage() {
               <HeadingController heading={activeScene.heading} activeSceneKey={activeSceneKey} controlsRef={orbitRef} />
               <CompassController controlsRef={orbitRef} compassRef={compassRef} northOffset={activeScene.northOffset || 0} />
             </Canvas>
+            </CanvasErrorBoundary>
 
             {/* Menú Contextual (Clic derecho) */}
             {contextMenu && (
@@ -4280,6 +4333,234 @@ export default function TourEditorPage() {
                                           <span>Mostrar Etiqueta 3D Flotante</span>
                                         </label>
                                       </div>
+
+                                      {/* SECCIÓN: Medidas de los Lados del Terreno (Perímetro) */}
+                                      <div className="pt-3 border-t border-white/5 space-y-3">
+                                        <div className="flex items-center justify-between">
+                                          <div className="flex items-center gap-1.5">
+                                            <Ruler className="w-3.5 h-3.5 text-amber-400" />
+                                            <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Medidas de los Lados</span>
+                                          </div>
+                                          <span className="text-[9px] font-mono text-gray-500">{(hs.vertices?.length || 0)} lados</span>
+                                        </div>
+
+                                        <p className="text-[9px] text-gray-400 leading-tight">
+                                          Escribe la medida de cada lado (ej: <span className="text-amber-400 font-mono">LARGO: 16.40 m</span>). Si dejas un lado vacío, no se mostrará nada.
+                                        </p>
+
+                                        {/* Lista de cada Lado */}
+                                        <div className="space-y-2">
+                                          {Array.from({ length: hs.vertices?.length || 0 }).map((_, sideIdx) => {
+                                            const numVerts = hs.vertices?.length || 0;
+                                            const vFrom = sideIdx + 1;
+                                            const vTo = ((sideIdx + 1) % numVerts) + 1;
+                                            const currentMedida = hs.medidasLados?.[sideIdx] || { texto: '', lado: 'exterior', invertido: false };
+
+                                            const updateSide = (field, value) => {
+                                              const newHotspots = [...activeScene.hotspots];
+                                              const currentSides = Array.isArray(newHotspots[index].medidasLados) 
+                                                ? [...newHotspots[index].medidasLados] 
+                                                : [];
+                                              
+                                              while (currentSides.length < numVerts) {
+                                                currentSides.push({ texto: '', lado: 'exterior', invertido: false });
+                                              }
+
+                                              currentSides[sideIdx] = {
+                                                ...currentSides[sideIdx],
+                                                [field]: value
+                                              };
+
+                                              newHotspots[index].medidasLados = currentSides;
+                                              const updated = {
+                                                ...scenes,
+                                                [activeSceneKey]: {
+                                                  ...activeScene,
+                                                  hotspots: newHotspots
+                                                }
+                                              };
+                                              saveToLocal(updated);
+                                            };
+
+                                            return (
+                                              <div key={sideIdx} className="bg-slate-950/70 border border-white/5 rounded-xl p-2.5 space-y-2">
+                                                <div className="flex items-center justify-between">
+                                                  <span className="text-[9px] font-bold uppercase tracking-wider text-gray-300 flex items-center gap-1">
+                                                    <span className="w-4 h-4 rounded bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono text-[8px]">
+                                                      {sideIdx + 1}
+                                                    </span>
+                                                    Lado {sideIdx + 1} <span className="text-gray-500 font-mono text-[8px]">(V{vFrom} → V{vTo})</span>
+                                                  </span>
+
+                                                  <div className="flex items-center gap-1">
+                                                    {/* Botón Exterior / Interior */}
+                                                    <button
+                                                      type="button"
+                                                      onClick={() => updateSide('lado', currentMedida.lado === 'interior' ? 'exterior' : 'interior')}
+                                                      className={`text-[8px] font-bold px-2 py-0.5 rounded transition-all cursor-pointer ${
+                                                        currentMedida.lado === 'interior'
+                                                          ? 'bg-blue-500/20 text-blue-300 border border-blue-400/30'
+                                                          : 'bg-amber-500/20 text-amber-300 border border-amber-400/30'
+                                                      }`}
+                                                      title="Cambiar orientación: Exterior o Interior del lote"
+                                                    >
+                                                      {currentMedida.lado === 'interior' ? 'Interior' : 'Exterior'}
+                                                    </button>
+
+                                                    {/* Botón Invertir Giro (180°) */}
+                                                    <button
+                                                      type="button"
+                                                      onClick={() => updateSide('invertido', !currentMedida.invertido)}
+                                                      className={`p-1 rounded transition-all cursor-pointer ${
+                                                        currentMedida.invertido
+                                                          ? 'bg-amber-500 text-slate-950 shadow-sm'
+                                                          : 'bg-white/5 hover:bg-white/10 text-gray-400'
+                                                      }`}
+                                                      title="Invertir dirección de lectura del texto (180°)"
+                                                    >
+                                                      <RotateCw className="w-3 h-3" />
+                                                    </button>
+                                                  </div>
+                                                </div>
+
+                                                <input
+                                                  type="text"
+                                                  value={currentMedida.texto || ''}
+                                                  onChange={(e) => updateSide('texto', e.target.value)}
+                                                  placeholder={`ej: FRENTE: 9 metros (vacío = oculto)`}
+                                                  className="w-full bg-slate-900 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-amber-300 outline-none focus:border-amber-400 font-semibold"
+                                                />
+
+                                                {/* Controles individuales de Tamaño y Separación para este Lado */}
+                                                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-white/5">
+                                                  <div className="space-y-1">
+                                                    <div className="flex justify-between items-center text-[8px] font-bold text-gray-500 uppercase tracking-wider">
+                                                      <span>Tamaño</span>
+                                                      <span className="font-mono text-amber-300">{currentMedida.fontSize || hs.medidasEstilo?.fontSize || 14}px</span>
+                                                    </div>
+                                                    <input
+                                                      type="range"
+                                                      min="8"
+                                                      max="28"
+                                                      step="1"
+                                                      value={currentMedida.fontSize || hs.medidasEstilo?.fontSize || 14}
+                                                      onChange={(e) => updateSide('fontSize', parseInt(e.target.value))}
+                                                      className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                                    />
+                                                  </div>
+
+                                                  <div className="space-y-1">
+                                                    <div className="flex justify-between items-center text-[8px] font-bold text-gray-500 uppercase tracking-wider">
+                                                      <span>Separación</span>
+                                                      <span className="font-mono text-amber-300">
+                                                        {(((currentMedida.offset !== undefined ? currentMedida.offset : (hs.medidasEstilo?.offset ?? 0.35))) * 10).toFixed(1)}
+                                                      </span>
+                                                    </div>
+                                                    <input
+                                                      type="range"
+                                                      min="0.05"
+                                                      max="1.5"
+                                                      step="0.05"
+                                                      value={currentMedida.offset !== undefined ? currentMedida.offset : (hs.medidasEstilo?.offset ?? 0.35)}
+                                                      onChange={(e) => updateSide('offset', parseFloat(e.target.value))}
+                                                      className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                                                    />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            );
+                                          })}
+                                        </div>
+
+                                        {/* Opciones Generales de Estilo y Relieve para las Medidas */}
+                                        <div className="bg-slate-950/40 border border-white/5 rounded-xl p-2.5 space-y-2.5">
+                                          <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">
+                                            Estilo General de las Medidas
+                                          </span>
+
+                                          <div className="flex items-center justify-between gap-3">
+                                            {/* Color de Texto */}
+                                            <div className="flex-1 space-y-1">
+                                              <label className="text-[8px] font-bold text-gray-500 uppercase tracking-wider block">Color Texto</label>
+                                              <div className="flex items-center gap-2 bg-slate-900 border border-white/10 rounded-lg px-2 py-1">
+                                                <input
+                                                  type="color"
+                                                  value={hs.medidasEstilo?.colorTexto || '#fbff00'}
+                                                  onChange={(e) => {
+                                                    const newHotspots = [...activeScene.hotspots];
+                                                    newHotspots[index].medidasEstilo = {
+                                                      ...(newHotspots[index].medidasEstilo || {}),
+                                                      colorTexto: e.target.value
+                                                    };
+                                                    const updated = {
+                                                      ...scenes,
+                                                      [activeSceneKey]: {
+                                                        ...activeScene,
+                                                        hotspots: newHotspots
+                                                      }
+                                                    };
+                                                    saveToLocal(updated);
+                                                  }}
+                                                  className="w-5 h-5 rounded bg-transparent border-0 cursor-pointer"
+                                                />
+                                                <span className="text-[9px] font-mono text-gray-300">{hs.medidasEstilo?.colorTexto || '#fbff00'}</span>
+                                              </div>
+                                            </div>
+
+                                            {/* Checkboxes de relieve 3D y sombra */}
+                                            <div className="flex items-center gap-3 pt-3">
+                                              <label className="flex items-center gap-1.5 cursor-pointer text-[8px] font-bold uppercase tracking-wider text-gray-400">
+                                                <input
+                                                  type="checkbox"
+                                                  checked={hs.medidasEstilo?.volumen3D !== 0}
+                                                  onChange={(e) => {
+                                                    const newHotspots = [...activeScene.hotspots];
+                                                    newHotspots[index].medidasEstilo = {
+                                                      ...(newHotspots[index].medidasEstilo || {}),
+                                                      volumen3D: e.target.checked ? 5 : 0,
+                                                      strokeGrosor: e.target.checked ? 1 : 0
+                                                    };
+                                                    const updated = {
+                                                      ...scenes,
+                                                      [activeSceneKey]: {
+                                                        ...activeScene,
+                                                        hotspots: newHotspots
+                                                      }
+                                                    };
+                                                    saveToLocal(updated);
+                                                  }}
+                                                  className="w-3 h-3 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                                />
+                                                <span>Relieve 3D</span>
+                                              </label>
+
+                                              <label className="flex items-center gap-1.5 cursor-pointer text-[8px] font-bold uppercase tracking-wider text-gray-400">
+                                                <input
+                                                  type="checkbox"
+                                                  checked={hs.medidasEstilo?.sombra !== false}
+                                                  onChange={(e) => {
+                                                    const newHotspots = [...activeScene.hotspots];
+                                                    newHotspots[index].medidasEstilo = {
+                                                      ...(newHotspots[index].medidasEstilo || {}),
+                                                      sombra: e.target.checked
+                                                    };
+                                                    const updated = {
+                                                      ...scenes,
+                                                      [activeSceneKey]: {
+                                                        ...activeScene,
+                                                        hotspots: newHotspots
+                                                      }
+                                                    };
+                                                    saveToLocal(updated);
+                                                  }}
+                                                  className="w-3 h-3 rounded border-white/10 text-amber-500 bg-slate-950 accent-amber-500 cursor-pointer"
+                                                />
+                                                <span>Sombra</span>
+                                              </label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   );
                                 })()}
@@ -4904,9 +5185,7 @@ export default function TourEditorPage() {
                                                 onClick={() => {
                                                   const newHotspots = [...activeScene.hotspots];
                                                   newHotspots[index].posicionTipo = mode;
-                                                  if (mode === 'piso') {
-                                                    newHotspots[index].inclinacion = 0;
-                                                  } else if (mode === 'muro') {
+                                                  if (mode === 'muro') {
                                                     newHotspots[index].rotacion = 0;
                                                   }
                                                   const updated = {
@@ -5067,7 +5346,7 @@ export default function TourEditorPage() {
                                           </div>
 
                                           {/* Inclinación Eje Y (Giro) */}
-                                          <div className={`space-y-1 ${(hs.posicionTipo === 'piso') ? 'opacity-40 pointer-events-none' : ''}`}>
+                                          <div className="space-y-1">
                                             <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
                                               <span>Inclinación Eje Y</span>
                                               <div className="flex items-center gap-1.5">
@@ -5075,8 +5354,7 @@ export default function TourEditorPage() {
                                                   type="number"
                                                   min="-180"
                                                   max="180"
-                                                  disabled={hs.posicionTipo === 'piso'}
-                                                  value={hs.posicionTipo === 'piso' ? 0 : (hs.inclinacion ?? 0)}
+                                                  value={hs.inclinacion ?? 0}
                                                   onChange={(e) => {
                                                     let val = parseInt(e.target.value);
                                                     if (isNaN(val)) val = 0;
@@ -5101,8 +5379,7 @@ export default function TourEditorPage() {
                                               type="range"
                                               min="-180"
                                               max="180"
-                                              disabled={hs.posicionTipo === 'piso'}
-                                              value={hs.posicionTipo === 'piso' ? 0 : (hs.inclinacion ?? 0)}
+                                              value={hs.inclinacion ?? 0}
                                               onChange={(e) => {
                                                 const newHotspots = [...activeScene.hotspots];
                                                 newHotspots[index].inclinacion = parseInt(e.target.value);
@@ -5135,9 +5412,7 @@ export default function TourEditorPage() {
                                         onClick={() => {
                                           const newHotspots = [...activeScene.hotspots];
                                           newHotspots[index].posicionTipo = mode;
-                                          if (mode === 'piso') {
-                                            newHotspots[index].inclinacion = 0;
-                                          } else if (mode === 'muro') {
+                                          if (mode === 'muro') {
                                             newHotspots[index].rotacion = 0;
                                           }
                                           const updated = {
@@ -5327,16 +5602,15 @@ export default function TourEditorPage() {
                                   </div>
 
                                   {/* Inclinación Eje Y */}
-                                  <div className={`space-y-1 ${(hs.posicionTipo === 'piso') ? 'opacity-40 pointer-events-none' : ''}`}>
+                                  <div className="space-y-1">
                                     <div className="flex justify-between items-center text-[9px] font-bold text-gray-400 uppercase tracking-wider">
-                                      <span>Inclinación Eje Y {(hs.posicionTipo === 'piso') && <span className="text-amber-500 font-mono text-[8px]">(Fijo a 0°)</span>}</span>
+                                      <span>Inclinación Eje Y (Giro)</span>
                                       <div className="flex items-center gap-1.5">
                                         <input 
                                           type="number"
                                           min="-180"
                                           max="180"
-                                          disabled={hs.posicionTipo === 'piso'}
-                                          value={hs.posicionTipo === 'piso' ? 0 : (hs.inclinacion ?? 0)}
+                                          value={hs.inclinacion ?? 0}
                                           onChange={(e) => {
                                             let val = parseInt(e.target.value);
                                             if (isNaN(val)) val = 0;
@@ -5361,8 +5635,7 @@ export default function TourEditorPage() {
                                       type="range"
                                       min="-180"
                                       max="180"
-                                      disabled={hs.posicionTipo === 'piso'}
-                                      value={hs.posicionTipo === 'piso' ? 0 : (hs.inclinacion ?? 0)}
+                                      value={hs.inclinacion ?? 0}
                                       onChange={(e) => {
                                         const newHotspots = [...activeScene.hotspots];
                                         newHotspots[index].inclinacion = parseInt(e.target.value);

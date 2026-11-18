@@ -3,6 +3,42 @@ import * as THREE from 'three';
 import { Html, Line } from '@react-three/drei';
 
 /**
+ * Función para calcular la extrusión multicapa de volumen 3D, contorno y sombra nítida
+ */
+const build3DTextShadow = ({ volumen3D = 4, direccion3D = 45, colorCanto = '#020617', strokeGrosor = 1, colorStroke = '#000000', sombra = true }) => {
+  const shadows = [];
+  const vol = Number(volumen3D) || 0;
+  const stroke = Number(strokeGrosor) || 0;
+  const angleDeg = Number(direccion3D ?? 45);
+  const angleRad = (angleDeg * Math.PI) / 180;
+  const cosA = Math.cos(angleRad);
+  const sinA = Math.sin(angleRad);
+
+  if (stroke > 0) {
+    for (let x = -stroke; x <= stroke; x++) {
+      for (let y = -stroke; y <= stroke; y++) {
+        if (x !== 0 || y !== 0) shadows.push(`${x}px ${y}px 0 ${colorStroke}`);
+      }
+    }
+  }
+  if (vol > 0) {
+    for (let i = 1; i <= vol; i++) {
+      const offsetX = (i * cosA).toFixed(2);
+      const offsetY = (i * sinA).toFixed(2);
+      shadows.push(`${offsetX}px ${offsetY}px 0 ${colorCanto}`);
+    }
+  }
+  if (sombra) {
+    const offset = vol > 0 ? vol + 3 : 4;
+    const shadowX = (offset * cosA).toFixed(2);
+    const shadowY = (offset * sinA).toFixed(2);
+    const blurRadius = (offset * 1.5).toFixed(1);
+    shadows.push(`${shadowX}px ${shadowY}px ${blurRadius}px rgba(0, 0, 0, 0.75)`);
+  }
+  return shadows.length > 0 ? shadows.join(', ') : 'none';
+};
+
+/**
  * Triangula un polígono 3D arbitrario proyectándolo sobre su plano óptimo
  */
 function createPolygonGeometry(vertices3D) {
@@ -96,6 +132,8 @@ export default function Polygon3D({
   sombra = true,
   rotacion = 0,
   inclinacion = 0,
+  medidasLados = [],
+  medidasEstilo = {},
   onSelect,
   onVertexDragStart,
   datosLote = {},
@@ -171,6 +209,127 @@ export default function Polygon3D({
   const borderColor = lineaActiva 
     ? activeLineColor 
     : (colorBorde || (isSelected ? '#fbbf24' : (hovered ? '#ffffff' : '#ffffff')));
+
+  // Calcular las medidas perimetrales (textos en cada lado del polígono)
+  const medidasCalculadas = useMemo(() => {
+    if (!vertices || vertices.length < 2 || !medidasLados || !Array.isArray(medidasLados)) {
+      return [];
+    }
+
+    const points3D = vertices.map(v => new THREE.Vector3(v[0], v[1], v[2]));
+    const numPoints = points3D.length;
+    const numEdges = lineaActiva ? numPoints - 1 : numPoints;
+
+    // Centroide del polígono
+    const center = new THREE.Vector3();
+    points3D.forEach(p => center.add(p));
+    center.divideScalar(numPoints);
+
+    // Normal del polígono
+    const normal = new THREE.Vector3();
+    for (let i = 0; i < points3D.length; i++) {
+      const current = points3D[i];
+      const next = points3D[(i + 1) % points3D.length];
+      normal.x += (current.y - next.y) * (current.z + next.z);
+      normal.y += (current.z - next.z) * (current.x + next.x);
+      normal.z += (current.x - next.x) * (current.y + next.y);
+    }
+    if (normal.lengthSq() < 0.0001) normal.set(0, 1, 0);
+    normal.normalize();
+
+    // Asegurar que la normal apunte hacia el interior de la esfera (hacia el punto de vista 0,0,0)
+    if (normal.dot(center) > 0) {
+      normal.negate();
+    }
+
+    const results = [];
+    const offsetBase = typeof medidasEstilo?.offset === 'number' ? medidasEstilo.offset : 0.35;
+
+    for (let i = 0; i < numEdges; i++) {
+      const configLado = medidasLados[i];
+      if (!configLado || !configLado.texto || !configLado.texto.trim()) {
+        continue; // Si no tiene texto, no se dibuja nada
+      }
+
+      const pA = points3D[i];
+      const pB = points3D[(i + 1) % numPoints];
+
+      // Punto medio del lado
+      const mid = new THREE.Vector3().addVectors(pA, pB).multiplyScalar(0.5);
+
+      // Tangente (vector a lo largo de la línea del lado)
+      const tangent = new THREE.Vector3().subVectors(pB, pA);
+      if (tangent.lengthSq() < 0.0001) continue;
+      tangent.normalize();
+
+      // Perpendicular en el plano del polígono apuntando al EXTERIOR
+      let outVec = new THREE.Vector3().crossVectors(tangent, normal).normalize();
+      const fromCenter = new THREE.Vector3().subVectors(mid, center);
+      if (outVec.dot(fromCenter) < 0) {
+        outVec.negate();
+      }
+
+      // Si el usuario configuró 'interior', invertimos la dirección
+      if (configLado.lado === 'interior') {
+        outVec.negate();
+      }
+
+      // Separación individual de este lado (o fallback al estilo general)
+      const offsetLado = typeof configLado.offset === 'number' ? configLado.offset : offsetBase;
+
+      // Posición final del texto en el espacio 3D
+      const textPos = mid.clone().addScaledVector(outVec, offsetLado);
+      // Elevar sutilmente hacia el centro de la escena para evitar superposición con el piso
+      textPos.multiplyScalar(0.995);
+
+      // Dirección de lectura del texto
+      let xDir = tangent.clone();
+      let yDir = outVec.clone();
+
+      if (configLado.invertido) {
+        xDir.negate();
+        yDir.negate();
+      }
+
+      const zDir = new THREE.Vector3().crossVectors(xDir, yDir).normalize();
+
+      // Matriz ortonormal perfecta
+      const m = new THREE.Matrix4().makeBasis(xDir, yDir, zDir);
+      const quat = new THREE.Quaternion().setFromRotationMatrix(m);
+
+      // Tamaño individual de este lado (o fallback al estilo general)
+      const fontSizeLado = typeof configLado.fontSize === 'number' ? configLado.fontSize : (medidasEstilo?.fontSize || 14);
+
+      // Estilo 3D idéntico al solicitado
+      const style = {
+        color: medidasEstilo?.colorTexto || '#fbff00',
+        fontSize: `${fontSizeLado}px`,
+        fontWeight: medidasEstilo?.negrita !== false ? 'bold' : 'normal',
+        fontFamily: medidasEstilo?.fuente ? `'${medidasEstilo.fuente}', sans-serif` : "'Montserrat', sans-serif",
+        whiteSpace: 'pre-line',
+        textAlign: 'center',
+        width: 'max-content',
+        textShadow: build3DTextShadow({
+          volumen3D: medidasEstilo?.volumen3D ?? 5,
+          strokeGrosor: medidasEstilo?.strokeGrosor ?? 1,
+          colorCanto: medidasEstilo?.colorCanto || '#020617',
+          colorStroke: medidasEstilo?.colorStroke || '#000000',
+          sombra: medidasEstilo?.sombra !== false
+        }),
+        letterSpacing: (medidasEstilo?.volumen3D > 0) ? '0.05em' : 'normal'
+      };
+
+      results.push({
+        index: i,
+        texto: configLado.texto,
+        posicion: [textPos.x, textPos.y, textPos.z],
+        quaternion: quat,
+        estilo: style
+      });
+    }
+
+    return results;
+  }, [vertices, medidasLados, medidasEstilo, lineaActiva]);
 
   // Renderizar la etiqueta con orientación 3D y estilos cuando aplica
   const renderLabel = () => {
@@ -328,6 +487,25 @@ export default function Polygon3D({
 
       {/* 4. Etiqueta / Tooltip informativo en el Centroide */}
       {renderLabel()}
+
+      {/* 5. Textos de Medidas Perimetrales anclados directamente al suelo */}
+      {medidasCalculadas.map((medida) => (
+        <group key={`medida-${medida.index}`} position={medida.posicion} quaternion={medida.quaternion}>
+          <Html
+            center
+            transform
+            distanceFactor={20}
+            zIndexRange={[45, 0]}
+          >
+            <div
+              className="flex items-center justify-center select-none pointer-events-none"
+              style={medida.estilo}
+            >
+              <span className="inline-block">{medida.texto}</span>
+            </div>
+          </Html>
+        </group>
+      ))}
     </group>
   );
 }

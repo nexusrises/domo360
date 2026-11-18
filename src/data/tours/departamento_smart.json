@@ -10,7 +10,7 @@
           -6.74,
           -1.85
         ],
-        "destino": "1790102327587_upeu_terreno1_9820",
+        "destino": "1790102327587_upeu_terreno1_1481",
         "texto": " TERRENO\nEN VENTA",
         "opacidad": 1,
         "escala": 1,
@@ -245,7 +245,37 @@
         "area": "",
         "fijo": false,
         "mostrarEtiqueta": false,
-        "mostrarBorde": true
+        "mostrarBorde": true,
+        "medidasLados": [
+          {
+            "texto": "",
+            "lado": "exterior",
+            "invertido": false
+          },
+          {
+            "texto": "ANCHO: 8 metros",
+            "lado": "exterior",
+            "invertido": false,
+            "fontSize": 10
+          },
+          {
+            "texto": "LARGO: 20 metros",
+            "lado": "exterior",
+            "invertido": true,
+            "fontSize": 13,
+            "offset": 0.5
+          },
+          {
+            "texto": "",
+            "lado": "exterior",
+            "invertido": false
+          }
+        ],
+        "medidasEstilo": {
+          "fontSize": 10,
+          "offset": 0.4,
+          "colorTexto": "#ffc800"
+        }
       },
       {
         "tipo": "linea",
@@ -275,7 +305,8 @@
         "grosorBorde": 3,
         "texto": "Tramo de calle",
         "fijo": false,
-        "mostrarEtiqueta": false
+        "mostrarEtiqueta": false,
+        "color": "#ef4444"
       },
       {
         "tipo": "hotspot",
@@ -328,6 +359,31 @@
         "fontSize": 27,
         "fondoTransparente": true,
         "colorTexto": "#2840b8"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          3,
+          -18.15,
+          -7.85
+        ],
+        "texto": "ÁREA: 160 m²",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Outfit",
+        "fondoTransparente": true,
+        "volumen3D": 5,
+        "fontSize": 18
       }
     ],
     "heading": {

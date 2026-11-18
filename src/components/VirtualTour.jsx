@@ -218,7 +218,20 @@ function HotspotGroup({ posicion, posicionTipo, inclinacion, rotacion, escalaZoo
       if (rotacion) {
         node.rotateX((rotacion * Math.PI) / 180);
       }
+    } else if (posicionTipo === 'muro') {
+      const [x, y, z] = posicion || [0, 0, -20];
+      const radialYaw = Math.atan2(x, z);
+
+      // Muro: Mantiene la perpendicularidad con el piso (se queda sujeto al eje Y vertical)
+      // Rotamos horizontalmente para encarar la cámara, pero sin inclinación en X
+      node.rotation.set(0, radialYaw + Math.PI, 0);
+
+      // Inclinación opcional del usuario en el eje Z local (como un cuadro torcido)
+      if (inclinacion) {
+        node.rotateZ((inclinacion * Math.PI) / 180);
+      }
     } else {
+      // 2D (Billboard clásico: mira directamente a la cámara en todos los ejes)
       const [x, y, z] = posicion || [0, 0, -20];
       const distHorizontal = Math.sqrt(x * x + z * z);
       if (distHorizontal < 2.0) {
@@ -226,7 +239,9 @@ function HotspotGroup({ posicion, posicionTipo, inclinacion, rotacion, escalaZoo
       } else {
         node.up.set(0, 1, 0);
       }
-      node.lookAt(0, 0, 0);
+      // En lugar de mirar rígidamente al origen 0,0,0, mira dinámicamente a la posición
+      // de la cámara activa en tiempo real para asegurar una perpendicularidad perfecta
+      node.lookAt(state.camera.position);
 
       // Rotar sobre su eje Z local (Giro/Roll)
       if (inclinacion) {
@@ -450,7 +465,7 @@ function Hotspot({
         }}
       >
         {/* Contenedor con ref para control de visibilidad sin re-renders */}
-        <div ref={visibilityRef}>
+        <div ref={visibilityRef} className="flex items-center justify-center w-max">
           {itemTipo === 'hotspot' && (
             <button
               onClick={() => {
@@ -1245,6 +1260,8 @@ export default function VirtualTour({
                   sombra={hs.sombra}
                   rotacion={hs.rotacion}
                   inclinacion={hs.inclinacion}
+                  medidasLados={hs.medidasLados}
+                  medidasEstilo={hs.medidasEstilo}
                   isEditMode={false}
                   isLinea={hs.tipo === 'linea'}
                 />

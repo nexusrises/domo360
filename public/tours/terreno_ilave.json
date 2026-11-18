@@ -418,7 +418,84 @@
         "grosorBorde": 3,
         "texto": "21.75 METROS LINEALES",
         "fijo": false,
-        "mostrarEtiqueta": true
+        "mostrarEtiqueta": false,
+        "color": "#ef4444"
+      },
+      {
+        "tipo": "linea",
+        "vertices": [
+          [
+            -11.02,
+            -14.96,
+            7.4
+          ],
+          [
+            -18.95,
+            -6.33,
+            0.98
+          ],
+          [
+            -18.42,
+            -5.25,
+            -5.76
+          ],
+          [
+            -18.15,
+            -5.41,
+            -6.43
+          ],
+          [
+            -14.35,
+            -5.78,
+            -12.68
+          ],
+          [
+            -14.19,
+            -5.63,
+            -12.92
+          ],
+          [
+            -9.71,
+            -13.26,
+            -11.39
+          ],
+          [
+            -10.94,
+            -15,
+            7.44
+          ]
+        ],
+        "colorBorde": "#ffffff",
+        "grosorBorde": 6,
+        "texto": "Tramo de calle",
+        "fijo": false,
+        "color": "#f5ed0a",
+        "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -9.16,
+          -17.55,
+          -2.83
+        ],
+        "texto": "FRENTERA: 21.65 metros",
+        "colorTexto": "#e55757",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 19,
+        "posicionTipo": "piso",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "fontSize": 30,
+        "direccion3D": 70
       }
     ],
     "heading": {

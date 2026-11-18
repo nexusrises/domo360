@@ -1,0 +1,766 @@
+{
+  "1794952879212_dji_20261105111002_0025_d": {
+    "nombre": "LOTE DISPONIBLE",
+    "imagen": "/tour/capilla1/1794952879212_DJI_20261105111002_0025_D.webp",
+    "hotspots": [
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            -16.31,
+            -10.77,
+            4.23
+          ],
+          [
+            -16.41,
+            -10.71,
+            -3.98
+          ],
+          [
+            -4.4,
+            -17.93,
+            -7.69
+          ],
+          [
+            -4.02,
+            -18.68,
+            5.92
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.2,
+        "colorBorde": "#e2f202",
+        "grosorBorde": 2,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarRelleno": false,
+        "medidasEstilo": {
+          "colorTexto": "#fbff24"
+        },
+        "mostrarEtiqueta": false,
+        "mostrarBorde": true,
+        "medidasLados": [
+          {
+            "texto": "ANCHO: 8 metro",
+            "lado": "exterior",
+            "invertido": false,
+            "offset": 0.6
+          },
+          {
+            "texto": "LARGO: 20 metros",
+            "lado": "exterior",
+            "invertido": false,
+            "offset": 0.5
+          },
+          {
+            "texto": "ANCHO: 8 metro",
+            "lado": "exterior",
+            "invertido": true,
+            "offset": 0.65,
+            "fontSize": 18
+          },
+          {
+            "texto": "LARGO: 20 metros",
+            "lado": "exterior",
+            "invertido": false,
+            "offset": 0.75
+          }
+        ]
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -12.55,
+          -15.57,
+          -0.24
+        ],
+        "texto": "ÁREA: 160 m²",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fondoTransparente": true,
+        "volumen3D": 6,
+        "fontSize": 21
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          0.1,
+          -19.98,
+          -0.92
+        ],
+        "destino": "1794952895990_cam_20261105111327_0011_d",
+        "texto": "VISTA FRONTAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#42c809",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -0.36,
+          -12.04,
+          -15.97
+        ],
+        "destino": "1794952893996_cam_20261105111302_0010_d",
+        "texto": "ESQUINA\nDEL LOTE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#42c809",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -5.05,
+          -14.85,
+          12.41
+        ],
+        "destino": "1794952881587_dji_20261105111125_0026_d",
+        "texto": "VISTA PANORAMICA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#42c809",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat"
+      }
+    ],
+    "heading": {
+      "x": -60,
+      "y": 87
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "northOffset": 357,
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "saturacion": 88
+    }
+  },
+  "1794952881587_dji_20261105111125_0026_d": {
+    "nombre": "VISTA PANORAMICA",
+    "imagen": "/tour/capilla1/1794952881587_DJI_20261105111125_0026_D.webp",
+    "hotspots": [
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            9.71,
+            -17.42,
+            -1.55
+          ],
+          [
+            9.58,
+            -17.28,
+            3.09
+          ],
+          [
+            1.71,
+            -19.66,
+            3.25
+          ],
+          [
+            1.85,
+            -19.82,
+            -1.96
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.45,
+        "colorBorde": "#e0f005",
+        "grosorBorde": 2,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarEtiqueta": false
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          5.95,
+          -19.08,
+          0.65
+        ],
+        "destino": "1794952879212_dji_20261105111002_0025_d",
+        "texto": "LOTE \nDISPONIBLE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#51e203",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne"
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -19.33,
+          -4.95,
+          1.43
+        ],
+        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fondoTransparente": true,
+        "fontSize": 24,
+        "volumen3D": 6
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.99,
+          -0.33,
+          0.5
+        ],
+        "destino": "1794955352267_cementeriolacapilla_4122",
+        "texto": "VISTA FRONTAL \nDEL CEMENTERIO",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#4ec101",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 13
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -7.3,
+          -1.29,
+          -18.58
+        ],
+        "destino": "_self",
+        "texto": "EL PENAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#cc8305",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 16
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -2.94,
+          -0.02,
+          -19.78
+        ],
+        "destino": "_self",
+        "texto": "HOSPITAL\n\" EsSALUD \"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#cc8305",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 16
+      }
+    ],
+    "heading": {
+      "x": -9,
+      "y": 64
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "northOffset": 173,
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 101,
+      "contraste": 98,
+      "saturacion": 90
+    }
+  },
+  "1794952898143_cam_20261105111345_0012_d": {
+    "nombre": "INTERIOR DEL LOTE",
+    "imagen": "/tour/capilla1/1794952898143_CAM_20261105111345_0012_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          11.2,
+          0.16,
+          -16.57
+        ],
+        "destino": "1794952895990_cam_20261105111327_0011_d",
+        "texto": "VISTA FRONTAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#5ac502",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 11
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          7.91,
+          14.14,
+          -11.72
+        ],
+        "destino": "1794952881587_dji_20261105111125_0026_d",
+        "texto": "VISTA PANORAMICA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#5ac502",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 11
+      }
+    ],
+    "heading": {
+      "x": -8,
+      "y": -39
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "saturacion": 83
+    },
+    "northOffset": 54
+  },
+  "1794952895990_cam_20261105111327_0011_d": {
+    "nombre": "VISTA FRONTAL",
+    "imagen": "/tour/capilla1/1794952895990_CAM_20261105111327_0011_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -13.88,
+          -0.95,
+          -14.36
+        ],
+        "destino": "1794952893996_cam_20261105111302_0010_d",
+        "texto": "ESQUINA\nDEL LOTE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#36c502",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 13
+      },
+      {
+        "tipo": "poligono",
+        "vertices": [
+          [
+            -11.19,
+            -1.11,
+            16.54
+          ],
+          [
+            -17.4,
+            -1.27,
+            9.78
+          ],
+          [
+            -19.38,
+            -4.21,
+            -2.6
+          ],
+          [
+            1.08,
+            -4.22,
+            19.52
+          ]
+        ],
+        "color": "#22c55e",
+        "opacidad": 0.15,
+        "colorBorde": "#f7fb09",
+        "grosorBorde": 1,
+        "texto": "Lote 1",
+        "manzana": "A",
+        "lote": "1",
+        "estado": "Disponible",
+        "precio": "",
+        "area": "",
+        "fijo": false,
+        "mostrarRelleno": true,
+        "mostrarEtiqueta": false,
+        "medidasLados": [
+          {
+            "texto": "",
+            "lado": "exterior",
+            "invertido": false
+          },
+          {
+            "texto": "",
+            "lado": "exterior",
+            "invertido": false
+          },
+          {
+            "texto": "FRENTERA de 8 metros",
+            "lado": "exterior",
+            "invertido": true,
+            "offset": 0.8,
+            "fontSize": 20
+          },
+          {
+            "texto": "LARGO de 20 metros",
+            "lado": "exterior",
+            "invertido": false,
+            "offset": 0.85,
+            "fontSize": 15
+          }
+        ],
+        "medidasEstilo": {
+          "colorTexto": "#e3f11e",
+          "sombra": true,
+          "volumen3D": 5,
+          "strokeGrosor": 1
+        }
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -10.86,
+          -12.87,
+          10.79
+        ],
+        "destino": "1794952879212_dji_20261105111002_0025_d",
+        "texto": "VISTA PANORAMICA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#3bca07",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 12
+      }
+    ],
+    "heading": {
+      "x": -6,
+      "y": 125
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "saturacion": 83
+    },
+    "northOffset": 47
+  },
+  "1794952893996_cam_20261105111302_0010_d": {
+    "nombre": "ESQUINA DEL LOTE",
+    "imagen": "/tour/capilla1/1794952893996_CAM_20261105111302_0010_D.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          18.54,
+          -0.56,
+          7.48
+        ],
+        "destino": "1794952895990_cam_20261105111327_0011_d",
+        "texto": "VISTA FRONTAL\nLOTE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#2cb805",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 11
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          15.03,
+          11.77,
+          5.95
+        ],
+        "destino": "1794952881587_dji_20261105111125_0026_d",
+        "texto": "VISTA PANORAMICA",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#2cb805",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 11
+      }
+    ],
+    "heading": {
+      "x": -2,
+      "y": -116
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "saturacion": 89
+    },
+    "northOffset": 65
+  },
+  "1794955352267_cementeriolacapilla_4122": {
+    "nombre": "CementerioLACAPILLA",
+    "imagen": "/tour/capilla1/1794955352267_CementerioLACAPILLA.webp",
+    "hotspots": [
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -19.64,
+          -2.12,
+          3.16
+        ],
+        "destino": "1794952881587_dji_20261105111125_0026_d",
+        "texto": "UBICACION\nDEL LOTE",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "Camera",
+        "color": "#59d309",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 13
+      },
+      {
+        "tipo": "texto",
+        "posicion": [
+          -18.91,
+          -6.5,
+          -0.47
+        ],
+        "texto": "CEMENTERIO\n\" LA CAPILLA \"",
+        "colorTexto": "#ffffff",
+        "colorFondo": "#0f172a",
+        "opacidad": 0.9,
+        "escala": 1,
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": true,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 24,
+        "fondoTransparente": true,
+        "volumen3D": 8
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -11,
+          -1.05,
+          16.67
+        ],
+        "destino": "_self",
+        "texto": "EL PENAL",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#da8c07",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 15
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          -6.49,
+          -0.52,
+          18.91
+        ],
+        "destino": "_self",
+        "texto": "HOSPITAL\n\" EsSALUD \"",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#da8c07",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Montserrat",
+        "fontSize": 13
+      },
+      {
+        "tipo": "hotspot",
+        "posicion": [
+          19.84,
+          -0.57,
+          2.49
+        ],
+        "destino": "_self",
+        "texto": "UNAJ",
+        "opacidad": 1,
+        "escala": 1,
+        "icono": "ArrowDown",
+        "color": "#f59e0b",
+        "inclinacion": 0,
+        "posicionTipo": "2d",
+        "escalaZoom": false,
+        "sombra": true,
+        "fijo": false,
+        "negrita": false,
+        "cursiva": false,
+        "mostrarTextoSiempre": true,
+        "fuente": "Syne",
+        "fontSize": 35,
+        "fondoTransparente": true,
+        "colorTexto": "#073288"
+      }
+    ],
+    "heading": {
+      "x": -31,
+      "y": 82
+    },
+    "norteMagnetico": 0,
+    "filtro": "drone_cielo_azul",
+    "colorSettings": {
+      "preset": "drone_cielo_azul",
+      "brillo": 100,
+      "contraste": 91,
+      "saturacion": 80,
+      "temperatura": 0
+    },
+    "northOffset": 359
+  }
+}
